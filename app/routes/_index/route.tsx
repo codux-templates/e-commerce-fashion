@@ -1,7 +1,6 @@
 import '../../../src/styles/utils.scss';
 import { CategoryLink } from '~/src/components/category-link/category-link';
 import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
-import { LabelWithArrow } from '~/src/components/label-with-arrow/label-with-arrow';
 import { SalesBar } from '~/src/components/marquee/sales-bar';
 import { CategoriesSection } from '~/src/components/categories-section/categories-section';
 import { TaggedProductsSection } from '~/src/components/tagged-products-section/tagged-products-section';
@@ -24,7 +23,7 @@ export default function HomePage() {
                     <div className="subheading">Start the freshest season</div>
                     <h1 className="uppercase">New Spring Collection is Now Online</h1>
                     <CategoryLink categorySlug="all-products">
-                        <LabelWithArrow>Shop Collections</LabelWithArrow>
+                        <button className="button invert lg">Shop Collections</button>
                     </CategoryLink>
                 </div>
             </div>

@@ -51,10 +51,14 @@ export const Category = ({categorySlug}: CategoryProps) => {
   };
 
   return (
-    <div onClick={()=>navigate(`/products/${categorySlug}`)} className={styles.category} onMouseMove={isHovered ? handleMouseMove : undefined} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <Reveal direction="down" duration={1.4} >
-        {category?.name??categorySlug + " not found"}
-        {isHovered && preloadedImage && <img style={{top: mousePosition.y, left: mousePosition.x }} className={styles.categoryImage} src={preloadedImage} alt={category?.name ?? categorySlug} />}
+    <div onClick={()=>navigate(`/products/${categorySlug}`)}  onMouseMove={isHovered ? handleMouseMove : undefined} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <Reveal direction="down" duration={1.4} className={styles.category}>
+        <img className={styles.categoryImageMobile} src={preloadedImage} alt={category?.name ?? categorySlug} />
+        {category?.name ?? categorySlug + " not found"}
+        {isHovered && preloadedImage &&
+          <img style={{ top: mousePosition.y, left: mousePosition.x }} className={styles.categoryImage}
+               src={preloadedImage} alt={category?.name ?? categorySlug} />}
+
       </Reveal>
     </div>
   );
