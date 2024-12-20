@@ -3,20 +3,74 @@
  */
 
 :root {
-    font: var(--paragraph1);
-    color: var(--text-color);
-    --pagePaddingHoriz: max(2vw, 15px);
+    font: var(--body1);
+    color: var(--text-primary);
+    --pagePaddingHoriz: 8px;
+    --header-height: 40px;
+    --announcement-bar-height: 30px;
 }
 
 body {
     min-width: 320px;
     min-height: 100vh;
-    background: var(--page-background-color);
+    background: var(--background);
 }
 
 :focus-visible {
     outline: none;
     box-shadow:
         0 0 0 1px #ffffff,
-        0 0 0 3px var(--focus-ring-color);
+        0 0 0 3px var(--focus);
+}
+
+h1 {
+    font: var(--heading1);
+    letter-spacing: var(--letter-spacing-heading);
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+h2 {
+    font: var(--heading2);
+    letter-spacing: var(--letter-spacing-heading);
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+
+}
+
+h3 {
+    font: var(--heading3);
+    letter-spacing: var(--letter-spacing-heading);
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+h4 {
+    font: var(--heading4);
+    letter-spacing: var(--letter-spacing-heading);
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+p {
+    font: var(--body1);
+    text-transform: none;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+a{
+    color: var(--link);
+    font: var(--navlink);
+    text-transform: none;
+    text-decoration: none;
+    transition: color 200ms ease;
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+.pageWrapper {
+    padding: 0 var(--pagePaddingHoriz);
 }

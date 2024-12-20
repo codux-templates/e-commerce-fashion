@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { DropdownIcon } from '../icons';
 
 import styles from './select.module.scss';
+import React from 'react';
 
 export interface SelectProps<V extends string> {
     value: V;

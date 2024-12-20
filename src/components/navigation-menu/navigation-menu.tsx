@@ -15,7 +15,7 @@ export const NavigationMenu = ({ className, vertical = false }: NavigationMenuPr
         });
 
     return (
-        <nav className={className}>
+        <nav className={`${className}`}>
             <ul className={classNames(styles.menuList, { [styles.vertical]: vertical })}>
                 <li>
                     <CategoryLink categorySlug="all-products" className={menuItemStyle}>

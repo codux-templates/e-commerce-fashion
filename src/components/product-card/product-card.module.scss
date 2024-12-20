@@ -38,7 +38,6 @@
 .name {
     margin-top: 16px;
     margin-bottom: 4px;
-    font-family: var(--heading-font);
     font-size: 16px;
     line-height: 20px;
 }
@@ -53,5 +52,5 @@
 }
 
 .skeleton > .imageWrapper {
-    background: #f1ede7;
+    background: var(--surface-mid);
 }

@@ -1,19 +1,27 @@
 :root {
-    --page-background-color: #fef9ec;
-    --text-color: #17110d;
-    --error-color: #df3131;
-    /** Focus ring that appears when an element is focused via keyboard. */
-    --focus-ring-color: #414434;
-
-    --primary1: #fef9ec;
-    --primary2: #ffefc7;
-    --primary3: #dad3c1;
-    --primary4: #767165;
-    --primary5: #17110d;
-
-    --secondary1: #ced0c4;
-    --secondary2: #9fa295;
-    --secondary3: #707365;
-    --secondary4: #414434;
-    --secondary5: #22241b;
+    --announcement-content: #ffffff;
+    --announcement-surface: #524840;
+    --background: #ffffff;
+    --border: #e5e5e5;
+    --button-primary-border: #3b3b3b;
+    --button-primary-content: #3b3b3b;
+    --button-primary-invert-border: #ffffff;
+    --button-primary-invert-content: #ffffff;
+    --button-primary-invert-surface: #ffffff;
+    --button-primary-surface: #ffffff;
+    --button-primary-surface-hover: #f7f7f7;
+    --footer-surface: #f7f7f7;
+    --header-surface: #ffffff;
+    --link: #000000;
+    --link-hover: #666666;
+    --popover-background: #ffffff;
+    --popover-border: #000000;
+    --surface-dark: #000000;
+    --surface-light: #ffffff;
+    --surface-mid: #f7f7f7;
+    --text-disabled: #b2b2b2;
+    --text-invert: #ffffff;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --focus: #000000
 }

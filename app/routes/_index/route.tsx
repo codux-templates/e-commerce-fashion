@@ -1,103 +1,124 @@
-import type { MetaFunction } from '@remix-run/react';
+import '../../../src/styles/utils.scss';
 import { CategoryLink } from '~/src/components/category-link/category-link';
 import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
 import { LabelWithArrow } from '~/src/components/label-with-arrow/label-with-arrow';
-import { BackgroundParallax, FadeIn, FloatIn } from '~/src/components/visual-effects';
+import { SalesBar } from '~/src/components/marquee/sales-bar';
+import { CategoriesSection } from '~/src/components/categories-section/categories-section';
+import { TaggedProductsSection } from '~/src/components/tagged-products-section/tagged-products-section';
+import { SplitSection } from '~/src/components/spit-section/split-section';
+import styles from './route.module.scss';
+import classNames from 'classnames';
+import { MetaFunction, useNavigate } from '@remix-run/react';
 
 export default function HomePage() {
+    const navigate = useNavigate();
     return (
-        <div>
+        <>
             <div className="heroBanner">
                 <img
-                    src="https://static.wixstatic.com/media/32aab9_2c3c65e142434906992aedb17db53566~mv2.jpg"
+                    src="https://s3-alpha-sig.figma.com/img/34eb/d38e/4737ca55766dd3c7e65a3f69a8937bc5?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=akfbVZ9I38apeW~rJ1XTtr7IhCMH-zOz0c8Vkuo00w9Z5rGoo2IJFxKnKJzfSIThBRE8KYkmMZGNHW9RjWtrjX7rwqeXxicUEBCQU73ygYZVhyMyVmjC8zTIBHyxi2OJKRwmXISZlfJC~22RH0oFSfnleot2QjT6MSGnBB4law8VwIi-9ebeHZ7afd9lSsdrne0CLlVfMXPNdGHEI~BPUGR1p3rbR9Lso4KHRGiad4Ysq-xycENG5zC~LgvQG4s8mrOWXAiEQSIRjObQo26G0h78cEBUsoW9ABmh86XFzKDwCo5LPQGIlMEN9AqRTObeEL1SM9qWCJRCIdT8krdFVA__"
                     className="heroBannerImage"
                     alt=""
                 />
                 <div className="heroBannerOverlay">
-                    <div className="heroBannerSubtitle">ReClaim</div>
-                    <h1 className="heroBannerTitle">Reuse. Repurpose. Relove.</h1>
+                    <div className="subheading">Start the freshest season</div>
+                    <h1 className="uppercase">New Spring Collection is Now Online</h1>
                     <CategoryLink categorySlug="all-products">
                         <LabelWithArrow>Shop Collections</LabelWithArrow>
                     </CategoryLink>
                 </div>
             </div>
+            <SalesBar elements={['Shop Sale', 'Up to 50% off']} />
+            <div className={'pageWrapper'}>
+                <FeaturedProductsSection categorySlug="new-in" title="New In" productCount={4} />
 
-            <div className="textBannerSection">
-                <FadeIn className="textBanner" duration={1.8}>
-                    <div className="textBannerSubtitle">Products of the highest standards</div>
-                    <div className="textBannerTitle">
-                        Essential home collections for sustainable living
-                    </div>
-                    <CategoryLink categorySlug="all-products">
-                        <LabelWithArrow>Shop Collections</LabelWithArrow>
-                    </CategoryLink>
-                </FadeIn>
-            </div>
+                <CategoriesSection categorySlugs={['women', 'man', 'accessories']} />
 
-            <div className="cardsSection">
-                <CategoryLink categorySlug="kitchen-essentials" className="linkCard">
-                    <img
-                        className="linkCardBackground"
-                        src="https://static.wixstatic.com/media/c837a6_c05a03f48fbd49e7b5046d1b18c930eb~mv2.jpg/v1/fill/w_547,h_730,q_90/c837a6_c05a03f48fbd49e7b5046d1b18c930eb~mv2.jpg"
-                        alt=""
-                    />
-                    <div className="linkCardTitle">Kitchen</div>
-                </CategoryLink>
-                <CategoryLink categorySlug="bath" className="linkCard">
-                    <img
-                        className="linkCardBackground"
-                        src="https://static.wixstatic.com/media/c837a6_269f35d6ccff4321b7ed1e65c2835c61~mv2.jpg/v1/fill/w_548,h_730,q_90/c837a6_269f35d6ccff4321b7ed1e65c2835c61~mv2.jpg"
-                        alt=""
-                    />
-                    <div className="linkCardTitle">Bath</div>
-                </CategoryLink>
-                <CategoryLink categorySlug="on-the-go" className="linkCard">
-                    <img
-                        className="linkCardBackground"
-                        src="https://static.wixstatic.com/media/c837a6_d38d8d08196d477ba49efff880d5b918~mv2.jpg/v1/fill/w_547,h_730,q_90/c837a6_d38d8d08196d477ba49efff880d5b918~mv2.jpg"
-                        alt=""
-                    />
-                    <div className="linkCardTitle">On the Go</div>
-                </CategoryLink>
-            </div>
+                <TaggedProductsSection />
+                <SplitSection
+                    subheading={'About'}
+                    buttonText={'Shop All'}
+                    buttonUrl={'/products/all-products'}
+                    title={
+                        "Fashion is more than just what you wear—it's how you express yourself. That’s why we’re committed to offering pieces that blend quality, comfort, and style, so you can look and feel your best every day."
+                    }
+                    imageUrl={
+                        'https://s3-alpha-sig.figma.com/img/9dd3/fe0d/25846e5769d5dff3f39611ee1589857b?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=WsgAYeVcBWBuoo-zvP6AzvWq6etJft7oxhmwxZMsVoW8B7-RWKoAl51G-bCWAzjlqlloVk8iwkmmx-qddC5GsRG-r~i8lh4bU8VbaT1e~lQFuPhSI6gh0sAyDNNRzsJskAKKhaJtvVLwWb7rMUKSYKvNTOiiggOk5CXD4fy8-J2l64-RjQ6qZ-YltxF7TbPxGSLShQ8KEpBctHHjO27BCqMLS6aBk8f9GmEu7Y7ox9hyYpNGShe61yNMDJpTAkFT4h651XDN93WvuJ-Vn695yKcy1dRn8Wfc4SE7AZ0js0hCQr~6Csw5CqIpKwI2oXXCTuJH9Jj-ydzaDwfkIfsaJA__'
+                    }
+                />
+                <FeaturedProductsSection
+                    categorySlug="best-sellers"
+                    title="Best Sellers"
+                    productCount={4}
+                />
 
-            <FeaturedProductsSection
-                className="alternateBackground"
-                categorySlug="new-in"
-                title="New In"
-                description="Embrace a sustainable lifestyle with our newest drop-ins."
-                productCount={4}
-            />
-
-            <BackgroundParallax
-                className="floatingCardBackground"
-                backgroundImageUrl="https://static.wixstatic.com/media/c837a6_cae4dbe5a7ee4637b7d55d9bd5bd755d~mv2.png/v1/fill/w_1178,h_974,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/c837a6_cae4dbe5a7ee4637b7d55d9bd5bd755d~mv2.png"
-                parallaxStrength={0.75}
-            >
-                <FloatIn direction="up" duration={1.2} distance={120}>
-                    <div className="floatingCard">
-                        <div className="floatingCardHeader">Happy Holidays</div>
-                        <div className="floatingCardContent">
-                            <h2 className="floatingCardTitle">The holidays best sellers</h2>
-                            <div className="floatingCardDescription">
-                                Home essentials for
-                                <br /> sustainable living
-                            </div>
+                <div className={styles.banner}>
+                    <div className={styles.bannerContentWrapper}>
+                        <div className={styles.bannerContent}>
+                            <span className={styles.bannerSubheading}>
+                                Product Spotlight
+                            </span>
+                            <span className={styles.bannerTitle}>
+                                A hot summer deserves a cool hat
+                            </span>
                         </div>
-                        <CategoryLink categorySlug="all-products">
-                            <LabelWithArrow>Buy a gift</LabelWithArrow>
-                        </CategoryLink>
+                        <button onClick={() => navigate('/products/all-products')} className={classNames("button button-lg",styles.bannerButton)}>
+                          Shop now
+                        </button>
                     </div>
-                </FloatIn>
-            </BackgroundParallax>
+                    <div className={styles.bannerImageWrapper}>
+                        <img className={styles.bannerImage} src="https://s3-alpha-sig.figma.com/img/ae39/2e28/a9bfabda082c6167b007f5eda6ea0bf8?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NNEJH16XwLY1sAIUuudpWmNTRJ6gAvNXbo9nkUbS-Gh71eFm-6Ojrc-TsWEk-Jesl5Fc5SjsH1XIBtPzxuTqiBL-TiSPCq686vfjXlMkOdAf6EmSeKSnRDYz-LkW984Bt~NibG~8axA8tAW69IgieOVapjRv7~kyQl-73SDxeZqX70hFldrHsd4iJ0zYSIf1SRSqRJZ2mT4QsksZ1y~nk5a~W4BD59TAkRFq4HJXUTrMMv~AM1qdBzS4~wiBqkB5tJjVmKtbm3X4Gfxlgo18EEB8X9rWuzys5GCYtKz5Sc43akkUwPPa7ebHuLunKgQsDLlXq8Fg7LYar0dSXF9hbA__" alt="Product Spotlight" />
+                    </div>
+                </div>
 
-            <FeaturedProductsSection
-                categorySlug="best-sellers"
-                title="Best Sellers"
-                description="When quality is eco-friendly. Explore our top picks."
-                productCount={4}
-            />
-        </div>
+                <div className={styles.infoSection}>
+                    <div className={styles.infoSectionCard}>
+                        <span className={"material-symbols-outlined"}>local_shipping</span>
+                        <div className={styles.infoSectionCardTextWrapper}>
+                            <span className={styles.infoCardHeading}>
+                                Free Shipping
+                            </span>
+                            <span className={styles.infoSectionCardSubheading}>
+                                On orders over 120$
+                            </span>
+                        </div>
+                    </div>
+                    <div className={styles.infoSectionCard}>
+                        <span className={"material-symbols-outlined"}>refresh</span>
+                        <div className={styles.infoSectionCardTextWrapper}>
+                            <span className={styles.infoCardHeading}>
+Free Returns
+                            </span>
+                            <span className={styles.infoSectionCardSubheading}>
+On full time priced items only
+                            </span>
+                        </div>
+                    </div>
+                    <div className={styles.infoSectionCard}>
+                        <span className={"material-symbols-outlined"}>loyalty</span>
+                        <div className={styles.infoSectionCardTextWrapper}>
+                            <span className={styles.infoCardHeading}>
+Crash replacement
+                            </span>
+                            <span className={styles.infoSectionCardSubheading}>
+40% off your new kit
+                            </span>
+                        </div>
+                    </div>
+                    <div className={styles.infoSectionCard}>
+                        <span className={"material-symbols-outlined"}>recycling</span>
+                        <div className={styles.infoSectionCardTextWrapper}>
+                            <span className={styles.infoCardHeading}>
+Eco-friendly
+                            </span>
+                            <span className={styles.infoSectionCardSubheading}>
+All of our packacing is recycled
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }
 

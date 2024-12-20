@@ -16,8 +16,10 @@ export const UserMenu = () => {
     if (!isLoggedIn) {
         return (
             <NavLink className={styles.root} to={'/login'}>
-                <Avatar imageSrc={undefined} />
-                Log In
+                <div className={styles.icon}>
+                    <span className="material-symbols-outlined">person</span>
+                </div>
+                <div className={styles.label}>Sign in</div>
             </NavLink>
         );
     }

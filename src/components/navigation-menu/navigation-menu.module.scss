@@ -5,6 +5,12 @@
     padding: 0;
     justify-content: center;
     flex-wrap: wrap;
+    height: 100%;
+
+}
+
+.menuList li{
+    height: 100%;
 }
 
 .menuList.vertical {
@@ -12,12 +18,14 @@
 }
 
 .menuItem {
-    display: block;
-    padding: 14px 18px;
+    padding: 0 12px;
     white-space: nowrap;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .menuItem:hover,
 .menuItem.active {
-    text-decoration: underline;
+    text-decoration: none;
 }

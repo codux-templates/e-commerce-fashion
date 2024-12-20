@@ -23,6 +23,7 @@ import { Toaster } from '~/src/components/toaster/toaster';
 import { CartOpenContextProvider } from '~/src/wix/cart';
 import { EcomApiContextProvider, getWixClientId, setWixClientId } from '~/src/wix/ecom';
 import { commitSession, initializeEcomSession } from '~/src/wix/ecom/session';
+import 'material-symbols';
 
 import styles from './root.module.scss';
 
@@ -52,6 +53,7 @@ export function Layout({ children }: React.PropsWithChildren) {
     return (
         <html lang="en">
             <head>
+                <title>RND.Apparel</title>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <Meta />

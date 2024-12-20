@@ -12,9 +12,9 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 0 var(--pagePaddingHoriz);
+    margin-top: calc(var(--header-height) + var(--announcement-bar-height));
 }
 
 .navigationProgressBar {
-    --color: #7d6283;
+    color: var(--surface-dark);
 }

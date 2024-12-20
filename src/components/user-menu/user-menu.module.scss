@@ -1,17 +1,32 @@
 .root {
-    padding: 0;
-    border: 0;
+    padding: 0 8px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    font: var(--paragraph3);
+    gap: 4px;
     cursor: pointer;
-    background-color: transparent;
 }
 
 .link {
     display: block;
-    font: var(--paragraph3);
-    line-height: 26px;
-    text-align: center;
+    font: var(--navlink);
 }
+
+.icon{
+    display: none;
+    span{
+        font-variation-settings: 'OPSZ' 20;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .label{
+        display: none;
+    }
+
+    .icon{
+        display: flex;
+        align-items: center;
+    }
+}
+

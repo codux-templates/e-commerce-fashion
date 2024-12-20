@@ -1,7 +1,7 @@
 .backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(27, 17, 13, 0.8);
+    background: rgba(0, 0, 0, 0.75);
 }
 
 .drawer {
@@ -11,5 +11,5 @@
     width: 100%;
     max-width: 420px;
     height: 100%;
-    background: var(--primary1);
+    background: var(--surface-light);
 }

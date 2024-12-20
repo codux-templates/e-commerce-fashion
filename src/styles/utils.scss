@@ -6,40 +6,106 @@
 
 .heading1 {
     font: var(--heading1);
+    letter-spacing: var(--letter-spacing-heading);
 }
 
 .heading2 {
     font: var(--heading2);
+    letter-spacing: var(--letter-spacing-heading);
 }
 
 .heading3 {
     font: var(--heading3);
+    letter-spacing: var(--letter-spacing-heading);
 }
 
 .heading4 {
     font: var(--heading4);
 }
 
-.heading5 {
-    font: var(--heading5);
+.subheading {
+    font: var(--subheading);
+    text-transform: uppercase;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
-.heading6 {
-    font: var(--heading6);
+.display {
+    font: var(--display);
+    text-transform: none;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
 /* Paragraphs *****************************************************************/
 
-.paragraph1 {
-    font: var(--paragraph1);
+.body1 {
+    font: var(--body1);
+    text-transform: none;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
-.paragraph2 {
-    font: var(--paragraph2);
+.body1-caps {
+    font: var(--body1-caps);
+    text-transform: uppercase;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
-.paragraph3 {
-    font: var(--paragraph3);
+.body2 {
+    font: var(--body2);
+    text-transform: none;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.body2-caps {
+    font: var(--body2-caps);
+    text-transform: uppercase;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.body3 {
+    font: var(--body3);
+    text-transform: none;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+/* Action ********************************************************************/
+
+.action {
+    font: var(--action);
+    text-transform: uppercase;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.navlink {
+    font: var(--navlink);
+    text-transform: none;
+    text-decoration: none;
+    color: var(--link);
+}
+
+.navlink:hover {
+    color: var(--text-secondary);
+}
+
+/* Text utils ********************************************************************/
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
 }
 
 /* Buttons ********************************************************************/
@@ -48,27 +114,26 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 16px;
-    border: 1px solid var(--primary5);
-    font: var(--paragraph1);
+    padding: 8px 9px;
+    border: 1px solid var(--button-primary-border);
+    font: var(--action);
     background: transparent;
-    color: var(--primary5);
+    color: var(--button-primary-content);
     cursor: pointer;
     white-space: nowrap;
     transition: all 200ms ease;
     transition-property: background-color, color;
+    text-transform: uppercase;
 }
 
 .button:disabled {
-    border-color: transparent;
-    background: var(--primary3);
-    color: var(--primary1);
+    color: var(--text-disabled);
     cursor: default;
+    border: 1px solid var(--border)
 }
 
 .button:not(:disabled):hover {
-    background: var(--primary5);
-    color: var(--primary1);
+    background: var(--button-primary-surface-hover);
 }
 
 .primaryButton {
@@ -151,6 +216,24 @@
     height: 20px;
 }
 
+/* Recommended icon sizes */
+span.size-20 {
+    font-size: 20px;
+    font-variation-settings: 'OPSZ' 20;
+}
+span.size-24 {
+    font-size: 24px;
+    font-variation-settings: 'OPSZ' 24;
+}
+span.size-40 {
+    font-size: 40px;
+    font-variation-settings: 'OPSZ' 40;
+}
+span.size-48 {
+    font-size: 48px;
+    font-variation-settings: 'OPSZ' 48;
+}
+
 /* Text Page ******************************************************************/
 
 .textPage {
@@ -197,10 +280,9 @@
 /* Hero Banner ****************************************************************/
 
 .heroBanner {
-    margin-bottom: var(--pagePaddingHoriz);
-    height: 100vh;
+    height: 720px;
     position: relative;
-    color: var(--primary1);
+    color: var(--text-invert);
     background: #000;
 }
 
@@ -213,7 +295,10 @@
     overflow: hidden;
     position: absolute;
     inset: 0;
-    padding: 40px;
+    max-width: 640px;
+    margin-right: auto;
+    margin-left: auto;
+    gap: 28px;
 }
 
 .heroBannerImage {
@@ -251,13 +336,11 @@
     flex-direction: column;
     place-items: center;
     text-align: center;
-    font-family: var(--text-font);
     line-height: 1;
 }
 
 .textBannerTitle {
     margin-bottom: 10px;
-    font-family: var(--heading-font);
     font-size: max(30px, 4.3vw);
     line-height: 1.1;
 }
