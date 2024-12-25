@@ -11,3 +11,29 @@
     color: var(--error-color);
     font: var(--paragraph3);
 }
+
+.quickViewRow{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+}
+.quickViewSizes{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font: var(--body2);
+    text-transform: uppercase;
+}
+.quickViewSizes > span{
+    padding: 2px;
+    overflow: clip;
+    text-overflow: ellipsis;
+    min-width: 20px;
+    max-width: 40px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

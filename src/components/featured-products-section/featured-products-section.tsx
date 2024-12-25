@@ -1,7 +1,6 @@
 import '../../styles/utils.scss';
 import classNames from 'classnames';
 import { ProductCard, ProductCardSkeleton } from '~/src/components/product-card/product-card';
-import { ProductLink } from '~/src/components/product-link/product-link';
 import { FadeIn, Reveal } from '~/src/components/visual-effects';
 import { useCategoryDetails } from '~/src/wix/categories';
 import { getProductImageUrl, useProducts } from '~/src/wix/products';
@@ -32,15 +31,20 @@ export const FeaturedProductsSection = (props: FeaturedProductsSectionProps) => 
             <Reveal className={styles.products} direction="down" duration={1.4}>
                 {products
                     ? products.items.map((product) => (
-                          <ProductLink key={product._id} productSlug={product.slug!}>
-                              <ProductCard
-                                  name={product.name!}
-                                  imageUrl={getProductImageUrl(product, { minHeight: 700 })}
-                                  price={product.priceData?.formatted?.price}
-                                  discountedPrice={product.priceData?.formatted?.discountedPrice}
-                                  ribbon={product.ribbon ?? undefined}
-                              />
-                          </ProductLink>
+                        <ProductCard
+                            product={product}
+                            variants={product.variants}
+                            key={product._id}
+                            slug={product.slug!}
+                            inventoryStatus={product.stock?.inventoryStatus}
+                            price={product.priceData?.price ?? undefined}
+                            discountedPrice={product.priceData?.discountedPrice}
+                            name={product.name!}
+                            imageUrl={getProductImageUrl(product, { minHeight: 700 })}
+                            formattedPrice={product.priceData?.formatted?.price}
+                            formattedDiscountedPrice={product.priceData?.formatted?.discountedPrice}
+                            ribbon={product.ribbon ?? undefined}
+                        />
                       ))
                     : Array.from({ length: productCount }).map((_, i) => (
                           <ProductCardSkeleton key={i} />

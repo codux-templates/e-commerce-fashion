@@ -68,8 +68,8 @@ export const ProductGrid = React.memo<ProductGridProps>(function ProductGrid({
                     <ProductCard
                         name={product.name!}
                         imageUrl={getProductImageUrl(product, { minWidth: 540, minHeight: 720 })}
-                        price={product.priceData?.formatted?.price}
-                        discountedPrice={product.priceData?.formatted?.discountedPrice}
+                        formattedPrice={product.priceData?.formatted?.price}
+                        formattedDiscountedPrice={product.priceData?.formatted?.discountedPrice}
                         ribbon={product.ribbon ?? undefined}
                         inventoryStatus={product.stock?.inventoryStatus}
                     />
