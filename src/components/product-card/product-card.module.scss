@@ -51,8 +51,8 @@
     display: flex;
     align-items: center;
     position: absolute;
-    top: 4%;
-    left: 4%;
+    top: 8px;
+    left: 8px;
     font: var(--body2);
 }
 
@@ -78,9 +78,9 @@
 
 .productCard .quickView{
     position: absolute;
-    bottom: 4%;
-    left: 4%;
-    right: 4%;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
     display: none;
     flex-direction: column;
     gap: 8px;
