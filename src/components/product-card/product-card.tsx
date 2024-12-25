@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { toast } from '~/src/components/toast/toast';
 import { getErrorMessage } from '~/src/wix/utils';
 import { ProductOption } from '~/src/components/product-option/product-option';
+import { type JsonifyObject } from 'type-fest/source/jsonify';
 
 interface ProductCardProps {
     name: string;
@@ -43,6 +44,7 @@ export const ProductCard = ({
     slug,
     product,
 }: ProductCardProps) => {
+
     const {
         outOfStock,
         productOptions,
@@ -51,8 +53,7 @@ export const ProductCard = ({
         addToCartAttempted,
         handleAddToCart,
         handleOptionChange,
-
-    } = useProductDetails(JSON.stringify(product));
+    } = useProductDetails(product as JsonifyObject<products.Product>);
 
     const handleError = (error: unknown) => toast.error(getErrorMessage(error));
 
