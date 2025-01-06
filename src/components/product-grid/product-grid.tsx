@@ -5,7 +5,6 @@ import type { CollectionDetails, Product } from '~/src/wix/ecom';
 import { getProductImageUrl } from '~/src/wix/products';
 import { EmptyProductsCategory } from '../empty-products-category/empty-products-category';
 import { ProductCard } from '../product-card/product-card';
-import { ProductLink } from '../product-link/product-link';
 import styles from './product-grid.module.scss';
 
 export interface ProductGridProps {

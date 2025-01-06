@@ -3,7 +3,7 @@ import { CategoryLink } from '~/src/components/category-link/category-link';
 import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
 import { SalesBar } from '~/src/components/marquee/sales-bar';
 import { CategoriesSection } from '~/src/components/categories-section/categories-section';
-import { Section } from '~/src/components/tagged-products-section/section';
+import { Section } from '~/src/components/section/section';
 import { SplitSection } from '~/src/components/spit-section/split-section';
 import styles from './route.module.scss';
 import { MetaFunction } from '@remix-run/react';

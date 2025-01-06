@@ -1,7 +1,11 @@
 .root{
   display: flex;
-  gap: 16px;
+  gap: 8px;
   width: 100%;
+}
+
+.reverse {
+  flex-direction: row-reverse;
 }
 
 .imageContainer {
@@ -24,9 +28,11 @@
 }
 
 .header {
+  padding: 8px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  max-width: 560px;
 }
 .subheading{
   font: var(--subheading);
@@ -37,7 +43,7 @@
   font: var(--display);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .root {
     flex-direction: column;
     gap: 32px;
