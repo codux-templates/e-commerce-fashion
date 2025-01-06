@@ -5,6 +5,7 @@ import { Select, SelectItem } from '~/src/components/select/select';
 import { ErrorIcon } from '../icons';
 
 import styles from './product-option.module.scss';
+import classNames from 'classnames';
 
 export interface ProductOptionProps {
     option: products.ProductOption;
@@ -35,14 +36,13 @@ export const ProductOption = ({ isQuickView = false, option, selectedChoice, err
 
       {!isQuickView &&
         <div className={styles.root}>
-            <div className="paragraph2">
+            <div className="subheading">
                 {name}
-                {selectedChoice && `: ${selectedChoice.description}`}
             </div>
 
             {optionType === products.OptionType.color ? (
               <ColorSelect
-                className="colorSelect"
+                className={'colorSelect'}
                 // `description` is what identifies the color choice. It's the unique color name.
                 // `value` is the color value, which can be repeated in different color choices.
                 options={choices
@@ -87,7 +87,7 @@ export const ProductOption = ({ isQuickView = false, option, selectedChoice, err
             <div className={styles.quickViewRow}>
                 Color
                 <ColorSelect
-                  className="colorSelect quickViewColors"
+                  className={classNames("colorSelect", styles.quickViewColors)}
                   // `description` is what identifies the color choice. It's the unique color name.
                   // `value` is the color value, which can be repeated in different color choices.
                   options={choices

@@ -5,18 +5,19 @@ import classNames from 'classnames';
 import { Accordion } from '~/src/components/accordion/accordion';
 import { BreadcrumbData, Breadcrumbs } from '~/src/components/breadcrumbs/breadcrumbs';
 import { RouteBreadcrumbs, useBreadcrumbs } from '~/src/components/breadcrumbs/use-breadcrumbs';
-import { MinusIcon, PlusIcon } from '~/src/components/icons';
 import { ProductImages } from '~/src/components/product-images/product-images';
 import { ProductOption } from '~/src/components/product-option/product-option';
 import { ProductPrice } from '~/src/components/product-price/product-price';
 import { QuantityInput } from '~/src/components/quantity-input/quantity-input';
-import { ShareProductLinks } from '~/src/components/share-product-links/share-product-links';
 import { toast } from '~/src/components/toast/toast';
 import { initializeEcomApiAnonymous } from '~/src/wix/ecom';
 import { initializeEcomApiForRequest } from '~/src/wix/ecom/session';
 import { useProductDetails } from '~/src/wix/products';
 import { getErrorMessage, removeQueryStringFromUrl } from '~/src/wix/utils';
-
+import { Section } from '~/src/components/tagged-products-section/section';
+import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
+import { Banner } from '~/src/components/banner/banner';
+import { ProductsSpotlight } from '~/src/components/products-spotlight/products-spotlight';
 import styles from './route.module.scss';
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
@@ -92,12 +93,12 @@ export default function ProductDetailsPage() {
 
     return (
         <div className={styles.page}>
-            <Breadcrumbs breadcrumbs={breadcrumbs} />
+            {/*<Breadcrumbs breadcrumbs={breadcrumbs} />*/}
 
             <div className={styles.content}>
                 <ProductImages media={media} />
 
-                <div>
+                <div className={styles.productInfo}>
                     <h1 className={styles.productName}>{product.name}</h1>
                     {sku && <p className={styles.sku}>SKU: {sku}</p>}
 
@@ -148,19 +149,33 @@ export default function ProductDetailsPage() {
                     </div>
 
                     <button
-                        className={classNames('button', 'primaryButton', styles.addToCartButton)}
+                        className={classNames(
+                            'button',
+                            'primaryButton',
+                            'button-lg',
+                            styles.addToCartButton,
+                        )}
                         onClick={() => handleAddToCart().catch(handleError)}
                         disabled={outOfStock || isAddingToCart}
                     >
                         {outOfStock ? 'Out of stock' : 'Add to Cart'}
                     </button>
 
+                    {!outOfStock &&
+                        <button
+                            className={classNames('button', 'invert', 'button-lg', styles.buyItNowButton)}
+                            onClick={() => handleAddToCart().catch(handleError)}
+                            disabled={outOfStock || isAddingToCart}
+                        >
+                             Buy it now
+                        </button>
+                    }
+
                     {product.additionalInfoSections &&
                         product.additionalInfoSections.length > 0 && (
                             <Accordion
                                 className={styles.additionalInfoSections}
-                                expandIcon={<PlusIcon width={22} />}
-                                collapseIcon={<MinusIcon width={22} />}
+
                                 items={product.additionalInfoSections.map((section) => ({
                                     header: (
                                         <div className={styles.additionalInfoSectionTitle}>
@@ -178,13 +193,68 @@ export default function ProductDetailsPage() {
                                 initialOpenItemIndex={0}
                             />
                         )}
-
-                    <ShareProductLinks
-                        className={styles.socialLinks}
-                        productCanonicalUrl={canonicalUrl}
-                    />
                 </div>
             </div>
+
+            <FeaturedProductsSection  categorySlug={'new-in'} title={'You might also like'} productCount={4} />
+            <Section
+                title="Mix, match, and make it yours"
+                subheading="Complete the look"
+            >
+                <ProductsSpotlight
+                  spotlights={[
+                      {
+                          x: 0.57,
+                          y: 0.28,
+                          productSlug: 'flowers'
+                      },
+                      {
+                          x: 0.4,
+                          y: 0.6,
+                          productSlug: 'flowers'
+                      },
+                  ]}
+                  imagePosition={'top'}
+                  imageUrl="https://static.wixstatic.com/media/a2cc95_11cce258e7cb45ab80637d887a5e8aea~mv2.png/v1/fit/w_640,h_640/0e228a0f121297eada19e8519cd7c75e.png.png"
+                />
+                <ProductsSpotlight
+                  spotlights={[
+                      {
+                          x: 0.57,
+                          y: 0.2,
+                          productSlug: 'flowers'
+                      },
+                      {
+                          x: 0.4,
+                          y: 0.8,
+                          productSlug: 'flowers'
+                      },
+                  ]}
+                  imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
+                />
+                <ProductsSpotlight
+                  spotlights={[
+                      {
+                          x: 0.57,
+                          y: 0.2,
+                          productSlug: 'flowers'
+                      },
+                      {
+                          x: 0.4,
+                          y: 0.8,
+                          productSlug: 'flowers'
+                      },
+                  ]}
+                  imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
+                />
+            </Section>
+            <Banner
+                title="A hot summer deserves a cool hat"
+                subheading="Product Spotlight"
+                buttonText="Shop now"
+                buttonUrl="/products/all-products"
+                imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
+            />
         </div>
     );
 }

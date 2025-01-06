@@ -1,17 +1,24 @@
 .page {
-    padding-bottom: 50px;
+    padding: 0 8px 50px;
 }
 
 .content {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    column-gap: 32px;
+    column-gap: 8px;
     margin-top: 36px;
+    padding: 0 119px 0 0;
+    position: relative;
+}
+
+.productInfo {
+    position: sticky;
+    place-self: start;
+    top: 106px;
 }
 
 .productName {
     font: var(--heading3);
-    font-size: 34px;
 }
 
 .sku {
@@ -22,15 +29,13 @@
 }
 
 .price {
-    margin-top: 16px;
-    font: var(--heading5);
-    font-size: 21px;
+    margin-top: 8px;
+    font: var(--heading3);
 }
 
 .description {
-    margin-top: 14px;
-    font: var(--paragraph2);
-    line-height: 1.5;
+    margin-top: 8px;
+    font: var(--body1);
 }
 
 .productOptions {
@@ -45,14 +50,21 @@
 }
 
 .quantityLabel {
+    font: var(--subheading);
+    text-transform: uppercase;
     display: inline-block;
-    margin-bottom: 8px;
-    font-size: 15px;
+    margin-bottom: 10px;
 }
 
 .addToCartButton {
-    width: 260px;
-    margin-top: 28px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.buyItNowButton {
+    width: 100%;
+    margin-top: 8px;
+    background: var(--surface-dark);
 }
 
 .additionalInfoSections {
@@ -79,6 +91,7 @@
     .content {
         grid-template-columns: 1fr;
         row-gap: 24px;
+        padding-right: unset;
     }
 }
 

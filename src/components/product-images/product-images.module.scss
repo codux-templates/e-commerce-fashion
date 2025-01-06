@@ -1,4 +1,11 @@
-.mainImageWrapper {
+.imagesWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    overflow: auto;
+}
+
+.imageWrapper {
     aspect-ratio: 3 / 4;
     display: flex;
     align-items: center;
@@ -6,7 +13,7 @@
     background: #e8e6e6;
 }
 
-.mainImage {
+.image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -18,36 +25,27 @@
     color: #646464;
 }
 
-.thumbnails {
-    display: flex;
-    gap: 8px;
-    margin-top: 8px;
+@media (max-width: 1023px) {
+    .imagesWrapper {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
 }
 
-.thumbnail {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
+@media (max-width: 767px) {
+    .imagesWrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
 }
 
-.thumbnail.selected {
-    cursor: default;
-}
-
-.thumbnail.selected::after {
-    content: '';
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff9;
-}
-
-.thumbnailImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+@media (max-width: 479px) {
+    .imagesWrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        width: 100%;
+        max-width: 100vw;
+        height: 460px;
+    }
 }

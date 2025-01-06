@@ -1,15 +1,15 @@
 .trigger {
     width: 100%;
-    height: 40px;
+    height: 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0 0 12px;
-    background: #fff;
-    border: 1px solid transparent;
-    border-bottom-color: rgba(0, 0, 0, 0.4);
-    color: var(--primary5);
+    padding: 8px 0 8px 12px;
+    background: var(--input-surface);
+    border: 1px solid var(--input-border);
+    color: var(--text-primary);
     cursor: pointer;
+    border-radius: 2px;
 }
 
 .trigger:focus-visible {
@@ -27,7 +27,7 @@
 }
 
 .trigger[data-placeholder] {
-    color: var(--secondary3);
+    color: var(--body2);
 }
 
 .triggerIcon {
@@ -44,7 +44,8 @@
     width: var(--radix-select-trigger-width);
     max-height: var(--radix-select-content-available-height);
     background: #fff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-top: none;
 }
 
 .content:focus-visible {
@@ -56,7 +57,7 @@
     display: flex;
     align-items: center;
     padding: 8px 12px;
-    color: var(--primary5);
+    color: var(--text-primary);
     cursor: pointer;
 }
 

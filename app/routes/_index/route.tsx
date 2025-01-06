@@ -3,14 +3,14 @@ import { CategoryLink } from '~/src/components/category-link/category-link';
 import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
 import { SalesBar } from '~/src/components/marquee/sales-bar';
 import { CategoriesSection } from '~/src/components/categories-section/categories-section';
-import { TaggedProductsSection } from '~/src/components/tagged-products-section/tagged-products-section';
+import { Section } from '~/src/components/tagged-products-section/section';
 import { SplitSection } from '~/src/components/spit-section/split-section';
 import styles from './route.module.scss';
-import classNames from 'classnames';
-import { MetaFunction, useNavigate } from '@remix-run/react';
+import { MetaFunction } from '@remix-run/react';
+import { Banner } from '~/src/components/banner/banner';
+import { ProductsSpotlight } from '~/src/components/products-spotlight/products-spotlight';
 
 export default function HomePage() {
-    const navigate = useNavigate();
     return (
         <>
             <div className="heroBanner">
@@ -23,7 +23,7 @@ export default function HomePage() {
                     <div className="subheading">Start the freshest season</div>
                     <h1 className="uppercase">New Spring Collection is Now Online</h1>
                     <CategoryLink categorySlug="all-products">
-                        <button className="button invert lg">Shop Collections</button>
+                        <button className="button invert button-lg">Shop Collections</button>
                     </CategoryLink>
                 </div>
             </div>
@@ -33,7 +33,42 @@ export default function HomePage() {
 
                 <CategoriesSection categorySlugs={['women', 'man', 'accessories']} />
 
-                <TaggedProductsSection />
+                <Section
+                    title="Sale is on"
+                    subheading="Don’t miss our last catches"
+                >
+                    <ProductsSpotlight
+                      spotlights={[
+                          {
+                              x: 0.57,
+                              y: 0.28,
+                              productSlug: 'flowers'
+                          },
+                          {
+                              x: 0.4,
+                              y: 0.6,
+                              productSlug: 'flowers'
+                          },
+                      ]}
+                      imagePosition={'top'}
+                      imageUrl="https://static.wixstatic.com/media/a2cc95_11cce258e7cb45ab80637d887a5e8aea~mv2.png/v1/fit/w_640,h_640/0e228a0f121297eada19e8519cd7c75e.png.png"
+                    />
+                    <ProductsSpotlight
+                      spotlights={[
+                          {
+                              x: 0.4,
+                              y: 0.6,
+                              productSlug: 'flowers'
+                          },
+                          {
+                              x: 0.4,
+                              y: 0.8,
+                              productSlug: 'flowers'
+                          },
+                      ]}
+                      imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
+                    />
+                </Section>
                 <SplitSection
                     subheading={'About'}
                     buttonText={'Shop All'}
@@ -49,29 +84,13 @@ export default function HomePage() {
                     productCount={4}
                 />
 
-                <div className={styles.banner}>
-                    <div className={styles.bannerContentWrapper}>
-                        <div className={styles.bannerContent}>
-                            <span className={styles.bannerSubheading}>Product Spotlight</span>
-                            <span className={styles.bannerTitle}>
-                                A hot summer deserves a cool hat
-                            </span>
-                        </div>
-                        <button
-                            onClick={() => navigate('/products/all-products')}
-                            className={classNames('button button-lg', styles.bannerButton)}
-                        >
-                            Shop now
-                        </button>
-                    </div>
-                    <div className={styles.bannerImageWrapper}>
-                        <img
-                            className={styles.bannerImage}
-                            src="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
-                            alt="Product Spotlight"
-                        />
-                    </div>
-                </div>
+                <Banner
+                    title="A hot summer deserves a cool hat"
+                    subheading="Product Spotlight"
+                    buttonText="Shop now"
+                    buttonUrl="/products/all-products"
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
+                />
 
                 <div className={styles.infoSection}>
                     <div className={styles.infoSectionCard}>

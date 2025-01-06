@@ -131,7 +131,7 @@
     color: var(--button-primary-invert-content);
 }
 
-.button.lg{
+.button.button-lg{
     padding: 19px 40px;
 }
 
@@ -568,7 +568,7 @@ span.size-48 {
 }
 
 .colorSelect {
-    --option-size: 24px;
+    --option-size: 44px;
     --border-color: var(--primary3);
     --border-color-hover: var(--primary5);
     --border-color-selected: var(--primary4);

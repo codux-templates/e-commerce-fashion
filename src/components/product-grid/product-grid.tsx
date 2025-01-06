@@ -54,26 +54,27 @@ export const ProductGrid = React.memo<ProductGridProps>(function ProductGrid({
     return (
         <div className={styles.productGrid}>
             {products.map((product) => (
-                <ProductLink
-                    key={product._id}
-                    className={styles.productLink}
-                    productSlug={product.slug!}
-                    state={{
-                        fromCategory: {
-                            name: category.name,
-                            slug: category.slug,
-                        },
-                    }}
-                >
+
                     <ProductCard
+                        key={product._id}
+                        slug={product.slug!}
+                        product={product as Product}
                         name={product.name!}
                         imageUrl={getProductImageUrl(product, { minWidth: 540, minHeight: 720 })}
                         formattedPrice={product.priceData?.formatted?.price}
                         formattedDiscountedPrice={product.priceData?.formatted?.discountedPrice}
-                        ribbon={product.ribbon ?? undefined}
+                        discountedPrice={product.priceData?.discountedPrice}
+                        price={product.priceData?.price}
+                        ribbon={product.ribbon}
                         inventoryStatus={product.stock?.inventoryStatus}
+                        state={{
+                            fromCategory: {
+                                name: category.name,
+                                slug: category.slug,
+                            },
+                        }}
                     />
-                </ProductLink>
+
             ))}
         </div>
     );

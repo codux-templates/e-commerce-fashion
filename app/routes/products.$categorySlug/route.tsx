@@ -4,8 +4,7 @@ import type { GetStaticRoutes } from '@wixc3/define-remix-app';
 import classNames from 'classnames';
 import { useEffect } from 'react';
 import { AppliedProductFilters } from '~/src/components/applied-product-filters/applied-product-filters';
-import { Breadcrumbs } from '~/src/components/breadcrumbs/breadcrumbs';
-import { RouteBreadcrumbs, useBreadcrumbs } from '~/src/components/breadcrumbs/use-breadcrumbs';
+import { RouteBreadcrumbs } from '~/src/components/breadcrumbs/use-breadcrumbs';
 import { CategoryLink } from '~/src/components/category-link/category-link';
 import { ProductFilters } from '~/src/components/product-filters/product-filters';
 import { ProductGrid } from '~/src/components/product-grid/product-grid';
@@ -90,7 +89,7 @@ export default function ProductsPage() {
 
     const currency = products[0]?.priceData?.currency ?? 'USD';
 
-    const breadcrumbs = useBreadcrumbs();
+    /*const breadcrumbs = useBreadcrumbs();*/
 
     useEffect(() => {
         if (error) toast.error(getErrorMessage(error));
@@ -98,7 +97,7 @@ export default function ProductsPage() {
 
     return (
         <div className={styles.page}>
-            <Breadcrumbs breadcrumbs={breadcrumbs} />
+            {/*<Breadcrumbs breadcrumbs={breadcrumbs} />*/}
 
             <div className={styles.content}>
                 <div className={styles.sidebar}>

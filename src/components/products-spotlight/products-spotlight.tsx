@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     useFloating,
     offset,
@@ -10,14 +10,14 @@ import {
 } from '@floating-ui/react';
 import styles from './products-spotlight.module.scss';
 import { AnimatePresence, motion } from 'motion/react';
+import { Product, useEcomApi } from '~/src/wix/ecom';
+import { useNavigate } from '@remix-run/react';
 
 
 export type ProductSpotlight = {
     x: number;
     y: number;
-    productId: string;
-    productName: string;
-    price: string;
+    productSlug: string;
 };
 
 export type ProductsSpotlightProps = {
@@ -42,6 +42,18 @@ export const ProductsSpotlight = ({ spotlights, imageUrl, imagePosition }: Produ
 const Spotlight = ({ spotlight }:{spotlight: ProductSpotlight})=> {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const api = useEcomApi();
+  const [product, setProduct] = useState<Product>();
+
+  useEffect(() => {
+      if (!spotlight.productSlug) return;
+      async function getProduct() {
+        const product = await api.getProductBySlug(spotlight.productSlug);
+        setProduct(product);
+      }
+      getProduct();
+    },[api, spotlight.productSlug]);
+
     const { refs, floatingStyles, context, placement } = useFloating({
         placement: 'right',
         middleware: [
@@ -63,6 +75,7 @@ const Spotlight = ({ spotlight }:{spotlight: ProductSpotlight})=> {
     const role = useRole(context);
     const { getReferenceProps, getFloatingProps } = useInteractions([hover, focus, role]);
 
+    const navigate = useNavigate();
     return (
         <>
             <div
@@ -73,12 +86,13 @@ const Spotlight = ({ spotlight }:{spotlight: ProductSpotlight})=> {
                 }}
                 ref={refs.setReference}
                 {...getReferenceProps()}
+                onClick={() => product&&navigate(`/product-details/${product.slug}`)}
             >
                 <div className={styles.spotlightInner}></div>
             </div>
 
             <AnimatePresence>
-                {isOpen && (
+                {isOpen && product && (
                     <div
                       ref={refs.setFloating}
                       style={{ ...floatingStyles }}
@@ -90,10 +104,11 @@ const Spotlight = ({ spotlight }:{spotlight: ProductSpotlight})=> {
                             animate={{ opacity: 1, scale: 1, x: 0 }}
                             exit={{ opacity: 0, scale: 1, x: placement === 'right' ? '-10px' : '10px'}}
                             transition={{ duration: 0.3 }}
+                            onClick={() => navigate(`/product-details/${product.slug}`)}
                         >
                             <div className={styles.popupContent}>
-                                <div className={styles.productName}>{spotlight.productName}</div>
-                                <div className={styles.price}>{spotlight.price}</div>
+                                <div className={styles.productName}>{product.name}</div>
+                                <div className={styles.price}>{product.priceData?.formatted?.discountedPrice ?? product.priceData?.formatted?.price ?? ''}</div>
                             </div>
                         </motion.div>
                     </div>

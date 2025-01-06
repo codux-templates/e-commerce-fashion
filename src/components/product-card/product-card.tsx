@@ -9,6 +9,7 @@ import { toast } from '~/src/components/toast/toast';
 import { getErrorMessage } from '~/src/wix/utils';
 import { ProductOption } from '~/src/components/product-option/product-option';
 import { type JsonifyObject } from 'type-fest/source/jsonify';
+import { Product } from '~/src/wix/ecom';
 
 interface ProductCardProps {
     name: string;
@@ -23,13 +24,19 @@ interface ProductCardProps {
      * It is displayed if it's not equal to the main price.
      */
     formattedDiscountedPrice?: string;
-    ribbon?: string;
+    ribbon?: string | null;
     inventoryStatus?: products.InventoryStatus;
-    price?: number;
-    discountedPrice?: number;
+    price?: number | null;
+    discountedPrice?: number | null;
     slug: string;
     variants?: products.Variant[];
-    product: products.Product;
+    product: Product;
+    state?: {
+        fromCategory?: {
+            name?: string | null;
+            slug?: string | null;
+        };
+    };
 }
 
 export const ProductCard = ({
@@ -43,6 +50,7 @@ export const ProductCard = ({
     discountedPrice,
     slug,
     product,
+  state,
 }: ProductCardProps) => {
 
     const {
@@ -53,14 +61,14 @@ export const ProductCard = ({
         addToCartAttempted,
         handleAddToCart,
         handleOptionChange,
-    } = useProductDetails(product as JsonifyObject<products.Product>);
+    } = useProductDetails(product as JsonifyObject<Product>);
 
     const handleError = (error: unknown) => toast.error(getErrorMessage(error));
 
     return (
         <div className={styles.productCard}>
             <div className={styles.imageWrapper}>
-                <ProductLink productSlug={slug}>
+                <ProductLink productSlug={slug} state={state}>
                     {imageUrl ? (
                         <img src={imageUrl} alt={name} className={styles.image} />
                     ) : (
@@ -136,7 +144,7 @@ export const ProductCard = ({
                     </div>
                 )}
             </div>
-            <ProductLink productSlug={slug}>
+            <ProductLink productSlug={slug} state={state}>
                 <div className={styles.name}>{name}</div>
                 <ProductPrice
                     className={styles.price}

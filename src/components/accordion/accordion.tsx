@@ -48,11 +48,11 @@ export const Accordion = ({
                                 {isOpen
                                     ? collapseIcon || (
                                           <DropdownIcon
-                                              width={12}
+                                              width={10}
                                               className={styles.collapseIcon}
                                           />
                                       )
-                                    : expandIcon || <DropdownIcon width={12} />}
+                                    : expandIcon || <DropdownIcon width={10} />}
                             </div>
                         </div>
 
