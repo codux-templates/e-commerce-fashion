@@ -28,12 +28,17 @@ export const ProductSortingSelect = () => {
         );
     };
 
+    const renderValue = () => {
+        return `Sort by`;
+    };
+
     return (
         <Select
             value={sortBy}
             onValueChange={handleChange}
             className={styles.select}
             dropdownClassName={styles.selectDropdown}
+            renderValue={renderValue}
         >
             <div className={styles.itemsWrapper}>
                 {sortingOptions.map((option) => (
