@@ -3,8 +3,6 @@ import { type MetaFunction, useLoaderData } from '@remix-run/react';
 import type { GetStaticRoutes } from '@wixc3/define-remix-app';
 import classNames from 'classnames';
 import { Accordion } from '~/src/components/accordion/accordion';
-import { BreadcrumbData } from '~/src/components/breadcrumbs/breadcrumbs';
-import { RouteBreadcrumbs, useBreadcrumbs } from '~/src/components/breadcrumbs/use-breadcrumbs';
 import { ProductImages } from '~/src/components/product-images/product-images';
 import { ProductOption } from '~/src/components/product-option/product-option';
 import { ProductPrice } from '~/src/components/product-price/product-price';
@@ -34,43 +32,8 @@ export const getStaticRoutes: GetStaticRoutes = async () => {
     return items.map((product) => `/product-details/${product.slug}`);
 };
 
-interface ProductDetailsLocationState {
-    fromCategory?: {
-        name: string;
-        slug: string;
-    };
-}
-
-const breadcrumbs: RouteBreadcrumbs<typeof loader, ProductDetailsLocationState> = (
-    match,
-    location,
-) => {
-    const fromCategory = location.state?.fromCategory;
-
-    const breadcrumbs: BreadcrumbData[] = [
-        {
-            title: match.data.product.name!,
-            to: `/product-details/${match.data.product.slug}`,
-        },
-    ];
-
-    if (fromCategory) {
-        breadcrumbs.unshift({
-            title: fromCategory.name,
-            to: `/products/${fromCategory.slug}`,
-            clientOnly: true,
-        });
-    }
-
-    return breadcrumbs;
-};
-
-export const handle = {
-    breadcrumbs,
-};
-
 export default function ProductDetailsPage() {
-    const { product, canonicalUrl } = useLoaderData<typeof loader>();
+    const { product } = useLoaderData<typeof loader>();
 
     const {
         outOfStock,
@@ -86,8 +49,6 @@ export default function ProductDetailsPage() {
         handleOptionChange,
         handleQuantityChange,
     } = useProductDetails(product);
-
-    const breadcrumbs = useBreadcrumbs();
 
     const handleError = (error: unknown) => toast.error(getErrorMessage(error));
 
@@ -211,7 +172,7 @@ export default function ProductDetailsPage() {
                       {
                           x: 0.4,
                           y: 0.6,
-                          productSlug: 'flowers'
+                          productSlug: 'i-m-a-product-9'
                       },
                   ]}
                   imagePosition={'top'}
@@ -227,7 +188,7 @@ export default function ProductDetailsPage() {
                       {
                           x: 0.4,
                           y: 0.8,
-                          productSlug: 'flowers'
+                          productSlug: 'i-m-a-product-9'
                       },
                   ]}
                   imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
@@ -242,7 +203,7 @@ export default function ProductDetailsPage() {
                       {
                           x: 0.4,
                           y: 0.8,
-                          productSlug: 'flowers'
+                          productSlug: 'i-m-a-product-9'
                       },
                   ]}
                   imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"

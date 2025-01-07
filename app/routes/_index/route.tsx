@@ -47,7 +47,7 @@ export default function HomePage() {
                           {
                               x: 0.4,
                               y: 0.6,
-                              productSlug: 'flowers'
+                              productSlug: 'i-m-a-product-9'
                           },
                       ]}
                       imagePosition={'top'}
@@ -63,7 +63,7 @@ export default function HomePage() {
                           {
                               x: 0.4,
                               y: 0.8,
-                              productSlug: 'flowers'
+                              productSlug: 'i-m-a-product-9'
                           },
                       ]}
                       imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
