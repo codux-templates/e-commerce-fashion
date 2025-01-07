@@ -8,12 +8,13 @@ interface BannerProps {
     buttonText: string;
     buttonUrl: string;
     imageUrl: string;
+    className?: string;
 }
 
-export const Banner = ({ title, subheading, buttonText, buttonUrl, imageUrl }: BannerProps) => {
+export const Banner = ({ title, subheading, buttonText, buttonUrl, imageUrl, className }: BannerProps) => {
     const navigate = useNavigate();
     return (
-        <div className={styles.banner}>
+        <div className={classNames(styles.banner, className)}>
             <div className={styles.bannerContentWrapper}>
                 <div className={styles.bannerContent}>
                     <span className={styles.bannerSubheading}>{subheading}</span>

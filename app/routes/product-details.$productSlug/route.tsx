@@ -57,7 +57,9 @@ export default function ProductDetailsPage() {
             {/*<Breadcrumbs breadcrumbs={breadcrumbs} />*/}
 
             <div className={styles.content}>
+              <div className={styles.productImagesWrapper}>
                 <ProductImages media={media} />
+              </div>
 
                 <div className={styles.productInfo}>
                     <h1 className={styles.productName}>{product.name}</h1>
@@ -159,6 +161,7 @@ export default function ProductDetailsPage() {
 
             <FeaturedProductsSection  categorySlug={'new-in'} title={'You might also like'} productCount={4} />
             <Section
+                className={styles.spotlightsSection}
                 title="Mix, match, and make it yours"
                 subheading="Complete the look"
             >
@@ -210,6 +213,7 @@ export default function ProductDetailsPage() {
                 />
             </Section>
             <Banner
+              className={styles.banner}
                 title="A hot summer deserves a cool hat"
                 subheading="Product Spotlight"
                 buttonText="Shop now"

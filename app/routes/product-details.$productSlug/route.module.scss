@@ -1,5 +1,5 @@
 .page {
-    padding: 0 8px 50px;
+    padding: 0 0 50px;
 }
 
 .content {
@@ -9,6 +9,10 @@
     margin-top: 36px;
     padding: 0 119px 0 0;
     position: relative;
+}
+
+.productImagesWrapper {
+    padding-left: 8px;
 }
 
 .productInfo {
@@ -76,14 +80,18 @@
     font-size: 18px;
 }
 
-.socialLinks {
-    margin-top: 36px;
+.spotlightsSection{
+    padding: 0 8px;
+}
+
+.banner{
+    padding: 0 8px;
 }
 
 @media (max-width: 1024px) {
     .content {
         grid-template-columns: 1fr 1fr;
-        column-gap: 16px;
+        column-gap: 8px;
     }
 }
 
@@ -91,11 +99,19 @@
     .content {
         grid-template-columns: 1fr;
         row-gap: 24px;
-        padding-right: unset;
+        padding-right: 8px;
+    }
+
+    .productInfo {
+        padding: 0 8px;
     }
 }
 
 @media (max-width: 480px) {
+    .productImagesWrapper {
+        padding-left: 0;
+    }
+
     .productName {
         font: var(--heading6);
     }
