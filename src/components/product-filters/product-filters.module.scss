@@ -1,0 +1,18 @@
+.trigger {
+  display: flex;
+  align-items: center;
+  width: auto;
+  gap: 8px;
+  justify-content: end;
+  background: none;
+  border: none;
+  padding: 5px 8px;
+  font: var(--action);
+  text-transform: uppercase;
+}
+
+.content {
+  margin-top: 8px;
+  width: 216px;
+  text-wrap: nowrap;
+}

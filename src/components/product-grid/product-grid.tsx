@@ -24,6 +24,7 @@ export const ProductGrid = React.memo<ProductGridProps>(function ProductGrid({
     filtersApplied,
     onClickClearFilters,
 }) {
+
     if (category.numberOfProducts === 0) {
         return (
             <EmptyProductsCategory
@@ -51,6 +52,7 @@ export const ProductGrid = React.memo<ProductGridProps>(function ProductGrid({
     }
 
     return (
+      <div className={styles.root}>
         <div className={styles.productGrid}>
             {products.map((product) => (
 
@@ -76,5 +78,6 @@ export const ProductGrid = React.memo<ProductGridProps>(function ProductGrid({
 
             ))}
         </div>
+      </div>
     );
 });

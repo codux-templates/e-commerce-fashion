@@ -1,8 +1,11 @@
 .root {
     display: flex;
     gap: 4px;
+    text-transform: uppercase;
+    font: var(--body2-caps);
 }
 
 .beforeDiscount {
+    color: var(--text-disabled);
     text-decoration: line-through;
 }

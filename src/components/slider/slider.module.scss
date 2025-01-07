@@ -1,10 +1,10 @@
-:where(.root) {
+.root {
     --thumb-size: 12px;
     --track-height: 2px;
-    --track-color: #b2b2b2;
-    --range-color: #0175ff;
-    --thumb-color: #0175ff;
-    --focus-ring-color: #0175ff;
+    --track-color: rgba(0, 0, 0, 0.38);
+    --range-color: var(--icon-primary);
+    --thumb-color: var(--icon-primary);
+    --focus-ring-color: var(--icon-primary);
 }
 
 .root {
@@ -16,6 +16,8 @@
     user-select: none;
     touch-action: none;
     cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 9px;
 }
 
 .root[data-disabled] {
@@ -28,7 +30,7 @@
     position: relative;
     flex-grow: 1;
     height: var(--track-height);
-    border-radius: 999px;
+    border-radius: 2px;
     background-color: var(--track-color);
 }
 

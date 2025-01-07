@@ -5,7 +5,8 @@
 .content {
     display: flex;
     gap: 40px;
-    margin-top: 36px;
+    margin-top: 40px;
+    margin-bottom: 120px;
 }
 
 .sidebar {
@@ -27,16 +28,21 @@
 }
 
 .categoryList {
-    list-style: none;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     padding: 0;
 }
 
 .categoryLink {
-    font: var(--paragraph3);
+
 }
 
 .categoryLinkActive {
-    color: var(--secondary3);
+    color: var(--text-invert);
+    background: var(--surface-dark);
 }
 
 .filters {
@@ -54,16 +60,23 @@
 
 .categoryHeader {
     margin-bottom: 46px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
 }
 
 .categoryName {
-    font: var(--heading3);
+    font: var(--heading1);
+    text-transform: uppercase;
 }
 
 .categoryDescription {
-    max-width: 672px;
-    margin-top: 4px;
-    font: var(--paragraph1);
+    max-width: 470px;
+    font: var(--body1-caps);
+    text-transform: uppercase;
 }
 
 .appliedFilters {
@@ -75,15 +88,23 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    margin-bottom: 8px;
+    padding: 40px 8px;
 }
 
 .productsCount {
-    font: var(--paragraph3);
+    font: var(--body2-caps);
+    text-transform: uppercase;
+}
+
+.filtersAndSorting {
+    align-items: center;
+    display: flex;
+    gap: 8px;
 }
 
 .loadMoreWrapper {
     margin-top: 40px;
+    padding: 24px;
     display: flex;
     justify-content: center;
 }

@@ -28,24 +28,20 @@ export const ProductSortingSelect = () => {
         );
     };
 
-    const renderValue = (value: ProductSortBy) => {
-        const option = sortingOptions.find((option) => option.value === value)!;
-        return `Sort by: ${option.label}`;
-    };
-
     return (
         <Select
             value={sortBy}
             onValueChange={handleChange}
             className={styles.select}
             dropdownClassName={styles.selectDropdown}
-            renderValue={renderValue}
         >
-            {sortingOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value} className={styles.selectItem}>
-                    {option.label}
-                </SelectItem>
-            ))}
+            <div className={styles.itemsWrapper}>
+                {sortingOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value} className={styles.selectItem}>
+                      {option.label}
+                  </SelectItem>
+                ))}
+            </div>
         </Select>
     );
 };

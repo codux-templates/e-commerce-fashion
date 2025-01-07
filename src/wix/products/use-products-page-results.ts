@@ -12,19 +12,37 @@ export interface UseProductsPageResultsArgs {
     filters: IProductFilters;
     sorting: ProductSortBy;
     resultsFromLoader: ProductsPageResults;
+    limit?: number
 }
 
 /**
  * Returns the list of products displayed on the products page.
  *
+ * @param categoryId
+ * @param filters
+ * @param sorting
+ * @param categoryId
+ * @param limit
+ * @param filters
+ * @param sorting
+ * @param categoryId
+ * @param limit
+ * @param filters
+ * @param sorting
+ * @param categoryId
+ * @param limit
+ * @param filters
+ * @param sorting
  * @param resultsFromLoader The initial batch of results obtained from the route loader,
  * to avoid redundant fetching on the client side.
+ * @param limit
  */
 export function useProductsPageResults({
     categoryId,
     filters,
     sorting,
     resultsFromLoader,
+    limit
 }: UseProductsPageResultsArgs) {
     const [results, setResults] = useState(resultsFromLoader);
     const resultsRef = useRef(results);
@@ -52,6 +70,7 @@ export function useProductsPageResults({
                 filters,
                 sortBy: sorting,
                 skip: results.items.length,
+                limit,
             });
 
             if (resultsRef.current === resultsBeforeFetch) {

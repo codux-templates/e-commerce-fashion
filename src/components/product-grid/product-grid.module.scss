@@ -1,12 +1,13 @@
-.productGrid {
-    /* The max width must be at least 3/2 of the min width to prevent gaps when
-     * transitioning from 3 to 2 items per row. */
-    --minColumnWidth: 350px;
-    --maxColumnWidth: 540px;
+.root {
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+}
 
+.productGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--minColumnWidth), 1fr));
-    gap: 20px 4px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 4px;
 }
 
 .productLink {
@@ -22,9 +23,15 @@
     color: rgba(23, 17, 13, 0.7);
 }
 
-@media (max-width: 1024px) {
-    .productGrid {
-        --minColumnWidth: 250px;
-        --maxColumnWidth: 500px;
+.loadMoreWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+@media (max-width: 767px){
+    .productGrid{
+        grid-template-columns: repeat(2, 1fr);
     }
 }

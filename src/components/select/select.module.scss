@@ -31,7 +31,7 @@
 }
 
 .triggerIcon {
-    padding: 0 20px;
+    padding: 0 8px;
     display: flex;
     color: var(--primary5);
 }
@@ -59,6 +59,7 @@
     padding: 8px 12px;
     color: var(--text-primary);
     cursor: pointer;
+    font: var(--body2);
 }
 
 .item:focus-visible {
@@ -67,5 +68,5 @@
 
 .item:hover,
 .item:focus {
-    background: #e8eaed;
+    background: var(--surface-mid);
 }

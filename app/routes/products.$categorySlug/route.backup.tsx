@@ -3,13 +3,14 @@ import { type MetaFunction, useLoaderData } from '@remix-run/react';
 import type { GetStaticRoutes } from '@wixc3/define-remix-app';
 import classNames from 'classnames';
 import { useEffect } from 'react';
+import { AppliedProductFilters } from '~/src/components/applied-product-filters/applied-product-filters';
 import { RouteBreadcrumbs } from '~/src/components/breadcrumbs/use-breadcrumbs';
 import { CategoryLink } from '~/src/components/category-link/category-link';
 import { ProductFilters } from '~/src/components/product-filters/product-filters';
 import { ProductGrid } from '~/src/components/product-grid/product-grid';
 import { ProductSortingSelect } from '~/src/components/product-sorting-select/product-sorting-select';
 import { toast } from '~/src/components/toast/toast';
-import { initializeEcomApiAnonymous, ProductFilter } from '~/src/wix/ecom';
+import { initializeEcomApiAnonymous } from '~/src/wix/ecom';
 import { initializeEcomApiForRequest } from '~/src/wix/ecom/session';
 import {
     productFiltersFromSearchParams,
@@ -21,10 +22,6 @@ import {
 import { getErrorMessage } from '~/src/wix/utils';
 
 import styles from './route.module.scss';
-import { Banner } from '~/src/components/banner/banner';
-
-const INITIAL_PRODUCTS_LIMIT = 8;
-const LOAD_MORE_PRODUCTS_LIMIT = 8;
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     const url = new URL(request.url);
@@ -44,7 +41,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     }
 
     const [categoryProducts, allCategories, productPriceBounds] = await Promise.all([
-        api.getProducts({ categoryId: category._id!, filters, sortBy, limit: INITIAL_PRODUCTS_LIMIT}),
+        api.getProducts({ categoryId: category._id!, filters, sortBy }),
         api.getAllCategories(),
         api.getProductPriceBoundsInCategory(category._id!),
     ]);
@@ -88,7 +85,6 @@ export default function ProductsPage() {
             filters: appliedFilters,
             sorting,
             resultsFromLoader,
-            limit: LOAD_MORE_PRODUCTS_LIMIT
         });
 
     const currency = products[0]?.priceData?.currency ?? 'USD';
@@ -99,15 +95,48 @@ export default function ProductsPage() {
         if (error) toast.error(getErrorMessage(error));
     }, [error]);
 
-    const handleClearFilters = () => {
-        clearFilters([ProductFilter.minPrice, ProductFilter.maxPrice]);
-    }
-
     return (
         <div className={styles.page}>
             {/*<Breadcrumbs breadcrumbs={breadcrumbs} />*/}
 
             <div className={styles.content}>
+                <div className={styles.sidebar}>
+                    <nav>
+                        <h2 className={styles.sidebarTitle}>Browse by</h2>
+                        <ul className={styles.categoryList}>
+                            {allCategories.map((category) => (
+                                <li key={category._id} className={styles.categoryListItem}>
+                                    <CategoryLink
+                                        categorySlug={category.slug!}
+                                        className={({ isActive }) =>
+                                            classNames(styles.categoryLink, {
+                                                [styles.categoryLinkActive]: isActive,
+                                            })
+                                        }
+                                    >
+                                        {category.name}
+                                    </CategoryLink>
+                                </li>
+                            ))}
+                        </ul>
+
+                        {category.numberOfProducts !== 0 && (
+                            <div className={styles.filters}>
+                                <h2
+                                    className={classNames(styles.sidebarTitle, styles.filtersTitle)}
+                                >
+                                    Filters
+                                </h2>
+                                <ProductFilters
+                                    minAvailablePrice={productPriceBounds.lowest}
+                                    maxAvailablePrice={productPriceBounds.highest}
+                                    currency={currency}
+                                />
+                            </div>
+                        )}
+                    </nav>
+                </div>
+
                 <div className={styles.main}>
                     <div className={styles.categoryHeader}>
                         <h1 className={styles.categoryName}>
@@ -118,36 +147,24 @@ export default function ProductsPage() {
                         )}
                     </div>
 
-                    <div className={styles.categoryList}>
-                        {allCategories.map((category) => (
-                            <div key={category._id} className={styles.categoryListItem}>
-                                <CategoryLink
-                                    categorySlug={category.slug!}
-                                    className={({ isActive }) =>
-                                        classNames('button button-sm', styles.categoryLink, {
-                                            ['active']: isActive,
-                                        })
-                                    }
-                                >
-                                    {category.name}
-                                </CategoryLink>
-                            </div>
-                        ))}
-                    </div>
+                    {someFiltersApplied && (
+                        <AppliedProductFilters
+                            className={styles.appliedFilters}
+                            appliedFilters={appliedFilters}
+                            onClearFilters={clearFilters}
+                            onClearAllFilters={clearAllFilters}
+                            currency={currency}
+                            minPriceInCategory={productPriceBounds.lowest}
+                            maxPriceInCategory={productPriceBounds.highest}
+                        />
+                    )}
 
                     <div className={styles.countAndSorting}>
                         <p className={styles.productsCount}>
-                            {totalProducts} {totalProducts === 1 ? 'item' : 'items'}
+                            {totalProducts} {totalProducts === 1 ? 'product' : 'products'}
                         </p>
-                        <div className={styles.filtersAndSorting}>
-                            <ProductFilters
-                                minAvailablePrice={productPriceBounds.lowest}
-                                maxAvailablePrice={productPriceBounds.highest}
-                                currency={currency}
-                                onClearFilters={handleClearFilters}
-                            />
-                            <ProductSortingSelect />
-                        </div>
+
+                        <ProductSortingSelect />
                     </div>
 
                     <ProductGrid
@@ -160,7 +177,7 @@ export default function ProductsPage() {
                     {products.length < totalProducts && (
                         <div className={styles.loadMoreWrapper}>
                             <button
-                                className="button button-sm"
+                                className="button secondaryButton"
                                 onClick={loadMoreProducts}
                                 disabled={isLoadingMoreProducts}
                             >
@@ -170,13 +187,6 @@ export default function ProductsPage() {
                     )}
                 </div>
             </div>
-            <Banner
-              title={'A hot summer deserves a cool hat'}
-              subheading={'Product Spotlight'}
-              imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
-              buttonText={'Shop Now'}
-              buttonUrl={'/products/all-products'}
-            />
         </div>
     );
 }

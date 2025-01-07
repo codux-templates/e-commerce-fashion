@@ -12,11 +12,6 @@ export interface SelectProps<V extends string> {
     children: React.ReactNode;
     className?: string;
     dropdownClassName?: string;
-    /**
-     * Allows to customize the selected value.
-     * By default the selected item's text will be rendered.
-     */
-    renderValue?: (value: V) => React.ReactNode;
     hasError?: boolean;
 }
 
@@ -27,14 +22,13 @@ export const Select = <V extends string>({
     children,
     className,
     dropdownClassName,
-    renderValue,
     hasError,
 }: SelectProps<V>) => (
     <RadixSelect.Root value={value} onValueChange={onValueChange}>
         <RadixSelect.Trigger
             className={classNames(styles.trigger, { [styles.hasError]: hasError }, className)}
         >
-            <RadixSelect.Value placeholder={placeholder}>{renderValue?.(value)}</RadixSelect.Value>
+            <RadixSelect.Value placeholder={placeholder}>Sort by</RadixSelect.Value>
             <RadixSelect.Icon className={styles.triggerIcon}>
                 <DropdownIcon width={12} />
             </RadixSelect.Icon>
@@ -42,6 +36,7 @@ export const Select = <V extends string>({
 
         <RadixSelect.Portal>
             <RadixSelect.Content
+              align={'end'}
                 className={classNames(styles.content, dropdownClassName)}
                 position="popper"
             >
