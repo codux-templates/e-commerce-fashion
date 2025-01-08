@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { cart } from '@wix/ecom';
 import { media } from '@wix/sdk';
 import { QuantityInput } from '~/src/components/quantity-input/quantity-input';
-import { TrashIcon, ImagePlaceholderIcon, ErrorIcon } from '~/src/components/icons';
+import { ImagePlaceholderIcon, ErrorIcon } from '~/src/components/icons';
 import { Spinner } from '~/src/components/spinner/spinner';
 import { ProductPrice } from '~/src/components/product-price/product-price';
 import classNames from 'classnames';
@@ -66,58 +66,60 @@ export const CartItem = ({
                 )}
 
                 <div className={styles.productInfo}>
-                    <div className={styles.productNameAndPrice}>
+                    <div className={styles.productNameWrapper}>
                         <div className={styles.productName}>{productName}</div>
+                    </div>
 
-                        {item.fullPrice?.formattedConvertedAmount && (
-                            <ProductPrice
-                                price={item.fullPrice?.formattedConvertedAmount}
-                                discountedPrice={item.price?.formattedConvertedAmount}
-                            />
-                        )}
-
+                    <div className={styles.productOptionsWrapper}>
                         {item.descriptionLines && item.descriptionLines.length > 0 && (
-                            <CartItemOptions
-                                className={styles.options}
-                                options={item.descriptionLines}
-                                visibleOptionsCount={1}
-                            />
+                          <CartItemOptions
+                            className={styles.options}
+                            options={item.descriptionLines}
+                            visibleOptionsCount={2}
+                          />
                         )}
                     </div>
 
+                    {item.fullPrice?.formattedConvertedAmount && (
+                      <ProductPrice
+                        className={styles.price}
+                        price={item.price?.formattedConvertedAmount}
+                      />
+                    )}
+
                     <div className={styles.quantity}>
                         <QuantityInput
-                            value={quantity}
-                            onChange={handleQuantityChange}
-                            className={classNames(styles.quantityInput, {
-                                [styles.quantityInputDisabled]: isUnavailable,
-                            })}
-                            disabled={isUnavailable}
+                          value={quantity}
+                          onChange={handleQuantityChange}
+                          className={classNames(styles.quantityInput, {
+                              [styles.quantityInputDisabled]: isUnavailable,
+                          })}
+                          disabled={isUnavailable}
                         />
                     </div>
                     <div className={styles.priceBreakdown}>
                         {priceBreakdown?.lineItemPrice?.formattedConvertedAmount}
                     </div>
-                    <button
-                        className={classNames(styles.removeButton, 'iconButton')}
-                        onClick={onRemove}
+                    <span
+                      className={classNames('action uppercase', styles.removeButton)}
+                      onClick={onRemove}
                     >
-                        <TrashIcon />
-                    </button>
+                        Remove
+                    </span>
                 </div>
             </div>
 
             {isUnavailable && (
-                <div className={styles.unavailableIndication}>
-                    <ErrorIcon className={styles.unavailableIcon} />
-                    <span>Sorry, this item is no longer available.</span>
-                </div>
+              <div className={styles.unavailableIndication}>
+                  <ErrorIcon className={styles.unavailableIcon} />
+                  <span>Sorry, this item is no longer available.</span>
+              </div>
             )}
 
             {isUpdating && (
-                <div className={styles.spinner}>
-                    <Spinner size={50} />
-                </div>
+              <div className={styles.spinner}>
+                  <Spinner size={50} />
+              </div>
             )}
         </div>
     );

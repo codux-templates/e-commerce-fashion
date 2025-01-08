@@ -2,13 +2,15 @@ import { Link, type MetaFunction } from '@remix-run/react';
 import classNames from 'classnames';
 import { type ReactNode } from 'react';
 import { CartItem } from '~/src/components/cart/cart-item/cart-item';
-import { LockIcon } from '~/src/components/icons';
 import { Spinner } from '~/src/components/spinner/spinner';
 import { toast } from '~/src/components/toast/toast';
 import { findLineItemPriceBreakdown, useCart, useCheckout } from '~/src/wix/cart';
 import { getErrorMessage } from '~/src/wix/utils';
 
 import styles from './route.module.scss';
+import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
+import { Banner } from '~/src/components/banner/banner';
+import { InfoSection } from '~/src/components/info-section/info-section';
 
 export default function CartPage() {
     const {
@@ -53,68 +55,104 @@ export default function CartPage() {
 
     return (
         <div className={styles.page}>
-            <div className={styles.cart}>
-                <h1 className={styles.cartHeader}>My cart</h1>
-                <div className={styles.cartItems}>
-                    {cart.data.lineItems.map((item) => (
-                        <CartItem
+            <div className={styles.cartSection}>
+                <div className={styles.cart}>
+                    <div className={styles.cartHeader}>
+                        <div className={'heading4 uppercase'}>Title of Note</div>
+                        <span className={'body1'}>Description of promo or note. (For example: free delivery.)</span>
+                    </div>
+                    <div className={styles.cartItems}>
+                        {cart.data.lineItems.map((item) => (
+                          <CartItem
                             key={item._id}
                             item={item}
                             isUpdating={updatingCartItemIds.includes(item._id!)}
                             priceBreakdown={findLineItemPriceBreakdown(item, cartTotals)}
                             onRemove={() => removeItem(item._id!).catch(handleError)}
                             onQuantityChange={(quantity: number) =>
-                                updateItemQuantity({ id: item._id!, quantity }).catch(handleError)
+                              updateItemQuantity({ id: item._id!, quantity }).catch(handleError)
                             }
-                        />
-                    ))}
-                </div>
-            </div>
-            <div className={styles.summary}>
-                <h1 className={styles.summaryHeader}>Order summary</h1>
-                <div
-                    className={classNames(styles.summaryContent, {
-                        [styles.loading]: isCartTotalsUpdating,
-                    })}
-                >
-                    <div className={styles.summaryRow}>
-                        <span>Subtotal</span>
-                        <span>{cartTotals?.priceSummary?.subtotal?.formattedConvertedAmount}</span>
+                          />
+                        ))}
                     </div>
-                    {cartTotals?.shippingInfo?.region && (
+                </div>
+                <div className={styles.summary}>
+                    <div
+                      className={classNames(styles.summaryContent, {
+                          [styles.loading]: isCartTotalsUpdating,
+                      })}
+                    >
                         <div className={styles.summaryRow}>
-                            <span>Delivery</span>
-                            <span>
+                            <span>Subtotal</span>
+                            <span>{cartTotals?.priceSummary?.subtotal?.formattedConvertedAmount}</span>
+                        </div>
+                        {cartTotals?.shippingInfo?.region && (
+                          <div className={styles.summaryRow}>
+                              <span>Delivery</span>
+                              <span>
                                 {Number(cartTotals?.priceSummary?.shipping?.amount) === 0
-                                    ? 'FREE'
-                                    : cartTotals?.priceSummary?.shipping?.formattedConvertedAmount}
+                                  ? 'FREE'
+                                  : cartTotals?.priceSummary?.shipping?.formattedConvertedAmount}
                             </span>
+                          </div>
+                        )}
+                        <div className={classNames(styles.summaryRow, styles.summaryTotal)}>
+                            <span>Total</span>
+                            <span>{cartTotals?.priceSummary?.total?.formattedConvertedAmount}</span>
                         </div>
-                    )}
-                    <div className={classNames(styles.summaryRow, styles.summaryTotal)}>
-                        <span>Total</span>
-                        <span>{cartTotals?.priceSummary?.total?.formattedConvertedAmount}</span>
+                        {isCartTotalsUpdating && (
+                          <div className={styles.spinner}>
+                              <Spinner size={50} />
+                          </div>
+                        )}
                     </div>
-                    {isCartTotalsUpdating && (
-                        <div className={styles.spinner}>
-                            <Spinner size={50} />
-                        </div>
-                    )}
-                </div>
 
-                <button
-                    className={classNames('button', styles.checkoutButton)}
-                    onClick={checkout}
-                    disabled={isCheckoutInProgress || isCartTotalsUpdating}
-                >
-                    {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Checkout'}
-                </button>
-
-                <div className={styles.secureCheckout}>
-                    <LockIcon width={11} />
-                    <span>Secure Checkout</span>
+                    <button
+                      className={classNames('button button-lg', styles.checkoutButton)}
+                      onClick={checkout}
+                      disabled={isCheckoutInProgress || isCartTotalsUpdating}
+                    >
+                        {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Checkout'}
+                    </button>
                 </div>
             </div>
+
+            <FeaturedProductsSection
+                categorySlug="best-seller"
+                title="You might also like"
+                productCount={4}
+            />
+
+            <Banner
+              title="A hot summer deserves a cool hat"
+              subheading="Product Spotlight"
+              buttonText="Shop now"
+              buttonUrl="/products/all-products"
+              imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5edd6f9183d.png"
+              />
+
+            <InfoSection items={[
+                {
+                    icon: 'local_shipping',
+                    heading: 'Free Shipping',
+                    subheading: 'On orders over 120$',
+                },
+                {
+                    icon: 'refresh',
+                    heading: 'Free Returns',
+                    subheading: 'On full time priced items only',
+                },
+                {
+                    icon: 'loyalty',
+                    heading: 'Crash replacement',
+                    subheading: '40% off your new kit',
+                },
+                {
+                    icon: 'recycling',
+                    heading: 'Eco-friendly',
+                    subheading: 'All of our packaging is recycled',
+                },
+            ]} />
         </div>
     );
 }

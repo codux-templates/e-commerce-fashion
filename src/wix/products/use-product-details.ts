@@ -63,7 +63,7 @@ export function useProductDetails(product: SerializeFrom<products.Product>) {
     }, []);
 
     const isAllOptionsSelected = (): boolean => {
-        return productOptions?.every(option => selectedChoices[option.name!] !== undefined)??true;
+        return !Object.values(selectedChoices).includes(undefined);
     };
 
     return {

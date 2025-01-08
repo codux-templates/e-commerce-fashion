@@ -5,10 +5,10 @@ import { SalesBar } from '~/src/components/marquee/sales-bar';
 import { CategoriesSection } from '~/src/components/categories-section/categories-section';
 import { Section } from '~/src/components/section/section';
 import { SplitSection } from '~/src/components/spit-section/split-section';
-import styles from './route.module.scss';
 import { MetaFunction } from '@remix-run/react';
 import { Banner } from '~/src/components/banner/banner';
 import { ProductsSpotlight } from '~/src/components/products-spotlight/products-spotlight';
+import { InfoSection } from '~/src/components/info-section/info-section';
 
 export default function HomePage() {
     return (
@@ -84,44 +84,28 @@ export default function HomePage() {
                     imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
                 />
 
-                <div className={styles.infoSection}>
-                    <div className={styles.infoSectionCard}>
-                        <span className={'material-symbols-outlined'}>local_shipping</span>
-                        <div className={styles.infoSectionCardTextWrapper}>
-                            <span className={styles.infoCardHeading}>Free Shipping</span>
-                            <span className={styles.infoSectionCardSubheading}>
-                                On orders over 120$
-                            </span>
-                        </div>
-                    </div>
-                    <div className={styles.infoSectionCard}>
-                        <span className={'material-symbols-outlined'}>refresh</span>
-                        <div className={styles.infoSectionCardTextWrapper}>
-                            <span className={styles.infoCardHeading}>Free Returns</span>
-                            <span className={styles.infoSectionCardSubheading}>
-                                On full time priced items only
-                            </span>
-                        </div>
-                    </div>
-                    <div className={styles.infoSectionCard}>
-                        <span className={'material-symbols-outlined'}>loyalty</span>
-                        <div className={styles.infoSectionCardTextWrapper}>
-                            <span className={styles.infoCardHeading}>Crash replacement</span>
-                            <span className={styles.infoSectionCardSubheading}>
-                                40% off your new kit
-                            </span>
-                        </div>
-                    </div>
-                    <div className={styles.infoSectionCard}>
-                        <span className={'material-symbols-outlined'}>recycling</span>
-                        <div className={styles.infoSectionCardTextWrapper}>
-                            <span className={styles.infoCardHeading}>Eco-friendly</span>
-                            <span className={styles.infoSectionCardSubheading}>
-                                All of our packacing is recycled
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                <InfoSection items={[
+                    {
+                        icon: 'local_shipping',
+                        heading: 'Free Shipping',
+                        subheading: 'On orders over 120$',
+                    },
+                    {
+                        icon: 'refresh',
+                        heading: 'Free Returns',
+                        subheading: 'On full time priced items only',
+                    },
+                    {
+                        icon: 'loyalty',
+                        heading: 'Crash replacement',
+                        subheading: '40% off your new kit',
+                    },
+                    {
+                        icon: 'recycling',
+                        heading: 'Eco-friendly',
+                        subheading: 'All of our packaging is recycled',
+                    },
+                ]} />
             </div>
         </>
     );
