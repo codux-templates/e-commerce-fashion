@@ -15,7 +15,7 @@ export default function HomePage() {
         <>
             <div className="heroBanner">
                 <img
-                    src="https://static.wixstatic.com/media/a2cc95_30c2b0d877354d389a2bce2e169440c9~mv2.png/v1/fit/w_640,h_640/4737ca55766dd3c7e65a3f69a8937bc5.png.png"
+                    src="https://static.wixstatic.com/media/a2cc95_30c2b0d877354d389a2bce2e169440c9~mv2.png/v1/fit/w_2560,h_1440/4737ca55766dd3c7e65a3f69a8937bc5.png"
                     className="heroBannerImage"
                     alt=""
                 />
@@ -31,42 +31,34 @@ export default function HomePage() {
             <div className={'pageWrapper'}>
                 <FeaturedProductsSection categorySlug="new-in" title="New In" productCount={4} />
 
-                <CategoriesSection categorySlugs={['women', 'man', 'accessories']} />
+                <CategoriesSection categorySlugs={['women', 'men', 'accessories']} />
 
-                <Section
-                    title="Sale is on"
-                    subheading="Don’t miss our last catches"
-                >
+                <Section title="Sale is on" subheading="Don’t miss our last catches">
                     <ProductsSpotlight
-                      spotlights={[
-                          {
-                              x: 0.57,
-                              y: 0.28,
-                              productSlug: 'flowers'
-                          },
-                          {
-                              x: 0.4,
-                              y: 0.6,
-                              productSlug: 'i-m-a-product-9'
-                          },
-                      ]}
-                      imagePosition={'top'}
-                      imageUrl="https://static.wixstatic.com/media/a2cc95_11cce258e7cb45ab80637d887a5e8aea~mv2.png/v1/fit/w_640,h_640/0e228a0f121297eada19e8519cd7c75e.png.png"
+                        spotlights={[
+                            {
+                                horizontalPercentage: 37,
+                                verticalPercentage: 50,
+                                productSlug: 't-shirt-dress',
+                            },
+                        ]}
+                        imagePosition={'top'}
+                        imageUrl="https://static.wixstatic.com/media/a2cc95_11cce258e7cb45ab80637d887a5e8aea~mv2.png/v1/fit/w_640,h_640/0e228a0f121297eada19e8519cd7c75e.png.png"
                     />
                     <ProductsSpotlight
-                      spotlights={[
-                          {
-                              x: 0.4,
-                              y: 0.6,
-                              productSlug: 'flowers'
-                          },
-                          {
-                              x: 0.4,
-                              y: 0.8,
-                              productSlug: 'i-m-a-product-9'
-                          },
-                      ]}
-                      imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
+                        spotlights={[
+                            {
+                                horizontalPercentage: 55,
+                                verticalPercentage: 20,
+                                productSlug: 'knit-beanie',
+                            },
+                            {
+                                horizontalPercentage: 40,
+                                verticalPercentage: 80,
+                                productSlug: 'unisex-oversized-t-shirt',
+                            },
+                        ]}
+                        imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
                     />
                 </Section>
                 <SplitSection

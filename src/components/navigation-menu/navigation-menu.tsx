@@ -23,23 +23,28 @@ export const NavigationMenu = ({ className, vertical = false }: NavigationMenuPr
                     </CategoryLink>
                 </li>
                 <li>
-                    <CategoryLink categorySlug="kitchen-essentials" className={menuItemStyle}>
-                        Kitchen
+                    <CategoryLink categorySlug="women" className={menuItemStyle}>
+                        Women
                     </CategoryLink>
                 </li>
                 <li>
-                    <CategoryLink categorySlug="bath" className={menuItemStyle}>
-                        Bath
+                    <CategoryLink categorySlug="men" className={menuItemStyle}>
+                        Men
                     </CategoryLink>
                 </li>
                 <li>
-                    <CategoryLink categorySlug="on-the-go" className={menuItemStyle}>
-                        On the Go
+                    <CategoryLink categorySlug="accessories" className={menuItemStyle}>
+                        Accessories
+                    </CategoryLink>
+                </li>
+                <li>
+                    <CategoryLink categorySlug="outlet" className={menuItemStyle}>
+                        Outlet
                     </CategoryLink>
                 </li>
                 <li>
                     <NavLink to="/about-us" className={menuItemStyle}>
-                        About Us
+                        About
                     </NavLink>
                 </li>
             </ul>

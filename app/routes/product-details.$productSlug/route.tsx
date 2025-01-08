@@ -48,6 +48,7 @@ export default function ProductDetailsPage() {
         handleAddToCart,
         handleOptionChange,
         handleQuantityChange,
+        isAllOptionsSelected,
     } = useProductDetails(product);
 
     const handleError = (error: unknown) => toast.error(getErrorMessage(error));
@@ -57,9 +58,9 @@ export default function ProductDetailsPage() {
             {/*<Breadcrumbs breadcrumbs={breadcrumbs} />*/}
 
             <div className={styles.content}>
-              <div className={styles.productImagesWrapper}>
-                <ProductImages media={media} />
-              </div>
+                <div className={styles.productImagesWrapper}>
+                    <ProductImages media={media} />
+                </div>
 
                 <div className={styles.productInfo}>
                     <h1 className={styles.productName}>{product.name}</h1>
@@ -119,26 +120,34 @@ export default function ProductDetailsPage() {
                             styles.addToCartButton,
                         )}
                         onClick={() => handleAddToCart().catch(handleError)}
-                        disabled={outOfStock || isAddingToCart}
+                        disabled={outOfStock || isAddingToCart || !isAllOptionsSelected()}
                     >
-                        {outOfStock ? 'Out of stock' : 'Add to Cart'}
+                        {outOfStock
+                            ? 'Out of stock'
+                            : !isAllOptionsSelected()
+                              ? 'Select options'
+                              : 'Add to Cart'}
                     </button>
 
-                    {!outOfStock &&
+                    {!outOfStock && (
                         <button
-                            className={classNames('button', 'invert', 'button-lg', styles.buyItNowButton)}
+                            className={classNames(
+                                'button',
+                                'button-secondary',
+                                'button-lg',
+                                styles.buyItNowButton,
+                            )}
                             onClick={() => handleAddToCart().catch(handleError)}
-                            disabled={outOfStock || isAddingToCart}
+                            disabled={outOfStock || isAddingToCart || !isAllOptionsSelected()}
                         >
-                             Buy it now
+                            Buy it now
                         </button>
-                    }
+                    )}
 
                     {product.additionalInfoSections &&
                         product.additionalInfoSections.length > 0 && (
                             <Accordion
                                 className={styles.additionalInfoSections}
-
                                 items={product.additionalInfoSections.map((section) => ({
                                     header: (
                                         <div className={styles.additionalInfoSectionTitle}>
@@ -159,61 +168,55 @@ export default function ProductDetailsPage() {
                 </div>
             </div>
 
-            <FeaturedProductsSection  categorySlug={'new-in'} title={'You might also like'} productCount={4} />
+            <FeaturedProductsSection
+                categorySlug={'new-in'}
+                title={'You might also like'}
+                productCount={4}
+            />
             <Section
                 className={styles.spotlightsSection}
                 title="Mix, match, and make it yours"
                 subheading="Complete the look"
             >
                 <ProductsSpotlight
-                  spotlights={[
-                      {
-                          x: 0.57,
-                          y: 0.28,
-                          productSlug: 'flowers'
-                      },
-                      {
-                          x: 0.4,
-                          y: 0.6,
-                          productSlug: 'i-m-a-product-9'
-                      },
-                  ]}
-                  imagePosition={'top'}
-                  imageUrl="https://static.wixstatic.com/media/a2cc95_11cce258e7cb45ab80637d887a5e8aea~mv2.png/v1/fit/w_640,h_640/0e228a0f121297eada19e8519cd7c75e.png.png"
+                    spotlights={[
+                        {
+                            horizontalPercentage: 37,
+                            verticalPercentage: 50,
+                            productSlug: 't-shirt-dress',
+                        },
+                    ]}
+                    imagePosition={'top'}
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_11cce258e7cb45ab80637d887a5e8aea~mv2.png/v1/fit/w_640,h_640/0e228a0f121297eada19e8519cd7c75e.png.png"
                 />
                 <ProductsSpotlight
-                  spotlights={[
-                      {
-                          x: 0.57,
-                          y: 0.2,
-                          productSlug: 'flowers'
-                      },
-                      {
-                          x: 0.4,
-                          y: 0.8,
-                          productSlug: 'i-m-a-product-9'
-                      },
-                  ]}
-                  imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
+                    spotlights={[
+                        {
+                            horizontalPercentage: 57,
+                            verticalPercentage: 20,
+                            productSlug: 'knit-beanie',
+                        },
+                        {
+                            horizontalPercentage: 40,
+                            verticalPercentage: 80,
+                            productSlug: 'unisex-oversized-t-shirt',
+                        },
+                    ]}
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
                 />
                 <ProductsSpotlight
-                  spotlights={[
-                      {
-                          x: 0.57,
-                          y: 0.2,
-                          productSlug: 'flowers'
-                      },
-                      {
-                          x: 0.4,
-                          y: 0.8,
-                          productSlug: 'i-m-a-product-9'
-                      },
-                  ]}
-                  imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
+                    spotlights={[
+                        {
+                            horizontalPercentage: 40,
+                            verticalPercentage: 80,
+                            productSlug: 'men-s-crewneck-sweater',
+                        },
+                    ]}
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_aa2b1d021aec496d82343066eb108ed5~mv2.jpg/v1/fit/w_640,h_640/6e08f8548530cd72ddfcd50ecf665249.jpg.jpg"
                 />
             </Section>
             <Banner
-              className={styles.banner}
+                className={styles.banner}
                 title="A hot summer deserves a cool hat"
                 subheading="Product Spotlight"
                 buttonText="Shop now"

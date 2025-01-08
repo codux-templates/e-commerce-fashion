@@ -1,8 +1,11 @@
 .page {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0 4%;
-    padding: 0 8px 60px;
+    gap: 120px;
+    padding: 40px 92px 60px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1200px;
+    width: 100%;
 }
 
 .cart {
@@ -11,19 +14,18 @@
 
 .summary {
     width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
-.cartHeader,
-.summaryHeader {
-    font: var(--heading5);
-    line-height: 18px;
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(23, 17, 13, 0.2);
+.cartHeader{
+    padding: 12px;
+    background-color: var(--surface-mid);
 }
 
 .summaryContent {
     position: relative;
-    padding: 14px 0;
 }
 
 .summaryContent.loading {
@@ -42,14 +44,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 0;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-strong)
 }
 
 .summaryTotal {
-    font-size: 20px;
-    padding: 16px 0 2px;
-    margin-top: 14px;
-    border-top: 1px solid rgba(23, 17, 13, 0.2);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-strong)
 }
 
 .checkoutButton {
@@ -82,16 +83,20 @@
     text-decoration: underline;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
+    .page {
+        padding: 40px 8px 60px;
+        gap: 94px;
+    }
+}
+
+@media (max-width: 767px) {
+    .page {
+        flex-direction: column-reverse;
+        gap: 40px;
+    }
+
     .summary {
         width: 100%;
-    }
-
-    .summaryHeader {
-        display: none;
-    }
-
-    .summaryContent {
-        margin-top: 30px;
     }
 }

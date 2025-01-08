@@ -61,9 +61,12 @@ export const ProductCard = ({
         addToCartAttempted,
         handleAddToCart,
         handleOptionChange,
+        isAllOptionsSelected
     } = useProductDetails(product as JsonifyObject<Product>);
 
     const handleError = (error: unknown) => toast.error(getErrorMessage(error));
+
+
 
     return (
         <div className={styles.productCard}>
@@ -89,32 +92,11 @@ export const ProductCard = ({
                         <span className={styles.ribbonWhite}>SOLD OUT</span>
                     )}
                 </div>
-                {productOptions && productOptions.length > 0 && (
+
                     <div className={styles.quickView}>
                         {productOptions && productOptions.length > 0 && (
                             <div className={styles.productOptions}>
-                                {productOptions
-                                    .filter((option) => option.name === 'Color')
-                                    .map((option) => (
-                                        <ProductOption
-                                            isQuickView={true}
-                                            key={option.name}
-                                            error={
-                                                addToCartAttempted &&
-                                                selectedChoices[option.name!] === undefined
-                                                    ? `Select ${option.name}`
-                                                    : undefined
-                                            }
-                                            option={option}
-                                            selectedChoice={selectedChoices[option.name!]}
-                                            onChange={(choice) =>
-                                                handleOptionChange(option.name!, choice)
-                                            }
-                                        />
-                                    ))}
-                                {productOptions
-                                    .filter((option) => option.name === 'Size')
-                                    .map((option) => (
+                                {productOptions.map((option) => (
                                         <ProductOption
                                             isQuickView={true}
                                             key={option.name}
@@ -137,12 +119,11 @@ export const ProductCard = ({
                         <button
                             className={classNames('button', styles.addToCartButton)}
                             onClick={() => handleAddToCart().catch(handleError)}
-                            disabled={outOfStock || isAddingToCart}
+                            disabled={outOfStock || isAddingToCart || !isAllOptionsSelected()}
                         >
-                            {outOfStock ? 'Out of stock' : 'Add to Cart'}
+                            {outOfStock ? 'Out of stock' : !isAllOptionsSelected() ? 'Select options' : 'Add to Cart'}
                         </button>
                     </div>
-                )}
             </div>
             <ProductLink productSlug={slug} state={state}>
                 <div className={styles.name}>{name}</div>

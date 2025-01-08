@@ -13,12 +13,11 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Product, useEcomApi } from '~/src/wix/ecom';
 import { useNavigate } from '@remix-run/react';
 
-
-export type ProductSpotlight = {
-    x: number;
-    y: number;
-    productSlug: string;
-};
+export interface ProductSpotlight {
+  horizontalPercentage: number;
+  verticalPercentage: number;
+  productSlug: string;
+}
 
 export type ProductsSpotlightProps = {
     spotlights: ProductSpotlight[];
@@ -81,8 +80,8 @@ const Spotlight = ({ spotlight }:{spotlight: ProductSpotlight})=> {
             <div
                 className={styles.spotlight}
                 style={{
-                    left: `${spotlight.x * 100}%`,
-                    top: `${spotlight.y * 100}%`,
+                    left: `${spotlight.horizontalPercentage}%`,
+                    top: `${spotlight.verticalPercentage}%`,
                 }}
                 ref={refs.setReference}
                 {...getReferenceProps()}

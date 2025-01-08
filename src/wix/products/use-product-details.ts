@@ -62,6 +62,10 @@ export function useProductDetails(product: SerializeFrom<products.Product>) {
         }));
     }, []);
 
+    const isAllOptionsSelected = (): boolean => {
+        return productOptions?.every(option => selectedChoices[option.name!] !== undefined)??true;
+    };
+
     return {
         outOfStock,
         priceData,
@@ -75,5 +79,6 @@ export function useProductDetails(product: SerializeFrom<products.Product>) {
         handleAddToCart,
         handleOptionChange,
         handleQuantityChange: setQuantity,
+        isAllOptionsSelected
     };
 }
