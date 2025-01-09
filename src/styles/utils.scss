@@ -82,6 +82,9 @@
     text-transform: uppercase;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
+    &:active {
+        color: var(--link-hover);
+    }
 }
 
 .navlink {
@@ -129,7 +132,7 @@
     border-radius: 2px;
 }
 
-.button:not(:disabled):hover{
+.button:not(:disabled):hover {
     background: var(--button-primary-surface-hover);
 }
 
@@ -138,21 +141,21 @@
     color: var(--button-primary-invert-content);
 }
 
-.button.button-lg{
+.button.button-lg {
     padding: 19px 40px;
 }
 
 .button:disabled {
     color: var(--text-disabled);
     cursor: default;
-    border: 1px solid var(--border)
+    border: 1px solid var(--border);
 }
 
 .button:not(:disabled).invert:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
-.button.active{
+.button.active {
     background: var(--button-primary-surface-selected);
     color: var(--text-invert);
 }
@@ -168,7 +171,7 @@
     color: var(--primary1);
 }
 
-.button.button-secondary{
+.button.button-secondary {
     background: var(--button-secondaty-surface);
     color: var(--button-primary-invert-content);
 }
@@ -529,11 +532,12 @@ span.size-48 {
     display: flex;
     border-bottom: 1px solid var(--secondary1);
     overflow: auto;
+    gap: 12px;
 }
 
 .tab {
-    padding: 14px 30px;
-    border-bottom: 4px solid transparent;
+    padding: 3px 2px;
+    border-bottom: 0 solid transparent;
     flex-shrink: 0;
 }
 

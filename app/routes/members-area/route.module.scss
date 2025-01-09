@@ -1,12 +1,15 @@
 .page {
-    padding: 100px 8px 0;
     width: 100%;
-    max-width: 980px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .content {
-    padding: 30px;
+    padding: 80px 8px;
+    max-width: 947px;
+    display: block;
+    width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -17,4 +20,16 @@
     .content {
         padding: 20px 8px;
     }
+}
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 40px 8px 24px;
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+}
+.div2 {
+    gap: 12px;
 }
