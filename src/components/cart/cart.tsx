@@ -4,6 +4,7 @@ import { toast } from '~/src/components/toast/toast';
 import { useCart, useCartOpen, useCheckout } from '~/src/wix/cart';
 import { getErrorMessage } from '~/src/wix/utils';
 import { CartView } from './cart-view/cart-view';
+import styles from './cart.module.scss';
 
 export const Cart = () => {
     const { isOpen, setIsOpen } = useCartOpen();
@@ -35,7 +36,7 @@ export const Cart = () => {
     };
 
     return (
-        <Drawer onClose={() => setIsOpen(false)} open={isOpen}>
+        <Drawer onClose={() => setIsOpen(false)} open={isOpen} drawerClassName={styles.drawer}>
             <CartView
                 cart={cart.data}
                 cartTotals={cartTotals}

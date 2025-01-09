@@ -41,7 +41,7 @@ export const Category = ({categorySlug}: CategoryProps) => {
   useEffect(() => {
     if (category?.media?.mainMedia?.image?.url) {
       const img = new Image();
-      img.src = category?.media?.mainMedia?.image?.url;
+      img.src = category?.media?.items[0]._id;
       img.onload = () => setPreloadedImage(img.src);
     }
   }, [category?.media?.mainMedia?.image?.url]);

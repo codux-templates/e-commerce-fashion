@@ -174,7 +174,6 @@ export const meta: MetaFunction = () => {
 const CartFallback = ({ children }: { children: ReactNode }) => (
     <div className={styles.page}>
         <div className={styles.cart}>
-            <h1 className={styles.cartHeader}>My cart</h1>
             <div className={styles.cartFallback}>{children}</div>
         </div>
     </div>

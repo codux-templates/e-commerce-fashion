@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { ReactNode } from 'react';
-import { CrossIcon, LockIcon } from '~/src/components/icons';
+import { CrossIcon } from '~/src/components/icons';
 import { Spinner } from '~/src/components/spinner/spinner';
 import { getCartItemCount, findLineItemPriceBreakdown } from '~/src/wix/cart';
 import { type Cart, type CartTotals } from '~/src/wix/ecom';
@@ -29,10 +29,10 @@ export const CartView = ({
     updatingCartItemIds = [],
     error,
     isLoading,
-    isUpdating = false,
-    isCheckoutInProgress,
+    //isUpdating = false,
+    //isCheckoutInProgress,
     onClose,
-    onCheckout,
+    //onCheckout,
     onViewCart,
     onItemQuantityChange,
     onItemRemove,
@@ -54,8 +54,8 @@ export const CartView = ({
     return (
         <div className={styles.cart}>
             <div className={styles.header}>
-                <span className="heading6">
-                    Cart ({itemCount} {itemCount === 1 ? 'item' : 'items'})
+                <span className="heading3 uppercase">
+                    Cart ({itemCount})
                 </span>
                 <button className={classNames(styles.closeButton, 'iconButton')} onClick={onClose}>
                     <CrossIcon />
@@ -89,12 +89,13 @@ export const CartView = ({
                                     <span>{cart.subtotal.formattedConvertedAmount}</span>
                                 </div>
                                 <div className={styles.subtotalNote}>
-                                    Taxes and shipping are calculated at checkout.
+                                    <span className={"material-symbols-outlined"}>local_shipping</span>
+                                    Estimated delivery 3-7 business days
                                 </div>
                             </>
                         )}
 
-                        <button
+{/*                        <button
                             className={classNames(
                                 'button',
                                 'mutedPrimaryButton',
@@ -104,18 +105,13 @@ export const CartView = ({
                             disabled={isCheckoutInProgress || isUpdating}
                         >
                             {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Checkout'}
-                        </button>
+                        </button>*/}
                         <button
-                            className={classNames('button', styles.viewCartButton)}
+                            className={classNames('button button-lg', styles.viewCartButton)}
                             onClick={onViewCart}
                         >
-                            View Cart
+                            Checkout
                         </button>
-
-                        <div className={styles.secureCheckout}>
-                            <LockIcon width={11} />
-                            <span>Secure Checkout</span>
-                        </div>
                     </div>
                 </>
             )}

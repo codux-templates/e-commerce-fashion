@@ -44,7 +44,7 @@
     min-width: 200px;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: min-content auto min-content min-content;
-    grid-template-areas: 'productName price' 'productOptions priceBreakdown' 'quantity quantity' 'removeButton removeButton';
+    grid-template-areas: 'productName price' 'productOptions productOptions' 'quantity quantity' 'removeButton removeButton';
     gap: 12px;
 }
 
@@ -121,7 +121,7 @@
     height: 20px;
 }
 
-@container (max-width: 1023px) {
+@container (max-width: 584px) {
     .itemContent {
         grid-template-columns: 144px 1fr;
     }

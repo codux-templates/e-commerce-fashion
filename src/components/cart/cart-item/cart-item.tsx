@@ -83,7 +83,7 @@ export const CartItem = ({
                     {item.fullPrice?.formattedConvertedAmount && (
                       <ProductPrice
                         className={styles.price}
-                        price={item.price?.formattedConvertedAmount}
+                        price={priceBreakdown?.lineItemPrice?.formattedConvertedAmount}
                       />
                     )}
 
