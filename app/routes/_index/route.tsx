@@ -71,7 +71,7 @@ export default function HomePage() {
                     imageUrl="https://static.wixstatic.com/media/a2cc95_d312443aeecb499bb9f6986404b94193~mv2.png/v1/fit/w_640,h_640/25846e5769d5dff3f39611ee1589857b.png.png"
                 />
                 <FeaturedProductsSection
-                    categorySlug="best-sellers"
+                    categorySlug="best-seller"
                     title="Best Sellers"
                     productCount={4}
                 />
