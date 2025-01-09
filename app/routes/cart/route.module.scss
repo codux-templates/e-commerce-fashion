@@ -19,15 +19,29 @@
 }
 
 .summary {
-    width: 280px;
+    width: 100%;
+    max-width: 330px;
     display: flex;
     flex-direction: column;
     gap: 40px;
+    flex-shrink: 1;
+}
+
+.summaryMobile{
+    display: none;
 }
 
 .cartHeader{
     padding: 12px;
     background-color: var(--surface-mid);
+    position: relative;
+    span{
+        cursor: pointer;
+        font-size: 20px;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+    }
 }
 
 .summaryContent {
@@ -99,10 +113,27 @@
 @media (max-width: 767px) {
     .cartSection {
         flex-direction: column-reverse;
-        gap: 40px;
+        gap: 24px;
     }
 
     .summary {
+        display: none;
+    }
+    .summaryMobile{
+        display: block;
+    }
+
+    .summaryAccordion{
+        border-bottom: none !important;
+    }
+
+    .summaryMobileContent{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
         width: 100%;
+    }
+    .checkoutButton {
+        margin-bottom: 0;
     }
 }

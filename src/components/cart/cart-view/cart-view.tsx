@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { ReactNode } from 'react';
-import { CrossIcon } from '~/src/components/icons';
 import { Spinner } from '~/src/components/spinner/spinner';
 import { getCartItemCount, findLineItemPriceBreakdown } from '~/src/wix/cart';
 import { type Cart, type CartTotals } from '~/src/wix/ecom';
@@ -54,11 +53,11 @@ export const CartView = ({
     return (
         <div className={styles.cart}>
             <div className={styles.header}>
-                <span className="heading3 uppercase">
-                    Cart ({itemCount})
-                </span>
+                <span className="heading3 uppercase">Cart ({itemCount})</span>
                 <button className={classNames(styles.closeButton, 'iconButton')} onClick={onClose}>
-                    <CrossIcon />
+                    <span style={{ fontSize: 20 }} className={'material-symbols-outlined'}>
+                        close
+                    </span>
                 </button>
             </div>
 
@@ -89,13 +88,15 @@ export const CartView = ({
                                     <span>{cart.subtotal.formattedConvertedAmount}</span>
                                 </div>
                                 <div className={styles.subtotalNote}>
-                                    <span className={"material-symbols-outlined"}>local_shipping</span>
+                                    <span className={'material-symbols-outlined'}>
+                                        local_shipping
+                                    </span>
                                     Estimated delivery 3-7 business days
                                 </div>
                             </>
                         )}
 
-{/*                        <button
+                        {/*                        <button
                             className={classNames(
                                 'button',
                                 'mutedPrimaryButton',

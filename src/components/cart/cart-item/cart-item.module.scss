@@ -121,7 +121,15 @@
     height: 20px;
 }
 
-@container (max-width: 584px) {
+@media (min-width: 768px){
+    .root{
+        min-width: 435px;
+    }
+}
+
+
+
+@container (max-width: 565px) {
     .itemContent {
         grid-template-columns: 144px 1fr;
     }

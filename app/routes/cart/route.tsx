@@ -1,6 +1,6 @@
 import { Link, type MetaFunction } from '@remix-run/react';
 import classNames from 'classnames';
-import { type ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
 import { CartItem } from '~/src/components/cart/cart-item/cart-item';
 import { Spinner } from '~/src/components/spinner/spinner';
 import { toast } from '~/src/components/toast/toast';
@@ -11,8 +11,10 @@ import styles from './route.module.scss';
 import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
 import { Banner } from '~/src/components/banner/banner';
 import { InfoSection } from '~/src/components/info-section/info-section';
+import { Accordion } from '~/src/components/accordion/accordion';
 
 export default function CartPage() {
+    const [isNoteClosed, setIsNoteClosed] = useState(false);
     const {
         cart,
         cartTotals,
@@ -57,64 +59,76 @@ export default function CartPage() {
         <div className={styles.page}>
             <div className={styles.cartSection}>
                 <div className={styles.cart}>
-                    <div className={styles.cartHeader}>
-                        <div className={'heading4 uppercase'}>Title of Note</div>
-                        <span className={'body1'}>Description of promo or note. (For example: free delivery.)</span>
-                    </div>
+                    {!isNoteClosed && (
+                        <div className={styles.cartHeader}>
+                            <span
+                                onClick={() => setIsNoteClosed(true)}
+                                className={'material-symbols-outlined'}
+                            >
+                                close
+                            </span>
+                            <div className={'heading4 uppercase'}>Title of Note</div>
+                            <div className={'body1'}>
+                                Description of promo or note. (For example: free delivery.)
+                            </div>
+                        </div>
+                    )}
                     <div className={styles.cartItems}>
                         {cart.data.lineItems.map((item) => (
-                          <CartItem
-                            key={item._id}
-                            item={item}
-                            isUpdating={updatingCartItemIds.includes(item._id!)}
-                            priceBreakdown={findLineItemPriceBreakdown(item, cartTotals)}
-                            onRemove={() => removeItem(item._id!).catch(handleError)}
-                            onQuantityChange={(quantity: number) =>
-                              updateItemQuantity({ id: item._id!, quantity }).catch(handleError)
-                            }
-                          />
+                            <CartItem
+                                key={item._id}
+                                item={item}
+                                isUpdating={updatingCartItemIds.includes(item._id!)}
+                                priceBreakdown={findLineItemPriceBreakdown(item, cartTotals)}
+                                onRemove={() => removeItem(item._id!).catch(handleError)}
+                                onQuantityChange={(quantity: number) =>
+                                    updateItemQuantity({ id: item._id!, quantity }).catch(
+                                        handleError,
+                                    )
+                                }
+                            />
                         ))}
                     </div>
                 </div>
-                <div className={styles.summary}>
-                    <div
-                      className={classNames(styles.summaryContent, {
-                          [styles.loading]: isCartTotalsUpdating,
-                      })}
-                    >
-                        <div className={styles.summaryRow}>
-                            <span>Subtotal</span>
-                            <span>{cartTotals?.priceSummary?.subtotal?.formattedConvertedAmount}</span>
-                        </div>
-                        {cartTotals?.shippingInfo?.region && (
-                          <div className={styles.summaryRow}>
-                              <span>Delivery</span>
-                              <span>
-                                {Number(cartTotals?.priceSummary?.shipping?.amount) === 0
-                                  ? 'FREE'
-                                  : cartTotals?.priceSummary?.shipping?.formattedConvertedAmount}
+                <div className={styles.summaryMobile}>
+                    <Accordion
+                        expandIcon={
+                            <span style={{ fontSize: 20 }} className={'material-symbols-outlined'}>
+                                expand_more
                             </span>
-                          </div>
-                        )}
-                        <div className={classNames(styles.summaryRow, styles.summaryTotal)}>
-                            <span>Total</span>
-                            <span>{cartTotals?.priceSummary?.total?.formattedConvertedAmount}</span>
-                        </div>
-                        {isCartTotalsUpdating && (
-                          <div className={styles.spinner}>
-                              <Spinner size={50} />
-                          </div>
-                        )}
-                    </div>
-
-                    <button
-                      className={classNames('button button-lg', styles.checkoutButton)}
-                      onClick={checkout}
-                      disabled={isCheckoutInProgress || isCartTotalsUpdating}
-                    >
-                        {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Checkout'}
-                    </button>
+                        }
+                        collapseIcon={
+                            <span style={{ fontSize: 20 }} className={'material-symbols-outlined'}>
+                                remove
+                            </span>
+                        }
+                        itemClassName={styles.summaryAccordion}
+                        initialOpenItemIndex={0}
+                        items={[
+                            {
+                                header: 'Show order overview',
+                                content: (
+                                    <Summary
+                                        className={styles.summaryMobileContent}
+                                        isCartTotalsUpdating={isCartTotalsUpdating}
+                                        cartTotals={cartTotals}
+                                        checkout={checkout}
+                                        isCheckoutInProgress={isCheckoutInProgress}
+                                    />
+                                ),
+                            },
+                        ]}
+                    />
                 </div>
+
+                    <Summary
+                      className={styles.summary}
+                        isCartTotalsUpdating={isCartTotalsUpdating}
+                        cartTotals={cartTotals}
+                        checkout={checkout}
+                        isCheckoutInProgress={isCheckoutInProgress}
+                    />
+
             </div>
 
             <FeaturedProductsSection
@@ -124,35 +138,37 @@ export default function CartPage() {
             />
 
             <Banner
-              title="A hot summer deserves a cool hat"
-              subheading="Product Spotlight"
-              buttonText="Shop now"
-              buttonUrl="/products/all-products"
-              imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5edd6f9183d.png"
-              />
+                title="A hot summer deserves a cool hat"
+                subheading="Product Spotlight"
+                buttonText="Shop now"
+                buttonUrl="/products/all-products"
+                imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5edd6f9183d.png"
+            />
 
-            <InfoSection items={[
-                {
-                    icon: 'local_shipping',
-                    heading: 'Free Shipping',
-                    subheading: 'On orders over 120$',
-                },
-                {
-                    icon: 'refresh',
-                    heading: 'Free Returns',
-                    subheading: 'On full time priced items only',
-                },
-                {
-                    icon: 'loyalty',
-                    heading: 'Crash replacement',
-                    subheading: '40% off your new kit',
-                },
-                {
-                    icon: 'recycling',
-                    heading: 'Eco-friendly',
-                    subheading: 'All of our packaging is recycled',
-                },
-            ]} />
+            <InfoSection
+                items={[
+                    {
+                        icon: 'local_shipping',
+                        heading: 'Free Shipping',
+                        subheading: 'On orders over 120$',
+                    },
+                    {
+                        icon: 'refresh',
+                        heading: 'Free Returns',
+                        subheading: 'On full time priced items only',
+                    },
+                    {
+                        icon: 'loyalty',
+                        heading: 'Crash replacement',
+                        subheading: '40% off your new kit',
+                    },
+                    {
+                        icon: 'recycling',
+                        heading: 'Eco-friendly',
+                        subheading: 'All of our packaging is recycled',
+                    },
+                ]}
+            />
         </div>
     );
 }
@@ -178,3 +194,46 @@ const CartFallback = ({ children }: { children: ReactNode }) => (
         </div>
     </div>
 );
+
+const Summary = ({isCartTotalsUpdating, cartTotals, checkout, isCheckoutInProgress, className}: any)=> <div className={className}>
+    <div
+      className={classNames(styles.summaryContent, {
+          [styles.loading]: isCartTotalsUpdating,
+      })}
+    >
+        <div className={styles.summaryRow}>
+            <span>Subtotal</span>
+            <span>
+                                {cartTotals?.priceSummary?.subtotal?.formattedConvertedAmount}
+                            </span>
+        </div>
+        {cartTotals?.shippingInfo?.region && (
+          <div className={styles.summaryRow}>
+              <span>Delivery</span>
+              <span>
+                                    {Number(cartTotals?.priceSummary?.shipping?.amount) === 0
+                                      ? 'FREE'
+                                      : cartTotals?.priceSummary?.shipping
+                                        ?.formattedConvertedAmount}
+                                </span>
+          </div>
+        )}
+        <div className={classNames(styles.summaryRow, styles.summaryTotal)}>
+            <span>Total</span>
+            <span>{cartTotals?.priceSummary?.total?.formattedConvertedAmount}</span>
+        </div>
+        {isCartTotalsUpdating && (
+          <div className={styles.spinner}>
+              <Spinner size={50} />
+          </div>
+        )}
+    </div>
+
+    <button
+      className={classNames('button button-lg', styles.checkoutButton)}
+      onClick={checkout}
+      disabled={isCheckoutInProgress || isCartTotalsUpdating}
+    >
+        {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Checkout'}
+    </button>
+</div>

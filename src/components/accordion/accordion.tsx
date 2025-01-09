@@ -14,6 +14,7 @@ interface AccordionProps {
     items: AccordionItem[];
     initialOpenItemIndex?: number;
     className?: string;
+    itemClassName?: string
     small?: boolean;
     expandIcon?: React.ReactNode;
     collapseIcon?: React.ReactNode;
@@ -26,6 +27,7 @@ export const Accordion = ({
     small = false,
     expandIcon,
     collapseIcon,
+    itemClassName
 }: AccordionProps) => {
     const [openItemIndex, setOpenItemIndex] = useState<number | null>(initialOpenItemIndex ?? null);
 
@@ -35,7 +37,7 @@ export const Accordion = ({
                 const isOpen = openItemIndex === index;
 
                 return (
-                    <div key={index} className={styles.item}>
+                    <div key={index} className={classNames(styles.item, itemClassName)}>
                         <div
                             className={styles.header}
                             {...getClickableElementAttributes(() =>
