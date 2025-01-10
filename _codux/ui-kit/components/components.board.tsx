@@ -10,6 +10,7 @@ import ComponentWrapper from '_codux/board-wrappers/component-wrapper';
 import { Kit } from '../ui-kit-utils/kit';
 
 import styles from './components.board.module.scss';
+import { products } from '@wix/stores';
 
 export default createBoard({
     name: 'Components & Elements',
@@ -124,11 +125,54 @@ export default createBoard({
                     <Kit.Item className={styles.demoWidth}>
                         <Variant name="Product Card">
                             <ProductCard
-                                name="Bamboo Toothbrush"
-                                imageUrl="https://static.wixstatic.com/media/c837a6_18152edaef9940ca88f446ae94b48a47~mv2.jpg/v1/fill/w_824,h_1098,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_18152edaef9940ca88f446ae94b48a47~mv2.jpg"
-                                ribbon="NEW"
-                                formattedPrice="$6"
-                                formattedDiscountedPrice="$5.5"
+                                product={
+                                    {
+                                        slug: 'knit-beanie',
+                                        name: 'Knit Beanie',
+                                        priceData: {
+                                            price: 6.0,
+                                            discountedPrice: 5.5,
+                                            formatted: {
+                                                price: '$6',
+                                                discountedPrice: '$5.5',
+                                            },
+                                        },
+                                        ribbon: 'NEW',
+                                        stock: {
+                                            inventoryStatus: 'IN_STOCK' as products.InventoryStatus, // Possible values: 'OUT_OF_STOCK', 'IN_STOCK'
+                                        },
+                                        media: {
+                                            mainMedia: {
+                                                _id: 'c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.jpg',
+                                                image: {
+                                                    url: 'https://static.wixstatic.com/media/c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.jpg/v1/fit/w_4849,h_6465,q_90/file.jpg',
+                                                    width: 4849,
+                                                    height: 6465,
+                                                },
+                                            },
+                                            items: [
+                                                {
+                                                    _id: 'c837a6_18152edaef9940ca88f446ae94b48a47~mv2.jpg',
+                                                    image: {
+                                                        url: 'https://static.wixstatic.com/media/c837a6_18152edaef9940ca88f446ae94b48a47~mv2.jpg/v1/fill/w_824,h_1098,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_18152edaef9940ca88f446ae94b48a47~mv2.jpg',
+                                                        width: 4849,
+                                                        height: 6465,
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        productOptions: [
+                                            {
+                                                name: 'Color',
+                                                choices: ['Green' as products.Choice, 'Blue' as products.Choice],
+                                            },
+                                            {
+                                                name: 'Size',
+                                                choices: ['Small' as products.Choice, 'Medium' as products.Choice],
+                                            },
+                                        ],
+                                    } satisfies products.Product
+                                }
                             />
                         </Variant>
                         <Kit.Description>Product Card</Kit.Description>
@@ -151,7 +195,7 @@ export default createBoard({
         </ComponentWrapper>
     ),
     environmentProps: {
-        windowWidth: 320,
+        windowWidth: 588,
         windowHeight: 800,
     },
     isSnippet: true,

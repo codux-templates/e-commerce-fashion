@@ -237,7 +237,7 @@ export default function MyAccountPage() {
 
 export const meta: MetaFunction = () => {
     return [
-        { title: 'My Account | ReClaim' },
+        { title: 'My Account | RND.Apparel' },
         {
             name: 'description',
             content: 'Essential home products for sustainable living',

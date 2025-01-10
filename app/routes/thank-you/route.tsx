@@ -39,7 +39,7 @@ export default function ThankYouPage() {
 
 export const meta: MetaFunction = () => {
     return [
-        { title: 'Thank You | ReClaim' },
+        { title: 'Thank You | RND.Apparel' },
         {
             name: 'description',
             content: 'Thank You for your order',

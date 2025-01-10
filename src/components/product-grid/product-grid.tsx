@@ -2,7 +2,6 @@ import type { SerializeFrom } from '@remix-run/node';
 import classNames from 'classnames';
 import React from 'react';
 import type { CollectionDetails, Product } from '~/src/wix/ecom';
-import { getProductImageUrl } from '~/src/wix/products';
 import { EmptyProductsCategory } from '../empty-products-category/empty-products-category';
 import { ProductCard } from '../product-card/product-card';
 import styles from './product-grid.module.scss';
@@ -58,16 +57,7 @@ export const ProductGrid = React.memo<ProductGridProps>(function ProductGrid({
 
                     <ProductCard
                         key={product._id}
-                        slug={product.slug!}
                         product={product as Product}
-                        name={product.name!}
-                        imageUrl={getProductImageUrl(product, { minWidth: 540, minHeight: 720 })}
-                        formattedPrice={product.priceData?.formatted?.price}
-                        formattedDiscountedPrice={product.priceData?.formatted?.discountedPrice}
-                        discountedPrice={product.priceData?.discountedPrice}
-                        price={product.priceData?.price}
-                        ribbon={product.ribbon}
-                        inventoryStatus={product.stock?.inventoryStatus}
                         state={{
                             fromCategory: {
                                 name: category.name,

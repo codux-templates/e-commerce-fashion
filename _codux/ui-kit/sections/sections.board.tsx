@@ -23,7 +23,7 @@ export default createBoard({
                                     alt=""
                                 />
                                 <div className="heroBannerOverlay">
-                                    <div className="heroBannerSubtitle">ReClaim</div>
+                                    <div className="heroBannerSubtitle">RND.Apparel</div>
                                     <h1 className="heroBannerTitle">Reuse. Repurpose. Relove.</h1>
                                     <CategoryLink categorySlug="all-products">
                                         <LabelWithArrow>Shop Collections</LabelWithArrow>
@@ -66,7 +66,6 @@ export default createBoard({
                             <FeaturedProductsSection
                                 categorySlug="new-in"
                                 title="New In"
-                                description="Embrace a sustainable lifestyle with our newest drop-ins."
                             />
                         </Variant>
                         <Kit.Description>Featured Products</Kit.Description>

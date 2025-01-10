@@ -1,9 +1,8 @@
-import { products } from '@wix/stores';
 import styles from './product-card.module.scss';
 import { ProductPrice } from '../product-price/product-price';
 import { ImagePlaceholderIcon } from '../icons';
 import { ProductLink } from '~/src/components/product-link/product-link';
-import { useProductDetails } from '~/src/wix/products';
+import { getProductImageUrl, useProductDetails } from '~/src/wix/products';
 import classNames from 'classnames';
 import { toast } from '~/src/components/toast/toast';
 import { getErrorMessage } from '~/src/wix/utils';
@@ -12,24 +11,6 @@ import { type JsonifyObject } from 'type-fest/source/jsonify';
 import { Product } from '~/src/wix/ecom';
 
 interface ProductCardProps {
-    name: string;
-    /** @format media-url */
-    imageUrl?: string;
-    /**
-     * Product price formatted with the currency.
-     */
-    formattedPrice?: string;
-    /**
-     * Discounted product price formatted with the currency.
-     * It is displayed if it's not equal to the main price.
-     */
-    formattedDiscountedPrice?: string;
-    ribbon?: string | null;
-    inventoryStatus?: products.InventoryStatus;
-    price?: number | null;
-    discountedPrice?: number | null;
-    slug: string;
-    variants?: products.Variant[];
     product: Product;
     state?: {
         fromCategory?: {
@@ -40,15 +21,6 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({
-    name,
-    imageUrl,
-    formattedPrice,
-    formattedDiscountedPrice,
-    ribbon,
-    inventoryStatus,
-    price,
-    discountedPrice,
-    slug,
     product,
   state,
 }: ProductCardProps) => {
@@ -65,22 +37,25 @@ export const ProductCard = ({
     } = useProductDetails(product as JsonifyObject<Product>);
 
     const handleError = (error: unknown) => toast.error(getErrorMessage(error));
-
-
+    const imageUrl = getProductImageUrl(product, { maxWidth: 1000 })
+    const price = product.priceData?.price
+    const formattedPrice = product.priceData?.formatted?.price
+    const formattedDiscountedPrice = product.priceData?.formatted?.discountedPrice
+    const discountedPrice = product.priceData?.discountedPrice
 
     return (
         <div className={styles.productCard}>
             <div className={styles.imageWrapper}>
-                <ProductLink productSlug={slug} state={state}>
+                <ProductLink productSlug={product.slug!} state={state}>
                     {imageUrl ? (
-                        <img src={imageUrl} alt={name} className={styles.image} />
+                        <img src={imageUrl} alt={product.name!} className={styles.image} />
                     ) : (
                         <ImagePlaceholderIcon className={styles.imagePlaceholderIcon} />
                     )}
                 </ProductLink>
                 <div className={styles.ribbonWrapper}>
-                    {ribbon && <span className={styles.ribbon}>{ribbon}</span>}
-                    {inventoryStatus !== "OUT_OF_STOCK" &&
+                    {product.ribbon && <span className={styles.ribbon}>{product.ribbon}</span>}
+                    {product.stock?.inventoryStatus !== "OUT_OF_STOCK" &&
                         discountedPrice &&
                         price &&
                         price !== discountedPrice && (
@@ -88,7 +63,7 @@ export const ProductCard = ({
                                 {100 - Math.floor((discountedPrice / price) * 100)}% Off
                             </span>
                         )}
-                    {inventoryStatus === 'OUT_OF_STOCK' && (
+                    {product.stock?.inventoryStatus === 'OUT_OF_STOCK' && (
                         <span className={styles.ribbonWhite}>SOLD OUT</span>
                     )}
                 </div>
@@ -125,8 +100,8 @@ export const ProductCard = ({
                         </button>
                     </div>
             </div>
-            <ProductLink productSlug={slug} state={state}>
-                <div className={styles.name}>{name}</div>
+            <ProductLink productSlug={product.slug!} state={state}>
+                <div className={styles.name}>{product.name!}</div>
                 <ProductPrice
                     className={styles.price}
                     price={formattedPrice}

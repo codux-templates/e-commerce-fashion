@@ -175,7 +175,7 @@ export default function CartPage() {
 
 export const meta: MetaFunction = () => {
     return [
-        { title: 'Cart | ReClaim' },
+        { title: 'Cart | RND.Apparel' },
         {
             name: 'description',
             content: 'Essential home products for sustainable living',

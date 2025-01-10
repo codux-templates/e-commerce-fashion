@@ -118,7 +118,7 @@ export default function MyOrdersPage() {
 
 export const meta: MetaFunction = () => {
     return [
-        { title: 'My Orders | ReClaim' },
+        { title: 'My Orders | RND.Apparel' },
         {
             name: 'description',
             content: 'Essential home products for sustainable living',

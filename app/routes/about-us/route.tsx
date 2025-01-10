@@ -88,7 +88,7 @@ export default function AboutUsPage() {
 
 export const meta: MetaFunction = () => {
     return [
-        { title: 'About ReClaim' },
+        { title: 'About RND.Apparel' },
         {
             name: 'description',
             content: 'Essential home products for sustainable living',

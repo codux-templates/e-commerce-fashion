@@ -160,6 +160,11 @@
     color: var(--text-invert);
 }
 
+.button.active:hover {
+    background: var(--button-primary-surface-selected);
+    color: var(--text-invert);
+}
+
 .mutedPrimaryButton {
     border-color: transparent;
     background: var(--secondary3);

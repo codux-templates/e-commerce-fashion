@@ -1,25 +1,26 @@
 :where(.root) {
     /* Default styles. Customize them by passing a className to the component. */
     --option-size: 24px;
-    --border-color: #bdbdbd;
-    --border-color-hover: #212121;
-    --border-color-selected: #757575;
     --border-color-error: #ff0000;
 }
 
 .root {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 2px;
 }
 
 .option {
     height: var(--option-size);
     width: var(--option-size);
-    border: 0.5px solid #00000033;
+    border: 1px solid transparent;
     transition: padding 100ms;
-    padding: 0;
+    padding: 2px;
     cursor: pointer;
+    background-color: var(--surface-light);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 .option:hover {
@@ -27,17 +28,21 @@
 }
 
 .option.selected {
-    border-color: var(--surface-dark);
+    border-color: var(--input-border);
 }
 
 .colorBox {
     width: 100%;
     height: 100%;
+    border: 0.5px solid #00000033;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 .option:hover .colorBox,
 .option.selected .colorBox {
-    border: 1px solid var(--surface-dark);
+
 }
 
 .root.hasError .option {

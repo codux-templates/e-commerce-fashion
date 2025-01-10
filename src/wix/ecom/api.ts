@@ -3,7 +3,8 @@ import { members } from '@wix/members';
 import { redirects } from '@wix/redirects';
 import { createClient, OAuthStrategy, Tokens } from '@wix/sdk';
 import { collections, products } from '@wix/stores';
-import { getFilteredProductsQuery , getSortedProductsQuery } from '~/src/wix/products';
+import { getFilteredProductsQuery } from '../products/product-filters';
+import { getSortedProductsQuery } from '../products/product-sorting';
 import { EcomApi, WixApiClient } from './types';
 import { isNotFoundWixClientError, normalizeWixClientError } from './wix-client-error';
 

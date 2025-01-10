@@ -28,16 +28,31 @@
     align-items: center;
     font: var(--body2);
     text-transform: uppercase;
+    gap: 2px;
 }
-.quickViewSizes > span{
+
+.option{
+    border: 1px solid transparent;
+    cursor: pointer;
     padding: 2px;
     overflow: clip;
     text-overflow: ellipsis;
     text-wrap: nowrap;
-    min-width: 20px;
-    height: 20px;
+    min-width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+}
+
+.option:hover{
+    border: 1px solid var(--border-color-hover);
+}
+
+.option.selected{
+    border: 1px solid var(--surface-dark);
+}
+
+.option.disabled{
+    color: var(--text-disabled);
 }

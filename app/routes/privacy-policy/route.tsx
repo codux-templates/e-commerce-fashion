@@ -57,7 +57,7 @@ export default function PrivacyPolicyPage() {
 
 export const meta: MetaFunction = () => {
     return [
-        { title: 'Privacy Policy | ReClaim' },
+        { title: 'Privacy Policy | RND.Apparel' },
         {
             name: 'description',
             content: 'Essential home products for sustainable living',

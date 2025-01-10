@@ -73,147 +73,126 @@ export const Footer = ({ className }: FooterProps) => {
                   </svg>
               </Link>
           </FadeIn>
-          <div className={styles.navWrapper}>
-              <div className={styles.description}>{"This is the space to introduce visitors to the business or brand. Briefly explain who's behind it, what it does and what makes it unique. Share its core values and what this site has to offer"}</div>
-              <FadeIn className={styles.navigation} duration={1.8}>
-                  <div className={styles.footerNavColumn}>
-                      <div className={styles.footerNavColumnTitle}>Shop</div>
-                      <nav>
+          <div className={styles.footerNavWrapper}>
+              <div className={styles.navWrapper}>
+                  <div
+                    className={styles.description}>{'This is the space to introduce visitors to the business or brand. Briefly explain who\'s behind it, what it does and what makes it unique. Share its core values and what this site has to offer'}</div>
+                  <FadeIn className={styles.navigation} duration={1.8}>
+                      <div className={styles.footerNavColumn}>
+                          <div className={styles.footerNavColumnTitle}>Shop</div>
+                          <nav>
+                              <ul className={styles.navList}>
+                                  <li>
+                                      <CategoryLink categorySlug="women" className={navItemStyle}>
+                                          Women
+                                      </CategoryLink>
+                                  </li>
+                                  <li>
+                                      <CategoryLink
+                                        categorySlug="men"
+                                        className={navItemStyle}
+                                      >
+                                          Men
+                                      </CategoryLink>
+                                  </li>
+                                  <li>
+                                      <CategoryLink categorySlug="accessories" className={navItemStyle}>
+                                          Accessories
+                                      </CategoryLink>
+                                  </li>
+                                  <li>
+                                      <CategoryLink categorySlug="outlet" className={navItemStyle}>
+                                          Outlet
+                                      </CategoryLink>
+                                  </li>
+                                  <li>
+                                      <NavLink to={"/about-us"} className={navItemStyle}>
+                                          About
+                                      </NavLink>
+                                  </li>
+                              </ul>
+                          </nav>
+                      </div>
+                      <div className={styles.footerNavColumn}>
+                          <div className={styles.footerNavColumnTitle}>Follow us</div>
                           <ul className={styles.navList}>
                               <li>
-                                  <CategoryLink categorySlug="all-products" className={navItemStyle}>
-                                      Shop All
-                                  </CategoryLink>
-                              </li>
-                              <li>
-                                  <CategoryLink
-                                    categorySlug="kitchen-essentials"
-                                    className={navItemStyle}
+                                  <Link
+                                    to="https://www.facebook.com/WixStudio"
+                                    className={styles.navItem}
+                                    target="_blank"
                                   >
-                                      Kitchen
-                                  </CategoryLink>
+                                      Facebook
+                                  </Link>
                               </li>
                               <li>
-                                  <CategoryLink categorySlug="bath" className={navItemStyle}>
-                                      Bath
-                                  </CategoryLink>
+                                  <Link
+                                    to="https://www.instagram.com/wixstudio"
+                                    className={styles.navItem}
+                                    target="_blank"
+                                  >
+                                      Instagram
+                                  </Link>
                               </li>
                               <li>
-                                  <CategoryLink categorySlug="on-the-go" className={navItemStyle}>
-                                      On the Go
-                                  </CategoryLink>
+                                  <Link
+                                    to="https://www.linkedin.com/company/wixstudio/"
+                                    className={styles.navItem}
+                                    target="_blank"
+                                  >
+                                      LinkedIn
+                                  </Link>
+                              </li>
+                          </ul>
+                      </div>
+                      <div className={styles.footerNavColumn}>
+                          <div className={styles.footerNavColumnTitle}>Contact</div>
+                          <ul className={styles.navList}>
+                              <li className={styles.navItem}>
+                                  500 Terry Francine Street <br />
+                                  San Francisco, CA 94158 <br />
                               </li>
                               <li>
-                                  <CategoryLink categorySlug="new-in" className={navItemStyle}>
-                                      New In
-                                  </CategoryLink>
+                                  <Link
+                                    to="tel:1234567890"
+                                    className={styles.navItem}
+                                    target="_blank"
+                                  >
+                                      Tel: 123-456-7890
+                                  </Link>
+                              </li>
+                          </ul>
+                      </div>
+                      <div className={styles.footerNavColumn}>
+                          <div className={styles.footerNavColumnTitle}>Legal</div>
+                          <ul className={styles.navList}>
+                              <li>
+                                  <NavLink to={"/shipping-policy"} className={navItemStyle}>
+                                      Shipping Policy
+                                  </NavLink>
                               </li>
                               <li>
-                                  <CategoryLink categorySlug="best-sellers" className={navItemStyle}>
-                                      Best Sellers
-                                  </CategoryLink>
+                                  <NavLink to={"/privacy-policy"} className={navItemStyle}>
+                                      Privacy Policy
+                                  </NavLink>
                               </li>
                               <li>
-                                  <NavLink to="/about-us" className={navItemStyle}>
-                                      About Us
+                                  <NavLink to={"/refund-policy"} className={navItemStyle}>
+                                      Refund Policy
+                                  </NavLink>
+                              </li>
+                              <li>
+                                  <NavLink to={"/terms-and-conditions"} className={navItemStyle}>
+                                      Terms & Conditions
                                   </NavLink>
                               </li>
                           </ul>
-                      </nav>
-                  </div>
-                  <div className={styles.footerNavColumn}>
-                      <div className={styles.footerNavColumnTitle}>Follow us</div>
-                      <ul className={styles.navList}>
-                          <li>
-                              <Link
-                                to="https://www.facebook.com/WixStudio"
-                                className={styles.navItem}
-                                target="_blank"
-                              >
-                                  Facebook
-                              </Link>
-                          </li>
-                          <li>
-                              <Link
-                                to="https://www.instagram.com/wixstudio"
-                                className={styles.navItem}
-                                target="_blank"
-                              >
-                                  Instagram
-                              </Link>
-                          </li>
-                          <li>
-                              <Link
-                                to="https://www.pinterest.com/wixcom"
-                                className={styles.navItem}
-                                target="_blank"
-                              >
-                                  Pinterest
-                              </Link>
-                          </li>
-                      </ul>
-                  </div>
-                  <div className={styles.footerNavColumn}>
-                      <div className={styles.footerNavColumnTitle}>Contact</div>
-                      <ul className={styles.navList}>
-                          <li>
-                              <Link
-                                to="https://www.facebook.com/WixStudio"
-                                className={styles.navItem}
-                                target="_blank"
-                              >
-                                  Facebook
-                              </Link>
-                          </li>
-                          <li>
-                              <Link
-                                to="https://www.instagram.com/wixstudio"
-                                className={styles.navItem}
-                                target="_blank"
-                              >
-                                  Instagram
-                              </Link>
-                          </li>
-                          <li>
-                              <Link
-                                to="https://www.pinterest.com/wixcom"
-                                className={styles.navItem}
-                                target="_blank"
-                              >
-                                  Pinterest
-                              </Link>
-                          </li>
-                      </ul>
-                  </div>
-                  <div className={styles.footerNavColumn}>
-                      <div className={styles.footerNavColumnTitle}>Legal</div>
-                      <ul className={styles.navList}>
-                          <li>
-                              <NavLink to="/terms-and-conditions" className={navItemStyle}>
-                                  Terms & Conditions
-                              </NavLink>
-                          </li>
-                          <li>
-                              <NavLink to="/privacy-policy" className={navItemStyle}>
-                                  Privacy Policy
-                              </NavLink>
-                          </li>
-                          <li>
-                              <NavLink to="/shipping-policy" className={navItemStyle}>
-                                  Shipping Policy
-                              </NavLink>
-                          </li>
-                          <li>
-                              <NavLink to="/refund-policy" className={navItemStyle}>
-                                  Refund Policy
-                              </NavLink>
-                          </li>
-                      </ul>
-                  </div>
-              </FadeIn>
-          </div>
-          <div className={styles.copyright}>
-              © 2024 RND.APPAREL, All rights reserved.
+                      </div>
+                  </FadeIn>
+              </div>
+              <div className={styles.copyright}>
+                  © 2024 RND.APPAREL, All rights reserved.
+              </div>
           </div>
       </footer>
     );

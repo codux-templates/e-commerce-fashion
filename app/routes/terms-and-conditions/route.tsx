@@ -62,7 +62,7 @@ export default function TermsAndConditionsPage() {
 
 export const meta: MetaFunction = () => {
     return [
-        { title: 'Terms and Conditions | ReClaim' },
+        { title: 'Terms and Conditions | RND.Apparel' },
         {
             name: 'description',
             content: 'Essential home products for sustainable living',

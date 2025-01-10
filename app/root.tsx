@@ -14,7 +14,6 @@ import {
     ScrollRestoration,
     useLoaderData,
 } from '@remix-run/react';
-import { RouteBreadcrumbs } from '~/src/components/breadcrumbs/use-breadcrumbs';
 import { Cart } from '~/src/components/cart/cart';
 import { Footer } from '~/src/components/footer/footer';
 import { Header } from '~/src/components/header/header';
@@ -42,12 +41,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
     return json(data, { headers });
 }
-
-const breadcrumbs: RouteBreadcrumbs = () => [{ title: 'Home', to: '/' }];
-
-export const handle = {
-    breadcrumbs,
-};
 
 export function Layout({ children }: React.PropsWithChildren) {
     return (
@@ -92,7 +85,7 @@ export default function App() {
 }
 
 export const meta: MetaFunction = () => {
-    const title = 'ReClaim: Home Goods Store';
+    const title = 'RND.Apparel';
     const description = 'Essential home products for sustainable living';
 
     return [

@@ -39,7 +39,7 @@ export default function RefundPolicyPage() {
 
 export const meta: MetaFunction = () => {
     return [
-        { title: 'Refund Policy | ReClaim' },
+        { title: 'Refund Policy | RND.Apparel' },
         {
             name: 'description',
             content: 'Essential home products for sustainable living',

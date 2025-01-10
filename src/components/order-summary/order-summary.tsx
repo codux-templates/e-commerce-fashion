@@ -1,14 +1,13 @@
 import classNames from 'classnames';
-import { orders } from '@wix/ecom';
+import { orders, orderTransactions } from '@wix/ecom';
 import type { SerializeFrom } from '@remix-run/node';
 import { OrderItem } from './order-item/order-item';
 import styles from './order-summary.module.scss';
-import { type OrderTransactions } from '@wix/ecom_orders';
 
 export interface OrderSummaryProps {
     className?: string;
     order: SerializeFrom<orders.Order & orders.OrderNonNullableFields>;
-    orderTransactions?: SerializeFrom<OrderTransactions>;
+    orderTransactions?: SerializeFrom<orderTransactions.OrderTransactions>;
 }
 
 export const OrderSummary = ({ order, className, orderTransactions }: OrderSummaryProps) => {

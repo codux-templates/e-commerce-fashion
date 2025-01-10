@@ -3,7 +3,6 @@ import { type MetaFunction, useLoaderData } from '@remix-run/react';
 import type { GetStaticRoutes } from '@wixc3/define-remix-app';
 import classNames from 'classnames';
 import { useEffect } from 'react';
-import { RouteBreadcrumbs } from '~/src/components/breadcrumbs/use-breadcrumbs';
 import { CategoryLink } from '~/src/components/category-link/category-link';
 import { ProductFilters } from '~/src/components/product-filters/product-filters';
 import { ProductGrid } from '~/src/components/product-grid/product-grid';
@@ -52,21 +51,10 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     return { category, categoryProducts, allCategories, productPriceBounds };
 };
 
-const breadcrumbs: RouteBreadcrumbs<typeof loader> = (match) => [
-    {
-        title: match.data.category.name!,
-        to: `/products/${match.data.category.slug}`,
-    },
-];
-
 export const getStaticRoutes: GetStaticRoutes = async () => {
     const api = initializeEcomApiAnonymous();
     const categories = await api.getAllCategories();
     return categories.map((category) => `/products/${category.slug}`);
-};
-
-export const handle = {
-    breadcrumbs,
 };
 
 export default function ProductsPage() {
@@ -93,8 +81,6 @@ export default function ProductsPage() {
 
     const currency = products[0]?.priceData?.currency ?? 'USD';
 
-    /*const breadcrumbs = useBreadcrumbs();*/
-
     useEffect(() => {
         if (error) toast.error(getErrorMessage(error));
     }, [error]);
@@ -105,8 +91,6 @@ export default function ProductsPage() {
 
     return (
         <div className={styles.page}>
-            {/*<Breadcrumbs breadcrumbs={breadcrumbs} />*/}
-
             <div className={styles.content}>
                 <div className={styles.main}>
                     <div className={styles.categoryHeader}>
@@ -183,7 +167,7 @@ export default function ProductsPage() {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [
-        { title: `${data?.category.name ?? 'ReClaim: Products'} | ReClaim` },
+        { title: `${data?.category.name ?? 'RND.Apparel: Products'} | RND.Apparel` },
         {
             name: 'description',
             content: data?.category.description,

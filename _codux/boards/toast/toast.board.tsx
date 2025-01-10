@@ -28,6 +28,7 @@ const createToast = (type: ToastData['type'], message: string): ToastData => ({
     createdAt: 0,
     visible: true,
     pauseDuration: 0,
+    dismissed: false,
     ariaProps: {
         role: 'status',
         'aria-live': 'polite',

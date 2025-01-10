@@ -1,6 +1,7 @@
 import { createRemixStub } from '@remix-run/testing';
 import { PropsWithChildren } from 'react';
 import { EcomApiContextProvider } from '~/src/wix/ecom';
+import { CartOpenContextProvider } from '~/src/wix/cart';
 
 export interface ComponentWrapperProps extends PropsWithChildren {
     loaderData?: Record<string, unknown>;
@@ -16,7 +17,9 @@ export default function ComponentWrapper({ children, loaderData }: ComponentWrap
 
     return (
         <EcomApiContextProvider>
-            <RemixStub hydrationData={{ loaderData }} />
+            <CartOpenContextProvider>
+                <RemixStub hydrationData={{ loaderData }} />
+            </CartOpenContextProvider>
         </EcomApiContextProvider>
     );
 }

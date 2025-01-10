@@ -12,9 +12,9 @@ import { OrderDetails } from '~/src/wix/ecom';
 
 import styles from './route.module.scss';
 import classNames from 'classnames';
-import { type OrderTransactions } from '@wix/ecom_orders';
+import { orderTransactions } from '@wix/ecom';
 
-export type LoaderResponseData = { order: OrderDetails, orderTransactions: OrderTransactions | undefined };
+export type LoaderResponseData = { order: OrderDetails, orderTransactions: orderTransactions.OrderTransactions | undefined };
 export type LoaderResponse = Promise<TypedResponse<never> | LoaderResponseData>;
 
 export async function loader({ params, request }: LoaderFunctionArgs): LoaderResponse {
@@ -60,7 +60,7 @@ export default function MyOrderPage() {
 
 export const meta: MetaFunction = () => {
     return [
-        { title: 'My Order | ReClaim' },
+        { title: 'My Order | RND.Apparel' },
         {
             name: 'description',
             content: 'Essential home products for sustainable living',

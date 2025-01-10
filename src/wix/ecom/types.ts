@@ -3,7 +3,6 @@ import { members } from '@wix/members';
 import { redirects } from '@wix/redirects';
 import { IOAuthStrategy, OauthData, WixClient } from '@wix/sdk';
 import { collections, products } from '@wix/stores';
-import { type OrderTransactions } from '@wix/ecom_orders';
 
 export type Product = products.Product;
 export type Collection = collections.Collection;
@@ -101,7 +100,7 @@ export type EcomApi = {
         items: OrderDetails[];
         totalCount: number;
     }>;
-    getOrderTransactions: (orderId: string) => Promise<OrderTransactions|undefined>
+    getOrderTransactions: (orderId: string) => Promise<orderTransactions.OrderTransactions|undefined>
     /**
      * Returns the lowest and the highest product price in the category.
      */

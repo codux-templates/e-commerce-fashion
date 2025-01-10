@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { ProductCard, ProductCardSkeleton } from '~/src/components/product-card/product-card';
 import { FadeIn, Reveal } from '~/src/components/visual-effects';
 import { useCategoryDetails } from '~/src/wix/categories';
-import { getProductImageUrl, useProducts } from '~/src/wix/products';
+import { useProducts } from '~/src/wix/products';
 import styles from './featured-products-section.module.scss';
 
 interface FeaturedProductsSectionProps {
@@ -32,18 +32,8 @@ export const FeaturedProductsSection = (props: FeaturedProductsSectionProps) => 
                 {products
                     ? products.items.map((product) => (
                         <ProductCard
-                            product={product}
-                            variants={product.variants}
                             key={product._id}
-                            slug={product.slug!}
-                            inventoryStatus={product.stock?.inventoryStatus}
-                            price={product.priceData?.price ?? undefined}
-                            discountedPrice={product.priceData?.discountedPrice}
-                            name={product.name!}
-                            imageUrl={getProductImageUrl(product, { minHeight: 700 })}
-                            formattedPrice={product.priceData?.formatted?.price}
-                            formattedDiscountedPrice={product.priceData?.formatted?.discountedPrice}
-                            ribbon={product.ribbon ?? undefined}
+                            product={product}
                         />
                       ))
                     : Array.from({ length: productCount }).map((_, i) => (

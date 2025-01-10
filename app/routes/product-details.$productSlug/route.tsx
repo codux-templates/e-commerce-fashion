@@ -55,8 +55,6 @@ export default function ProductDetailsPage() {
 
     return (
         <div className={styles.page}>
-            {/*<Breadcrumbs breadcrumbs={breadcrumbs} />*/}
-
             <div className={styles.content}>
                 <div className={styles.productImagesWrapper}>
                     <ProductImages media={media} />
@@ -228,7 +226,7 @@ export default function ProductDetailsPage() {
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-    const title = `${data?.product.name ?? 'Product Details'} | ReClaim`;
+    const title = `${data?.product.name ?? 'Product Details'} | RND.Apparel`;
     const description = data?.product.description;
 
     return [

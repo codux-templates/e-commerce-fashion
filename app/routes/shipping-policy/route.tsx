@@ -45,7 +45,7 @@ export default function ShippingPolicyPage() {
 
 export const meta: MetaFunction = () => {
     return [
-        { title: 'Shipping Policy | ReClaim' },
+        { title: 'Shipping Policy | RND.Apparel' },
         {
             name: 'description',
             content: 'Essential home products for sustainable living',

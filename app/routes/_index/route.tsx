@@ -112,7 +112,7 @@ export default function HomePage() {
 }
 
 export const meta: MetaFunction = () => {
-    const title = 'ReClaim: Home Goods Store';
+    const title = 'RND.Apparel';
     const description = 'Essential home products for sustainable living';
 
     return [
