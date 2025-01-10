@@ -208,6 +208,18 @@
 
 /* Inputs ********************************************************************/
 
+.badge{
+    padding: 8px 10px;
+    font: var(--body2);
+}
+
+.badge.black{
+    background-color: var(--surface-dark);
+    color: var(--text-invert);
+}
+
+/* Inputs ********************************************************************/
+
 .transparentInput {
     border: none;
     background: transparent;

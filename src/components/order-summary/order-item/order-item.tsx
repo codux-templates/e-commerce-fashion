@@ -1,3 +1,4 @@
+import '../../../styles/utils.scss';
 import { orders } from '@wix/ecom';
 import type { SerializeFrom } from '@remix-run/node';
 import { media } from '@wix/sdk';
@@ -27,10 +28,12 @@ export const OrderItem = ({ item }: OrderItemProps) => {
             </div>
 
             <div className={styles.main}>
-                <div>
-                    <div>{productName}</div>
+                <div className={styles.div1}>
+                    <div className={styles.productNameAndPrice}>
+                        <div className="heading4">{productName}</div>
+                        <div className="heading4">{item.totalPriceBeforeTax?.formattedAmount}</div>
+                    </div>
                     <div className={styles.productDetails}>
-                        <div>Price: {item.price?.formattedAmount}</div>
                         {item.descriptionLines?.map(({ name, colorInfo, plainText }, index) => {
                             const displayName = name?.translated ?? name?.original;
                             const colorName = colorInfo?.translated ?? colorInfo?.original;
@@ -41,12 +44,8 @@ export const OrderItem = ({ item }: OrderItemProps) => {
                                 </div>
                             );
                         })}
+                        <div className={styles.productInfo}>Qty: {item.quantity}</div>
                     </div>
-                </div>
-
-                <div className={styles.orderInfo}>
-                    <div>Qty: {item.quantity}</div>
-                    <div>{item.totalPriceBeforeTax?.formattedAmount}</div>
                 </div>
             </div>
         </div>

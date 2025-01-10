@@ -1,10 +1,9 @@
-import { currentCart, orders } from '@wix/ecom';
+import { currentCart, orders, orderTransactions } from '@wix/ecom';
 import { members } from '@wix/members';
 import { redirects } from '@wix/redirects';
 import { createClient, OAuthStrategy, Tokens } from '@wix/sdk';
 import { collections, products } from '@wix/stores';
-import { getFilteredProductsQuery } from '../products/product-filters';
-import { getSortedProductsQuery } from '../products/product-sorting';
+import { getFilteredProductsQuery , getSortedProductsQuery } from '~/src/wix/products';
 import { EcomApi, WixApiClient } from './types';
 import { isNotFoundWixClientError, normalizeWixClientError } from './wix-client-error';
 
@@ -52,6 +51,7 @@ export function createWixClient(tokens?: Tokens): WixApiClient {
             collections,
             orders,
             members,
+            orderTransactions
         },
         auth: OAuthStrategy({
             clientId: getWixClientId(),
@@ -191,6 +191,15 @@ const createEcomApi = (wixClient: WixApiClient): EcomApi =>
                 items: searchOrdersResponse.orders,
                 totalCount: searchOrdersResponse.metadata?.count ?? 0,
             };
+        },
+
+        async getOrderTransactions(orderId: string){
+          try {
+            const response = await wixClient.orderTransactions.listTransactionsForSingleOrder(orderId);
+            return response.orderTransactions;
+          } catch (error) {
+            if (!isNotFoundWixClientError(error)) throw error;
+          }
         },
 
         async getProductPriceBoundsInCategory(categoryId: string) {
