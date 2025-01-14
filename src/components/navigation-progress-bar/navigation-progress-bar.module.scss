@@ -1,7 +1,3 @@
-:where(.progressBar) {
-    --color: #007bff;
-}
-
 .progressBar {
     position: fixed;
     top: 0;
@@ -14,18 +10,6 @@
 
 .progressBar.loading {
     animation: loadingAnimation 100s forwards;
-}
-
-.progressBar.finished {
-    /**
-     * By combining the 'loading' and 'finished' animations here, we ensure that
-     * when the .loading class is replaced with the .finished class, the browser
-     * retains the progress of the 'loading' animation, and uses as the starting
-     * point for the 'finished' animation.
-     */
-    animation:
-        loadingAnimation 100s forwards,
-        finishedAnimation 0.3s forwards;
 }
 
 @keyframes loadingAnimation {

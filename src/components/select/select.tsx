@@ -1,9 +1,9 @@
 import * as RadixSelect from '@radix-ui/react-select';
 import classNames from 'classnames';
-import { DropdownIcon } from '../icons';
 
 import styles from './select.module.scss';
 import React from 'react';
+import Icon from '../icons/icon';
 
 export interface SelectProps<V extends string> {
     value: V;
@@ -36,13 +36,13 @@ export const Select = <V extends string>({
         >
             <RadixSelect.Value placeholder={placeholder}>{renderValue?.(value)}</RadixSelect.Value>
             <RadixSelect.Icon className={styles.triggerIcon}>
-                <DropdownIcon width={12} />
+                <Icon name="expand_more" />
             </RadixSelect.Icon>
         </RadixSelect.Trigger>
 
         <RadixSelect.Portal>
             <RadixSelect.Content
-              align={'end'}
+                align={'end'}
                 className={classNames(styles.content, dropdownClassName)}
                 position="popper"
             >
@@ -58,10 +58,24 @@ export interface SelectItemProps {
     className?: string;
 }
 
-export const SelectItem = ({ value, children, className }: SelectItemProps) => {
+export const SelasdectItem = ({ value, children, className }: SelectItemProps) => {
     return (
         <RadixSelect.Item className={classNames(styles.item, className)} value={value}>
             <RadixSelect.ItemText>{children}</RadixSelect.ItemText>
         </RadixSelect.Item>
     );
 };
+
+export const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
+  function SelectItem({ children, className, ...props }, forwardedRef) {
+      return (
+        <RadixSelect.Item
+          className={classNames(styles.item, className)}
+          {...props}
+          ref={forwardedRef}
+        >
+            <RadixSelect.ItemText>{children}</RadixSelect.ItemText>
+        </RadixSelect.Item>
+      );
+  }
+);

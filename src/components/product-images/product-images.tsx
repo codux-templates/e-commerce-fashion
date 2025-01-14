@@ -1,6 +1,5 @@
 import { products } from '@wix/stores';
 import classNames from 'classnames';
-import { ImagePlaceholderIcon } from '../icons';
 
 import styles from './product-images.module.scss';
 
@@ -25,8 +24,10 @@ export const ProductImages = ({ media }: ProductImagesProps) => {
                         alt={item.image!.altText ?? ''}
                       />
                   </div>
-                )):(
-                  <ImagePlaceholderIcon className={styles.imagePlaceholderIcon} />
+                )): (
+                  <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
+                        image
+                  </span>
                 )
                 }
             </div>

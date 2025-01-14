@@ -31,12 +31,6 @@
     background: #000;
 }
 
-.imagePlaceholderIcon {
-    color: #fff;
-    width: 37px;
-    height: 37px;
-}
-
 .productInfo {
     display: grid;
     width: 100%;
@@ -115,12 +109,6 @@
     font: var(--paragraph3);
 }
 
-.unavailableIcon {
-    color: var(--error-color);
-    width: 20px;
-    height: 20px;
-}
-
 @media (min-width: 768px){
     .root{
         min-width: 314px;
@@ -130,27 +118,9 @@
 
 
 @container (max-width: 565px) {
-    .itemContent {
-        grid-template-columns: 144px 1fr;
-    }
-
-    .productInfo {
-        grid-template-rows: min-content auto min-content;
-        grid-template-areas:
-                'productName price'
-                'productOptions priceBreakdown'
-                'quantity removeButton';
-    }
 
     .quantity {
         justify-self: start;
     }
 
-    .priceBreakdown {
-
-    }
-    .removeButton{
-        justify-self: end;
-        align-self: center;
-    }
 }

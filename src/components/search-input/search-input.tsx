@@ -44,7 +44,6 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
                   </label>
               </form>
           </FloatIn>
-
       </div>
     );
 });

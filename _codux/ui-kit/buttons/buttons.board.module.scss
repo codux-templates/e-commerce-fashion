@@ -11,11 +11,6 @@
     width: max(45px, 5vw);
 }
 
-.itemsGroup .icon {
-    height: 30px;
-    overflow: hidden;
-}
-
 .demoWidth :global(.button) {
     width: 250px;
 }
@@ -24,8 +19,4 @@
     .demoWidth :global(.button) {
         width: 100%;
     }
-}
-
-.icon.menuIcon {
-    padding-top: 4px;
 }

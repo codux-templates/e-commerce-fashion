@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { FacebookIcon, PinterestIcon, WhatsAppIcon } from '../icons';
 import styles from './share-product-links.module.scss';
 
 interface ShareProductLinksProps {
@@ -16,7 +15,7 @@ export const ShareProductLinks = ({ productCanonicalUrl, className }: ShareProdu
                 target="_blank"
                 rel="noreferrer"
             >
-                <WhatsAppIcon className={styles.icon} />
+                whatsapp
             </a>
 
             <a
@@ -24,7 +23,7 @@ export const ShareProductLinks = ({ productCanonicalUrl, className }: ShareProdu
                 target="_blank"
                 rel="noreferrer"
             >
-                <FacebookIcon className={styles.icon} />
+                facebook
             </a>
 
             <a
@@ -32,7 +31,7 @@ export const ShareProductLinks = ({ productCanonicalUrl, className }: ShareProdu
                 target="_blank"
                 rel="noreferrer"
             >
-                <PinterestIcon className={styles.icon} />
+                pinterest
             </a>
         </div>
     );

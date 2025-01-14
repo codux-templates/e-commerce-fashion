@@ -10,24 +10,12 @@
     gap: 40px 4px;
 }
 
-.productLink {
-    display: block;
-    max-width: var(--maxColumnWidth);
-}
-
 .clearFiltersButton {
     margin-top: 32px;
 }
 
 .clearFiltersButton:hover {
     color: rgba(23, 17, 13, 0.7);
-}
-
-.loadMoreWrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
 }
 
 @media (max-width: 767px){

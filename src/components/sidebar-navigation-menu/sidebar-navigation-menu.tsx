@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { useNavigation } from '@remix-run/react';
 import { Drawer } from '../drawer/drawer';
-import { CrossIcon } from '../icons';
 import { NavigationMenu } from '../navigation-menu/navigation-menu';
 import styles from './sidebar-navigation-menu.module.scss';
 import { useEffect } from 'react';
@@ -25,7 +24,9 @@ export const SidebarNavigationMenu = ({ open, onClose }: SidebarNavigationMenuPr
         <Drawer open={open} onClose={onClose} drawerClassName={styles.drawer}>
             <NavigationMenu vertical className={styles.menu} />
             <button className={classNames(styles.closeButton, 'iconButton')} onClick={onClose}>
-                <CrossIcon />
+                      <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
+                        close
+                    </span>
             </button>
         </Drawer>
     );

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 import { getClickableElementAttributes } from '~/src/wix/utils';
-import { DropdownIcon } from '../icons';
 
 import styles from './accordion.module.scss';
+import Icon from '../icons/icon';
 
 interface AccordionItem {
     header: React.ReactNode;
@@ -49,12 +49,11 @@ export const Accordion = ({
                             <div className={styles.toggleIconContainer}>
                                 {isOpen
                                     ? collapseIcon || (
-                                          <DropdownIcon
-                                              width={10}
-                                              className={styles.collapseIcon}
-                                          />
+                                      <Icon name={'expand_more'} style={{ transform: 'rotate(180deg)' }}/>
                                       )
-                                    : expandIcon || <DropdownIcon width={10} />}
+                                    : expandIcon || (
+                                        <Icon name={'expand_more'}/>
+                                      )}
                             </div>
                         </div>
 

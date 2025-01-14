@@ -78,14 +78,6 @@
     margin-bottom: 14px;
 }
 
-.secureCheckout {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font: var(--paragraph3);
-}
-
 /* Fallback for loading, error, and empty cart states */
 .cartFallback {
     min-height: 300px;

@@ -19,12 +19,6 @@
     object-fit: cover;
 }
 
-.imagePlaceholderIcon {
-    width: 210px;
-    height: 210px;
-    color: #646464;
-}
-
 @media (max-width: 1023px) {
     .imagesWrapper {
         grid-template-columns: 1fr;

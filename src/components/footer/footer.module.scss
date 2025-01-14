@@ -38,17 +38,6 @@
     white-space: nowrap;
 }
 
-.navItem.active {
-    color: #5b4b34;
-}
-
-.bottomBar {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
 .logo {
     height: auto;
 }
@@ -58,10 +47,6 @@
     a {
         font: var(--body3);
     };
-}
-
-.coduxLink {
-    text-decoration: underline;
 }
 
 .description {

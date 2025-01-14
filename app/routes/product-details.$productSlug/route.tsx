@@ -34,11 +34,17 @@ export const getStaticRoutes: GetStaticRoutes = async () => {
 
 export default function ProductDetailsPage() {
     const { product } = useLoaderData<typeof loader>();
+    // The `key` ensures the component state, such as selected options or
+    // quantity, resets when navigating between products.
+    return <ProductDetails key={product._id} />;
+}
+
+function ProductDetails() {
+    const { product } = useLoaderData<typeof loader>();
 
     const {
         outOfStock,
         priceData,
-        sku,
         media,
         productOptions,
         quantity,
@@ -62,7 +68,6 @@ export default function ProductDetailsPage() {
 
                 <div className={styles.productInfo}>
                     <h1 className={styles.productName}>{product.name}</h1>
-                    {sku && <p className={styles.sku}>SKU: {sku}</p>}
 
                     {priceData && (
                         <ProductPrice

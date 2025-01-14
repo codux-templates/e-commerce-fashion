@@ -2,7 +2,6 @@ import { products } from '@wix/stores';
 import { ColorSelect } from '~/src/components/color-select/color-select';
 import { getChoiceValue } from '~/src/wix/products';
 import { Select, SelectItem } from '~/src/components/select/select';
-import { ErrorIcon } from '../icons';
 
 import styles from './product-option.module.scss';
 import classNames from 'classnames';
@@ -55,6 +54,7 @@ export const ProductOption = ({ isQuickView = false, option, selectedChoice, err
                         />
                     ) : (
                         <Select
+
                             placeholder={`Select ${name}`}
                             value={selectedChoice?.value ?? ''}
                             onValueChange={handleChange}
@@ -73,7 +73,9 @@ export const ProductOption = ({ isQuickView = false, option, selectedChoice, err
 
                     {hasError && (
                         <div className={styles.error}>
-                            <ErrorIcon width={18} height={18} />
+                            <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
+                                error
+                            </span>
                             {error}
                         </div>
                     )}
@@ -110,9 +112,13 @@ export const ProductOption = ({ isQuickView = false, option, selectedChoice, err
                                     .filter((c) => c.value && c.description && c.visible)
                                     .map((c) => (
                                         <span
-                                            className={classNames(styles.option,
-                                              { [styles.disabled]: !c.inStock },
-                                              { [styles.selected]: selectedChoice?.value === c.value! }
+                                            className={classNames(
+                                                styles.option,
+                                                { [styles.disabled]: !c.inStock },
+                                                {
+                                                    [styles.selected]:
+                                                        selectedChoice?.value === c.value!,
+                                                },
                                             )}
                                             key={c.value}
                                             onClick={() => handleChange(c.value!)}

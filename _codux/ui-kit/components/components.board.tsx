@@ -3,8 +3,6 @@ import { Accordion } from '~/src/components/accordion/accordion';
 import { ProductCard } from '~/src/components/product-card/product-card';
 import { QuantityInput } from '~/src/components/quantity-input/quantity-input';
 import { Select, SelectItem } from '~/src/components/select/select';
-import classNames from 'classnames';
-import { CategoryLink } from '~/src/components/category-link/category-link';
 import { ColorSelect } from '~/src/components/color-select/color-select';
 import ComponentWrapper from '_codux/board-wrappers/component-wrapper';
 import { Kit } from '../ui-kit-utils/kit';
@@ -164,11 +162,17 @@ export default createBoard({
                                         productOptions: [
                                             {
                                                 name: 'Color',
-                                                choices: ['Green' as products.Choice, 'Blue' as products.Choice],
+                                                choices: [
+                                                    'Green' as products.Choice,
+                                                    'Blue' as products.Choice,
+                                                ],
                                             },
                                             {
                                                 name: 'Size',
-                                                choices: ['Small' as products.Choice, 'Medium' as products.Choice],
+                                                choices: [
+                                                    'Small' as products.Choice,
+                                                    'Medium' as products.Choice,
+                                                ],
                                             },
                                         ],
                                     } satisfies products.Product
@@ -177,25 +181,12 @@ export default createBoard({
                         </Variant>
                         <Kit.Description>Product Card</Kit.Description>
                     </Kit.Item>
-                    <Kit.Item className={classNames(styles.demoWidth, styles.linkCardWrapper)}>
-                        <Variant name="Link Card">
-                            <CategoryLink categorySlug="all-products" className="linkCard">
-                                <img
-                                    className="linkCardBackground"
-                                    src="https://static.wixstatic.com/media/c837a6_c05a03f48fbd49e7b5046d1b18c930eb~mv2.jpg/v1/fill/w_547,h_730,q_90/c837a6_c05a03f48fbd49e7b5046d1b18c930eb~mv2.jpg"
-                                    alt=""
-                                />
-                                <div className="linkCardTitle">All Products</div>
-                            </CategoryLink>
-                        </Variant>
-                        <Kit.Description>Link Card</Kit.Description>
-                    </Kit.Item>
                 </Kit.Section>
             </Kit>
         </ComponentWrapper>
     ),
     environmentProps: {
-        windowWidth: 588,
+        windowWidth: 550,
         windowHeight: 800,
     },
     isSnippet: true,

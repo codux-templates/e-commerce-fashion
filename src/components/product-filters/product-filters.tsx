@@ -5,7 +5,6 @@ import { mergeUrlSearchParams, useSearchParamsOptimistic } from '~/src/wix/utils
 import { PriceFilter } from './price-filter';
 import { DropdownMenu } from '~/src/components/dropdown-menu/dropdown-menu';
 import styles from './product-filters.module.scss';
-import { DropdownIcon } from '~/src/components/icons';
 
 interface ProductFiltersProps {
     minAvailablePrice: number;
@@ -32,17 +31,26 @@ export const ProductFilters = ({
     };
 
     return (
-      <DropdownMenu trigger={<div className={styles.trigger}>Price<DropdownIcon width={12} /></div>} contentProps={{ align: 'end', className: styles.content}}>
-          <PriceFilter
-            minAvailablePrice={minAvailablePrice}
-            maxAvailablePrice={maxAvailablePrice}
-            minSelectedPrice={filters.minPrice}
-            maxSelectedPrice={filters.maxPrice}
-            currency={currency}
-            onChange={handleFiltersChange}
-            onClearFilters={onClearFilters}
-          />
-      </DropdownMenu>
-
+        <DropdownMenu
+            trigger={
+                <div className={styles.trigger}>
+                    Price
+                    <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
+                        expand_more
+                    </span>
+                </div>
+            }
+            contentProps={{ align: 'end', className: styles.content }}
+        >
+            <PriceFilter
+                minAvailablePrice={minAvailablePrice}
+                maxAvailablePrice={maxAvailablePrice}
+                minSelectedPrice={filters.minPrice}
+                maxSelectedPrice={filters.maxPrice}
+                currency={currency}
+                onChange={handleFiltersChange}
+                onClearFilters={onClearFilters}
+            />
+        </DropdownMenu>
     );
 };

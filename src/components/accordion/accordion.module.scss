@@ -26,11 +26,9 @@
     padding-right: 4px;
 }
 
-.collapseIcon {
-    transform: rotate(180deg);
-}
-
 .content {
+    overflow: hidden;
+
     --transitionDuration: 0.4s;
     display: grid;
     grid-template-rows: 0fr;
@@ -39,17 +37,21 @@
 
 .expanded {
     grid-template-rows: 1fr;
+
 }
 
 .contentExpander {
-    overflow: auto;
-    transition: overflow 0s allow-discrete;
+    overflow: hidden;
+    height: 0;
+    transition: overflow 0s;
+    transition-behavior: allow-discrete;
 }
 
 .expanded .contentExpander {
     // Prevent clipping outline and box-shadow after transition.
     overflow: visible;
     transition-delay: var(--transitionDuration);
+    height: auto;
 }
 
 .contentInner {

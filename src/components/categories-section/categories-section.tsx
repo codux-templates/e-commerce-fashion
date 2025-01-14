@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FadeIn, Reveal } from '~/src/components/visual-effects';
-import { useCategoryDetails } from '~/src/wix/categories';
+import { getCategoryImageUrl, useCategoryDetails } from '~/src/wix/categories';
 import styles from './categories-section.module.scss';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from '@remix-run/react';
@@ -41,10 +41,10 @@ export const Category = ({categorySlug}: CategoryProps) => {
   useEffect(() => {
     if (category?.media?.mainMedia?.image?.url) {
       const img = new Image();
-      img.src = category?.media?.mainMedia?.image?.url;
+      img.src = getCategoryImageUrl(category, { maxWidth: 400, maxHeight: 400, quality: 100 })??'';
       img.onload = () => setPreloadedImage(img.src);
     }
-  }, [category?.media?.mainMedia?.image?.url]);
+  }, [category, category?.media?.mainMedia?.image?.url]);
 
   const handleMouseMove = (event: React.MouseEvent) => {
     setMousePosition({ x: event.clientX, y: event.clientY });

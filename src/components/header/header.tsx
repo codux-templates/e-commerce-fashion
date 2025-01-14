@@ -8,6 +8,7 @@ import { SidebarNavigationMenu } from '../sidebar-navigation-menu/sidebar-naviga
 import { UserMenu } from '../user-menu/user-menu';
 
 import styles from './header.module.scss';
+import { RemoveScroll } from 'react-remove-scroll';
 
 export interface HeaderProps {
     className?: string;
@@ -36,10 +37,6 @@ export const Header = ({ className }: HeaderProps) => {
     useEffect(() => {
         if (isSearchOpen && searchInputRef.current) {
             searchInputRef.current.focus(); // Focus the input when isSearchOpen is true
-        }
-        const html = document.querySelector("html");
-        if (html) {
-            html.style.overflow = isSearchOpen ? "hidden" : "auto";
         }
     }, [isSearchOpen]);
     const searchButtonOnClickHandler = () => {
@@ -134,7 +131,7 @@ export const Header = ({ className }: HeaderProps) => {
                     </button>
                 </div>
             </section>
-            {isSearchOpen && <SearchInput ref={searchInputRef} onKeyDown={onSearchKeyDown} onSearchSubmit={onSearchSubmit} />}
+            {isSearchOpen && <RemoveScroll><SearchInput ref={searchInputRef} onKeyDown={onSearchKeyDown} onSearchSubmit={onSearchSubmit} /></RemoveScroll>}
             <SidebarNavigationMenu open={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
         </header>
     );

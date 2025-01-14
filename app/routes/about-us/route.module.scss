@@ -39,21 +39,8 @@
     object-fit: cover;
 }
 
-.aboutSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .title {
     text-transform: uppercase;
-}
-
-.subtitle {
-    font: var(--heading2);
-    font-size: 60px;
-    max-width: 600px;
-    margin-bottom: 6%;
 }
 
 .description {
@@ -101,11 +88,6 @@
         margin-bottom: 40px;
     }
 
-    .subtitle {
-        font: var(--heading3);
-        max-width: unset;
-    }
-
     .description {
         font-size: 18px;
     }
@@ -114,11 +96,6 @@
 @media screen and (max-width: 767px) {
     .splitSection {
         flex-direction: column;
-    }
-
-    .subtitle {
-        font-size: 40px;
-        margin-bottom: 5%;
     }
 
     .description {

@@ -1,6 +1,5 @@
 import styles from './product-card.module.scss';
 import { ProductPrice } from '../product-price/product-price';
-import { ImagePlaceholderIcon } from '../icons';
 import { ProductLink } from '~/src/components/product-link/product-link';
 import { getProductImageUrl, useProductDetails } from '~/src/wix/products';
 import classNames from 'classnames';
@@ -9,6 +8,7 @@ import { getErrorMessage } from '~/src/wix/utils';
 import { ProductOption } from '~/src/components/product-option/product-option';
 import { type JsonifyObject } from 'type-fest/source/jsonify';
 import { Product } from '~/src/wix/ecom';
+import Icon from '../icons/icon';
 
 interface ProductCardProps {
     product: Product;
@@ -50,12 +50,12 @@ export const ProductCard = ({
                     {imageUrl ? (
                         <img src={imageUrl} alt={product.name!} className={styles.image} />
                     ) : (
-                        <ImagePlaceholderIcon className={styles.imagePlaceholderIcon} />
+                        <Icon name="image" />
                     )}
                 </ProductLink>
                 <div className={styles.ribbonWrapper}>
                     {product.ribbon && <span className={styles.ribbon}>{product.ribbon}</span>}
-                    {product.stock?.inventoryStatus !== "OUT_OF_STOCK" &&
+                    {product.stock?.inventoryStatus !== 'OUT_OF_STOCK' &&
                         discountedPrice &&
                         price &&
                         price !== discountedPrice && (
@@ -68,37 +68,39 @@ export const ProductCard = ({
                     )}
                 </div>
 
-                    <div className={styles.quickView}>
-                        {productOptions && productOptions.length > 0 && (
-                            <div className={styles.productOptions}>
-                                {productOptions.map((option) => (
-                                        <ProductOption
-                                            isQuickView={true}
-                                            key={option.name}
-                                            error={
-                                                addToCartAttempted &&
-                                                selectedChoices[option.name!] === undefined
-                                                    ? `Select ${option.name}`
-                                                    : undefined
-                                            }
-                                            option={option}
-                                            selectedChoice={selectedChoices[option.name!]}
-                                            onChange={(choice) =>
-                                                handleOptionChange(option.name!, choice)
-                                            }
-                                        />
-                                    ))}
-                            </div>
-                        )}
+                <div className={styles.quickView}>
+                    {productOptions && productOptions.length > 0 && (
+                        <div className={styles.productOptions}>
+                            {productOptions.map((option) => (
+                                <ProductOption
+                                    isQuickView={true}
+                                    key={option.name}
+                                    error={
+                                        addToCartAttempted &&
+                                        selectedChoices[option.name!] === undefined
+                                            ? `Select ${option.name}`
+                                            : undefined
+                                    }
+                                    option={option}
+                                    selectedChoice={selectedChoices[option.name!]}
+                                    onChange={(choice) => handleOptionChange(option.name!, choice)}
+                                />
+                            ))}
+                        </div>
+                    )}
 
-                        <button
-                            className={classNames('button', styles.addToCartButton)}
-                            onClick={() => handleAddToCart().catch(handleError)}
-                            disabled={outOfStock || isAddingToCart || !isAllOptionsSelected()}
-                        >
-                            {outOfStock ? 'Out of stock' : !isAllOptionsSelected() ? 'Select options' : 'Add to Cart'}
-                        </button>
-                    </div>
+                    <button
+                        className={classNames('button', styles.addToCartButton)}
+                        onClick={() => handleAddToCart().catch(handleError)}
+                        disabled={outOfStock || isAddingToCart || !isAllOptionsSelected()}
+                    >
+                        {outOfStock
+                            ? 'Out of stock'
+                            : !isAllOptionsSelected()
+                              ? 'Select options'
+                              : 'Add to Cart'}
+                    </button>
+                </div>
             </div>
             <ProductLink productSlug={product.slug!} state={state}>
                 <div className={styles.name}>{product.name!}</div>

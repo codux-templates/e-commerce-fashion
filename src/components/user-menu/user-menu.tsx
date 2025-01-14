@@ -5,7 +5,6 @@ import {
     DropdownMenuItem,
     DropdownMenuSeparator,
 } from '~/src/components/dropdown-menu/dropdown-menu';
-import { DropdownIcon } from '~/src/components/icons';
 import { useUserInfo } from '~/src/wix/users';
 
 import styles from './user-menu.module.scss';
@@ -27,10 +26,12 @@ export const UserMenu = () => {
     return (
         <DropdownMenu
             trigger={
-                <button className={styles.root}>
+                <div className={styles.root}>
                     <Avatar imageSrc={user?.profile?.photo?.url} />
-                    <DropdownIcon width={10} height={10} />
-                </button>
+                    <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
+                        expand_more
+                    </span>
+                </div>
             }
             contentProps={{
                 align: 'end',

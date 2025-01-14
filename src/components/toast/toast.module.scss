@@ -9,9 +9,6 @@
 }
 
 /** Toast type: success */
-.root.success {
-    background-color: #767f53;
-}
 
 /** Toast type: error */
 .root.error {
@@ -19,9 +16,6 @@
 }
 
 /** Toast type: unspecified */
-.root.blank {
-    background-color: #7d6283;
-}
 
 /** Toast type: loading */
 .root.loading {
@@ -78,10 +72,3 @@
     }
 }
 
-.enterAnimation {
-    animation: fadeIn 0.5s ease forwards;
-}
-
-.exitAnimation {
-    animation: fadeOut 0.5s ease forwards;
-}
