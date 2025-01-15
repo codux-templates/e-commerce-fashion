@@ -10,7 +10,6 @@ import { initializeEcomApiForRequest } from '~/src/wix/ecom/session';
 import { CategoryLink } from '~/src/components/category-link/category-link';
 import { loaderMockData } from './loader-mock-data';
 
-
 import styles from './route.module.scss';
 
 export type LoaderResponseData = { orders: OrderDetails[] };
@@ -33,7 +32,7 @@ export async function coduxLoader(): ReturnType<typeof loader> {
 }
 
 export default function MyOrdersPage() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { orders } = useLoaderData<typeof loader>();
 
     const formatOrderCreationDate = (date: Date) =>

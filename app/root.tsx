@@ -25,6 +25,7 @@ import { commitSession, initializeEcomSession } from '~/src/wix/ecom/session';
 import 'material-symbols';
 
 import styles from './root.module.scss';
+import { PropsWithChildren } from 'react';
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const { wixSessionTokens, session, shouldUpdateSessionCookie } =
@@ -42,7 +43,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     return json(data, { headers });
 }
 
-export function Layout({ children }: React.PropsWithChildren) {
+export function Layout({ children }: PropsWithChildren) {
     return (
         <html lang="en">
             <head>

@@ -11,7 +11,7 @@ export interface ProductGridProps {
     products: Array<Product | SerializeFrom<Product>>;
     /** category containing the shown products */
     category: CollectionDetails;
-    /** are there any filters appiled to the passed product list */
+    /** are there any filters applied to the passed product list */
     filtersApplied?: boolean;
     /** called when user clicks the "Clear Filters" link (shown when filters applied + no products found)  */
     onClickClearFilters?: () => void;
@@ -23,7 +23,6 @@ export const ProductGrid = React.memo<ProductGridProps>(function ProductGrid({
     filtersApplied,
     onClickClearFilters,
 }) {
-
     if (category.numberOfProducts === 0) {
         return (
             <EmptyProductsCategory
@@ -51,10 +50,9 @@ export const ProductGrid = React.memo<ProductGridProps>(function ProductGrid({
     }
 
     return (
-      <div className={styles.root}>
-        <div className={styles.productGrid}>
-            {products.map((product) => (
-
+        <div className={styles.root}>
+            <div className={styles.productGrid}>
+                {products.map((product) => (
                     <ProductCard
                         key={product._id}
                         product={product as Product}
@@ -65,9 +63,8 @@ export const ProductGrid = React.memo<ProductGridProps>(function ProductGrid({
                             },
                         }}
                     />
-
-            ))}
+                ))}
+            </div>
         </div>
-      </div>
     );
 });

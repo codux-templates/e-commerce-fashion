@@ -1,14 +1,15 @@
 .saleBar {
-  height: 44px;
-  background: var(--surface-dark);
-  display: flex;
-  gap: 64px;
-  color: var(--text-invert);
-  pointer-events: none;
-  user-select: none;
+    height: 44px;
+    background: var(--surface-dark-color);
+    display: flex;
+    gap: 64px;
+    color: var(--content-invert-color);
+    pointer-events: none;
+    user-select: none;
 }
+
 .saleBarItem {
-  align-content: center;
-  padding-right: 48px;
-  padding-left: 48px;
+    align-content: center;
+    padding-right: 48px;
+    padding-left: 48px;
 }

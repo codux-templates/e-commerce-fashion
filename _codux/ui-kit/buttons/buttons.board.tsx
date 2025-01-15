@@ -31,7 +31,9 @@ export default createBoard({
             </Kit.Section>
 
             <Kit.Section title="Icons">
-                <Kit.Description>You can use any Material Symbols icon from the Material Symbols library.</Kit.Description>
+                <Kit.Description>
+                    You can use any Material Symbols icon from the Material Symbols library.
+                </Kit.Description>
                 <div className={styles.itemsGroup}>
                     <Kit.Item>
                         <div className={styles.icon}>

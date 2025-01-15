@@ -66,13 +66,30 @@ export default function AboutUsPage() {
                 imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
             />
 
-            <FAQSection items={[
-              {question: "What is your returns policy?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci."},
-              {question: "What is the status of my order?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci."},
-              {question: "Can I return sale items?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci."},
-              {question: "My payment has failes, what should I do?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci."},
-              {question: "Which clothing size should I get?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci."}
-            ]}/>
+            <FAQSection
+                items={[
+                    {
+                        question: 'What is your returns policy?',
+                        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci.',
+                    },
+                    {
+                        question: 'What is the status of my order?',
+                        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci.',
+                    },
+                    {
+                        question: 'Can I return sale items?',
+                        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci.',
+                    },
+                    {
+                        question: 'My payment has failes, what should I do?',
+                        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci.',
+                    },
+                    {
+                        question: 'Which clothing size should I get?',
+                        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut bibendum placerat faucibus. Nullam quis vulputate purus. Aenean sed purus orci.',
+                    },
+                ]}
+            />
 
             <FeaturedProductsSection categorySlug={'new-in'} />
             <Banner

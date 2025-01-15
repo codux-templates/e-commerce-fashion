@@ -9,6 +9,7 @@ import { UserMenu } from '../user-menu/user-menu';
 
 import styles from './header.module.scss';
 import { RemoveScroll } from 'react-remove-scroll';
+import Icon from '../icons/icon';
 
 export interface HeaderProps {
     className?: string;
@@ -20,7 +21,7 @@ export const Header = ({ className }: HeaderProps) => {
     const navigate = useNavigate();
 
     const onSearchSubmit = (search: string) => {
-        setIsSearchOpen(false)
+        setIsSearchOpen(false);
         navigate(`/products/all-products?search=${encodeURIComponent(search)}`);
     };
 
@@ -28,10 +29,10 @@ export const Header = ({ className }: HeaderProps) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const searchInputRef = useRef<HTMLInputElement>(null)
+    const searchInputRef = useRef<HTMLInputElement>(null);
     const onSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(e.key === 'Escape'){
-            setIsSearchOpen(false)
+        if (e.key === 'Escape') {
+            setIsSearchOpen(false);
         }
     };
     useEffect(() => {
@@ -40,12 +41,11 @@ export const Header = ({ className }: HeaderProps) => {
         }
     }, [isSearchOpen]);
     const searchButtonOnClickHandler = () => {
-        setIsSearchOpen(!isSearchOpen)
-
+        setIsSearchOpen(!isSearchOpen);
     };
     return (
         <header className={classNames(styles.root, className)}>
-            <div className={classNames(styles.announcementBar, 'body3')}>
+            <div className={classNames(styles.announcementBar)}>
                 Free shipping over 50$ worldwide
             </div>
             <section className={styles.navigation}>
@@ -53,7 +53,7 @@ export const Header = ({ className }: HeaderProps) => {
                     className={classNames(styles.openMenuButton, 'iconButton')}
                     onClick={() => setIsSidebarOpen(true)}
                 >
-                    <span className={"material-symbols-outlined"}>menu</span>
+                    <Icon name="menu" />
                 </button>
                 <Link to="/" className={styles.logo}>
                     <svg
@@ -127,11 +127,21 @@ export const Header = ({ className }: HeaderProps) => {
                         className={classNames(styles.searchButton, 'iconButton')}
                         onClick={searchButtonOnClickHandler}
                     >
-                        <span className="material-symbols-outlined">{isSearchOpen? "close" : "search"}</span>
+                        <span className="material-symbols-outlined">
+                            {isSearchOpen ? 'close' : 'search'}
+                        </span>
                     </button>
                 </div>
             </section>
-            {isSearchOpen && <RemoveScroll><SearchInput ref={searchInputRef} onKeyDown={onSearchKeyDown} onSearchSubmit={onSearchSubmit} /></RemoveScroll>}
+            {isSearchOpen && (
+                <RemoveScroll>
+                    <SearchInput
+                        ref={searchInputRef}
+                        onKeyDown={onSearchKeyDown}
+                        onSearchSubmit={onSearchSubmit}
+                    />
+                </RemoveScroll>
+            )}
             <SidebarNavigationMenu open={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
         </header>
     );

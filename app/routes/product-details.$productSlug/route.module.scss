@@ -61,23 +61,18 @@
 .buyItNowButton {
     width: 100%;
     margin-top: 8px;
-    background: var(--surface-dark);
+    background: var(--surface-dark-color);
 }
 
 .additionalInfoSections {
     margin-top: 24px;
 }
 
-.additionalInfoSectionTitle {
-    font: var(--heading5);
-    font-size: 18px;
-}
-
-.spotlightsSection{
+.spotlightsSection {
     padding: 0 8px;
 }
 
-.banner{
+.banner {
     padding: 0 8px;
 }
 
@@ -103,10 +98,6 @@
 @media (max-width: 480px) {
     .productImagesWrapper {
         padding-left: 0;
-    }
-
-    .productName {
-        font: var(--heading6);
     }
 
     .addToCartButton {

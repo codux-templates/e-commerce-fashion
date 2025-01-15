@@ -20,9 +20,13 @@ export const OrderSummary = ({ order, className, orderTransactions }: OrderSumma
     const billingContact = billingInfo?.contactDetails;
     const billingAddress = billingInfo?.address;
 
-    const paymentMethod = orderTransactions?.payments?.slice(-1)[0].regularPaymentDetails?.paymentMethod;
-    const cardBrand = orderTransactions?.payments?.slice(-1)[0].regularPaymentDetails?.creditCardDetails?.brand
-    const cardNumber = orderTransactions?.payments?.slice(-1)[0].regularPaymentDetails?.creditCardDetails?.lastFourDigits
+    const paymentMethod =
+        orderTransactions?.payments?.slice(-1)[0]?.regularPaymentDetails?.paymentMethod;
+    const cardBrand =
+        orderTransactions?.payments?.slice(-1)[0]?.regularPaymentDetails?.creditCardDetails?.brand;
+    const cardNumber =
+        orderTransactions?.payments?.slice(-1)[0]?.regularPaymentDetails?.creditCardDetails
+            ?.lastFourDigits;
 
     return (
         <div className={classNames(styles.root, className)}>
@@ -66,20 +70,20 @@ export const OrderSummary = ({ order, className, orderTransactions }: OrderSumma
                         {billingContact?.phone && <div>{billingContact.phone}</div>}
                     </div>
                 </div>
-                { paymentMethod &&
+                {paymentMethod && (
                     <div className={styles.orderDetailsRow}>
                         <div className={'heading4 uppercase'}>Payment</div>
                         <div className={styles.paymentData}>
                             {paymentMethod === 'CreditCard' && (cardNumber || cardBrand) ? (
                                 <>
-                                    {cardBrand} ****{cardNumber}
+                                    {cardBrand ?? ''} {cardNumber ? `****${cardNumber}` : ''}
                                 </>
                             ) : (
                                 <>{paymentMethod}</>
                             )}
                         </div>
                     </div>
-                }
+                )}
                 <div className={styles.orderDetailsRow}>
                     {buyerNote && (
                         <div className={styles.noteSection}>

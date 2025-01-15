@@ -14,7 +14,7 @@ export interface SelectProps<V extends string> {
     dropdownClassName?: string;
     /**
      * Allows to customize the selected value.
-     * By default the selected item's text will be rendered.
+     * By default, the selected item's text will be rendered.
      */
     renderValue?: (value: V) => React.ReactNode;
     hasError?: boolean;
@@ -58,7 +58,7 @@ export interface SelectItemProps {
     className?: string;
 }
 
-export const SelasdectItem = ({ value, children, className }: SelectItemProps) => {
+export const SelectedItem = ({ value, children, className }: SelectItemProps) => {
     return (
         <RadixSelect.Item className={classNames(styles.item, className)} value={value}>
             <RadixSelect.ItemText>{children}</RadixSelect.ItemText>
@@ -66,16 +66,17 @@ export const SelasdectItem = ({ value, children, className }: SelectItemProps) =
     );
 };
 
-export const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
-  function SelectItem({ children, className, ...props }, forwardedRef) {
-      return (
+export const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(function SelectItem(
+    { children, className, ...props },
+    forwardedRef,
+) {
+    return (
         <RadixSelect.Item
-          className={classNames(styles.item, className)}
-          {...props}
-          ref={forwardedRef}
+            className={classNames(styles.item, className)}
+            {...props}
+            ref={forwardedRef}
         >
             <RadixSelect.ItemText>{children}</RadixSelect.ItemText>
         </RadixSelect.Item>
-      );
-  }
-);
+    );
+});

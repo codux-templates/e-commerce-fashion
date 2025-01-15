@@ -2,7 +2,7 @@ import type { SerializeFrom } from '@remix-run/node';
 import { products } from '@wix/stores';
 import { useCallback, useState } from 'react';
 import { useCart, useCartOpen } from '../cart';
-import { AddToCartOptions } from '../ecom';
+import { AddToCartOptions, Product } from '../ecom';
 import {
     getMedia,
     getPriceData,
@@ -13,7 +13,7 @@ import {
     selectedChoicesToVariantChoices,
 } from './product-details';
 
-export function useProductDetails(product: SerializeFrom<products.Product>) {
+export function useProductDetails(product: Product | SerializeFrom<products.Product>) {
     const cartOpener = useCartOpen();
     const { addToCart, isAddingToCart } = useCart();
 
@@ -79,6 +79,6 @@ export function useProductDetails(product: SerializeFrom<products.Product>) {
         handleAddToCart,
         handleOptionChange,
         handleQuantityChange: setQuantity,
-        isAllOptionsSelected
+        isAllOptionsSelected,
     };
 }

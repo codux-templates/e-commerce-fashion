@@ -8,21 +8,21 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    color: var(--error-color);
-    font: var(--paragraph3);
+    color: var(--content-error-color);
 }
 
-.quickViewColors{
+.quickViewColors {
     --option-size: 24px;
 }
 
-.quickViewRow{
+.quickViewRow {
     display: flex;
     gap: 8px;
     align-items: center;
     justify-content: space-between;
 }
-.quickViewSizes{
+
+.quickViewSizes {
     display: flex;
     justify-content: end;
     align-items: center;
@@ -31,7 +31,7 @@
     gap: 2px;
 }
 
-.option{
+.option {
     border: 1px solid transparent;
     cursor: pointer;
     padding: 2px;
@@ -45,14 +45,14 @@
     justify-content: center;
 }
 
-.option:hover{
-    border: 1px solid var(--border-color-hover);
+.option:hover {
+    border: 1px solid var(--border-light-color);
 }
 
-.option.selected{
-    border: 1px solid var(--surface-dark);
+.option.selected {
+    border: 1px solid var(--surface-dark-color);
 }
 
-.option.disabled{
-    color: var(--text-disabled);
+.option.disabled {
+    color: var(--content-disabled-color);
 }

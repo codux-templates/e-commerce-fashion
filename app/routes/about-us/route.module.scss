@@ -7,7 +7,7 @@
     padding: 0 8px;
 }
 
-.hero{
+.hero {
     padding-top: 40px;
     width: 100%;
     display: flex;
@@ -16,7 +16,7 @@
     gap: 24px;
 }
 
-.header{
+.header {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -25,14 +25,14 @@
     gap: 24px;
 }
 
-.heroImageWrapper{
+.heroImageWrapper {
     position: relative;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 16.95%, rgba(0, 0, 0, 0) 100%);
     width: 100%;
     height: 480px;
 }
 
-.heroImage{
+.heroImage {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -75,7 +75,7 @@
     aspect-ratio: 1/1;
 }
 
-.video{
+.video {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -102,8 +102,4 @@
         max-width: unset;
         font-size: 14px;
     }
-}
-
-@media screen and (max-width: 480px) {
-
 }

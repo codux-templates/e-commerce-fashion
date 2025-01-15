@@ -11,7 +11,7 @@
 .infoBox {
     font: var(--body1);
     padding: 12px;
-    background-color: var(--surface-mid);
+    background-color: var(--surface-mid-color);
 }
 
 .orderItems {
@@ -25,12 +25,7 @@
     justify-content: space-between;
     width: 100%;
     padding: 8px 0 16px;
-    border-top: 1px solid var(--border-strong);
-}
-
-.note {
-    font: var(--paragraph3);
-    color: var(--secondary3);
+    border-top: 1px solid var(--border-dark-color);
 }
 
 .priceSummary {
@@ -43,7 +38,6 @@
 .priceDetails {
     display: flex;
     flex-direction: column;
-    font: var(--paragraph3);
 }
 
 .priceRow {
@@ -87,7 +81,6 @@
 }
 
 @media (max-width: 480px) {
-
     .priceSummary {
         grid-column: auto;
     }
@@ -97,6 +90,7 @@
         gap: 24px;
     }
 }
+
 .noteSection {
     display: flex;
     flex-direction: column;

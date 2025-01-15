@@ -42,9 +42,13 @@ export const ProductSortingSelect = () => {
         >
             <div className={styles.itemsWrapper}>
                 {sortingOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value} className={styles.selectItem}>
-                      {option.label}
-                  </SelectItem>
+                    <SelectItem
+                        key={option.value}
+                        value={option.value}
+                        className={styles.selectItem}
+                    >
+                        {option.label}
+                    </SelectItem>
                 ))}
             </div>
         </Select>

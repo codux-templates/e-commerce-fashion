@@ -63,10 +63,7 @@ export default createBoard({
 
                     <Kit.Item>
                         <Variant name="Featured Products">
-                            <FeaturedProductsSection
-                                categorySlug="new-in"
-                                title="New In"
-                            />
+                            <FeaturedProductsSection categorySlug="new-in" title="New In" />
                         </Variant>
                         <Kit.Description>Featured Products</Kit.Description>
                     </Kit.Item>

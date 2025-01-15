@@ -1,4 +1,4 @@
-import styles from './info-section.module.scss'; // Assuming you have styles for the component
+import styles from './info-section.module.scss';
 
 interface InfoItem {
     icon: string;

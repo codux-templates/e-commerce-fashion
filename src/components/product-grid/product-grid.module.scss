@@ -18,8 +18,8 @@
     color: rgba(23, 17, 13, 0.7);
 }
 
-@media (max-width: 767px){
-    .productGrid{
+@media (max-width: 767px) {
+    .productGrid {
         grid-template-columns: repeat(2, 1fr);
     }
 }

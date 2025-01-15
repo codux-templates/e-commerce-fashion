@@ -14,18 +14,17 @@
     width: auto;
     text-wrap: nowrap;
     padding: 8px;
-    background: var(--surface-light);
-    box-shadow: 0 0 10px 0 #0000001A;
+    background: var(--surface-light-color);
+    box-shadow: 0 0 10px 0 #0000001a;
     border-radius: 2px;
     border: unset;
-
 }
 
 .selectDropdown:focus-visible {
-    box-shadow: 0 0 10px 0 #0000001A;
+    box-shadow: 0 0 10px 0 #0000001a;
 }
 
-.itemsWrapper{
+.itemsWrapper {
     gap: 4px;
     display: flex;
     flex-direction: column;
@@ -34,16 +33,15 @@
 .selectItem {
     height: 38px;
     padding: 12px 14px;
-    font: var(--paragraph3);
-    border: 0.5px solid var(--border, #E5E5E5)
+    border: 0.5px solid var(--border-light-color);
 }
 
 .selectItem[data-state='checked'] {
-    background: var(--surface-mid);
-    border: 1px solid var(--border-active, #3B3B3B)
+    background: var(--surface-mid-color);
+    border: 1px solid var(--border-dark-color);
 }
 
 .selectItem:hover,
 .selectItem:focus {
-    background: var(--surface-mid);
+    background: var(--surface-mid-color);
 }

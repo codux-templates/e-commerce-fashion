@@ -32,7 +32,7 @@ export const Toast = ({ toast }: { toast: ToastData }) => {
             <div className={styles.message}>{resolveValue(toast.message, toast)}</div>
             {toast.type === 'loading' ? null : (
                 <button className={styles.closeButton} onClick={() => dismissToast(toast.id)}>
-                                        <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
+                    <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
                         close
                     </span>
                 </button>

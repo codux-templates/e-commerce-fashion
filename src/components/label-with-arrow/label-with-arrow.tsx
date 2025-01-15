@@ -13,9 +13,9 @@ export const LabelWithArrow: FC<HTMLAttributes<HTMLDivElement>> = ({
                 {children}
             </div>
             <div className={styles.label}>{children}</div>
-          <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-              arrow_forward
-          </span>
+            <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
+                arrow_forward
+            </span>
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import '../../../src/styles/utils.scss';
 import { CategoryLink } from '~/src/components/category-link/category-link';
 import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
-import { SalesBar } from '~/src/components/marquee/sales-bar';
+import { Marquee } from '~/src/components/marquee/marquee';
 import { CategoriesSection } from '~/src/components/categories-section/categories-section';
 import { Section } from '~/src/components/section/section';
 import { SplitSection } from '~/src/components/spit-section/split-section';
@@ -27,7 +27,7 @@ export default function HomePage() {
                     </CategoryLink>
                 </div>
             </div>
-            <SalesBar elements={['Shop Sale', 'Up to 50% off']} />
+            <Marquee elements={['Shop Sale', 'Up to 50% off']} />
             <div className={'pageWrapper'}>
                 <FeaturedProductsSection categorySlug="new-in" title="New In" productCount={4} />
 
@@ -84,28 +84,30 @@ export default function HomePage() {
                     imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
                 />
 
-                <InfoSection items={[
-                    {
-                        icon: 'local_shipping',
-                        heading: 'Free Shipping',
-                        subheading: 'On orders over 120$',
-                    },
-                    {
-                        icon: 'refresh',
-                        heading: 'Free Returns',
-                        subheading: 'On full time priced items only',
-                    },
-                    {
-                        icon: 'loyalty',
-                        heading: 'Crash replacement',
-                        subheading: '40% off your new kit',
-                    },
-                    {
-                        icon: 'recycling',
-                        heading: 'Eco-friendly',
-                        subheading: 'All of our packaging is recycled',
-                    },
-                ]} />
+                <InfoSection
+                    items={[
+                        {
+                            icon: 'local_shipping',
+                            heading: 'Free Shipping',
+                            subheading: 'On orders over 120$',
+                        },
+                        {
+                            icon: 'refresh',
+                            heading: 'Free Returns',
+                            subheading: 'On full time priced items only',
+                        },
+                        {
+                            icon: 'loyalty',
+                            heading: 'Crash replacement',
+                            subheading: '40% off your new kit',
+                        },
+                        {
+                            icon: 'recycling',
+                            heading: 'Eco-friendly',
+                            subheading: 'All of our packaging is recycled',
+                        },
+                    ]}
+                />
             </div>
         </>
     );

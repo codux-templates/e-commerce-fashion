@@ -3,7 +3,7 @@
     grid-template-columns: auto 1fr;
     gap: 8px;
     padding: 16px 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-light-color);
 }
 
 .imageWrapper {
@@ -37,7 +37,6 @@
     .main {
         flex-direction: column;
     }
-
 }
 
 .productNameAndPrice {
@@ -45,6 +44,7 @@
     flex-direction: column;
     gap: 8px;
 }
+
 .div1 {
     display: flex;
     flex-direction: column;

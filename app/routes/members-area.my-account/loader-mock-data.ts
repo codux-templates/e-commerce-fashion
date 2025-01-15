@@ -26,7 +26,7 @@ export const loaderMockData: LoaderResponseData = {
         },
         profile: {
             nickname: 'John Doe',
-            slug: 'jogn_d',
+            slug: 'john_d',
         },
         privacyStatus: members.PrivacyStatusStatus.PRIVATE,
         activityStatus: members.ActivityStatusStatus.ACTIVE,

@@ -5,11 +5,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 0 8px 12px;
-    background: var(--input-surface);
-    border: 1px solid var(--input-border);
-    color: var(--text-primary);
+    background: var(--surface-mid-color);
+    border: 1px solid var(--border-dark-color);
+    color: var(--content-primary-color);
     cursor: pointer;
     border-radius: 2px;
+    user-select: none;
 }
 
 .trigger:focus-visible {
@@ -17,7 +18,7 @@
 }
 
 .trigger.hasError {
-    border-color: var(--error-color);
+    border-color: var(--border-error-color);
 }
 
 .trigger:hover,
@@ -33,7 +34,6 @@
 .triggerIcon {
     padding: 0 8px;
     display: flex;
-    color: var(--primary5);
 }
 
 .trigger[data-state='open'] .triggerIcon {
@@ -46,6 +46,7 @@
     background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.4);
     border-top: none;
+    user-select: none;
 }
 
 .content:focus-visible {
@@ -57,7 +58,7 @@
     display: flex;
     align-items: center;
     padding: 8px 12px;
-    color: var(--text-primary);
+    color: var(--content-primary-color);
     cursor: pointer;
     font: var(--body2);
 }
@@ -68,5 +69,5 @@
 
 .item:hover,
 .item:focus {
-    background: var(--surface-mid);
+    background: var(--surface-mid-color);
 }

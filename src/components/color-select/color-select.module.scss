@@ -1,7 +1,6 @@
 :where(.root) {
     /* Default styles. Customize them by passing a className to the component. */
     --option-size: 24px;
-    --border-color-error: #ff0000;
 }
 
 .root {
@@ -17,18 +16,16 @@
     transition: padding 100ms;
     padding: 2px;
     cursor: pointer;
-    background-color: var(--surface-light);
+    background-color: var(--surface-light-color);
     box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
 }
 
 .option:hover {
-    border-color: var(--border-color-hover);
+    border-color: var(--border-light-color);
 }
 
 .option.selected {
-    border-color: var(--input-border);
+    border-color: var(--border-dark-color);
 }
 
 .colorBox {
@@ -36,17 +33,14 @@
     height: 100%;
     border: 0.5px solid #00000033;
     box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
 }
 
 .option:hover .colorBox,
 .option.selected .colorBox {
-
 }
 
 .root.hasError .option {
-    border-color: var(--border-color-error);
+    border-color: var(--border-error-color);
 }
 
 .crossedOut {
@@ -59,15 +53,10 @@
     position: absolute;
     height: 1px;
     transform: rotate(-45deg);
+    opacity: 33%;
     inset: -50%;
     margin: auto;
-    border-top: 1px solid var(--border-color);
-}
-
-.crossedOut:hover::after {
-    border-color: var(--border-color-hover);
-}
-
-.crossedOut.selected::after {
-    border-color: var(--border-color-selected);
+    width: 24px;
+    border-top: 1px solid #fff;
+    mix-blend-mode: difference;
 }

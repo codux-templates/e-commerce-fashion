@@ -6,14 +6,14 @@ export const loaderMockData: LoaderResponseData = {
         payments: [
             {
                 regularPaymentDetails: {
-                    paymentMethod: 'ApplePay',
+                    paymentMethod: 'CreditCard',
                     creditCardDetails: {
                         brand: 'Visa',
-                        lastFourDigits: '1234'
-                    }
-                }
-            }
-        ]
+                        lastFourDigits: '1234',
+                    },
+                },
+            },
+        ],
     },
     order: {
         number: '10003',
@@ -112,7 +112,7 @@ export const loaderMockData: LoaderResponseData = {
             email: 'johnd@mail.com',
             memberId: 'member_id',
         },
-        buyerNote:"Teszt note",
+        buyerNote: 'Teszt note',
         paymentStatus: orders.PaymentStatus.NOT_PAID,
         fulfillmentStatus: orders.FulfillmentStatus.NOT_FULFILLED,
         buyerLanguage: 'en',

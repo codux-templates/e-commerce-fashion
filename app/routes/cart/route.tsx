@@ -12,6 +12,7 @@ import { FeaturedProductsSection } from '~/src/components/featured-products-sect
 import { Banner } from '~/src/components/banner/banner';
 import { InfoSection } from '~/src/components/info-section/info-section';
 import { Accordion } from '~/src/components/accordion/accordion';
+import { CartTotals } from '~/src/wix/ecom';
 
 export default function CartPage() {
     const [isNoteClosed, setIsNoteClosed] = useState(false);
@@ -121,14 +122,13 @@ export default function CartPage() {
                     />
                 </div>
 
-                    <Summary
-                      className={styles.summary}
-                        isCartTotalsUpdating={isCartTotalsUpdating}
-                        cartTotals={cartTotals}
-                        checkout={checkout}
-                        isCheckoutInProgress={isCheckoutInProgress}
-                    />
-
+                <Summary
+                    className={styles.summary}
+                    isCartTotalsUpdating={isCartTotalsUpdating}
+                    cartTotals={cartTotals}
+                    checkout={checkout}
+                    isCheckoutInProgress={isCheckoutInProgress}
+                />
             </div>
 
             <FeaturedProductsSection
@@ -195,45 +195,58 @@ const CartFallback = ({ children }: { children: ReactNode }) => (
     </div>
 );
 
-const Summary = ({isCartTotalsUpdating, cartTotals, checkout, isCheckoutInProgress, className}: any)=> <div className={className}>
-    <div
-      className={classNames(styles.summaryContent, {
-          [styles.loading]: isCartTotalsUpdating,
-      })}
-    >
-        <div className={styles.summaryRow}>
-            <span>Subtotal</span>
-            <span>
-                                {cartTotals?.priceSummary?.subtotal?.formattedConvertedAmount}
-                            </span>
-        </div>
-        {cartTotals?.shippingInfo?.region && (
-          <div className={styles.summaryRow}>
-              <span>Delivery</span>
-              <span>
-                                    {Number(cartTotals?.priceSummary?.shipping?.amount) === 0
-                                      ? 'FREE'
-                                      : cartTotals?.priceSummary?.shipping
-                                        ?.formattedConvertedAmount}
-                                </span>
-          </div>
-        )}
-        <div className={classNames(styles.summaryRow, styles.summaryTotal)}>
-            <span>Total</span>
-            <span>{cartTotals?.priceSummary?.total?.formattedConvertedAmount}</span>
-        </div>
-        {isCartTotalsUpdating && (
-          <div className={styles.spinner}>
-              <Spinner size={50} />
-          </div>
-        )}
-    </div>
+interface SummaryProps {
+    isCartTotalsUpdating: boolean;
+    cartTotals: CartTotals | undefined;
+    checkout: () => Promise<void>;
+    isCheckoutInProgress: boolean;
+    className?: string;
+}
 
-    <button
-      className={classNames('button button-lg', styles.checkoutButton)}
-      onClick={checkout}
-      disabled={isCheckoutInProgress || isCartTotalsUpdating}
-    >
-        {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Checkout'}
-    </button>
-</div>
+const Summary = ({
+    isCartTotalsUpdating,
+    cartTotals,
+    checkout,
+    isCheckoutInProgress,
+    className,
+}: SummaryProps) => (
+    <div className={className}>
+        <div
+            className={classNames(styles.summaryContent, {
+                [styles.loa]: isCartTotalsUpdating,
+            })}
+        >
+            <div className={styles.summaryRow}>
+                <span>Subtotal</span>
+                <span>{cartTotals?.priceSummary?.subtotal?.formattedConvertedAmount}</span>
+            </div>
+            {cartTotals?.shippingInfo?.region && (
+                <div className={styles.summaryRow}>
+                    <span>Delivery</span>
+                    <span>
+                        {Number(cartTotals?.priceSummary?.shipping?.amount) === 0
+                            ? 'FREE'
+                            : cartTotals?.priceSummary?.shipping?.formattedConvertedAmount}
+                    </span>
+                </div>
+            )}
+            <div className={classNames(styles.summaryRow, styles.summaryTotal)}>
+                <span>Total</span>
+                <span>{cartTotals?.priceSummary?.total?.formattedConvertedAmount}</span>
+            </div>
+            {isCartTotalsUpdating && (
+                <div className={styles.spinner}>
+                    <Spinner size={50} />
+                </div>
+            )}
+        </div>
+
+        <button
+            className={classNames('button button-lg', styles.checkoutButton)}
+            onClick={checkout}
+            disabled={isCheckoutInProgress || isCartTotalsUpdating}
+        >
+            {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Checkout'}
+        </button>
+    </div>
+);

@@ -14,7 +14,13 @@ export interface ProductOptionProps {
     isQuickView?: boolean;
 }
 
-export const ProductOption = ({ isQuickView = false, option, selectedChoice, error, onChange }: ProductOptionProps) => {
+export const ProductOption = ({
+    isQuickView = false,
+    option,
+    selectedChoice,
+    error,
+    onChange,
+}: ProductOptionProps) => {
     const { name, optionType, choices } = option;
 
     if (name === undefined || choices === undefined || optionType === undefined) {
@@ -54,7 +60,6 @@ export const ProductOption = ({ isQuickView = false, option, selectedChoice, err
                         />
                     ) : (
                         <Select
-
                             placeholder={`Select ${name}`}
                             value={selectedChoice?.value ?? ''}
                             onValueChange={handleChange}

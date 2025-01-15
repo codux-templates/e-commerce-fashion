@@ -2,9 +2,6 @@
     --thumb-size: 12px;
     --track-height: 2px;
     --track-color: rgba(0, 0, 0, 0.38);
-    --range-color: var(--icon-primary);
-    --thumb-color: var(--icon-primary);
-    --focus-ring-color: var(--icon-primary);
 }
 
 .root {
@@ -36,7 +33,8 @@
 
 .range {
     position: absolute;
-    background-color: var(--range-color);
+    opacity: 38%;
+    background-color: var(--content-primary-color);
     border-radius: 999px;
     height: 100%;
 }
@@ -45,7 +43,7 @@
     display: block;
     width: var(--thumb-size);
     height: var(--thumb-size);
-    background-color: var(--thumb-color);
+    background-color: var(--content-primary-color);
     border-radius: 999px;
 }
 

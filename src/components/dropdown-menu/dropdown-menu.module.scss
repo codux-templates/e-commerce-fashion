@@ -1,29 +1,26 @@
 .trigger {
     cursor: pointer;
+    user-select: none;
 }
 
 .content {
     padding: 8px;
-    background: var(--surface-light);
-    box-shadow: 0 0 10px 0 #0000001A;
+    background: var(--surface-light-color);
+    box-shadow: 0 0 10px 0 #0000001a;
     max-width: min(var(--radix-dropdown-menu-content-available-width), 400px);
     max-height: var(--radix-dropdown-menu-content-available-height);
     overflow: auto;
     border-radius: 2px;
+    user-select: none;
 }
 
 .item {
-    color: var(--primary5);
     padding: 5px 20px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     cursor: pointer;
     box-shadow: none;
-
-    &[data-highlighted] {
-        background-color: var(--primary3);
-    }
 
     &[data-disabled] {
         cursor: default;

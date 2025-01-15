@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-    --heading1: 600 48px/1.0 'DM Sans', sans-serif;
-    --heading2: 600 32px/1.0 'Inter', sans-serif;
-    --heading3: 600 28px/1.0 'DM Sans', sans-serif;
-    --heading4: 600 20px/1.0 'DM Sans', sans-serif;
+    --heading1: 600 48px/1 'DM Sans', sans-serif;
+    --heading2: 600 32px/1 'Inter', sans-serif;
+    --heading3: 600 28px/1 'DM Sans', sans-serif;
+    --heading4: 600 20px/1 'DM Sans', sans-serif;
 
-    --subheading: 600 16px/1.0 'DM Sans', sans-serif;
+    --subheading: 600 16px/1 'DM Sans', sans-serif;
 
     --display: 600 28px/36px 'DM Sans', sans-serif;
 
@@ -18,14 +18,8 @@
 
     --body3: 400 12px/16px 'DM Sans', sans-serif;
 
-    --action: 600 14px/1.0 'DM Sans', sans-serif;
+    --action: 600 14px/1 'DM Sans', sans-serif;
     --navlink: 400 14px/20px 'Inter', sans-serif;
 
     --letter-spacing-heading: 0.02em;
 }
-
-
-
-
-
-

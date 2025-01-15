@@ -1,4 +1,4 @@
-.root{
+.root {
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -28,7 +28,7 @@
 }
 
 @media (max-width: 767px) {
-  .question {
-    font: var(--heading2);
-  }
+    .question {
+        font: var(--heading2);
+    }
 }

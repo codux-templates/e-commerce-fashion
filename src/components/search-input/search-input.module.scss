@@ -1,4 +1,4 @@
-.root{
+.root {
     position: absolute;
     width: 100%;
     top: 100%;
@@ -18,11 +18,11 @@
     background: rgba(0, 0, 0, 0.2);
 }
 
-.content{
+.content {
     position: absolute;
     width: 100%;
-    background-color: var(--surface-light);
-    color: var(--text-primary);
+    background-color: var(--surface-light-color);
+    color: var(--content-primary-color);
 }
 
 .label {

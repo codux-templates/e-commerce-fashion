@@ -37,7 +37,9 @@ export const QuantityInput = ({
                 onClick={decrement}
                 disabled={value <= 1 || disabled}
             >
-                <span className={"material-symbols-outlined"} style={{fontSize: 20}}>remove</span>
+                <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
+                    remove
+                </span>
             </button>
             <input
                 id={id}
@@ -54,7 +56,9 @@ export const QuantityInput = ({
                 onClick={increment}
                 disabled={disabled}
             >
-              <span className={"material-symbols-outlined"} style={{ fontSize: 20 }}>add</span>
+                <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
+                    add
+                </span>
             </button>
         </div>
     );

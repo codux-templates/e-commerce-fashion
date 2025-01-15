@@ -152,11 +152,7 @@ function ProductDetails() {
                             <Accordion
                                 className={styles.additionalInfoSections}
                                 items={product.additionalInfoSections.map((section) => ({
-                                    header: (
-                                        <div className={styles.additionalInfoSectionTitle}>
-                                            {section.title!}
-                                        </div>
-                                    ),
+                                    header: <div>{section.title!}</div>,
                                     content: section.description ? (
                                         <div
                                             dangerouslySetInnerHTML={{

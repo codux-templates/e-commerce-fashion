@@ -14,7 +14,7 @@ interface AccordionProps {
     items: AccordionItem[];
     initialOpenItemIndex?: number;
     className?: string;
-    itemClassName?: string
+    itemClassName?: string;
     small?: boolean;
     expandIcon?: React.ReactNode;
     collapseIcon?: React.ReactNode;
@@ -27,7 +27,7 @@ export const Accordion = ({
     small = false,
     expandIcon,
     collapseIcon,
-    itemClassName
+    itemClassName,
 }: AccordionProps) => {
     const [openItemIndex, setOpenItemIndex] = useState<number | null>(initialOpenItemIndex ?? null);
 
@@ -49,11 +49,12 @@ export const Accordion = ({
                             <div className={styles.toggleIconContainer}>
                                 {isOpen
                                     ? collapseIcon || (
-                                      <Icon name={'expand_more'} style={{ transform: 'rotate(180deg)' }}/>
+                                          <Icon
+                                              name={'expand_more'}
+                                              style={{ transform: 'rotate(180deg)' }}
+                                          />
                                       )
-                                    : expandIcon || (
-                                        <Icon name={'expand_more'}/>
-                                      )}
+                                    : expandIcon || <Icon name={'expand_more'} />}
                             </div>
                         </div>
 

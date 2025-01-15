@@ -110,15 +110,6 @@ export default createBoard({
                     </Kit.Item>
                 </Kit.Section>
 
-                <Kit.Section title="Labels">
-                    <Kit.Item>
-                        <Variant name="Ribbon">
-                            <span className="ribbon">Sale</span>
-                        </Variant>
-                        <Kit.Description>Ribbon</Kit.Description>
-                    </Kit.Item>
-                </Kit.Section>
-
                 <Kit.Section title="Cards">
                     <Kit.Item className={styles.demoWidth}>
                         <Variant name="Product Card">

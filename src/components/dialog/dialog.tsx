@@ -3,6 +3,7 @@ import React from 'react';
 import * as RadixDialog from '@radix-ui/react-dialog';
 
 import styles from './dialog.module.scss';
+import Icon from '../icons/icon';
 
 export interface DialogProps extends React.PropsWithChildren {
     open: boolean;
@@ -35,9 +36,7 @@ export const Dialog = ({
                             className={classNames('iconButton', styles.closeButton)}
                             aria-label="Close dialog"
                         >
-                            <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-                                close
-                            </span>
+                            <Icon name={'close'} />
                         </button>
                     </RadixDialog.Close>
                 )}

@@ -3,13 +3,13 @@
     height: 48px;
     display: flex;
     align-items: center;
-    border: 1px solid var(--input-border);
-    background: var(--input-surface);
+    border: 1px solid var(--border-dark-color);
+    background: var(--surface-mid-color);
     border-radius: 2px;
 }
 
 .root:focus-within {
-    border-color: var(--input-border);
+    border-color: var(--border-dark-color);
 }
 
 .button {
@@ -23,7 +23,7 @@
 }
 
 .button:disabled {
-    color: var(--primary3);
+    color: var(--content-disabled-color);
     background: transparent;
     cursor: default;
 }
@@ -42,7 +42,7 @@
 }
 
 .input:disabled {
-    color: var(--primary3);
+    color: var(--content-disabled-color);
 }
 
 .input:focus-visible {

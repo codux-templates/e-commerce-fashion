@@ -11,22 +11,22 @@
     font: var(--navlink);
 }
 
-.icon{
+.icon {
     display: none;
-    span{
+
+    span {
         font-variation-settings: 'OPSZ' 20;
         font-size: 20px;
     }
 }
 
 @media (max-width: 1024px) {
-    .label{
+    .label {
         display: none;
     }
 
-    .icon{
+    .icon {
         display: flex;
         align-items: center;
     }
 }
-

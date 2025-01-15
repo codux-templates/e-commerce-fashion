@@ -1,38 +1,35 @@
 :root {
-    --announcement-content: #ffffff;
-    --announcement-surface: #524840;
-    --background: #ffffff;
-    --border: #e5e5e5;
-    --border-strong: #3b3b3b;
+    --background-color: #ffffff;
+
+    --border-dark-color: #3b3b3b;
+    --border-light-color: #e5e5e5;
+    --border-error-color: #ff0000;
+
     --button-primary-border: #3b3b3b;
     --button-primary-content: #3b3b3b;
     --button-primary-invert-border: #ffffff;
     --button-primary-invert-content: #ffffff;
-    --button-primary-invert-surface: #ffffff;
-    --button-primary-surface: #ffffff;
+    --button-primary-invert-surface: #ffffff33;
     --button-primary-surface-hover: #f7f7f7;
     --button-primary-surface-selected: #3b3b3b;
-    --button-secondaty-surface: #000000;
-    --button-secondaty-surface-hover: #3b3b3b;
-    --footer-surface: #f7f7f7;
-    --header-surface: #ffffff;
-    --link: #000000;
-    --link-default: #666666;
-    --link-hover: #000000;
-    --popover-background: #ffffff;
-    --popover-border: #000000;
-    --surface-dark: #000000;
-    --surface-light: #ffffff;
-    --surface-mid: #f7f7f7;
-    --text-disabled: #b2b2b2;
-    --text-invert: #ffffff;
-    --text-primary: #000000;
-    --text-secondary: #666666;
-    --focus: #000000;
-    --input-border: #3b3b3b;
-    --input-border-disabled: #E5E5E5;
-    --input-surface: #f7f7f7;
-    --icon-primary: #000000;
-    --overlay: rgba(0, 0, 0, 0.2);
-    --border-color-hover: #3b3b3b;
+    --button-primary-surface: #ffffff;
+    --button-secondary-surface-hover: #3b3b3b;
+    --button-secondary-surface: #000000;
+
+    --content-disabled-color: #b2b2b2;
+    --content-invert-color: #ffffff;
+    --content-primary-color: #000000;
+    --content-secondary-color: #666666;
+    --content-error-color: #ff0000;
+
+    --focus-ring-color: #000000;
+
+    --overlay-color: #00000033;
+
+    --progress-bar-color: #ffffff;
+
+    --surface-announcement-color: #524840;
+    --surface-dark-color: #000000;
+    --surface-light-color: #ffffff;
+    --surface-mid-color: #f2f2f2;
 }

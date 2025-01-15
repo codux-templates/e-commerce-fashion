@@ -4,11 +4,16 @@ import { CategoryLink } from '../category-link/category-link';
 import styles from './navigation-menu.module.scss';
 
 interface NavigationMenuProps {
-    className?: string;
     vertical?: boolean;
+    className?: string;
+    menuItemsClassName?: string;
 }
 
-export const NavigationMenu = ({ className, vertical = false }: NavigationMenuProps) => {
+export const NavigationMenu = ({
+    className,
+    menuItemsClassName,
+    vertical = false,
+}: NavigationMenuProps) => {
     const menuItemStyle = ({ isActive }: { isActive: boolean }) =>
         classNames(styles.menuItem, {
             [styles.active]: isActive,
@@ -18,32 +23,50 @@ export const NavigationMenu = ({ className, vertical = false }: NavigationMenuPr
         <nav className={`${className}`}>
             <ul className={classNames(styles.menuList, { [styles.vertical]: vertical })}>
                 <li>
-                    <CategoryLink categorySlug="all-products" className={menuItemStyle}>
+                    <CategoryLink
+                        categorySlug="all-products"
+                        className={classNames(menuItemStyle, menuItemsClassName)}
+                    >
                         Shop All
                     </CategoryLink>
                 </li>
                 <li>
-                    <CategoryLink categorySlug="women" className={menuItemStyle}>
+                    <CategoryLink
+                        categorySlug="women"
+                        className={classNames(menuItemStyle, menuItemsClassName)}
+                    >
                         Women
                     </CategoryLink>
                 </li>
                 <li>
-                    <CategoryLink categorySlug="men" className={menuItemStyle}>
+                    <CategoryLink
+                        categorySlug="men"
+                        className={classNames(menuItemStyle, menuItemsClassName)}
+                    >
                         Men
                     </CategoryLink>
                 </li>
                 <li>
-                    <CategoryLink categorySlug="accessories" className={menuItemStyle}>
+                    <CategoryLink
+                        categorySlug="accessories"
+                        className={classNames(menuItemStyle, menuItemsClassName)}
+                    >
                         Accessories
                     </CategoryLink>
                 </li>
                 <li>
-                    <CategoryLink categorySlug="outlet" className={menuItemStyle}>
+                    <CategoryLink
+                        categorySlug="outlet"
+                        className={classNames(menuItemStyle, menuItemsClassName)}
+                    >
                         Outlet
                     </CategoryLink>
                 </li>
                 <li>
-                    <NavLink to={"/about-us"} className={menuItemStyle}>
+                    <NavLink
+                        to={'/about-us'}
+                        className={classNames(menuItemStyle, menuItemsClassName)}
+                    >
                         About
                     </NavLink>
                 </li>

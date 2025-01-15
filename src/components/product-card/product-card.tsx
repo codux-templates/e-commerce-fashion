@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import { toast } from '~/src/components/toast/toast';
 import { getErrorMessage } from '~/src/wix/utils';
 import { ProductOption } from '~/src/components/product-option/product-option';
-import { type JsonifyObject } from 'type-fest/source/jsonify';
 import { Product } from '~/src/wix/ecom';
 import Icon from '../icons/icon';
 
@@ -20,11 +19,7 @@ interface ProductCardProps {
     };
 }
 
-export const ProductCard = ({
-    product,
-  state,
-}: ProductCardProps) => {
-
+export const ProductCard = ({ product, state }: ProductCardProps) => {
     const {
         outOfStock,
         productOptions,
@@ -33,15 +28,15 @@ export const ProductCard = ({
         addToCartAttempted,
         handleAddToCart,
         handleOptionChange,
-        isAllOptionsSelected
-    } = useProductDetails(product as JsonifyObject<Product>);
+        isAllOptionsSelected,
+    } = useProductDetails(product);
 
     const handleError = (error: unknown) => toast.error(getErrorMessage(error));
-    const imageUrl = getProductImageUrl(product, { maxWidth: 1000 })
-    const price = product.priceData?.price
-    const formattedPrice = product.priceData?.formatted?.price
-    const formattedDiscountedPrice = product.priceData?.formatted?.discountedPrice
-    const discountedPrice = product.priceData?.discountedPrice
+    const imageUrl = getProductImageUrl(product, { maxWidth: 1000 });
+    const price = product.priceData?.price;
+    const formattedPrice = product.priceData?.formatted?.price;
+    const formattedDiscountedPrice = product.priceData?.formatted?.discountedPrice;
+    const discountedPrice = product.priceData?.discountedPrice;
 
     return (
         <div className={styles.productCard}>

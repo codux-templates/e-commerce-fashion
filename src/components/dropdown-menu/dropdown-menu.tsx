@@ -15,7 +15,6 @@ export const DropdownMenu = ({ trigger, children, contentProps = {} }: DropdownM
             {trigger}
         </RadixDropdownMenu.Trigger>
 
-
         <RadixDropdownMenu.Portal>
             <RadixDropdownMenu.Content
                 // Avoid Chrome adding :focus-visible outline to the trigger on close.

@@ -21,6 +21,7 @@
         padding: 20px 8px;
     }
 }
+
 .header {
     display: flex;
     flex-direction: column;
@@ -28,5 +29,5 @@
     gap: 24px;
     padding: 40px 8px 24px;
     width: 100%;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-light-color);
 }

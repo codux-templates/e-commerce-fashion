@@ -6,11 +6,17 @@
     justify-content: center;
     flex-wrap: wrap;
     height: 100%;
-
+    gap: 8px;
 }
 
-.menuList li{
+.menuList li {
     height: 100%;
+}
+
+.menuList li a {
+    display: inline-block;
+    height: 100%;
+    place-content: center;
 }
 
 .menuItem {
@@ -24,4 +30,3 @@
 .menuList.vertical {
     flex-direction: column;
 }
-

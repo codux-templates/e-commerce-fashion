@@ -69,9 +69,11 @@ export const PriceFilter: FC<PriceFilterProps> = ({
                 <div>{formatPrice(value[0], currency)}</div>
                 <div>{formatPrice(value[1], currency)}</div>
             </div>
-            {(minAvailablePrice<minSelectedPrice || maxAvailablePrice>maxSelectedPrice) && (
+            {(minAvailablePrice < minSelectedPrice || maxAvailablePrice > maxSelectedPrice) && (
                 <div className={styles.clearButtonWrapper}>
-                    <div className={'button button-sm'} onClick={onClearFilters}>Clear</div>
+                    <div className={'button button-sm'} onClick={onClearFilters}>
+                        Clear
+                    </div>
                 </div>
             )}
         </div>

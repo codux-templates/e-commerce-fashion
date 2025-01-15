@@ -12,7 +12,7 @@ export interface UseProductsPageResultsArgs {
     filters: IProductFilters;
     sorting: ProductSortBy;
     resultsFromLoader: ProductsPageResults;
-    limit?: number
+    limit?: number;
 }
 
 /**
@@ -42,7 +42,7 @@ export function useProductsPageResults({
     filters,
     sorting,
     resultsFromLoader,
-    limit
+    limit,
 }: UseProductsPageResultsArgs) {
     const [results, setResults] = useState(resultsFromLoader);
     const resultsRef = useRef(results);

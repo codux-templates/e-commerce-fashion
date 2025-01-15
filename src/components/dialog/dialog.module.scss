@@ -10,10 +10,10 @@
 }
 
 .overlay {
-    background-color: #000000bb;
     position: fixed;
     inset: 0;
     animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--overlay-color);
 }
 
 .title {
@@ -24,7 +24,6 @@
 }
 
 .description {
-    font: var(--paragraph1);
     margin-bottom: 24px;
     text-align: center;
 }
@@ -42,8 +41,6 @@
     }
 
     .title {
-        font: var(--heading5);
-        font-size: 20px;
         margin-bottom: 12px;
     }
 

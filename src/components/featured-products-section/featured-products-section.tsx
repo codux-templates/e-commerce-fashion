@@ -31,10 +31,7 @@ export const FeaturedProductsSection = (props: FeaturedProductsSectionProps) => 
             <Reveal className={styles.products} direction="down" duration={1.4}>
                 {products
                     ? products.items.map((product) => (
-                        <ProductCard
-                            key={product._id}
-                            product={product}
-                        />
+                          <ProductCard key={product._id} product={product} />
                       ))
                     : Array.from({ length: productCount }).map((_, i) => (
                           <ProductCardSkeleton key={i} />

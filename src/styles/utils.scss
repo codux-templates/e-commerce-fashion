@@ -70,13 +70,14 @@
 /* Action ********************************************************************/
 
 .action {
-    color: var(--link-default);
+    color: var(--content-secondary-color);
     font: var(--action);
     text-transform: uppercase;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
+
     &:active {
-        color: var(--link-hover);
+        color: var(--content-primary-color);
     }
 }
 
@@ -84,11 +85,11 @@
     font: var(--navlink);
     text-transform: none;
     text-decoration: none;
-    color: var(--link);
+    color: var(--content-secondary-color);
 }
 
 .navlink:hover {
-    color: var(--text-secondary);
+    color: var(--content-secondary-color);
 }
 
 /* Text utils ********************************************************************/
@@ -115,10 +116,16 @@
     text-transform: uppercase;
     line-height: 10px;
     border-radius: 2px;
+    user-select: none;
 }
 
 .button:not(:disabled):hover {
     background: var(--button-primary-surface-hover);
+}
+
+.button:not(:disabled).active {
+    background: var(--button-primary-surface-selected);
+    color: var(--button-primary-invert-content);
 }
 
 .button.invert {
@@ -131,9 +138,9 @@
 }
 
 .button:disabled {
-    color: var(--text-disabled);
+    color: var(--content-disabled-color);
     cursor: default;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-light-color);
 }
 
 .button:not(:disabled).invert:hover {
@@ -142,7 +149,7 @@
 
 .button.muted {
     border-color: transparent;
-    color: var(--text-secondary);
+    color: var(--content-secondary-color);
 }
 
 .button.muted:not(:disabled):hover {
@@ -154,18 +161,18 @@
 }
 
 .button.button-secondary {
-    background: var(--button-secondaty-surface);
+    background: var(--button-secondary-surface);
     color: var(--button-primary-invert-content);
 }
 
 .button.button-secondary:not(:disabled):hover {
-    background: var(--button-secondaty-surface-hover);
+    background: var(--button-secondary-surface-hover);
 }
 
 .button.button-secondary:disabled {
-    background: var(--surface-mid);
-    border-color: var(--border);
-    color: var(--text-disabled);
+    background: var(--surface-mid-color);
+    border-color: var(--border-light-color);
+    color: var(--content-disabled-color);
 }
 
 .linkButton {
@@ -190,14 +197,16 @@
 
 /* Badge ********************************************************************/
 
-.badge{
+.badge {
     padding: 8px 10px;
     font: var(--body2);
+    user-select: none;
+    background-color: var(--surface-light-color);
 }
 
-.badge.black{
-    background-color: var(--surface-dark);
-    color: var(--text-invert);
+.badge.black {
+    background-color: var(--surface-dark-color);
+    color: var(--content-invert-color);
 }
 
 /* Inputs ********************************************************************/
@@ -210,45 +219,27 @@
 
 .textInput {
     box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    background: var(--input-surface);
-    color: var(--text-primary);
+    background: var(--surface-mid-color);
+    color: var(--content-primary-color);
     font: var(--body2);
     padding: 14px 12px;
     border-radius: 2px;
-    border: 1px solid var(--input-border);
+    border: 1px solid var(--border-dark-color);
     box-shadow: none;
 
     &:disabled {
-        color: var(--text-disabled);
-        border-color: var(--input-border-disabled);
+        color: var(--content-disabled-color);
+        border-color: var(--border-light-color);
     }
 
     &:focus,
     &:hover:not(:disabled) {
-        outline: var(--focus) solid 1px;
+        outline: var(--focus-ring-color) solid 1px;
     }
 
     &::placeholder {
-        color: var(--text-secondary);
+        color: var(--content-secondary-color);
     }
-}
-
-/* Icons **********************************************************************/
-
-/* Recommended icon sizes */
-span.size-20 {
-    font-size: 20px;
-    font-variation-settings: 'OPSZ' 20;
-}
-span.size-24 {
-    font-size: 24px;
-    font-variation-settings: 'OPSZ' 24;
-}
-span.size-40 {
-    font-size: 40px;
-    font-variation-settings: 'OPSZ' 40;
 }
 
 /* Text Page ******************************************************************/
@@ -257,7 +248,6 @@ span.size-40 {
     max-width: 60em;
     margin: 48px auto;
     text-align: center;
-    font: var(--paragraph2);
 }
 
 .textPage a {
@@ -265,12 +255,11 @@ span.size-40 {
 }
 
 .textPage h1 {
-    font: var(--heading2);
+    font: var(--heading1);
 }
 
 .textPage h2 {
-    font-size: 24px;
-    font-weight: 400;
+    font: var(--subheading);
     text-transform: uppercase;
     margin: 36px 0 24px 0;
 }
@@ -279,18 +268,13 @@ span.size-40 {
     margin-top: 24px;
 }
 
-@media (max-width: 768px) {
-    .textPage {
-        margin-top: 24px;
-        text-align: left;
-    }
-
+@media (max-width: 767px) {
     .textPage h1 {
-        font: var(--heading3);
+        font: var(--heading2);
     }
 
     .textPage h2 {
-        font-size: 20px;
+        font: var(--subheading);
     }
 }
 
@@ -299,15 +283,15 @@ span.size-40 {
 .heroBanner {
     height: 720px;
     position: relative;
-    color: var(--text-invert);
+    color: var(--content-invert-color);
     background: #000;
 }
 
 .heroBannerOverlay {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     overflow: hidden;
     position: absolute;
@@ -336,6 +320,12 @@ span.size-40 {
     font: var(--heading1);
     font-size: 6vw;
     text-transform: uppercase;
+}
+
+@media screen and (max-width: 767px) {
+    .heroBanner {
+        height: 560px;
+    }
 }
 
 /* Text Banner ****************************************************************/
@@ -396,28 +386,13 @@ span.size-40 {
     }
 }
 
-.linkCardTitle {
-    z-index: 2;
-    padding: 30px;
-    text-transform: uppercase;
-    color: var(--primary1);
-    font: var(--heading4);
-    text-align: center;
-}
-
-@container (max-width: 300px) {
-    .linkCardTitle {
-        font-size: 30px;
-    }
-}
-
 /* Floating Card **************************************************************/
 
 .floatingCard {
     width: 32%;
     aspect-ratio: 0.8;
-    padding: 22px;
-    background: var(--primary2);
+    padding: 8px;
+    background: var(--surface-light-color);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -483,13 +458,6 @@ span.size-40 {
     }
 }
 
-@media (max-width: 480px) {
-    .floatingCardHeader,
-    .floatingCardDescription {
-        font: var(--paragraph3);
-    }
-}
-
 /* Cards Section **************************************************************/
 
 .cardsSection {
@@ -518,52 +486,16 @@ span.size-40 {
 
 .tabs {
     display: flex;
-    border-bottom: 1px solid var(--secondary1);
     overflow: auto;
     gap: 12px;
 }
 
 .tab {
+    color: var(--content-secondary-color);
     padding: 3px 2px;
-    border-bottom: 0 solid transparent;
     flex-shrink: 0;
 }
 
-.tab:hover {
-    border-bottom-color: var(--secondary2);
-}
-
-@media (max-width: 768px) {
-    .tab {
-        padding: 14px 20px;
-    }
-
-}
-
-/* Miscellaneous **************************************************************/
-
-.ribbon {
-    display: inline-block;
-    vertical-align: middle;
-    padding: 2px 12px;
-    border-radius: 100px;
-    background: var(--primary2);
-    font: var(--paragraph3);
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
-.slider {
-    --track-color: var(--secondary2);
-    --range-color: var(--primary5);
-    --thumb-color: var(--primary5);
-    --focus-ring-color: inherit;
-}
-
-.colorSelect {
-    --option-size: 44px;
-    --border-color: var(--primary3);
-    --border-color-hover: var(--primary5);
-    --border-color-selected: var(--primary4);
-    --border-color-error: var(--error-color);
+.tab.active {
+    color: var(--content-primary-color);
 }

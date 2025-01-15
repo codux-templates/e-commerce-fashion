@@ -1,6 +1,6 @@
 import styles from './banner.module.scss';
 import classNames from 'classnames';
-import { useNavigate } from '@remix-run/react';
+import { NavLink } from '@remix-run/react';
 
 interface BannerProps {
     title: string;
@@ -11,8 +11,14 @@ interface BannerProps {
     className?: string;
 }
 
-export const Banner = ({ title, subheading, buttonText, buttonUrl, imageUrl, className }: BannerProps) => {
-    const navigate = useNavigate();
+export const Banner = ({
+    title,
+    subheading,
+    buttonText,
+    buttonUrl,
+    imageUrl,
+    className,
+}: BannerProps) => {
     return (
         <div className={classNames(styles.banner, className)}>
             <div className={styles.bannerContentWrapper}>
@@ -20,12 +26,12 @@ export const Banner = ({ title, subheading, buttonText, buttonUrl, imageUrl, cla
                     <span className={styles.bannerSubheading}>{subheading}</span>
                     <span className={styles.bannerTitle}>{title}</span>
                 </div>
-                <button
-                    onClick={() => navigate(buttonUrl)}
+                <NavLink
+                    to={buttonUrl}
                     className={classNames('button button-lg', styles.bannerButton)}
                 >
                     {buttonText}
-                </button>
+                </NavLink>
             </div>
             <div className={styles.bannerImageWrapper}>
                 <img className={styles.bannerImage} src={imageUrl} alt={title} />

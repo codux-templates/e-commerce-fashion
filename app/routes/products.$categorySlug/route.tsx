@@ -43,7 +43,12 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     }
 
     const [categoryProducts, allCategories, productPriceBounds] = await Promise.all([
-        api.getProducts({ categoryId: category._id!, filters, sortBy, limit: INITIAL_PRODUCTS_LIMIT}),
+        api.getProducts({
+            categoryId: category._id!,
+            filters,
+            sortBy,
+            limit: INITIAL_PRODUCTS_LIMIT,
+        }),
         api.getAllCategories(),
         api.getProductPriceBoundsInCategory(category._id!),
     ]);
@@ -76,7 +81,7 @@ export default function ProductsPage() {
             filters: appliedFilters,
             sorting,
             resultsFromLoader,
-            limit: LOAD_MORE_PRODUCTS_LIMIT
+            limit: LOAD_MORE_PRODUCTS_LIMIT,
         });
 
     const currency = products[0]?.priceData?.currency ?? 'USD';
@@ -87,7 +92,7 @@ export default function ProductsPage() {
 
     const handleClearFilters = () => {
         clearFilters([ProductFilter.minPrice, ProductFilter.maxPrice]);
-    }
+    };
 
     return (
         <div className={styles.page}>
@@ -155,11 +160,11 @@ export default function ProductsPage() {
                 </div>
             </div>
             <Banner
-              title={'A hot summer deserves a cool hat'}
-              subheading={'Product Spotlight'}
-              imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
-              buttonText={'Shop Now'}
-              buttonUrl={'/products/all-products'}
+                title={'A hot summer deserves a cool hat'}
+                subheading={'Product Spotlight'}
+                imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
+                buttonText={'Shop Now'}
+                buttonUrl={'/products/all-products'}
             />
         </div>
     );
