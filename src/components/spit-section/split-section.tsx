@@ -9,7 +9,7 @@ interface SplitSectionProps {
     subheading: string;
     buttonText?: string;
     buttonUrl?: string;
-    reverse?: boolean;
+    inverted?: boolean;
 }
 
 export const SplitSection = ({
@@ -19,11 +19,11 @@ export const SplitSection = ({
     subheading,
     buttonText,
     buttonUrl,
-    reverse = false,
+    inverted = false,
 }: SplitSectionProps) => {
     const navigate = useNavigate();
     return (
-        <div className={classNames(styles.root, reverse && styles.reverse, className)}>
+        <div className={classNames(styles.root, inverted && styles.reverse, className)}>
             <div className={styles.imageContainer}>
                 <img className={styles.image} src={imageUrl} alt={subheading} />
             </div>

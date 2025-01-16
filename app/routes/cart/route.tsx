@@ -13,6 +13,7 @@ import { Banner } from '~/src/components/banner/banner';
 import { InfoSection } from '~/src/components/info-section/info-section';
 import { Accordion } from '~/src/components/accordion/accordion';
 import { CartTotals } from '~/src/wix/ecom';
+import Icon from '~/src/components/icons/icon';
 
 export default function CartPage() {
     const [isNoteClosed, setIsNoteClosed] = useState(false);
@@ -62,16 +63,9 @@ export default function CartPage() {
                 <div className={styles.cart}>
                     {!isNoteClosed && (
                         <div className={styles.cartHeader}>
-                            <span
-                                onClick={() => setIsNoteClosed(true)}
-                                className={'material-symbols-outlined'}
-                            >
-                                close
-                            </span>
-                            <div className={'heading4 uppercase'}>Title of Note</div>
-                            <div className={'body1'}>
-                                Description of promo or note. (For example: free delivery.)
-                            </div>
+                            <Icon name="close" onClick={() => setIsNoteClosed(true)} />
+                            <div className={'heading4 uppercase'}>Free Delivery over 120$</div>
+                            <div className={'body1'}>Shop more, save more with free shipping!</div>
                         </div>
                     )}
                     <div className={styles.cartItems}>
@@ -93,16 +87,8 @@ export default function CartPage() {
                 </div>
                 <div className={styles.summaryMobile}>
                     <Accordion
-                        expandIcon={
-                            <span style={{ fontSize: 20 }} className={'material-symbols-outlined'}>
-                                expand_more
-                            </span>
-                        }
-                        collapseIcon={
-                            <span style={{ fontSize: 20 }} className={'material-symbols-outlined'}>
-                                remove
-                            </span>
-                        }
+                        expandIcon={<Icon name="expand_more" />}
+                        collapseIcon={<Icon name="remove" />}
                         itemClassName={styles.summaryAccordion}
                         initialOpenItemIndex={0}
                         items={[
@@ -138,10 +124,10 @@ export default function CartPage() {
             />
 
             <Banner
-                title="A hot summer deserves a cool hat"
+                title="Our Comfy sweatshirts is now online!"
                 subheading="Product Spotlight"
                 buttonText="Shop now"
-                buttonUrl="/products/all-products"
+                buttonUrl="/product-details/women-s-oversized-sweatshirt"
                 imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5edd6f9183d.png"
             />
 
@@ -154,18 +140,18 @@ export default function CartPage() {
                     },
                     {
                         icon: 'refresh',
-                        heading: 'Free Returns',
-                        subheading: 'On full time priced items only',
+                        heading: 'Easy Returns',
+                        subheading: 'Enjoy 30 days to change your mind.',
                     },
                     {
                         icon: 'loyalty',
-                        heading: 'Crash replacement',
-                        subheading: '40% off your new kit',
+                        heading: 'Weekly Deals',
+                        subheading: 'Save big on new offers every weekend.',
                     },
                     {
                         icon: 'recycling',
-                        heading: 'Eco-friendly',
-                        subheading: 'All of our packaging is recycled',
+                        heading: 'Secure Checkout',
+                        subheading: 'Shop confidently with encrypted payments.',
                     },
                 ]}
             />

@@ -36,13 +36,18 @@
 }
 
 .ribbon {
-    padding: 10px 12px;
     background: var(--surface-dark-color);
     color: var(--content-invert-color);
+    display: flex;
+    height: 32px;
+    padding-right: 12px;
+    padding-left: 12px;
+    justify-content: center;
+    align-items: center;
+    font: var(--body1);
 }
 
 .ribbonWhite {
-    padding: 10px 12px;
     background: var(--surface-light-color);
     color: var(--content-primary-color);
     text-transform: uppercase;
@@ -50,9 +55,8 @@
 
 .ribbonWrapper {
     pointer-events: none;
-    gap: 10px;
+    gap: 8px;
     display: flex;
-    align-items: center;
     position: absolute;
     top: 8px;
     left: 8px;

@@ -8,6 +8,7 @@ import {
 import { useUserInfo } from '~/src/wix/users';
 
 import styles from './user-menu.module.scss';
+import Icon from '../icons/icon';
 
 export const UserMenu = () => {
     const { isLoggedIn, user } = useUserInfo();
@@ -16,7 +17,7 @@ export const UserMenu = () => {
         return (
             <NavLink className={styles.root} to={'/login'}>
                 <div className={styles.icon}>
-                    <span className="material-symbols-outlined">person</span>
+                    <Icon name={'person'} />
                 </div>
                 <div className={styles.label}>Sign in</div>
             </NavLink>
@@ -28,9 +29,7 @@ export const UserMenu = () => {
             trigger={
                 <div className={styles.root}>
                     <Avatar imageSrc={user?.profile?.photo?.url} />
-                    <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-                        expand_more
-                    </span>
+                    <Icon name={'expand_more'} />
                 </div>
             }
             contentProps={{

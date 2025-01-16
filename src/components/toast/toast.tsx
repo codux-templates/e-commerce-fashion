@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { Toast as ToastData, toast, resolveValue } from 'react-hot-toast';
 
 import styles from './toast.module.scss';
+import Icon from '../icons/icon';
 
 export { toast, type ToastData };
 
@@ -32,9 +33,7 @@ export const Toast = ({ toast }: { toast: ToastData }) => {
             <div className={styles.message}>{resolveValue(toast.message, toast)}</div>
             {toast.type === 'loading' ? null : (
                 <button className={styles.closeButton} onClick={() => dismissToast(toast.id)}>
-                    <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-                        close
-                    </span>
+                    <Icon name={'close'} />
                 </button>
             )}
         </div>

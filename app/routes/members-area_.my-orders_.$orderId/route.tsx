@@ -13,6 +13,7 @@ import { OrderDetails } from '~/src/wix/ecom';
 import styles from './route.module.scss';
 import classNames from 'classnames';
 import { orderTransactions } from '@wix/ecom';
+import Icon from '~/src/components/icons/icon';
 
 export type LoaderResponseData = {
     order: OrderDetails;
@@ -49,7 +50,7 @@ export default function MyOrderPage() {
                     to={'/members-area/my-orders'}
                     className={classNames('action', styles.backLink)}
                 >
-                    <span className={'material-symbols-outlined'}>arrow_back</span>
+                    <Icon name={'arrow_back'} />
                     My orders
                 </NavLink>
                 <h1 className="heading1 uppercase">Order details</h1>

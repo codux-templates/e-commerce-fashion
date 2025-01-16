@@ -216,11 +216,11 @@ function ProductDetails() {
             </Section>
             <Banner
                 className={styles.banner}
-                title="A hot summer deserves a cool hat"
+                title="Our Comfy sweatshirts is now online!"
                 subheading="Product Spotlight"
                 buttonText="Shop now"
-                buttonUrl="/products/all-products"
-                imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
+                buttonUrl="/product-details/women-s-oversized-sweatshirt"
+                imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
             />
         </div>
     );

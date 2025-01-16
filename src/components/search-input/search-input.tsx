@@ -2,6 +2,7 @@ import { type FormEventHandler, forwardRef, useState } from 'react';
 import styles from './search-input.module.scss';
 import classNames from 'classnames';
 import { FadeIn, FloatIn } from '~/src/components/visual-effects';
+import Icon from '../icons/icon';
 
 export interface SearchInputProps extends React.HTMLAttributes<HTMLInputElement> {
     className?: string;
@@ -26,7 +27,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
             <FloatIn distance={56} direction={'down'} duration={0.2} className={styles.content}>
                 <form onSubmit={handleSubmit} role={'search'}>
                     <label className={styles.label}>
-                        <span className="material-symbols-outlined">search</span>
+                        <Icon name={'search'} />
                         <input
                             ref={ref}
                             className={styles.input}

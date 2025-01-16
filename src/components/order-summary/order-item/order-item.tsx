@@ -3,6 +3,7 @@ import { orders } from '@wix/ecom';
 import type { SerializeFrom } from '@remix-run/node';
 import { media } from '@wix/sdk';
 import styles from './order-item.module.scss';
+import Icon from '../../icons/icon';
 
 interface OrderItemProps {
     item: SerializeFrom<orders.OrderLineItem>;
@@ -22,9 +23,7 @@ export const OrderItem = ({ item }: OrderItemProps) => {
                         alt={image.altText ?? productName}
                     />
                 ) : (
-                    <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-                        image
-                    </span>
+                    <Icon name="image" />
                 )}
             </div>
 

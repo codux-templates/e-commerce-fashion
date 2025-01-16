@@ -9,6 +9,7 @@ import debounce from 'lodash.debounce';
 import { CartItemOptions } from '../cart-item-options/cart-item-options';
 
 import styles from './cart-item.module.scss';
+import Icon from '../../icons/icon';
 
 export interface CartItemProps {
     item: cart.LineItem;
@@ -60,9 +61,7 @@ export const CartItem = ({
                     </div>
                 ) : (
                     <div className={styles.imagePlaceholder}>
-                        <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-                            image
-                        </span>
+                        <Icon name="image" />
                     </div>
                 )}
 
@@ -112,9 +111,7 @@ export const CartItem = ({
 
             {isUnavailable && (
                 <div className={styles.unavailableIndication}>
-                    <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-                        error
-                    </span>
+                    <Icon name={'error'} />
                     <span>Sorry, this item is no longer available.</span>
                 </div>
             )}

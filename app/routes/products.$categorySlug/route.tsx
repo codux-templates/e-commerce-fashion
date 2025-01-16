@@ -160,11 +160,11 @@ export default function ProductsPage() {
                 </div>
             </div>
             <Banner
-                title={'A hot summer deserves a cool hat'}
+                title="Our Comfy sweatshirts is now online!"
                 subheading={'Product Spotlight'}
                 imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
                 buttonText={'Shop Now'}
-                buttonUrl={'/products/all-products'}
+                buttonUrl={'/product-details/women-s-oversized-sweatshirt'}
             />
         </div>
     );

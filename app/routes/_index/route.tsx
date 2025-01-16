@@ -29,7 +29,7 @@ export default function HomePage() {
             </div>
             <Marquee elements={['Shop Sale', 'Up to 50% off']} />
             <div className={'pageWrapper'}>
-                <FeaturedProductsSection categorySlug="new-in" title="New In" productCount={4} />
+                <FeaturedProductsSection categorySlug="new-in" title="New In" productCount={8} />
 
                 <CategoriesSection categorySlugs={['women', 'men', 'accessories']} />
 
@@ -66,9 +66,9 @@ export default function HomePage() {
                     buttonText={'Shop All'}
                     buttonUrl={'/products/all-products'}
                     title={
-                        "Fashion is more than just what you wear—it's how you express yourself. That’s why we’re committed to offering pieces that blend quality, comfort, and style, so you can look and feel your best every day."
+                        "Fashion is more than just what you wear it's how you express yourself. That’s why we’re committed to offering pieces that blend quality, comfort, and style, so you can look and feel your best every day."
                     }
-                    imageUrl="https://static.wixstatic.com/media/a2cc95_d312443aeecb499bb9f6986404b94193~mv2.png/v1/fit/w_640,h_640/25846e5769d5dff3f39611ee1589857b.png.png"
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_d312443aeecb499bb9f6986404b94193~mv2.png/v1/fit/w_1920,h_1920/25846e5769d5dff3f39611ee1589857b.png"
                 />
                 <FeaturedProductsSection
                     categorySlug="best-seller"
@@ -77,11 +77,11 @@ export default function HomePage() {
                 />
 
                 <Banner
-                    title="A hot summer deserves a cool hat"
+                    title="Our Comfy sweatshirts is now online!"
                     subheading="Product Spotlight"
                     buttonText="Shop now"
-                    buttonUrl="/products/all-products"
-                    imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
+                    buttonUrl="/product-details/women-s-oversized-sweatshirt"
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
                 />
 
                 <InfoSection
@@ -93,18 +93,18 @@ export default function HomePage() {
                         },
                         {
                             icon: 'refresh',
-                            heading: 'Free Returns',
-                            subheading: 'On full time priced items only',
+                            heading: 'Easy Returns',
+                            subheading: 'Enjoy 30 days to change your mind.',
                         },
                         {
                             icon: 'loyalty',
-                            heading: 'Crash replacement',
-                            subheading: '40% off your new kit',
+                            heading: 'Weekly Deals',
+                            subheading: 'Save big on new offers every weekend.',
                         },
                         {
                             icon: 'recycling',
-                            heading: 'Eco-friendly',
-                            subheading: 'All of our packaging is recycled',
+                            heading: 'Secure Checkout',
+                            subheading: 'Shop confidently with encrypted payments.',
                         },
                     ]}
                 />

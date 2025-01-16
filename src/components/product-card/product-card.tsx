@@ -54,12 +54,14 @@ export const ProductCard = ({ product, state }: ProductCardProps) => {
                         discountedPrice &&
                         price &&
                         price !== discountedPrice && (
-                            <span className={styles.ribbonWhite}>
+                            <span className={classNames(styles.ribbon, styles.ribbonWhite)}>
                                 {100 - Math.floor((discountedPrice / price) * 100)}% Off
                             </span>
                         )}
                     {product.stock?.inventoryStatus === 'OUT_OF_STOCK' && (
-                        <span className={styles.ribbonWhite}>SOLD OUT</span>
+                        <span className={classNames(styles.ribbon, styles.ribbonWhite)}>
+                            SOLD OUT
+                        </span>
                     )}
                 </div>
 

@@ -11,6 +11,13 @@
     text-transform: uppercase;
 }
 
+.trigger[data-state='open'] .triggerIcon {
+    transform: rotate(180deg);
+}
+
+.triggerIcon {
+}
+
 .content {
     margin-top: 8px;
     width: 216px;

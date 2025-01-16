@@ -46,7 +46,7 @@ export const Header = ({ className }: HeaderProps) => {
     return (
         <header className={classNames(styles.root, className)}>
             <div className={classNames(styles.announcementBar)}>
-                Free shipping over 50$ worldwide
+                Free shipping over 120$ worldwide
             </div>
             <section className={styles.navigation}>
                 <button
@@ -115,21 +115,19 @@ export const Header = ({ className }: HeaderProps) => {
                     <UserMenu />
 
                     <button
+                        className={classNames(styles.searchButton, 'iconButton')}
+                        onClick={searchButtonOnClickHandler}
+                    >
+                        <Icon name={isSearchOpen ? 'close' : 'search'} />
+                    </button>
+                    <button
                         className={classNames(styles.cartButton, 'iconButton')}
                         onClick={() => cartOpener.setIsOpen(true)}
                     >
                         {cartItemCount > 0 && (
                             <div className={styles.cartItemCounter}>{cartItemCount}</div>
                         )}
-                        <span className="material-symbols-outlined">shopping_bag</span>
-                    </button>
-                    <button
-                        className={classNames(styles.searchButton, 'iconButton')}
-                        onClick={searchButtonOnClickHandler}
-                    >
-                        <span className="material-symbols-outlined">
-                            {isSearchOpen ? 'close' : 'search'}
-                        </span>
+                        <Icon name={'shopping_bag'} />
                     </button>
                 </div>
             </section>

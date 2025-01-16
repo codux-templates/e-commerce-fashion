@@ -11,7 +11,7 @@ export default createBoard({
                         <h1 className="heading1">Heading 1</h1>
                     </Variant>
                     <Kit.Description>
-                        <b>--heading1:</b> Marcellus / 80px / 1
+                        <b>--heading1:</b> DM Sans / 600 / 48px / 1
                     </Kit.Description>
                 </Kit.Item>
                 <Kit.Item>
@@ -19,7 +19,7 @@ export default createBoard({
                         <h2 className="heading2">Heading 2</h2>
                     </Variant>
                     <Kit.Description>
-                        <b>--heading2:</b> Marcellus / 55px / 1.1
+                        <b>--heading2:</b> Inter / 600 / 32px / 1
                     </Kit.Description>
                 </Kit.Item>
                 <Kit.Item>
@@ -27,7 +27,7 @@ export default createBoard({
                         <h3 className="heading3">Heading 3</h3>
                     </Variant>
                     <Kit.Description>
-                        <b>--heading3:</b> Marcellus / 42px / 1.2
+                        <b>--heading3:</b> DM Sans / 600 / 28px / 1
                     </Kit.Description>
                 </Kit.Item>
                 <Kit.Item>
@@ -35,56 +35,96 @@ export default createBoard({
                         <h4 className="heading4">Heading 4</h4>
                     </Variant>
                     <Kit.Description>
-                        <b>--heading4:</b> Marcellus / 40px / 1.2
+                        <b>--heading4:</b> DM Sans / 600 / 20px / 1
                     </Kit.Description>
                 </Kit.Item>
                 <Kit.Item>
-                    <Variant name="Heading5">
-                        <h5 className="heading5">Heading 5</h5>
+                    <Variant name="Subheading">
+                        <div className="subheading">Subheading</div>
                     </Variant>
                     <Kit.Description>
-                        <b>--heading5:</b> Marcellus / 20px / 1.3
+                        <b>--subheading:</b> DM Sans / 600 / 16px / 1
                     </Kit.Description>
                 </Kit.Item>
                 <Kit.Item>
-                    <Variant name="Heading6">
-                        <h6 className="heading6">Heading 6</h6>
+                    <Variant name="Display">
+                        <div className="display">Display</div>
                     </Variant>
                     <Kit.Description>
-                        <b>--heading6:</b> Figtree (400) / 20px / 1.4
+                        <b>--display:</b> DM Sans / 600 / 28px / 36px
                     </Kit.Description>
                 </Kit.Item>
             </Kit.Section>
 
             <Kit.Section title="Paragraph">
                 <Kit.Item>
-                    <Variant name="Paragraph1">
-                        <div className="paragraph1">
+                    <Variant name="body1">
+                        <div className="body1">
                             We ignite opportunity by setting the world in motion. 0123456789
                         </div>
                     </Variant>
                     <Kit.Description>
-                        <b>--paragraph1:</b> Figtree (400) / 16px / 1.5
+                        <b>--body1:</b> DM Sans / 400 / 16px / 24px
                     </Kit.Description>
                 </Kit.Item>
                 <Kit.Item>
-                    <Variant name="Paragraph2">
-                        <div className="paragraph2">
+                    <Variant name="body1Caps">
+                        <div className="body1-caps">
                             We ignite opportunity by setting the world in motion. 0123456789
                         </div>
                     </Variant>
                     <Kit.Description>
-                        <b>--paragraph2:</b> Figtree (400) / 15px / 1.6
+                        <b>--body1-caps:</b> DM Sans / 500 / 16px / 20px
                     </Kit.Description>
                 </Kit.Item>
                 <Kit.Item>
-                    <Variant name="Paragraph3">
-                        <div className="paragraph3">
+                    <Variant name="Body2">
+                        <div className="body2">
                             We ignite opportunity by setting the world in motion. 0123456789
                         </div>
                     </Variant>
                     <Kit.Description>
-                        <b>--paragraph3:</b> Figtree (400) / 14px / 1.6
+                        <b>--body2:</b> DM Sans / 400 / 14px / 20px
+                    </Kit.Description>
+                </Kit.Item>
+                <Kit.Item>
+                    <Variant name="Body2Caps">
+                        <div className="body2-caps">
+                            We ignite opportunity by setting the world in motion. 0123456789
+                        </div>
+                    </Variant>
+                    <Kit.Description>
+                        <b>--body2-caps:</b> DM Sans / 500 / 14px / 20px
+                    </Kit.Description>
+                </Kit.Item>
+                <Kit.Item>
+                    <Variant name="Body3">
+                        <div className="body3">
+                            We ignite opportunity by setting the world in motion. 0123456789
+                        </div>
+                    </Variant>
+                    <Kit.Description>
+                        <b>--body3:</b> DM Sans / 400 / 12px / 16px
+                    </Kit.Description>
+                </Kit.Item>
+                <Kit.Item>
+                    <Variant name="Action">
+                        <a href={'#'} className="action">
+                            Action
+                        </a>
+                    </Variant>
+                    <Kit.Description>
+                        <b>--action:</b> DM Sans / 600 / 14px / 1
+                    </Kit.Description>
+                </Kit.Item>
+                <Kit.Item>
+                    <Variant name="Navlink">
+                        <a href={'#'} className="navlink">
+                            Navlink
+                        </a>
+                    </Variant>
+                    <Kit.Description>
+                        <b>--navlink:</b> Inter / 400 / 14px / 20px
                     </Kit.Description>
                 </Kit.Item>
             </Kit.Section>

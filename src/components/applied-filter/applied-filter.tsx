@@ -1,6 +1,7 @@
 import { getClickableElementAttributes } from '~/src/wix/utils';
 
 import styles from './applied-filter.module.scss';
+import Icon from '../icons/icon';
 
 interface AppliedFilterProps {
     children: React.ReactNode;
@@ -11,9 +12,7 @@ export const AppliedFilter = ({ children, onClick }: AppliedFilterProps) => {
     return (
         <div className={styles.root} {...getClickableElementAttributes(onClick)}>
             {children}
-            <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-                close
-            </span>
+            <Icon name={'close'} />
         </div>
     );
 };

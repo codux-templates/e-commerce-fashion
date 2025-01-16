@@ -9,6 +9,8 @@ import { Kit } from '../ui-kit-utils/kit';
 
 import styles from './components.board.module.scss';
 import { products } from '@wix/stores';
+import { Marquee } from '~/src/components/marquee/marquee';
+import { ProductsSpotlight } from '~/src/components/products-spotlight/products-spotlight';
 
 export default createBoard({
     name: 'Components & Elements',
@@ -33,6 +35,21 @@ export default createBoard({
                             />
                         </Variant>
                         <Kit.Description>Input Placeholder</Kit.Description>
+                    </Kit.Item>
+
+                    <Kit.Item>
+                        <Variant name="Input Error">
+                            <div className="formGroup">
+                                <input
+                                    className="textInput error"
+                                    placeholder="Placeholder"
+                                    value=""
+                                    onChange={() => {}}
+                                />
+                                <span className="errorMessage">Error message</span>
+                            </div>
+                        </Variant>
+                        <Kit.Description>Input Error</Kit.Description>
                     </Kit.Item>
 
                     <Kit.Item>
@@ -173,11 +190,41 @@ export default createBoard({
                         <Kit.Description>Product Card</Kit.Description>
                     </Kit.Item>
                 </Kit.Section>
+                <Kit.Section title="Marquee">
+                    <Kit.Item>
+                        <Variant name="Marquee">
+                            <Marquee elements={['Shop Sale', 'Up to 50% off']} />
+                        </Variant>
+                        <Kit.Description>Marquee</Kit.Description>
+                    </Kit.Item>
+                </Kit.Section>
+                <Kit.Section title="Products Spotlight">
+                    <Kit.Item className={styles.demoWidth}>
+                        <Variant name="Products Spotlight">
+                            <ProductsSpotlight
+                                imageUrl="https://static.wixstatic.com/media/c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.jpg/v1/fill/w_640,h_640,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.webp"
+                                spotlights={[
+                                    {
+                                        horizontalPercentage: 40,
+                                        verticalPercentage: 33,
+                                        productSlug: 'knit-beanie',
+                                    },
+                                    {
+                                        horizontalPercentage: 60,
+                                        verticalPercentage: 66,
+                                        productSlug: 'knit-beanie',
+                                    },
+                                ]}
+                            />
+                        </Variant>
+                        <Kit.Description>Products Spotlight</Kit.Description>
+                    </Kit.Item>
+                </Kit.Section>
             </Kit>
         </ComponentWrapper>
     ),
     environmentProps: {
-        windowWidth: 550,
+        windowWidth: 746,
         windowHeight: 800,
     },
     isSnippet: true,

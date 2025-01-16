@@ -3,6 +3,7 @@ import { cart } from '@wix/ecom';
 import classNames from 'classnames';
 
 import styles from './cart-item-options.module.scss';
+import Icon from '../../icons/icon';
 
 interface CartItemOptionsProps {
     options: cart.DescriptionLine[];
@@ -37,9 +38,7 @@ export const CartItemOptions = ({
                     onClick={toggleIsExpanded}
                 >
                     {isExpanded ? 'Less Details' : 'More Details'}
-                    <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-                        expand_more
-                    </span>
+                    <Icon name={'expand_more'} />
                 </button>
             )}
         </div>

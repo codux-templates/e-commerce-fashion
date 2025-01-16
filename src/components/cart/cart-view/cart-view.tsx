@@ -6,6 +6,7 @@ import { type Cart, type CartTotals } from '~/src/wix/ecom';
 import { CartItem } from '../cart-item/cart-item';
 
 import styles from './cart-view.module.scss';
+import Icon from '../../icons/icon';
 
 export interface CartViewProps {
     cart?: Cart;
@@ -55,9 +56,7 @@ export const CartView = ({
             <div className={styles.header}>
                 <span className="heading3 uppercase">Cart ({itemCount})</span>
                 <button className={classNames(styles.closeButton, 'iconButton')} onClick={onClose}>
-                    <span style={{ fontSize: 20 }} className={'material-symbols-outlined'}>
-                        close
-                    </span>
+                    <Icon name={'close'} />
                 </button>
             </div>
 
@@ -88,9 +87,7 @@ export const CartView = ({
                                     <span>{cart.subtotal.formattedConvertedAmount}</span>
                                 </div>
                                 <div className={styles.subtotalNote}>
-                                    <span className={'material-symbols-outlined'}>
-                                        local_shipping
-                                    </span>
+                                    <Icon name={'local_shipping'} />
                                     Estimated delivery 3-7 business days
                                 </div>
                             </>

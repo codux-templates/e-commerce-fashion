@@ -5,6 +5,7 @@ import { mergeUrlSearchParams, useSearchParamsOptimistic } from '~/src/wix/utils
 import { PriceFilter } from './price-filter';
 import { DropdownMenu } from '~/src/components/dropdown-menu/dropdown-menu';
 import styles from './product-filters.module.scss';
+import Icon from '../icons/icon';
 
 interface ProductFiltersProps {
     minAvailablePrice: number;
@@ -35,9 +36,7 @@ export const ProductFilters = ({
             trigger={
                 <div className={styles.trigger}>
                     Price
-                    <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-                        expand_more
-                    </span>
+                    <Icon className={styles.triggerIcon} name={'expand_more'} />
                 </div>
             }
             contentProps={{ align: 'end', className: styles.content }}

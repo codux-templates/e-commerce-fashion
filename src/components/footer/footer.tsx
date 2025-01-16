@@ -20,7 +20,7 @@ export const Footer = ({ className }: FooterProps) => {
             <FadeIn duration={1.8}>
                 <Link to="/" className={styles.logo}>
                     <svg
-                        width="1424"
+                        width="100%"
                         height="auto"
                         viewBox="0 0 1424 160"
                         fill="none"

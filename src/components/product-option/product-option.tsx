@@ -5,6 +5,7 @@ import { Select, SelectItem } from '~/src/components/select/select';
 
 import styles from './product-option.module.scss';
 import classNames from 'classnames';
+import Icon from '../icons/icon';
 
 export interface ProductOptionProps {
     option: products.ProductOption;
@@ -78,9 +79,7 @@ export const ProductOption = ({
 
                     {hasError && (
                         <div className={styles.error}>
-                            <span className={'material-symbols-outlined'} style={{ fontSize: 20 }}>
-                                error
-                            </span>
+                            <Icon name={'error'} />
                             {error}
                         </div>
                     )}

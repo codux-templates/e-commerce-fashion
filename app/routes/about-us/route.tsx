@@ -19,7 +19,7 @@ export default function AboutUsPage() {
                 <div className={styles.heroImageWrapper}>
                     <img
                         className={styles.heroImage}
-                        src="https://static.wixstatic.com/media/a2cc95_4ba2b54473c049b199516dc89e450707~mv2.jpg"
+                        src="https://static.wixstatic.com/media/a2cc95_d312443aeecb499bb9f6986404b94193~mv2.png/v1/fit/w_2560,h_2560/25846e5769d5dff3f39611ee1589857b.png"
                         alt=""
                     />
                 </div>
@@ -51,19 +51,19 @@ export default function AboutUsPage() {
                 </div>
             </div>
             <SplitSection
-                reverse={true}
+                inverted={true}
                 title={
                     "This is a space to share more about the business: who's behind it, what it does and what this site has to offer. It’s an opportunity to tell the story behind the business or describe a special service or product it offers. You can use this section to share the company history or highlight a particular feature that sets it apart from competitors."
                 }
                 subheading="02 Our philosophy"
-                imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
+                imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
             />
             <SplitSection
                 title={
                     "This is a space to share more about the business: who's behind it, what it does and what this site has to offer. It’s an opportunity to tell the story behind the business or describe a special service or product it offers. You can use this section to share the company history or highlight a particular feature that sets it apart from competitors."
                 }
                 subheading="03 Our values"
-                imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
+                imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
             />
 
             <FAQSection
@@ -93,10 +93,10 @@ export default function AboutUsPage() {
 
             <FeaturedProductsSection categorySlug={'new-in'} />
             <Banner
-                title={'A hot summer deserves a cool hat'}
+                title="Our Comfy sweatshirts is now online!"
                 subheading="Product Spotlight"
                 buttonText="Shop now"
-                buttonUrl="/products/all-products"
+                buttonUrl="/product-details/women-s-oversized-sweatshirt"
                 imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_640,h_640/a9bfabda082c6167b007f5eda6ea0bf8.png.png"
             />
         </div>

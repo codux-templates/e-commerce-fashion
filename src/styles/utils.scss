@@ -60,6 +60,13 @@
     text-decoration-skip-ink: none;
 }
 
+.body2-caps {
+    font: var(--body2-caps);
+    text-transform: uppercase;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
 .body3 {
     font: var(--body3);
     text-transform: none;
@@ -89,7 +96,7 @@
 }
 
 .navlink:hover {
-    color: var(--content-secondary-color);
+    color: var(--content-primary-color);
 }
 
 /* Text utils ********************************************************************/
@@ -240,6 +247,22 @@
     &::placeholder {
         color: var(--content-secondary-color);
     }
+
+    &.error {
+        border-color: var(--border-error-color);
+    }
+}
+
+.formGroup {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formGroup .errorMessage {
+    font: var(--body3);
+    color: var(--content-error-color);
 }
 
 /* Text Page ******************************************************************/
@@ -305,7 +328,7 @@
 .heroBannerImage {
     opacity: 0.8;
     object-fit: cover;
-    object-position: 50% 50%;
+    object-position: 50% 30%;
     height: 100%;
     width: 100%;
 }

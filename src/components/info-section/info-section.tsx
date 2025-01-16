@@ -1,7 +1,9 @@
+import Icon from '../icons/icon';
 import styles from './info-section.module.scss';
+import { IconName } from '~/src/components/icons/iconNames';
 
 interface InfoItem {
-    icon: string;
+    icon: IconName;
     heading: string;
     subheading: string;
 }
@@ -15,7 +17,7 @@ export const InfoSection = ({ items }: InfoSectionProps) => {
         <div className={styles.infoSection}>
             {items.map((item, index) => (
                 <div key={index} className={styles.infoSectionCard}>
-                    <span className={'material-symbols-outlined'}>{item.icon}</span>
+                    <Icon size={24} name={item.icon} />
                     <div className={styles.infoSectionCardTextWrapper}>
                         <span className={styles.infoCardHeading}>{item.heading}</span>
                         <span className={styles.infoSectionCardSubheading}>{item.subheading}</span>
