@@ -4,7 +4,7 @@
 }
 
 .content {
-    padding: 8px;
+    padding: 16px 8px;
     background: var(--surface-light-color);
     box-shadow: 0 0 10px 0 #0000001a;
     max-width: min(var(--radix-dropdown-menu-content-available-width), 400px);
@@ -12,15 +12,28 @@
     overflow: auto;
     border-radius: 2px;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .item {
-    padding: 5px 20px;
+    border: 0.5px solid var(--border-light-color);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     cursor: pointer;
-    box-shadow: none;
+    height: 48px;
+    padding: 8px 8px 8px 12px;
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+
+    &:hover,
+    &:focus {
+        background: var(--surface-mid-color);
+    }
 
     &[data-disabled] {
         cursor: default;
@@ -29,7 +42,7 @@
 }
 
 .separator {
-    margin: 5px 20px;
+    margin: 4px 8px;
     height: 1px;
     border: 1px inset #eee;
     opacity: 0.4;

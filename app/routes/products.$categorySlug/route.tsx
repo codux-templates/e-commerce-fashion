@@ -93,7 +93,6 @@ export default function ProductsPage() {
     const handleClearFilters = () => {
         clearFilters([ProductFilter.minPrice, ProductFilter.maxPrice]);
     };
-
     return (
         <div className={styles.page}>
             <div className={styles.content}>

@@ -58,7 +58,6 @@ function ProductDetails() {
     } = useProductDetails(product);
 
     const handleError = (error: unknown) => toast.error(getErrorMessage(error));
-
     return (
         <div className={styles.page}>
             <div className={styles.content}>

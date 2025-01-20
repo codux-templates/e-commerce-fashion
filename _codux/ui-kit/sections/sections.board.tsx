@@ -1,12 +1,13 @@
 import { createBoard, Variant } from '@wixc3/react-board';
 import { CategoryLink } from '~/src/components/category-link/category-link';
-import { LabelWithArrow } from '~/src/components/label-with-arrow/label-with-arrow';
 import ComponentWrapper from '_codux/board-wrappers/component-wrapper';
 import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
 import { Kit } from '../ui-kit-utils/kit';
 
 import styles from './sections.board.module.scss';
 import { SplitSection } from '~/src/components/spit-section/split-section';
+import { Banner } from '~/src/components/banner/banner';
+import { InfoSection } from '~/src/components/info-section/info-section';
 
 export default createBoard({
     name: 'Sections',
@@ -18,15 +19,19 @@ export default createBoard({
                         <Variant name="Hero Banner">
                             <div className="heroBanner">
                                 <img
-                                    src="https://static.wixstatic.com/media/32aab9_2c3c65e142434906992aedb17db53566~mv2.jpg"
+                                    src="https://static.wixstatic.com/media/a2cc95_30c2b0d877354d389a2bce2e169440c9~mv2.png/v1/fit/w_2560,h_1440/4737ca55766dd3c7e65a3f69a8937bc5.png"
                                     className="heroBannerImage"
                                     alt=""
                                 />
                                 <div className="heroBannerOverlay">
-                                    <div className="heroBannerSubtitle">RND.Apparel</div>
-                                    <h1 className="heroBannerTitle">Reuse. Repurpose. Relove.</h1>
+                                    <div className="subheading">Start the freshest season</div>
+                                    <h1 className="uppercase">
+                                        New Spring Collection is Now Online
+                                    </h1>
                                     <CategoryLink categorySlug="all-products">
-                                        <LabelWithArrow>Shop Collections</LabelWithArrow>
+                                        <button className="button invert button-lg">
+                                            Shop Collections
+                                        </button>
                                     </CategoryLink>
                                 </div>
                             </div>
@@ -70,6 +75,50 @@ export default createBoard({
                             <FeaturedProductsSection categorySlug="new-in" title="New In" />
                         </Variant>
                         <Kit.Description>Featured Products</Kit.Description>
+                    </Kit.Item>
+
+                    <Kit.Item>
+                        <Variant name="Product Banner">
+                            <Banner
+                                title={'Our Comfy sweatshirts is now online!'}
+                                subheading={'Product Spotlight'}
+                                buttonText={'Shop Now'}
+                                buttonUrl={'/product-details/women-s-oversized-sweatshirt'}
+                                imageUrl={
+                                    'https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png'
+                                }
+                            />
+                        </Variant>
+                        <Kit.Description>Product Banner</Kit.Description>
+                    </Kit.Item>
+                    <Kit.Item>
+                        <Variant name="Info Section">
+                            <InfoSection
+                                items={[
+                                    {
+                                        icon: 'local_shipping',
+                                        heading: 'Free Shipping',
+                                        subheading: 'On orders over 120$',
+                                    },
+                                    {
+                                        icon: 'refresh',
+                                        heading: 'Easy Returns',
+                                        subheading: 'Enjoy 30 days to change your mind.',
+                                    },
+                                    {
+                                        icon: 'loyalty',
+                                        heading: 'Weekly Deals',
+                                        subheading: 'Save big on new offers every weekend.',
+                                    },
+                                    {
+                                        icon: 'recycling',
+                                        heading: 'Secure Checkout',
+                                        subheading: 'Shop confidently with encrypted payments.',
+                                    },
+                                ]}
+                            />
+                        </Variant>
+                        <Kit.Description>Info Section</Kit.Description>
                     </Kit.Item>
                 </Kit.Section>
             </Kit>
