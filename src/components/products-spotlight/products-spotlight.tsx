@@ -13,6 +13,7 @@ import styles from './products-spotlight.module.scss';
 import { AnimatePresence, motion } from 'motion/react';
 import { Product, useEcomApi } from '~/src/wix/ecom';
 import { useNavigate } from '@remix-run/react';
+import Icon from '../icons/icon';
 
 export interface ProductSpotlight {
     horizontalPercentage: number;
@@ -125,13 +126,16 @@ const Spotlight = ({ spotlight }: { spotlight: ProductSpotlight }) => {
                             transition={{ duration: 0.3 }}
                             onClick={() => navigate(`/product-details/${product.slug}`)}
                         >
-                            <div className={styles.popupContent}>
-                                <div className={styles.productName}>{product.name}</div>
-                                <div className={styles.price}>
-                                    {product.priceData?.formatted?.discountedPrice ??
-                                        product.priceData?.formatted?.price ??
-                                        ''}
+                            <div className={styles.popupContentWrapper}>
+                                <div className={styles.popupContent}>
+                                    <div className={styles.productName}>{product.name}</div>
+                                    <div className={styles.price}>
+                                        {product.priceData?.formatted?.discountedPrice ??
+                                            product.priceData?.formatted?.price ??
+                                            ''}
+                                    </div>
                                 </div>
+                                <Icon name={'chevron_right'} />
                             </div>
                         </motion.div>
                     </div>

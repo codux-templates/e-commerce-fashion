@@ -45,7 +45,7 @@ export const ProductOption = ({
 
                     {optionType === products.OptionType.color ? (
                         <ColorSelect
-                            className={'colorSelect'}
+                            className={styles.colorSelect}
                             // `description` is what identifies the color choice. It's the unique color name.
                             // `value` is the color value, which can be repeated in different color choices.
                             options={choices
@@ -90,9 +90,9 @@ export const ProductOption = ({
                 <div>
                     {optionType === products.OptionType.color && (
                         <div className={styles.quickViewRow}>
-                            Color
+                            {option.name}
                             <ColorSelect
-                                className={classNames('colorSelect', styles.quickViewColors)}
+                                className={styles.quickViewColorSelect}
                                 // `description` is what identifies the color choice. It's the unique color name.
                                 // `value` is the color value, which can be repeated in different color choices.
                                 options={choices
@@ -110,7 +110,7 @@ export const ProductOption = ({
                     )}
                     {optionType !== products.OptionType.color && (
                         <div className={styles.quickViewRow}>
-                            <div>Size</div>
+                            <div>{option.name}</div>
                             <div className={styles.quickViewSizes}>
                                 {choices
                                     .filter((c) => c.value && c.description && c.visible)

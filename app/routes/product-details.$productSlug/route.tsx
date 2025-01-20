@@ -165,8 +165,8 @@ function ProductDetails() {
                         )}
                 </div>
             </div>
-
             <FeaturedProductsSection
+                className={styles.featuredProductsSection}
                 categorySlug={'new-in'}
                 title={'You might also like'}
                 productCount={4}

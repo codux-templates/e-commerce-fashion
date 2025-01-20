@@ -11,7 +11,11 @@
     color: var(--content-error-color);
 }
 
-.quickViewColors {
+.colorSelect {
+    --option-size: 48px;
+}
+
+.quickViewColorSelect {
     --option-size: 24px;
 }
 

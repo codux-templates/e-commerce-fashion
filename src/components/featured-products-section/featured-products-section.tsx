@@ -21,9 +21,9 @@ export const FeaturedProductsSection = (props: FeaturedProductsSectionProps) => 
     return (
         <div className={classNames(styles.root, className)}>
             <FadeIn className={styles.header} duration={1.8}>
-                <h4 className={classNames(styles.headerTitle, 'uppercase')}>
+                <h3 className={classNames(styles.headerTitle, 'uppercase')}>
                     {title ?? category?.name ?? categorySlug}
-                </h4>
+                </h3>
                 <a href={`/products/${categorySlug}`} className="button">
                     Shop all
                 </a>
