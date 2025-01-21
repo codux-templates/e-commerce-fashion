@@ -23,7 +23,9 @@ export default function HomePage() {
                     <div className="subheading">Start the freshest season</div>
                     <h1 className="uppercase">New Spring Collection is Now Online</h1>
                     <CategoryLink categorySlug="all-products">
-                        <button className="button invert button-lg">Shop Collections</button>
+                        <button className="button invert animated button-lg">
+                            Shop Collections
+                        </button>
                     </CategoryLink>
                 </div>
             </div>

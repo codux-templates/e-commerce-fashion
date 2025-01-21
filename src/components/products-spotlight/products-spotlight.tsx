@@ -93,6 +93,7 @@ const Spotlight = ({ spotlight }: { spotlight: ProductSpotlight }) => {
             <div
                 className={styles.spotlight}
                 style={{
+                    backgroundColor: isOpen ? '#00000066' : '#00000029',
                     left: `${spotlight.horizontalPercentage}%`,
                     top: `${spotlight.verticalPercentage}%`,
                 }}

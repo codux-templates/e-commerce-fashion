@@ -33,7 +33,7 @@ export async function coduxLoader(): ReturnType<typeof loader> {
 
 export default function MyOrdersPage() {
     const navigate = useNavigate();
-    const { orders } = useLoaderData<typeof loader>();
+    const { orders } = useLoaderData<typeof loader>() || {};
 
     const formatOrderCreationDate = (date: Date) =>
         date.toLocaleDateString('en-US', {

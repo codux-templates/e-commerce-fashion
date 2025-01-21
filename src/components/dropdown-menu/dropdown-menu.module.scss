@@ -24,7 +24,10 @@
     text-overflow: ellipsis;
     cursor: pointer;
     height: 48px;
-    padding: 8px 8px 8px 12px;
+    padding-top: 8px;
+    padding-right: 12px;
+    padding-left: 12px;
+    padding-bottom: 8px;
     gap: 16px;
     display: flex;
     align-items: center;
@@ -35,6 +38,10 @@
         background: var(--surface-mid-color);
     }
 
+    &:hover:focus-visible {
+        box-shadow: unset;
+    }
+
     &[data-disabled] {
         cursor: default;
         opacity: 0.5;
@@ -42,8 +49,9 @@
 }
 
 .separator {
-    margin: 4px 8px;
+    margin: 4px 0;
     height: 1px;
-    border: 1px inset #eee;
+    color: var(--border-light-color);
+    border: 1px solid var(--border-light-color);
     opacity: 0.4;
 }

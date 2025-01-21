@@ -1,4 +1,4 @@
-import { NavLink } from '@remix-run/react';
+import { Link } from '@remix-run/react';
 import { Avatar } from '~/src/components/avatar/avatar';
 import {
     DropdownMenu,
@@ -15,46 +15,46 @@ export const UserMenu = () => {
 
     if (!isLoggedIn) {
         return (
-            <NavLink className={styles.root} to={'/login'}>
+            <Link className={styles.root} to={'/login'}>
                 <div className={styles.icon}>
                     <Icon name={'person'} />
                 </div>
                 <div className={styles.label}>Sign in</div>
-            </NavLink>
+            </Link>
         );
     }
 
     return (
         <DropdownMenu
             trigger={
-                <div className={styles.root}>
+                <button className={styles.root}>
                     <Avatar imageSrc={user?.profile?.photo?.url} />
                     <Icon name={'expand_more'} />
-                </div>
+                </button>
             }
             contentProps={{
                 align: 'end',
                 sideOffset: 6,
             }}
         >
-            <DropdownMenuItem asChild>
-                <NavLink className={styles.link} to={'/members-area/my-account'}>
+            <DropdownMenuItem className={styles.dropdownItem}>
+                <Link className={styles.link} to={'/members-area/my-account'}>
                     My Account
-                </NavLink>
+                </Link>
             </DropdownMenuItem>
 
-            <DropdownMenuItem asChild>
-                <NavLink className={styles.link} to={'/members-area/my-orders'}>
+            <DropdownMenuItem className={styles.dropdownItem}>
+                <Link className={styles.link} to={'/members-area/my-orders'}>
                     My Orders
-                </NavLink>
+                </Link>
             </DropdownMenuItem>
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem asChild>
-                <NavLink className={styles.link} to={'/logout'}>
+            <DropdownMenuItem className={styles.dropdownItem}>
+                <Link className={styles.link} to={'/logout'}>
                     Log out
-                </NavLink>
+                </Link>
             </DropdownMenuItem>
         </DropdownMenu>
     );

@@ -8,6 +8,8 @@ import { getErrorMessage } from '~/src/wix/utils';
 import { ProductOption } from '~/src/components/product-option/product-option';
 import { Product } from '~/src/wix/ecom';
 import Icon from '../icons/icon';
+import { motion } from 'motion/react';
+import { useState } from 'react';
 
 interface ProductCardProps {
     product: Product;
@@ -17,9 +19,10 @@ interface ProductCardProps {
             slug?: string | null;
         };
     };
+    delay?: number;
 }
 
-export const ProductCard = ({ product, state }: ProductCardProps) => {
+export const ProductCard = ({ product, state, delay = 0 }: ProductCardProps) => {
     const {
         outOfStock,
         productOptions,
@@ -37,13 +40,52 @@ export const ProductCard = ({ product, state }: ProductCardProps) => {
     const formattedPrice = product.priceData?.formatted?.price;
     const formattedDiscountedPrice = product.priceData?.formatted?.discountedPrice;
     const discountedPrice = product.priceData?.discountedPrice;
+    const [isHovered, setIsHovered] = useState(false);
 
+    const quickViewVariants = {
+        hidden: { y: 'calc(100% + 8px)', opacity: 0.7 },
+        visible: { y: 0, opacity: 1, transition: { duration: 0.25, ease: 'easeOut' } },
+        exit: {
+            y: 'calc(100% + 8px)',
+            opacity: 0.7,
+            transition: { duration: 0.25, ease: 'easeIn' },
+        },
+    };
     return (
-        <div className={styles.productCard}>
+        <div
+            onFocus={() => setIsHovered(true)}
+            onBlur={() => setIsHovered(false)}
+            role={'button'}
+            tabIndex={0}
+            key={product._id}
+            className={styles.productCard}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
             <div className={styles.imageWrapper}>
-                <ProductLink productSlug={product.slug!} state={state}>
+                <ProductLink tabIndex={-1} productSlug={product.slug!} state={state}>
                     {imageUrl ? (
-                        <img src={imageUrl} alt={product.name!} className={styles.image} />
+                        <motion.div
+                            initial={{ scale: 1.15 }}
+                            animate={{ scale: 1 }}
+                            transition={{
+                                duration: 0.4, // Duration of the scale animation
+                                delay: delay, // Delay to sync with the reveal animation
+                                ease: 'easeInOut',
+                            }}
+                        >
+                            <motion.img
+                                initial={{ scale: 1 }}
+                                animate={{
+                                    scale: isHovered ? 1.05 : 1,
+                                    transition: { duration: 0.15, ease: 'easeOut', delay: 0 },
+                                }}
+                                transition={{ duration: 0.15, ease: 'easeOut', delay: 0 }}
+                                src={imageUrl}
+                                alt={product.name!}
+                                className={styles.image}
+                            />
+                        </motion.div>
                     ) : (
                         <Icon name="image" />
                     )}
@@ -65,7 +107,13 @@ export const ProductCard = ({ product, state }: ProductCardProps) => {
                     )}
                 </div>
 
-                <div className={styles.quickView}>
+                <motion.div
+                    className={styles.quickView}
+                    variants={quickViewVariants}
+                    initial="hidden"
+                    animate={isHovered ? 'visible' : 'exit'}
+                    onMouseEnter={() => setIsHovered(true)}
+                >
                     {productOptions && productOptions.length > 0 && (
                         <div className={styles.productOptions}>
                             {productOptions.map((option) => (
@@ -97,7 +145,7 @@ export const ProductCard = ({ product, state }: ProductCardProps) => {
                               ? 'Select options'
                               : 'Add to Cart'}
                     </button>
-                </div>
+                </motion.div>
             </div>
             <ProductLink productSlug={product.slug!} state={state}>
                 <div className={styles.name}>{product.name!}</div>

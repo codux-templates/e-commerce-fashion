@@ -4,11 +4,25 @@
     align-items: center;
     gap: 4px;
     cursor: pointer;
+    border: none;
+    background: transparent;
 }
 
 .link {
-    display: block;
+    display: flex;
+    align-items: center;
+    color: var(--content-primary-color);
     font: var(--navlink);
+}
+
+.dropdownItem {
+    border-color: transparent;
+    height: auto;
+}
+
+.dropdownItem:hover {
+    border-color: transparent;
+    height: auto;
 }
 
 .icon {

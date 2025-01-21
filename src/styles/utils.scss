@@ -114,11 +114,10 @@
     padding: 8px 7px;
     border: 1px solid var(--button-primary-border);
     font: var(--action);
-    background: transparent;
+    background-color: transparent;
     color: var(--button-primary-content);
     cursor: pointer;
     white-space: nowrap;
-    transition: all 200ms ease;
     transition-property: background-color, color;
     text-transform: uppercase;
     line-height: 10px;
@@ -126,7 +125,7 @@
     user-select: none;
 }
 
-.button:not(:disabled):hover {
+.button:not(:disabled):not(.animated):hover {
     background: var(--button-primary-surface-hover);
 }
 
@@ -150,7 +149,7 @@
     border: 1px solid var(--border-light-color);
 }
 
-.button:not(:disabled).invert:hover {
+.button:not(:disabled):not(.animated).invert:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
@@ -159,7 +158,7 @@
     color: var(--content-secondary-color);
 }
 
-.button.muted:not(:disabled):hover {
+.button.muted:not(:disabled):not(.animated):hover {
     background: var(--button-primary-surface-hover);
 }
 
@@ -172,7 +171,7 @@
     color: var(--button-primary-invert-content);
 }
 
-.button.button-secondary:not(:disabled):hover {
+.button.button-secondary:not(:disabled):not(.animated):hover {
     background: var(--button-secondary-surface-hover);
 }
 
@@ -200,6 +199,27 @@
 
 .smallButton {
     padding: 5px 16px;
+}
+
+.button.animated {
+    background-size: 100% 200%;
+    background-position: 0 -100%;
+    background-image: linear-gradient(
+        to bottom,
+        var(--button-secondary-surface) 50%,
+        transparent 50%
+    );
+    -webkit-transition: background-position 350ms;
+    -moz-transition: background-position 350ms;
+    transition:
+        background-position 350ms,
+        all 200ms ease;
+}
+
+.button.animated:hover {
+    color: var(--button-primary-invert-content);
+    border-color: var(--button-secondary-surface);
+    background-position: 0 0;
 }
 
 /* Badge ********************************************************************/

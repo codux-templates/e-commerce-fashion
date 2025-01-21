@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { NavLink } from '@remix-run/react';
 import { CategoryLink } from '../category-link/category-link';
 import styles from './navigation-menu.module.scss';
+import { ShuffleText } from '~/src/components/visual-effects/shuffle-text';
 
 interface NavigationMenuProps {
     vertical?: boolean;
@@ -28,32 +29,32 @@ export const NavigationMenu = ({
             <ul className={classNames(styles.menuList, { [styles.vertical]: vertical })}>
                 <li>
                     <CategoryLink categorySlug="all-products" className={menuItemStyle}>
-                        Shop All
+                        <ShuffleText text={'Shop All'} />
                     </CategoryLink>
                 </li>
                 <li>
                     <CategoryLink categorySlug="women" className={menuItemStyle}>
-                        Women
+                        <ShuffleText text={'Women'} />
                     </CategoryLink>
                 </li>
                 <li>
                     <CategoryLink categorySlug="men" className={menuItemStyle}>
-                        Men
+                        <ShuffleText text={'Men'} />
                     </CategoryLink>
                 </li>
                 <li>
                     <CategoryLink categorySlug="accessories" className={menuItemStyle}>
-                        Accessories
+                        <ShuffleText text={'Accessories'} />
                     </CategoryLink>
                 </li>
                 <li>
                     <CategoryLink categorySlug="outlet" className={menuItemStyle}>
-                        Outlet
+                        <ShuffleText text={'Outlet'} />
                     </CategoryLink>
                 </li>
                 <li>
                     <NavLink to={'/about-us'} className={menuItemStyle}>
-                        About
+                        <ShuffleText text={'About'} />
                     </NavLink>
                 </li>
             </ul>

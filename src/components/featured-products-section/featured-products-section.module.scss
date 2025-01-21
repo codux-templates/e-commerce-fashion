@@ -18,7 +18,7 @@
 .products {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 4px;
+    gap: 40px 4px;
     width: 100%;
 }
 
@@ -33,6 +33,5 @@
 
     .products {
         grid-template-columns: 1fr 1fr;
-        gap: 26px 10px;
     }
 }

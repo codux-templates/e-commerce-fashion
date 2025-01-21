@@ -31,7 +31,7 @@ export async function coduxLoader(): ReturnType<typeof loader> {
 }
 
 export default function MyAccountPage() {
-    const { user } = useLoaderData<typeof loader>();
+    const { user } = useLoaderData<typeof loader>() || {};
 
     const initialUserDetailsFormData = {
         firstName: user?.contact?.firstName ?? '',

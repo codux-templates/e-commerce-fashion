@@ -15,7 +15,7 @@
     align-items: center;
     justify-content: center;
     background: var(--surface-mid-color);
-    overflow: hidden;
+    overflow: clip;
 }
 
 .imageWrapper:hover img {
@@ -28,7 +28,6 @@
 }
 
 .image {
-    transition: transform 0.3s;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -78,14 +77,10 @@
     bottom: 8px;
     left: 8px;
     right: 8px;
-    display: none;
     flex-direction: column;
     gap: 8px;
     padding: 8px;
     background: var(--surface-light-color);
-}
-
-.productCard:hover .quickView {
     display: flex;
 }
 

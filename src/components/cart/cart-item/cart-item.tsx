@@ -100,12 +100,12 @@ export const CartItem = ({
                     <div className={styles.priceBreakdown}>
                         {priceBreakdown?.lineItemPrice?.formattedConvertedAmount}
                     </div>
-                    <span
+                    <button
                         className={classNames('action uppercase', styles.removeButton)}
                         onClick={onRemove}
                     >
                         Remove
-                    </span>
+                    </button>
                 </div>
             </div>
 

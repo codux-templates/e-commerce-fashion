@@ -68,7 +68,7 @@ export default function ProductsPage() {
         categoryProducts: resultsFromLoader,
         allCategories,
         productPriceBounds,
-    } = useLoaderData<typeof loader>();
+    } = useLoaderData<typeof loader>() || {};
 
     const { appliedFilters, someFiltersApplied, clearFilters, clearAllFilters } =
         useAppliedProductFilters();

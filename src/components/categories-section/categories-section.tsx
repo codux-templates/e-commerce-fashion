@@ -4,6 +4,7 @@ import { getCategoryImageUrl, useCategoryDetails } from '~/src/wix/categories';
 import styles from './categories-section.module.scss';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from '@remix-run/react';
+import { motion } from 'motion/react';
 
 interface CategoriesSectionProps {
     categorySlugs: string[];
@@ -64,15 +65,30 @@ export const Category = ({ categorySlug }: CategoryProps) => {
                     src={preloadedImage}
                     alt={category?.name ?? categorySlug}
                 />
-                {category?.name ?? categorySlug + ' not found'}
-                {isHovered && preloadedImage && (
-                    <img
-                        style={{ top: mousePosition.y, left: mousePosition.x }}
-                        className={styles.categoryImage}
-                        src={preloadedImage}
-                        alt={category?.name ?? categorySlug}
-                    />
-                )}
+                {category?.name}
+                <motion.div
+                    style={{
+                        display: isHovered ? 'block' : 'none',
+                        top: mousePosition.y,
+                        left: mousePosition.x,
+                    }}
+                    className={styles.categoryImage}
+                    //transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                    animate={isHovered ? 'show' : 'hidden'}
+                    initial={false}
+                    variants={{
+                        show: {
+                            clipPath: 'inset(0 0 0 0)',
+                            transitionEnd: { clipPath: '' },
+                        },
+                        hidden: {
+                            clipPath: 'inset(100% 0 0 0)',
+                        },
+                    }}
+                >
+                    <img src={preloadedImage} alt={category?.name ?? categorySlug} />
+                </motion.div>
             </Reveal>
         </div>
     );

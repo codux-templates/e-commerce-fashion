@@ -81,6 +81,10 @@
 }
 
 .removeButton {
+    font: var(--action);
+    width: min-content;
+    border: none;
+    background: transparent;
     grid-area: removeButton;
     cursor: pointer;
     height: min-content;

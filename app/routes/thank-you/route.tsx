@@ -16,7 +16,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function ThankYouPage() {
-    const { order } = useLoaderData<typeof loader>();
+    const { order } = useLoaderData<typeof loader>() || {};
 
     return (
         <div className={styles.root}>

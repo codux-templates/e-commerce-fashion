@@ -41,7 +41,7 @@ export async function coduxLoader(): ReturnType<typeof loader> {
 }
 
 export default function MyOrderPage() {
-    const { order, orderTransactions } = useLoaderData<typeof loader>();
+    const { order, orderTransactions } = useLoaderData<typeof loader>() || {};
 
     return (
         <div className={styles.page}>

@@ -27,8 +27,6 @@
     justify-content: center;
     align-items: center;
     border-radius: 100%;
-    backdrop-filter: blur(4px) invert(0.15);
-    background: rgba(255, 255, 255, 0.25);
 }
 
 .spotlightInner {
@@ -38,10 +36,10 @@
     width: 10px;
     height: 10px;
     background: var(--surface-light-color);
-    border: 0.5px solid rgba(0, 0, 0, 0.3);
 }
 
 .popup {
+    border-radius: 2px;
     background: var(--surface-light-color);
     box-sizing: border-box;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);

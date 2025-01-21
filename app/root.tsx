@@ -9,10 +9,11 @@ import {
     Links,
     Meta,
     type MetaFunction,
-    Outlet,
     Scripts,
     ScrollRestoration,
     useLoaderData,
+    useLocation,
+    useOutlet,
 } from '@remix-run/react';
 import { Cart } from '~/src/components/cart/cart';
 import { Footer } from '~/src/components/footer/footer';
@@ -25,7 +26,8 @@ import { commitSession, initializeEcomSession } from '~/src/wix/ecom/session';
 import 'material-symbols';
 
 import styles from './root.module.scss';
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const { wixSessionTokens, session, shouldUpdateSessionCookie } =
@@ -63,20 +65,37 @@ export function Layout({ children }: PropsWithChildren) {
 }
 
 export default function App() {
-    const { wixClientId, wixSessionTokens } = useLoaderData<typeof loader>();
+    const { wixClientId, wixSessionTokens } = useLoaderData<typeof loader>() || {};
 
     setWixClientId(wixClientId);
 
     return (
         <EcomApiContextProvider tokens={wixSessionTokens}>
             <CartOpenContextProvider>
-                <div className={styles.root}>
-                    <Header />
-                    <main className={styles.main}>
-                        <Outlet />
-                    </main>
-                    <Footer />
-                </div>
+                <AnimatePresence mode={'wait'} initial={false}>
+                    <motion.div
+                        key={useLocation().key}
+                        variants={{
+                            initial: { opacity: 0, scale: 0.9, originX: '50vw', originY: '50vh' },
+                            animate: { opacity: 1, scale: 1, originX: '50vw', originY: '50vh' },
+                            exit: { opacity: 0, scale: 0.9, originX: '50vw', originY: '50vh' },
+                        }}
+                        transition={{
+                            duration: 0.4,
+                        }}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                    >
+                        <div className={styles.root}>
+                            <Header />
+                            <main className={styles.main}>
+                                <AnimatedOutlet locationKey={useLocation().key} />
+                            </main>
+                            <Footer />
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
                 <Cart />
                 <NavigationProgressBar className={styles.navigationProgressBar} />
                 <Toaster />
@@ -115,3 +134,8 @@ export const meta: MetaFunction = () => {
 };
 
 export { ErrorBoundary } from '~/src/components/error-page/error-page';
+
+const AnimatedOutlet = ({ locationKey }: { locationKey: string }) => {
+    const [prevOutlet] = useState(useOutlet());
+    return prevOutlet && React.cloneElement(prevOutlet, { key: locationKey });
+};
