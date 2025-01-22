@@ -10,6 +10,7 @@ import { initializeEcomApiForRequest } from '~/src/wix/ecom/session';
 import { loaderMockData } from './loader-mock-data';
 
 import styles from './route.module.scss';
+import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
 
 export type LoaderResponseData = { user: Member | undefined };
 export type LoaderResponse = Promise<TypedResponse<never> | LoaderResponseData>;
@@ -63,7 +64,7 @@ export default function MyAccountPage() {
         navigation.state === 'submitting' && navigation.formAction === resetPasswordFormAction;
 
     return (
-        <div>
+        <PageWrapper>
             <div className={classNames(styles.section, styles.header)}>
                 <div>
                     <h2 className="heading4">Account</h2>
@@ -231,7 +232,7 @@ export default function MyAccountPage() {
                     </button>
                 </div>
             </Dialog>
-        </div>
+        </PageWrapper>
     );
 }
 

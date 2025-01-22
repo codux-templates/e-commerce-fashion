@@ -5,6 +5,7 @@ import { CategoryLink } from '~/src/components/category-link/category-link';
 import { OrderSummary } from '~/src/components/order-summary/order-summary';
 
 import styles from './route.module.scss';
+import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const url = new URL(request.url);
@@ -19,21 +20,23 @@ export default function ThankYouPage() {
     const { order } = useLoaderData<typeof loader>() || {};
 
     return (
-        <div className={styles.root}>
-            <h1 className="heading4">Thank You!</h1>
-            <div className={styles.subtitle}>You’ll receive a confirmation email soon.</div>
+        <PageWrapper>
+            <div className={styles.root}>
+                <h1 className="heading4">Thank You!</h1>
+                <div className={styles.subtitle}>You’ll receive a confirmation email soon.</div>
 
-            {order && (
-                <>
-                    <div className={styles.orderNumber}>Order number: {order.number}</div>
-                    <OrderSummary order={order} className={styles.orderSummary} />
-                </>
-            )}
+                {order && (
+                    <>
+                        <div className={styles.orderNumber}>Order number: {order.number}</div>
+                        <OrderSummary order={order} className={styles.orderSummary} />
+                    </>
+                )}
 
-            <CategoryLink categorySlug="all-products" className={styles.link}>
-                Continue Browsing
-            </CategoryLink>
-        </div>
+                <CategoryLink categorySlug="all-products" className={styles.link}>
+                    Continue Browsing
+                </CategoryLink>
+            </div>
+        </PageWrapper>
     );
 }
 

@@ -8,7 +8,7 @@ import { ProductOption } from '~/src/components/product-option/product-option';
 import { ProductPrice } from '~/src/components/product-price/product-price';
 import { QuantityInput } from '~/src/components/quantity-input/quantity-input';
 import { toast } from '~/src/components/toast/toast';
-import { initializeEcomApiAnonymous } from '~/src/wix/ecom';
+import { initializeEcomApiAnonymous, Product } from '~/src/wix/ecom';
 import { initializeEcomApiForRequest } from '~/src/wix/ecom/session';
 import { useProductDetails } from '~/src/wix/products';
 import { getErrorMessage, removeQueryStringFromUrl } from '~/src/wix/utils';
@@ -19,6 +19,9 @@ import { ProductsSpotlight } from '~/src/components/products-spotlight/products-
 import styles from './route.module.scss';
 import { useCart, useCheckout } from '~/src/wix/cart';
 import { Spinner } from '~/src/components/spinner/spinner';
+import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
+import { useEffect, useState } from 'react';
+import { JsonifyObject } from 'type-fest/source/jsonify';
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     if (!params.productSlug) throw new Response('Bad Request', { status: 400 });
@@ -35,14 +38,24 @@ export const getStaticRoutes: GetStaticRoutes = async () => {
 };
 
 export default function ProductDetailsPage() {
-    const { product } = useLoaderData<typeof loader>() || {};
-    // The `key` ensures the component state, such as selected options or
-    // quantity, resets when navigating between products.
-    return <ProductDetails key={product._id} />;
+    const loaderData = useLoaderData<typeof loader>();
+    if (!loaderData) return <></>;
+    const [data, setData] = useState(loaderData);
+
+    useEffect(() => {
+        setData(data);
+        return () => {
+            setData(data);
+        };
+    }, [data]);
+    return (
+        <PageWrapper key={data.product._id}>
+            <ProductDetails product={data.product} />
+        </PageWrapper>
+    );
 }
 
-function ProductDetails() {
-    const { product } = useLoaderData<typeof loader>() || {};
+function ProductDetails({ product }: { product: JsonifyObject<Product> }) {
     const { isCartTotalsUpdating } = useCart();
     const {
         outOfStock,

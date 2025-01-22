@@ -11,6 +11,8 @@ import { CategoryLink } from '~/src/components/category-link/category-link';
 import { loaderMockData } from './loader-mock-data';
 
 import styles from './route.module.scss';
+import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
+import { useEffect, useState } from 'react';
 
 export type LoaderResponseData = { orders: OrderDetails[] };
 export type LoaderResponse = Promise<TypedResponse<never> | LoaderResponseData>;
@@ -33,7 +35,16 @@ export async function coduxLoader(): ReturnType<typeof loader> {
 
 export default function MyOrdersPage() {
     const navigate = useNavigate();
-    const { orders } = useLoaderData<typeof loader>() || {};
+    const loaderData = useLoaderData<typeof loader>();
+    if (!loaderData) return <></>;
+    const [data, setData] = useState(loaderData);
+
+    useEffect(() => {
+        setData(data);
+        return () => {
+            setData(data);
+        };
+    }, [data]);
 
     const formatOrderCreationDate = (date: Date) =>
         date.toLocaleDateString('en-US', {
@@ -43,9 +54,9 @@ export default function MyOrdersPage() {
         });
 
     return (
-        <div>
+        <PageWrapper>
             <div className={styles.orders}>
-                {orders.length > 0 ? (
+                {data.orders.length > 0 ? (
                     <>
                         <div className={styles.orderListHeader}>
                             <div className={styles.orderListHeaderSection}>Order</div>
@@ -55,7 +66,7 @@ export default function MyOrdersPage() {
                             <div className={styles.orderListHeaderSection}></div>
                         </div>
 
-                        {orders.map((order) => (
+                        {data.orders.map((order) => (
                             <div key={order._id} className={styles.orderHeaderWrapper}>
                                 <div className={styles.orderHeader}>
                                     <div className={styles.orderHeaderSection}>
@@ -111,7 +122,7 @@ export default function MyOrdersPage() {
                     </div>
                 )}
             </div>
-        </div>
+        </PageWrapper>
     );
 }
 

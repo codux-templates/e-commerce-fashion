@@ -68,26 +68,36 @@ export default function App() {
     const { wixClientId, wixSessionTokens } = useLoaderData<typeof loader>() || {};
 
     setWixClientId(wixClientId);
-
+    const location = useLocation();
     return (
         <EcomApiContextProvider tokens={wixSessionTokens}>
             <CartOpenContextProvider>
                 <AnimatePresence mode={'wait'} initial={false}>
                     <motion.div
-                        key={useLocation().key}
+                        key={location.key}
                         variants={{
-                            initial: { opacity: 0, scale: 0.9, originX: '50vw', originY: '50vh' },
+                            initial: {
+                                opacity: 0,
+                                scale: 0.8,
+                                originX: '50vw',
+                                originY: '50vh',
+                            },
                             animate: {
-                                transition: { delay: 0.4, ease: 'easeInOut' },
+                                transition: { delay: 0.3, ease: 'easeInOut' },
                                 opacity: 1,
                                 scale: 1,
                                 originX: '50vw',
                                 originY: '50vh',
                             },
-                            exit: { opacity: 0, scale: 0.9, originX: '50vw', originY: '50vh' },
+                            exit: {
+                                opacity: 0,
+                                scale: 0.8,
+                                originX: '50vw',
+                                originY: '50vh',
+                            },
                         }}
                         transition={{
-                            duration: 0.5,
+                            duration: 0.4,
                             ease: 'easeInOut',
                         }}
                         initial="initial"
@@ -97,7 +107,7 @@ export default function App() {
                         <div className={styles.root}>
                             <Header />
                             <main className={styles.main}>
-                                <AnimatedOutlet locationKey={useLocation().key} />
+                                <AnimatedOutlet locationKey={location.key} />
                             </main>
                             <Footer />
                         </div>
@@ -143,6 +153,6 @@ export const meta: MetaFunction = () => {
 export { ErrorBoundary } from '~/src/components/error-page/error-page';
 
 const AnimatedOutlet = ({ locationKey }: { locationKey: string }) => {
-    const [prevOutlet] = useState(useOutlet());
-    return prevOutlet && React.cloneElement(prevOutlet, { key: locationKey });
+    const [outlet] = useState(useOutlet());
+    return outlet && React.cloneElement(outlet, { key: locationKey });
 };

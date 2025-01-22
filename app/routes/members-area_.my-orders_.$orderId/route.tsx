@@ -14,6 +14,10 @@ import styles from './route.module.scss';
 import classNames from 'classnames';
 import { orderTransactions } from '@wix/ecom';
 import Icon from '~/src/components/icons/icon';
+import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
+import { useEffect, useState } from 'react';
+import { OrderTransactions } from '@wix/ecom_orders';
+import { JsonifyObject } from 'type-fest/source/jsonify';
 
 export type LoaderResponseData = {
     order: OrderDetails;
@@ -41,24 +45,50 @@ export async function coduxLoader(): ReturnType<typeof loader> {
 }
 
 export default function MyOrderPage() {
-    const { order, orderTransactions } = useLoaderData<typeof loader>() || {};
+    const loaderData = useLoaderData<typeof loader>();
+    if (!loaderData) return <></>;
+    const [data, setData] = useState(loaderData);
 
+    useEffect(() => {
+        setData(data);
+        return () => {
+            setData(data);
+        };
+    }, [data]);
     return (
-        <div className={styles.page}>
-            <div className={styles.header}>
-                <NavLink
-                    to={'/members-area/my-orders'}
-                    className={classNames('action', styles.backLink)}
-                >
-                    <Icon name={'arrow_back'} />
-                    My orders
-                </NavLink>
-                <h1 className="heading1 uppercase">Order details</h1>
+        <MyOrderPageComponent
+            key={data.order._id}
+            order={data.order}
+            orderTransactions={data.orderTransactions}
+        />
+    );
+}
+
+function MyOrderPageComponent({
+    order,
+    orderTransactions,
+}: {
+    order: JsonifyObject<OrderDetails>;
+    orderTransactions: JsonifyObject<OrderTransactions> | undefined;
+}) {
+    return (
+        <PageWrapper>
+            <div className={styles.page}>
+                <div className={styles.header}>
+                    <NavLink
+                        to={'/members-area/my-orders'}
+                        className={classNames('action', styles.backLink)}
+                    >
+                        <Icon name={'arrow_back'} />
+                        My orders
+                    </NavLink>
+                    <h1 className="heading1 uppercase">Order details</h1>
+                </div>
+                <div className={styles.content}>
+                    <OrderSummary order={order} orderTransactions={orderTransactions} />
+                </div>
             </div>
-            <div className={styles.content}>
-                <OrderSummary key={order._id} order={order} orderTransactions={orderTransactions} />
-            </div>
-        </div>
+        </PageWrapper>
     );
 }
 

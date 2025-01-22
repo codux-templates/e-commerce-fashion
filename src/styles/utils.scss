@@ -107,6 +107,10 @@
 
 /* Buttons ********************************************************************/
 
+button {
+    color: var(--button-primary-content);
+}
+
 .button {
     display: inline-flex;
     align-items: center;

@@ -9,10 +9,11 @@ import { MetaFunction } from '@remix-run/react';
 import { Banner } from '~/src/components/banner/banner';
 import { ProductsSpotlight } from '~/src/components/products-spotlight/products-spotlight';
 import { InfoSection } from '~/src/components/info-section/info-section';
+import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
 
 export default function HomePage() {
     return (
-        <>
+        <PageWrapper>
             <div className="heroBanner">
                 <img
                     src="https://static.wixstatic.com/media/a2cc95_30c2b0d877354d389a2bce2e169440c9~mv2.png/v1/fit/w_2560,h_1440/4737ca55766dd3c7e65a3f69a8937bc5.png"
@@ -111,7 +112,7 @@ export default function HomePage() {
                     ]}
                 />
             </div>
-        </>
+        </PageWrapper>
     );
 }
 
