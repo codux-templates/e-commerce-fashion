@@ -17,6 +17,8 @@ import { FeaturedProductsSection } from '~/src/components/featured-products-sect
 import { Banner } from '~/src/components/banner/banner';
 import { ProductsSpotlight } from '~/src/components/products-spotlight/products-spotlight';
 import styles from './route.module.scss';
+import { useCart, useCheckout } from '~/src/wix/cart';
+import { Spinner } from '~/src/components/spinner/spinner';
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     if (!params.productSlug) throw new Response('Bad Request', { status: 400 });
@@ -41,7 +43,7 @@ export default function ProductDetailsPage() {
 
 function ProductDetails() {
     const { product } = useLoaderData<typeof loader>() || {};
-
+    const { isCartTotalsUpdating } = useCart();
     const {
         outOfStock,
         priceData,
@@ -54,10 +56,24 @@ function ProductDetails() {
         handleAddToCart,
         handleOptionChange,
         handleQuantityChange,
-        isAllOptionsSelected,
     } = useProductDetails(product);
 
-    const handleError = (error: unknown) => toast.error(getErrorMessage(error));
+    const handleError = (error: unknown) => {
+        return toast.error(getErrorMessage(error));
+    };
+
+    const { checkout, isCheckoutInProgress } = useCheckout({
+        successUrl: '/thank-you',
+        cancelUrl: '/products/all-products',
+        onError: handleError,
+    });
+
+    const handleBuyItNow = async () => {
+        if (await handleAddToCart(false)) {
+            checkout().catch(handleError);
+        }
+    };
+
     return (
         <div className={styles.page}>
             <div className={styles.content}>
@@ -118,17 +134,13 @@ function ProductDetails() {
                         className={classNames(
                             'button',
                             'primaryButton',
-                            'button-lg',
+                            'button-md',
                             styles.addToCartButton,
                         )}
                         onClick={() => handleAddToCart().catch(handleError)}
-                        disabled={outOfStock || isAddingToCart || !isAllOptionsSelected()}
+                        disabled={outOfStock || isAddingToCart}
                     >
-                        {outOfStock
-                            ? 'Out of stock'
-                            : !isAllOptionsSelected()
-                              ? 'Select options'
-                              : 'Add to Cart'}
+                        {outOfStock ? 'Out of stock' : 'Add to Cart'}
                     </button>
 
                     {!outOfStock && (
@@ -136,13 +148,13 @@ function ProductDetails() {
                             className={classNames(
                                 'button',
                                 'button-secondary',
-                                'button-lg',
+                                'button-md',
                                 styles.buyItNowButton,
                             )}
-                            onClick={() => handleAddToCart().catch(handleError)}
-                            disabled={outOfStock || isAddingToCart || !isAllOptionsSelected()}
+                            onClick={handleBuyItNow}
+                            disabled={isCheckoutInProgress || isCartTotalsUpdating}
                         >
-                            Buy it now
+                            {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Buy it now'}
                         </button>
                     )}
 

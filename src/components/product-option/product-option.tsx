@@ -115,7 +115,7 @@ export const ProductOption = ({
                                 {choices
                                     .filter((c) => c.value && c.description && c.visible)
                                     .map((c) => (
-                                        <span
+                                        <button
                                             className={classNames(
                                                 styles.option,
                                                 { [styles.disabled]: !c.inStock },
@@ -123,12 +123,13 @@ export const ProductOption = ({
                                                     [styles.selected]:
                                                         selectedChoice?.value === c.value!,
                                                 },
+                                                { [styles.hasError]: hasError },
                                             )}
                                             key={c.value}
                                             onClick={() => handleChange(c.value!)}
                                         >
                                             {c.description}
-                                        </span>
+                                        </button>
                                     ))}
                             </div>
                         </div>

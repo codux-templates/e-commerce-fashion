@@ -33,9 +33,15 @@
     font: var(--body2);
     text-transform: uppercase;
     gap: 2px;
+    border: 1px solid transparent;
+}
+
+.option.hasError {
+    border-color: var(--border-error-color);
 }
 
 .option {
+    background-color: unset;
     border: 1px solid transparent;
     cursor: pointer;
     padding: 2px;

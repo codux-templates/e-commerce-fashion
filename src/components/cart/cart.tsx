@@ -26,11 +26,11 @@ export const Cart = () => {
         }
     }, [isOpen]);
 
-    const handleError = (error: unknown) =>
-        toast.error(getErrorMessage(error), {
+    const handleError = (error: unknown) => {
+        return toast.error(getErrorMessage(error), {
             position: 'bottom-right',
-            style: { width: 400 },
         });
+    };
 
     const { checkout, isCheckoutInProgress } = useCheckout({
         successUrl: '/thank-you',

@@ -28,7 +28,7 @@ export const Banner = ({
                 </div>
                 <NavLink
                     to={buttonUrl}
-                    className={classNames('button animated button-lg', styles.bannerButton)}
+                    className={classNames('button animated button-md', styles.bannerButton)}
                 >
                     {buttonText}
                 </NavLink>

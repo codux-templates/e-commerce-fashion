@@ -30,6 +30,7 @@
 }
 
 .navigation {
+    position: relative;
     z-index: 100;
     height: var(--header-height);
     padding: 0 var(--pagePaddingHoriz);
@@ -97,6 +98,16 @@
 }
 
 @media (max-width: 1023px) {
+    .logo {
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .openMenuButton {
+        display: flex;
+    }
+
     .menu {
         display: none;
     }
@@ -105,15 +116,4 @@
         grid-template-columns: auto 1fr auto;
         align-items: center;
     }
-
-    .logo {
-        flex-grow: 1;
-    }
-
-    .openMenuButton {
-        display: flex;
-    }
-}
-
-@media (max-width: 768px) {
 }

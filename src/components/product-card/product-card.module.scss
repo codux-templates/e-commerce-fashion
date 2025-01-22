@@ -82,6 +82,7 @@
     padding: 8px;
     background: var(--surface-light-color);
     display: flex;
+    opacity: 0;
 }
 
 .productOptions {
@@ -95,7 +96,12 @@
 }
 
 @media (max-width: 767px) {
+    .productCard .quickView {
+        display: none !important;
+        opacity: 0 !important;
+    }
     .productCard:hover .quickView {
-        display: none;
+        display: none !important;
+        opacity: 0 !important;
     }
 }

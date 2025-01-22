@@ -228,7 +228,7 @@ const Summary = ({
         </div>
 
         <button
-            className={classNames('button button-lg', styles.checkoutButton)}
+            className={classNames('button button-md', styles.checkoutButton)}
             onClick={checkout}
             disabled={isCheckoutInProgress || isCartTotalsUpdating}
         >

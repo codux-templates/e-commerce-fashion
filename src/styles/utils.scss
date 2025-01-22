@@ -140,6 +140,10 @@
 }
 
 .button.button-lg {
+    padding: 27px 40px;
+}
+
+.button.button-md {
     padding: 19px 40px;
 }
 
@@ -216,10 +220,21 @@
         all 200ms ease;
 }
 
+.button.invert.animated {
+    background-image: linear-gradient(
+        to bottom,
+        var(--button-primary-surface) 50%,
+        transparent 50%
+    );
+}
+
 .button.animated:hover {
-    color: var(--button-primary-invert-content);
-    border-color: var(--button-secondary-surface);
+    color: var(--button-primary-surface);
     background-position: 0 0;
+}
+
+.button.invert.animated:hover {
+    color: var(--button-secondary-surface);
 }
 
 /* Badge ********************************************************************/

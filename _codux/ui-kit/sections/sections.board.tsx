@@ -29,7 +29,7 @@ export default createBoard({
                                         New Spring Collection is Now Online
                                     </h1>
                                     <CategoryLink categorySlug="all-products">
-                                        <button className="button invert button-lg">
+                                        <button className="button invert button-md">
                                             Shop Collections
                                         </button>
                                     </CategoryLink>

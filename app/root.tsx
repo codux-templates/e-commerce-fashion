@@ -77,11 +77,18 @@ export default function App() {
                         key={useLocation().key}
                         variants={{
                             initial: { opacity: 0, scale: 0.9, originX: '50vw', originY: '50vh' },
-                            animate: { opacity: 1, scale: 1, originX: '50vw', originY: '50vh' },
+                            animate: {
+                                transition: { delay: 0.4, ease: 'easeInOut' },
+                                opacity: 1,
+                                scale: 1,
+                                originX: '50vw',
+                                originY: '50vh',
+                            },
                             exit: { opacity: 0, scale: 0.9, originX: '50vw', originY: '50vh' },
                         }}
                         transition={{
-                            duration: 0.4,
+                            duration: 0.5,
+                            ease: 'easeInOut',
                         }}
                         initial="initial"
                         animate="animate"

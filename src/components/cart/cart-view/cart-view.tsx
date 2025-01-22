@@ -108,7 +108,10 @@ export const CartView = forwardRef<HTMLDivElement, CartViewProps>(function CartV
                             {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Checkout'}
                         </button>*/}
                         <button
-                            className={classNames('button button-lg', styles.viewCartButton)}
+                            className={classNames(
+                                'button button-secondary button-md',
+                                styles.viewCartButton,
+                            )}
                             onClick={onViewCart}
                         >
                             Checkout

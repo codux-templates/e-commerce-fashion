@@ -1,12 +1,8 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
+import styles from './route.module.scss';
+import { LoaderFunctionArgs } from '@remix-run/node';
 import { type MetaFunction, useLoaderData } from '@remix-run/react';
 import type { GetStaticRoutes } from '@wixc3/define-remix-app';
-import classNames from 'classnames';
-import { useEffect } from 'react';
-import { CategoryLink } from '~/src/components/category-link/category-link';
-import { ProductFilters } from '~/src/components/product-filters/product-filters';
-import { ProductGrid } from '~/src/components/product-grid/product-grid';
-import { ProductSortingSelect } from '~/src/components/product-sorting-select/product-sorting-select';
+import { useEffect, useMemo } from 'react';
 import { toast } from '~/src/components/toast/toast';
 import { initializeEcomApiAnonymous, ProductFilter } from '~/src/wix/ecom';
 import { initializeEcomApiForRequest } from '~/src/wix/ecom/session';
@@ -18,8 +14,11 @@ import {
     useProductsPageResults,
 } from '~/src/wix/products';
 import { getErrorMessage } from '~/src/wix/utils';
-
-import styles from './route.module.scss';
+import { ProductGrid } from '~/src/components/product-grid/product-grid';
+import { ProductFilters } from '~/src/components/product-filters/product-filters';
+import { ProductSortingSelect } from '~/src/components/product-sorting-select/product-sorting-select';
+import { CategoryLink } from '~/src/components/category-link/category-link';
+import classNames from 'classnames';
 import { Banner } from '~/src/components/banner/banner';
 
 const INITIAL_PRODUCTS_LIMIT = 8;
@@ -42,7 +41,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
         throw new Response('Category Not Found', { status: 404 });
     }
 
-    const [categoryProducts, allCategories, productPriceBounds] = await Promise.all([
+    const [categoryProducts, categories, productPriceBounds] = await Promise.all([
         api.getProducts({
             categoryId: category._id!,
             filters,
@@ -53,7 +52,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
         api.getProductPriceBoundsInCategory(category._id!),
     ]);
 
-    return { category, categoryProducts, allCategories, productPriceBounds };
+    return { category, categoryProducts, categories, productPriceBounds };
 };
 
 export const getStaticRoutes: GetStaticRoutes = async () => {
@@ -63,12 +62,25 @@ export const getStaticRoutes: GetStaticRoutes = async () => {
 };
 
 export default function ProductsPage() {
-    const {
-        category,
-        categoryProducts: resultsFromLoader,
-        allCategories,
-        productPriceBounds,
-    } = useLoaderData<typeof loader>() || {};
+    const { category, categoryProducts, categories, productPriceBounds } =
+        useLoaderData<typeof loader>() || {};
+
+    const skippedCategories: string[] = [];
+    const preferredOrder: string[] = ['all-products', 'women', 'men', 'accessories', 'outlet'];
+
+    const orderedCategories = useMemo(() => {
+        if (!categories) return [];
+        const filteredCategories = categories.filter(
+            (category) => !skippedCategories.includes(category.slug!),
+        );
+        const sortedCategories = preferredOrder.map((slug) =>
+            filteredCategories.find((category) => category.slug === slug),
+        );
+        const remainingCategories = filteredCategories.filter(
+            (category) => !preferredOrder.includes(category.slug!),
+        );
+        return [...sortedCategories, ...remainingCategories];
+    }, [categories, skippedCategories, preferredOrder]);
 
     const { appliedFilters, someFiltersApplied, clearFilters, clearAllFilters } =
         useAppliedProductFilters();
@@ -80,7 +92,7 @@ export default function ProductsPage() {
             categoryId: category._id!,
             filters: appliedFilters,
             sorting,
-            resultsFromLoader,
+            resultsFromLoader: categoryProducts,
             limit: LOAD_MORE_PRODUCTS_LIMIT,
         });
 
@@ -107,20 +119,21 @@ export default function ProductsPage() {
                     </div>
 
                     <div className={styles.categoryList}>
-                        {allCategories.map((category) => (
-                            <div key={category._id} className={styles.categoryListItem}>
-                                <CategoryLink
-                                    categorySlug={category.slug!}
-                                    className={({ isActive }) =>
-                                        classNames('button button-sm', styles.categoryLink, {
-                                            ['active']: isActive,
-                                        })
-                                    }
-                                >
-                                    {category.name}
-                                </CategoryLink>
-                            </div>
-                        ))}
+                        {orderedCategories &&
+                            orderedCategories.map((category) => (
+                                <div key={category?._id} className={styles.categoryListItem}>
+                                    <CategoryLink
+                                        categorySlug={category?.slug!}
+                                        className={({ isActive }) =>
+                                            classNames('button button-sm', styles.categoryLink, {
+                                                ['active']: isActive,
+                                            })
+                                        }
+                                    >
+                                        {category?.name}
+                                    </CategoryLink>
+                                </div>
+                            ))}
                     </div>
 
                     <div className={styles.countAndSorting}>

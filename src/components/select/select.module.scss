@@ -5,16 +5,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 0 8px 12px;
-    background: var(--surface-mid-color);
+    background: var(--surface-light-color);
     border: 1px solid var(--border-dark-color);
     color: var(--content-primary-color);
     cursor: pointer;
     border-radius: 2px;
     user-select: none;
-}
-
-.trigger:focus-visible {
-    box-shadow: none;
 }
 
 .trigger.hasError {

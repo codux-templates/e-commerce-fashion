@@ -34,10 +34,10 @@ export const ProductFilters = ({
     return (
         <DropdownMenu
             trigger={
-                <div className={styles.trigger}>
+                <button className={styles.trigger}>
                     Price
                     <Icon className={styles.triggerIcon} name={'expand_more'} />
-                </div>
+                </button>
             }
             contentProps={{ align: 'end', className: styles.content }}
         >

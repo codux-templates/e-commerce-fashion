@@ -20,9 +20,15 @@ interface ProductCardProps {
         };
     };
     delay?: number;
+    isQuickViewEnabled?: boolean;
 }
 
-export const ProductCard = ({ product, state, delay = 0 }: ProductCardProps) => {
+export const ProductCard = ({
+    product,
+    state,
+    delay = 0,
+    isQuickViewEnabled = true,
+}: ProductCardProps) => {
     const {
         outOfStock,
         productOptions,
@@ -31,7 +37,6 @@ export const ProductCard = ({ product, state, delay = 0 }: ProductCardProps) => 
         addToCartAttempted,
         handleAddToCart,
         handleOptionChange,
-        isAllOptionsSelected,
     } = useProductDetails(product);
 
     const handleError = (error: unknown) => toast.error(getErrorMessage(error));
@@ -55,8 +60,6 @@ export const ProductCard = ({ product, state, delay = 0 }: ProductCardProps) => 
         <div
             onFocus={() => setIsHovered(true)}
             onBlur={() => setIsHovered(false)}
-            role={'button'}
-            tabIndex={0}
             key={product._id}
             className={styles.productCard}
             onMouseEnter={() => setIsHovered(true)}
@@ -107,45 +110,45 @@ export const ProductCard = ({ product, state, delay = 0 }: ProductCardProps) => 
                     )}
                 </div>
 
-                <motion.div
-                    className={styles.quickView}
-                    variants={quickViewVariants}
-                    initial="hidden"
-                    animate={isHovered ? 'visible' : 'exit'}
-                    onMouseEnter={() => setIsHovered(true)}
-                >
-                    {productOptions && productOptions.length > 0 && (
-                        <div className={styles.productOptions}>
-                            {productOptions.map((option) => (
-                                <ProductOption
-                                    isQuickView={true}
-                                    key={option.name}
-                                    error={
-                                        addToCartAttempted &&
-                                        selectedChoices[option.name!] === undefined
-                                            ? `Select ${option.name}`
-                                            : undefined
-                                    }
-                                    option={option}
-                                    selectedChoice={selectedChoices[option.name!]}
-                                    onChange={(choice) => handleOptionChange(option.name!, choice)}
-                                />
-                            ))}
-                        </div>
-                    )}
-
-                    <button
-                        className={classNames('button', styles.addToCartButton)}
-                        onClick={() => handleAddToCart().catch(handleError)}
-                        disabled={outOfStock || isAddingToCart || !isAllOptionsSelected()}
+                {isQuickViewEnabled && (
+                    <motion.div
+                        className={styles.quickView}
+                        variants={quickViewVariants}
+                        initial="hidden"
+                        animate={isHovered ? 'visible' : 'exit'}
+                        onMouseEnter={() => setIsHovered(true)}
                     >
-                        {outOfStock
-                            ? 'Out of stock'
-                            : !isAllOptionsSelected()
-                              ? 'Select options'
-                              : 'Add to Cart'}
-                    </button>
-                </motion.div>
+                        {productOptions && productOptions.length > 0 && (
+                            <div className={styles.productOptions}>
+                                {productOptions.map((option) => (
+                                    <ProductOption
+                                        isQuickView={true}
+                                        key={option.name}
+                                        error={
+                                            addToCartAttempted &&
+                                            selectedChoices[option.name!] === undefined
+                                                ? `Select ${option.name}`
+                                                : undefined
+                                        }
+                                        option={option}
+                                        selectedChoice={selectedChoices[option.name!]}
+                                        onChange={(choice) =>
+                                            handleOptionChange(option.name!, choice)
+                                        }
+                                    />
+                                ))}
+                            </div>
+                        )}
+
+                        <button
+                            className={classNames('button button-md', styles.addToCartButton)}
+                            onClick={() => handleAddToCart().catch(handleError)}
+                            disabled={outOfStock || isAddingToCart}
+                        >
+                            {outOfStock ? 'Out of stock' : 'Add to Cart'}
+                        </button>
+                    </motion.div>
+                )}
             </div>
             <ProductLink productSlug={product.slug!} state={state}>
                 <div className={styles.name}>{product.name!}</div>
