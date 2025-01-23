@@ -56,7 +56,7 @@
     opacity: 33%;
     inset: -50%;
     margin: auto;
-    width: 24px;
+    width: var(--option-size);
     border-top: 1px solid #fff;
     mix-blend-mode: difference;
 }
