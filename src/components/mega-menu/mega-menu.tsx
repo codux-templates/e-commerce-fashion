@@ -6,6 +6,7 @@ import { type Collection } from '~/src/wix/ecom';
 import { CategoryLink } from '~/src/components/category-link/category-link';
 import { useMemo } from 'react';
 import { products } from '@wix/stores';
+import { ShuffleText } from '~/src/components/visual-effects/shuffle-text';
 
 interface MegaMenuProps {
     categorySlug?: string;
@@ -65,7 +66,7 @@ export const MegaMenu = ({
                                     key={category?.slug}
                                     categorySlug={category?.slug ?? ''}
                                 >
-                                    {category?.name}
+                                    <ShuffleText text={category?.name ?? ''} />
                                 </CategoryLink>
                             ))}
                     </div>

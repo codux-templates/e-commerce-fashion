@@ -12,7 +12,12 @@ export const FAQSection = ({ items }: FAQSectionProps) => {
             <Accordion
                 className={styles.accordion}
                 items={items.map((item) => ({
-                    header: <div className={styles.question}>{item.question}</div>,
+                    header: (
+                        <div className={styles.question}>
+                            {item.question}
+                            <span>{item.question}</span>
+                        </div>
+                    ),
                     content: <div className={styles.answer}>{item.answer}</div>,
                 }))}
                 initialOpenItemIndex={0}
