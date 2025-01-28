@@ -5,6 +5,10 @@
     overflow: auto;
 }
 
+.imageWrapper:last-child:nth-child(2n - 1) {
+    grid-column: span 2;
+}
+
 .imageWrapper {
     aspect-ratio: 3 / 4;
     display: flex;

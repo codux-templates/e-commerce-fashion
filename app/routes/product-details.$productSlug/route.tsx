@@ -17,7 +17,7 @@ import { FeaturedProductsSection } from '~/src/components/featured-products-sect
 import { Banner } from '~/src/components/banner/banner';
 import { ProductsSpotlight } from '~/src/components/products-spotlight/products-spotlight';
 import styles from './route.module.scss';
-import { useCart, useCheckout } from '~/src/wix/cart';
+import { useCheckout } from '~/src/wix/cart';
 import { Spinner } from '~/src/components/spinner/spinner';
 import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
 import { useEffect, useState } from 'react';
@@ -56,7 +56,6 @@ export default function ProductDetailsPage() {
 }
 
 function ProductDetails({ product }: { product: JsonifyObject<Product> }) {
-    const { isCartTotalsUpdating } = useCart();
     const {
         outOfStock,
         priceData,
@@ -165,7 +164,7 @@ function ProductDetails({ product }: { product: JsonifyObject<Product> }) {
                                 styles.buyItNowButton,
                             )}
                             onClick={handleBuyItNow}
-                            disabled={isCheckoutInProgress || isCartTotalsUpdating}
+                            disabled={isCheckoutInProgress}
                         >
                             {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Buy it now'}
                         </button>

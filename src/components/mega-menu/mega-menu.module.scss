@@ -2,6 +2,16 @@
     padding: 24px 8px;
     background-color: var(--surface-light-color);
     width: 100%;
+    z-index: 10;
+}
+
+.backdrop {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    top: 70px;
+    background-color: var(--overlay-color);
+    z-index: -1;
 }
 
 .contentWrapper {

@@ -30,6 +30,7 @@ export const ProductCard = ({
     isQuickViewEnabled = true,
 }: ProductCardProps) => {
     const {
+        media,
         outOfStock,
         productOptions,
         selectedChoices,
@@ -40,7 +41,6 @@ export const ProductCard = ({
     } = useProductDetails(product);
 
     const handleError = (error: unknown) => toast.error(getErrorMessage(error));
-    const imageUrl = getProductImageUrl(product, { maxWidth: 1000 });
     const price = product.priceData?.price;
     const formattedPrice = product.priceData?.formatted?.price;
     const formattedDiscountedPrice = product.priceData?.formatted?.discountedPrice;
@@ -67,7 +67,7 @@ export const ProductCard = ({
         >
             <div className={styles.imageWrapper}>
                 <ProductLink tabIndex={-1} productSlug={product.slug!} state={state}>
-                    {imageUrl ? (
+                    {media?.mainMedia?.image ? (
                         <motion.div
                             initial={{ scale: 1.15 }}
                             animate={{ scale: 1 }}
@@ -84,7 +84,9 @@ export const ProductCard = ({
                                     transition: { duration: 0.15, ease: 'easeOut', delay: 0 },
                                 }}
                                 transition={{ duration: 0.15, ease: 'easeOut', delay: 0 }}
-                                src={imageUrl}
+                                src={getProductImageUrl(media.mainMedia ?? product, {
+                                    maxWidth: 1000,
+                                })}
                                 alt={product.name!}
                                 className={styles.image}
                             />

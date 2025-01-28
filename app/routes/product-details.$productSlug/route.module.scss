@@ -64,6 +64,12 @@
     background: var(--surface-dark-color);
 }
 
+.buyItNowButton[disabled],
+.buyItNowButton:disabled {
+    color: var(--surface-light-color) !important;
+    background: var(--surface-dark-color) !important;
+}
+
 .additionalInfoSections {
     margin-top: 24px;
 }
