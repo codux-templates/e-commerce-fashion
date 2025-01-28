@@ -13,7 +13,12 @@
     width: 100%;
 }
 
+.question:hover {
+    color: var(--content-secondary-color);
+}
+
 .question {
+    color: var(--content-primary-color);
     font: var(--heading1);
     text-transform: uppercase;
     padding: 16px 40px;

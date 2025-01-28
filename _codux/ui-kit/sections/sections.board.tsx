@@ -111,7 +111,7 @@ export default createBoard({
                                         subheading: 'Save big on new offers every weekend.',
                                     },
                                     {
-                                        icon: 'recycling',
+                                        icon: 'lock',
                                         heading: 'Secure Checkout',
                                         subheading: 'Shop confidently with encrypted payments.',
                                     },

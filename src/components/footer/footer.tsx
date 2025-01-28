@@ -4,6 +4,7 @@ import { CategoryLink } from '~/src/components/category-link/category-link';
 import { FadeIn } from '~/src/components/visual-effects';
 
 import styles from './footer.module.scss';
+import { ShuffleText } from '~/src/components/visual-effects/shuffle-text';
 
 export interface FooterProps {
     className?: string;
@@ -86,12 +87,12 @@ export const Footer = ({ className }: FooterProps) => {
                                 <ul className={styles.navList}>
                                     <li>
                                         <CategoryLink categorySlug="women" className={navItemStyle}>
-                                            Women
+                                            <ShuffleText text="Women" />
                                         </CategoryLink>
                                     </li>
                                     <li>
                                         <CategoryLink categorySlug="men" className={navItemStyle}>
-                                            Men
+                                            <ShuffleText text="Men" />
                                         </CategoryLink>
                                     </li>
                                     <li>
@@ -99,7 +100,7 @@ export const Footer = ({ className }: FooterProps) => {
                                             categorySlug="accessories"
                                             className={navItemStyle}
                                         >
-                                            Accessories
+                                            <ShuffleText text="Accessories" />
                                         </CategoryLink>
                                     </li>
                                     <li>
@@ -107,12 +108,12 @@ export const Footer = ({ className }: FooterProps) => {
                                             categorySlug="outlet"
                                             className={navItemStyle}
                                         >
-                                            Outlet
+                                            <ShuffleText text="Outlet" />
                                         </CategoryLink>
                                     </li>
                                     <li>
                                         <NavLink to={'/about-us'} className={navItemStyle}>
-                                            About
+                                            <ShuffleText text="About" />
                                         </NavLink>
                                     </li>
                                 </ul>
@@ -127,7 +128,7 @@ export const Footer = ({ className }: FooterProps) => {
                                         className={styles.navItem}
                                         target="_blank"
                                     >
-                                        Facebook
+                                        <ShuffleText text="Facebook" />
                                     </Link>
                                 </li>
                                 <li>
@@ -136,7 +137,7 @@ export const Footer = ({ className }: FooterProps) => {
                                         className={styles.navItem}
                                         target="_blank"
                                     >
-                                        Instagram
+                                        <ShuffleText text="Instagram" />
                                     </Link>
                                 </li>
                                 <li>
@@ -145,7 +146,7 @@ export const Footer = ({ className }: FooterProps) => {
                                         className={styles.navItem}
                                         target="_blank"
                                     >
-                                        LinkedIn
+                                        <ShuffleText text="LinkedIn" />
                                     </Link>
                                 </li>
                             </ul>
@@ -173,22 +174,22 @@ export const Footer = ({ className }: FooterProps) => {
                             <ul className={styles.navList}>
                                 <li>
                                     <NavLink to={'/shipping-policy'} className={navItemStyle}>
-                                        Shipping Policy
+                                        <ShuffleText text="Shipping Policy" />
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to={'/privacy-policy'} className={navItemStyle}>
-                                        Privacy Policy
+                                        <ShuffleText text="Privacy Policy" />
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to={'/refund-policy'} className={navItemStyle}>
-                                        Refund Policy
+                                        <ShuffleText text="Refund Policy" />
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to={'/terms-and-conditions'} className={navItemStyle}>
-                                        Terms & Conditions
+                                        <ShuffleText text="Terms & Conditions" />
                                     </NavLink>
                                 </li>
                             </ul>

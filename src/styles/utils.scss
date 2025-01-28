@@ -130,7 +130,7 @@ button {
 }
 
 .button:not(:disabled):not(.animated):hover {
-    background: var(--button-primary-surface-hover);
+    //  background: var(--button-primary-surface-hover);
 }
 
 .button:not(:disabled).active {
@@ -209,7 +209,7 @@ button {
     padding: 5px 16px;
 }
 
-.button.animated {
+.button {
     background-size: 100% 200%;
     background-position: 0 -100%;
     background-image: linear-gradient(
@@ -224,7 +224,7 @@ button {
         all 200ms ease;
 }
 
-.button.invert.animated {
+.button.invert {
     background-image: linear-gradient(
         to bottom,
         var(--button-primary-surface) 50%,
@@ -232,12 +232,12 @@ button {
     );
 }
 
-.button.animated:hover {
+.button:hover {
     color: var(--button-primary-surface);
     background-position: 0 0;
 }
 
-.button.invert.animated:hover {
+.button.invert:hover {
     color: var(--button-secondary-surface);
 }
 

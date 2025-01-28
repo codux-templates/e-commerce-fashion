@@ -8,6 +8,7 @@ import { MegaMenu } from '~/src/components/mega-menu/mega-menu';
 import { AnimatePresence } from 'motion/react';
 import { useState } from 'react';
 import { useProducts } from '~/src/wix/products';
+import Icon from '../icons/icon';
 
 interface NavigationMenuProps {
     vertical?: boolean;
@@ -49,6 +50,7 @@ export const NavigationMenu = ({
                         <span>
                             <CategoryLink categorySlug="all-products" className={menuItemStyle}>
                                 <ShuffleText text={'Shop All'} />
+                                <Icon name="expand_more" />
                             </CategoryLink>
                         </span>
                     </RadixNavigationMenu.Trigger>

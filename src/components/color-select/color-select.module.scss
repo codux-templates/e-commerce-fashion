@@ -48,6 +48,10 @@
     overflow: hidden;
 }
 
+.crossedOut:hover {
+    border-color: transparent;
+}
+
 .crossedOut::after {
     content: '';
     position: absolute;

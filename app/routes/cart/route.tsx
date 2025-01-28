@@ -153,7 +153,7 @@ export default function CartPage() {
                             subheading: 'Save big on new offers every weekend.',
                         },
                         {
-                            icon: 'recycling',
+                            icon: 'lock',
                             heading: 'Secure Checkout',
                             subheading: 'Shop confidently with encrypted payments.',
                         },

@@ -66,3 +66,7 @@
 .option.disabled {
     color: var(--content-disabled-color);
 }
+
+.option.disabled:hover {
+    border-color: transparent;
+}
