@@ -16,8 +16,8 @@ import { orderTransactions } from '@wix/ecom';
 import Icon from '~/src/components/icons/icon';
 import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
 import { useEffect, useState } from 'react';
-import { OrderTransactions } from '@wix/ecom_orders';
-import { JsonifyObject } from 'type-fest/source/jsonify';
+import { type JsonifyObject } from 'type-fest/source/jsonify';
+import { type OrderTransactions } from '@wix/ecom_orders';
 
 export type LoaderResponseData = {
     order: OrderDetails;
@@ -46,15 +46,15 @@ export async function coduxLoader(): ReturnType<typeof loader> {
 
 export default function MyOrderPage() {
     const loaderData = useLoaderData<typeof loader>();
-    if (!loaderData) return <></>;
     const [data, setData] = useState(loaderData);
 
     useEffect(() => {
-        setData(data);
-        return () => {
-            setData(data);
-        };
-    }, [data]);
+        if (!data && loaderData) {
+            setData(loaderData);
+        }
+    }, [loaderData, data]);
+
+    if (!data) return <></>;
     return (
         <MyOrderPageComponent
             key={data.order._id}

@@ -55,7 +55,7 @@ export const CartView = forwardRef<HTMLDivElement, CartViewProps>(function CartV
     const itemCount = cart ? getCartItemCount(cart) : 0;
 
     return (
-        <div tabIndex={0} ref={ref} className={styles.cart}>
+        <div ref={ref} className={styles.cart}>
             <div className={styles.header}>
                 <span className="heading3 uppercase">Cart ({itemCount})</span>
                 <button className={classNames(styles.closeButton, 'iconButton')} onClick={onClose}>

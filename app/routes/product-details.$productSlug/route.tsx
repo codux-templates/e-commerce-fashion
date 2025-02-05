@@ -21,7 +21,7 @@ import { useCheckout } from '~/src/wix/cart';
 import { Spinner } from '~/src/components/spinner/spinner';
 import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
 import { useEffect, useState } from 'react';
-import { JsonifyObject } from 'type-fest/source/jsonify';
+import { type JsonifyObject } from 'type-fest/source/jsonify';
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     if (!params.productSlug) throw new Response('Bad Request', { status: 400 });
@@ -39,15 +39,14 @@ export const getStaticRoutes: GetStaticRoutes = async () => {
 
 export default function ProductDetailsPage() {
     const loaderData = useLoaderData<typeof loader>();
-    if (!loaderData) return <></>;
     const [data, setData] = useState(loaderData);
 
     useEffect(() => {
-        setData(data);
-        return () => {
-            setData(data);
-        };
-    }, [data]);
+        if (!data && loaderData) {
+            setData(loaderData);
+        }
+    }, [loaderData, data]);
+    if (!data) return <></>;
     return (
         <PageWrapper key={data.product._id}>
             <ProductDetails product={data.product} />

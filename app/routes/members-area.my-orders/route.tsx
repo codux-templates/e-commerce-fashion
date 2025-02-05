@@ -36,15 +36,13 @@ export async function coduxLoader(): ReturnType<typeof loader> {
 export default function MyOrdersPage() {
     const navigate = useNavigate();
     const loaderData = useLoaderData<typeof loader>();
-    if (!loaderData) return <></>;
     const [data, setData] = useState(loaderData);
 
     useEffect(() => {
-        setData(data);
-        return () => {
-            setData(data);
-        };
-    }, [data]);
+        if (!data && loaderData) {
+            setData(loaderData);
+        }
+    }, [loaderData, data]);
 
     const formatOrderCreationDate = (date: Date) =>
         date.toLocaleDateString('en-US', {
@@ -52,7 +50,7 @@ export default function MyOrdersPage() {
             day: 'numeric',
             year: 'numeric',
         });
-
+    if (!data) return <></>;
     return (
         <PageWrapper>
             <div className={styles.orders}>

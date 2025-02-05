@@ -109,7 +109,7 @@ export default createBoard({
                 </Kit.Item>
                 <Kit.Item>
                     <Variant name="Action">
-                        <a href={'#'} className="action">
+                        <a href="/#" className="action">
                             Action
                         </a>
                     </Variant>
@@ -119,7 +119,7 @@ export default createBoard({
                 </Kit.Item>
                 <Kit.Item>
                     <Variant name="Navlink">
-                        <a href={'#'} className="navlink">
+                        <a href="/#" className="navlink">
                             Navlink
                         </a>
                     </Variant>

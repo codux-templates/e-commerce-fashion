@@ -27,7 +27,7 @@ import { CategoryLink } from '~/src/components/category-link/category-link';
 import classNames from 'classnames';
 import { Banner } from '~/src/components/banner/banner';
 import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
-import { JsonifyObject } from 'type-fest/source/jsonify';
+import { type JsonifyObject } from 'type-fest/source/jsonify';
 
 const INITIAL_PRODUCTS_LIMIT = 8;
 const LOAD_MORE_PRODUCTS_LIMIT = 8;
@@ -71,16 +71,14 @@ export const getStaticRoutes: GetStaticRoutes = async () => {
 
 export default function ProductsPage() {
     const loaderData = useLoaderData<typeof loader>();
-    if (!loaderData) return <></>;
     const [data, setData] = useState(loaderData);
 
     useEffect(() => {
-        setData(data);
-        return () => {
-            setData(data);
-        };
-    }, [data]);
-
+        if (!data && loaderData) {
+            setData(loaderData);
+        }
+    }, [loaderData, data]);
+    if (!data) return <></>;
     return (
         <PageWrapper key={data.category?._id}>
             <ProductsPageComponent
@@ -105,8 +103,14 @@ function ProductsPageComponent({
     categories: Collection[];
     productPriceBounds: { lowest: number; highest: number };
 }) {
-    const skippedCategories: string[] = [];
-    const preferredOrder: string[] = ['all-products', 'women', 'men', 'accessories', 'outlet'];
+    const [skippedCategories] = useState<string[]>([]);
+    const [preferredOrder] = useState<string[]>([
+        'all-products',
+        'women',
+        'men',
+        'accessories',
+        'outlet',
+    ]);
 
     const orderedCategories = useMemo(() => {
         if (!categories) return [];
@@ -120,7 +124,7 @@ function ProductsPageComponent({
             (category) => !preferredOrder.includes(category.slug!),
         );
         return [...sortedCategories, ...remainingCategories];
-    }, [categories, skippedCategories, preferredOrder]);
+    }, [categories, preferredOrder, skippedCategories]);
 
     const { appliedFilters, someFiltersApplied, clearFilters, clearAllFilters } =
         useAppliedProductFilters();
@@ -163,24 +167,30 @@ function ProductsPageComponent({
 
                         <div className={styles.categoryList}>
                             {orderedCategories &&
-                                orderedCategories.map((category) => (
-                                    <div key={category?._id} className={styles.categoryListItem}>
-                                        <CategoryLink
-                                            categorySlug={category?.slug!}
-                                            className={({ isActive }) =>
-                                                classNames(
-                                                    'button button-sm',
-                                                    styles.categoryLink,
-                                                    {
-                                                        ['active']: isActive,
-                                                    },
-                                                )
-                                            }
-                                        >
-                                            {category?.name}
-                                        </CategoryLink>
-                                    </div>
-                                ))}
+                                orderedCategories.map(
+                                    (category) =>
+                                        category && (
+                                            <div
+                                                key={category._id}
+                                                className={styles.categoryListItem}
+                                            >
+                                                <CategoryLink
+                                                    categorySlug={category.slug ?? ''}
+                                                    className={({ isActive }) =>
+                                                        classNames(
+                                                            'button button-sm',
+                                                            styles.categoryLink,
+                                                            {
+                                                                ['active']: isActive,
+                                                            },
+                                                        )
+                                                    }
+                                                >
+                                                    {category?.name}
+                                                </CategoryLink>
+                                            </div>
+                                        ),
+                                )}
                         </div>
 
                         <div className={styles.countAndSorting}>

@@ -24,68 +24,71 @@ export const ProductGrid = (props: ProductGridProps) => {
     return <ProductGridComponent {...props} key={location.key} />;
 };
 
-const ProductGridComponent = React.memo<ProductGridProps>(
-    ({ category, products, filtersApplied, onClickClearFilters }) => {
-        if (category.numberOfProducts === 0) {
-            return (
-                <EmptyProductsCategory
-                    title="No products here yet..."
-                    subtitle="In the meantime, you can choose a different category to continue shopping."
-                />
-            );
-        }
-
-        if (filtersApplied && products.length === 0) {
-            return (
-                <EmptyProductsCategory
-                    title="We couldn't find any matches"
-                    subtitle="Try different filters or another category."
-                    actionButton={
-                        <button
-                            className={classNames(styles.clearFiltersButton, 'linkButton')}
-                            onClick={onClickClearFilters}
-                        >
-                            Clear Filters
-                        </button>
-                    }
-                />
-            );
-        }
-
+const ProductGridComponent = React.memo<ProductGridProps>(function ProductGridComponent({
+    category,
+    products,
+    filtersApplied,
+    onClickClearFilters,
+}) {
+    if (category.numberOfProducts === 0) {
         return (
-            <div className={styles.root}>
-                <div className={styles.productGrid}>
-                    {products &&
-                        products.map((product, index) => (
-                            <div key={index}>
-                                <motion.div
-                                    initial={{ clipPath: 'inset(100% 0 0 0)' }} // Start completely hidden
-                                    transition={{
-                                        duration: 0.4,
-                                        delay: 0.1 * index, // Stagger the start of each animation
-                                        ease: 'easeOut',
-                                    }}
-                                    whileInView={{
-                                        clipPath: 'inset(0% 0 0 0)',
-                                        transitionEnd: { clipPath: '' },
-                                    }}
-                                    viewport={{ margin: '-90px 0px', once: true }}
-                                >
-                                    <ProductCard
-                                        product={product as Product}
-                                        state={{
-                                            fromCategory: {
-                                                name: category.name,
-                                                slug: category.slug,
-                                            },
-                                        }}
-                                        delay={0.1 * index + 0.3}
-                                    />
-                                </motion.div>
-                            </div>
-                        ))}
-                </div>
-            </div>
+            <EmptyProductsCategory
+                title="No products here yet..."
+                subtitle="In the meantime, you can choose a different category to continue shopping."
+            />
         );
-    },
-);
+    }
+
+    if (filtersApplied && products.length === 0) {
+        return (
+            <EmptyProductsCategory
+                title="We couldn't find any matches"
+                subtitle="Try different filters or another category."
+                actionButton={
+                    <button
+                        className={classNames(styles.clearFiltersButton, 'linkButton')}
+                        onClick={onClickClearFilters}
+                    >
+                        Clear Filters
+                    </button>
+                }
+            />
+        );
+    }
+
+    return (
+        <div className={styles.root}>
+            <div className={styles.productGrid}>
+                {products &&
+                    products.map((product, index) => (
+                        <div key={index}>
+                            <motion.div
+                                initial={{ clipPath: 'inset(100% 0 0 0)' }} // Start completely hidden
+                                transition={{
+                                    duration: 0.4,
+                                    delay: 0.1 * index, // Stagger the start of each animation
+                                    ease: 'easeOut',
+                                }}
+                                whileInView={{
+                                    clipPath: 'inset(0% 0 0 0)',
+                                    transitionEnd: { clipPath: '' },
+                                }}
+                                viewport={{ margin: '-90px 0px', once: true }}
+                            >
+                                <ProductCard
+                                    product={product as Product}
+                                    state={{
+                                        fromCategory: {
+                                            name: category.name,
+                                            slug: category.slug,
+                                        },
+                                    }}
+                                    delay={0.1 * index + 0.3}
+                                />
+                            </motion.div>
+                        </div>
+                    ))}
+            </div>
+        </div>
+    );
+});
