@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import { MinusIcon, PlusIcon } from '../icons';
 import styles from './quantity-input.module.scss';
+import Icon from '../icons/icon';
 
 type QuantityInputProps = {
     value: number;
@@ -38,7 +38,7 @@ export const QuantityInput = ({
                 onClick={decrement}
                 disabled={value <= 1 || disabled}
             >
-                <MinusIcon className={styles.icon} />
+                <Icon name={'remove'} />
             </button>
             <input
                 id={id}
@@ -55,7 +55,7 @@ export const QuantityInput = ({
                 onClick={increment}
                 disabled={disabled}
             >
-                <PlusIcon className={styles.icon} />
+                <Icon name={'add'} />
             </button>
         </div>
     );

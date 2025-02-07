@@ -1,7 +1,7 @@
 import styles from './label-with-arrow.module.scss';
-import { ArrowRightIcon } from '~/src/components/icons';
 import classNames from 'classnames';
 import { FC, HTMLAttributes } from 'react';
+import Icon from '../icons/icon';
 
 export const LabelWithArrow: FC<HTMLAttributes<HTMLDivElement>> = ({
     className,
@@ -14,7 +14,7 @@ export const LabelWithArrow: FC<HTMLAttributes<HTMLDivElement>> = ({
                 {children}
             </div>
             <div className={styles.label}>{children}</div>
-            <ArrowRightIcon className={styles.icon} />
+            <Icon name={'arrow_forward'} />
         </div>
     );
 };

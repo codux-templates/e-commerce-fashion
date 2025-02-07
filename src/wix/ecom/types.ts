@@ -1,4 +1,4 @@
-import { cart, currentCart, orders } from '@wix/ecom';
+import { cart, currentCart, orders, orderTransactions } from '@wix/ecom';
 import { members } from '@wix/members';
 import { redirects } from '@wix/redirects';
 import { IOAuthStrategy, OauthData, WixClient } from '@wix/sdk';
@@ -68,6 +68,7 @@ export type WixApiClient = WixClient<
         collections: typeof collections;
         orders: typeof orders;
         members: typeof members;
+        orderTransactions: typeof orderTransactions;
     }
 >;
 
@@ -99,6 +100,9 @@ export type EcomApi = {
         items: OrderDetails[];
         totalCount: number;
     }>;
+    getOrderTransactions: (
+        orderId: string,
+    ) => Promise<orderTransactions.OrderTransactions | undefined>;
     /**
      * Returns the lowest and the highest product price in the category.
      */

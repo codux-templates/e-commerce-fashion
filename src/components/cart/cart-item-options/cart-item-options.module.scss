@@ -10,19 +10,5 @@
     justify-content: flex-start;
     gap: 6px;
     padding: 0;
-    font: var(--paragraph3);
     cursor: pointer;
-}
-
-.moreOptionsButton:focus,
-.moreOptionsButton:hover {
-    color: var(--secondary3);
-}
-
-.moreOptionsIcon {
-    width: 12px;
-}
-
-.root.expanded .moreOptionsIcon {
-    transform: rotate(180deg);
 }

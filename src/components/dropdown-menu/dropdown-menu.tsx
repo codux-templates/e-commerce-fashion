@@ -10,7 +10,7 @@ export interface DropdownMenuProps extends React.PropsWithChildren {
 }
 
 export const DropdownMenu = ({ trigger, children, contentProps = {} }: DropdownMenuProps) => (
-    <RadixDropdownMenu.Root>
+    <RadixDropdownMenu.Root modal={false}>
         <RadixDropdownMenu.Trigger asChild className={styles.trigger}>
             {trigger}
         </RadixDropdownMenu.Trigger>

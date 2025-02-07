@@ -1,29 +1,48 @@
-.title {
-    font: var(--heading5);
-    font-size: 26px;
+.orderHeaderWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-light-color);
 }
 
-.message {
-    margin-top: 13px;
+.orderListHeader {
+    width: 100%;
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    gap: 20px;
+    border-bottom: 1px solid var(--border-light-color);
 }
 
-.orders {
-    margin-top: 35px;
-}
-
-.orderListHeader,
 .orderHeader {
-    height: 78px;
+    width: 80%;
+    padding: 24px 0;
     display: flex;
     align-items: center;
     justify-content: stretch;
     gap: 20px;
 }
 
-.orderListHeaderSection,
-.orderHeaderSection {
-    padding: 0 12px;
+.orderListHeaderSection {
+    text-align: center;
     flex-basis: 100%;
+    font: var(--subheading);
+}
+
+.orderListHeaderSection:first-child {
+    text-align: left;
+}
+
+.orderHeaderSection {
+    padding: 0 0;
+    flex-basis: 100%;
+    font: var(--body1);
+    text-align: center;
+}
+
+.orderHeaderSection:first-child {
+    text-align: left;
 }
 
 .orderHeaderSectionName {
@@ -31,13 +50,10 @@
 }
 
 .orderListHeader {
-    height: 35px;
-    padding-bottom: 10px;
-    padding-right: 20px;
-}
-
-.orderList {
-    border-top: 1px solid var(--primary5);
+    padding-bottom: 24px;
+    padding-top: 24px;
+    border: 0 solid black;
+    border-bottom: 1px solid var(--border-light-color);
 }
 
 .emptyStateContainer {
@@ -47,12 +63,12 @@
     justify-content: center;
     align-items: center;
     padding: 100px 0;
-    border-top: 1px solid var(--primary3);
-    border-bottom: 1px solid var(--primary3);
+    border-top: 1px solid var(--border-light-color);
+    border-bottom: 1px solid var(--border-light-color);
 }
 
 .emptyStateMessage {
-    font: var(--heading6);
+    font: var(--heading4);
 }
 
 .startBrowsingLink {
@@ -70,7 +86,6 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 4px;
-        font: var(--paragraph3);
     }
 
     .orderHeader > div {

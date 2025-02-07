@@ -8,6 +8,65 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    color: var(--error-color);
-    font: var(--paragraph3);
+    color: var(--content-error-color);
+}
+
+.colorSelect {
+    --option-size: 48px;
+}
+
+.quickViewColorSelect {
+    --option-size: 24px;
+}
+
+.quickViewRow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quickViewSizes {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font: var(--body2);
+    text-transform: uppercase;
+    gap: 2px;
+    border: 1px solid transparent;
+}
+
+.option.hasError {
+    border-color: var(--border-error-color);
+}
+
+.option {
+    background-color: unset;
+    border: 1px solid transparent;
+    cursor: pointer;
+    padding: 2px;
+    overflow: clip;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    min-width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.option:hover {
+    border: 1px solid var(--border-light-color);
+}
+
+.option.selected {
+    border: 1px solid var(--surface-dark-color);
+}
+
+.option.disabled {
+    color: var(--content-disabled-color);
+}
+
+.option.disabled:hover {
+    border-color: transparent;
 }

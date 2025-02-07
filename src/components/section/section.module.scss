@@ -1,0 +1,35 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 320px;
+    text-align: center;
+    gap: 8px;
+}
+
+.subheading {
+    font: var(--subheading);
+    text-transform: uppercase;
+    color: var(--content-secondary-color);
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+}

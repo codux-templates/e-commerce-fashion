@@ -1,10 +1,7 @@
-:where(.root) {
+.root {
     --thumb-size: 12px;
     --track-height: 2px;
-    --track-color: #b2b2b2;
-    --range-color: #0175ff;
-    --thumb-color: #0175ff;
-    --focus-ring-color: #0175ff;
+    --track-color: rgba(0, 0, 0, 0.38);
 }
 
 .root {
@@ -16,6 +13,8 @@
     user-select: none;
     touch-action: none;
     cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 9px;
 }
 
 .root[data-disabled] {
@@ -28,13 +27,14 @@
     position: relative;
     flex-grow: 1;
     height: var(--track-height);
-    border-radius: 999px;
+    border-radius: 2px;
     background-color: var(--track-color);
 }
 
 .range {
     position: absolute;
-    background-color: var(--range-color);
+    opacity: 38%;
+    background-color: var(--content-primary-color);
     border-radius: 999px;
     height: 100%;
 }
@@ -43,7 +43,7 @@
     display: block;
     width: var(--thumb-size);
     height: var(--thumb-size);
-    background-color: var(--thumb-color);
+    background-color: var(--content-primary-color);
     border-radius: 999px;
 }
 

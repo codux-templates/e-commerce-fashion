@@ -1,14 +1,15 @@
 .root {
     width: 120px;
-    height: 40px;
+    height: 48px;
     display: flex;
     align-items: center;
-    border: 1px solid transparent;
-    border-bottom-color: rgba(23, 17, 13, 0.4);
+    border: 1px solid var(--border-dark-color);
+    background: var(--surface-light-color);
+    border-radius: 2px;
 }
 
 .root:focus-within {
-    border-color: var(--primary5);
+    border-color: var(--border-dark-color);
 }
 
 .button {
@@ -22,7 +23,7 @@
 }
 
 .button:disabled {
-    color: var(--primary3);
+    color: var(--content-disabled-color);
     background: transparent;
     cursor: default;
 }
@@ -41,7 +42,7 @@
 }
 
 .input:disabled {
-    color: var(--primary3);
+    color: var(--content-disabled-color);
 }
 
 .input:focus-visible {

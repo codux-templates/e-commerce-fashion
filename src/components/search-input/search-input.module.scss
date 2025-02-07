@@ -1,8 +1,37 @@
+.root {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: -1;
+}
+
+.backdrop {
+    position: fixed;
+    width: 100%;
+    top: calc(var(--header-height) + var(--announcement-bar-height));
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    position: absolute;
+    width: 100%;
+    background-color: var(--surface-light-color);
+    color: var(--content-primary-color);
+}
+
 .label {
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 8px;
-    font: var(--paragraph3);
+    font: var(--body1);
+    padding: 16px;
 }
 
 .input {
@@ -11,23 +40,9 @@
     padding: 0;
     background: none;
     min-width: 0;
+    font: var(--body1);
 
     &:focus-visible {
         box-shadow: none;
     }
-}
-
-.searchIcon {
-    width: 14px;
-    height: 14px;
-}
-
-.clearIcon {
-    cursor: pointer;
-    width: 8px;
-    height: 8px;
-}
-
-.input:placeholder-shown + .clearIcon {
-    display: none;
 }

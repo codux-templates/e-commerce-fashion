@@ -1,12 +1,12 @@
 import classNames from 'classnames';
-import { ReactNode } from 'react';
-import { CrossIcon, LockIcon } from '~/src/components/icons';
+import { forwardRef, ReactNode } from 'react';
 import { Spinner } from '~/src/components/spinner/spinner';
 import { getCartItemCount, findLineItemPriceBreakdown } from '~/src/wix/cart';
 import { type Cart, type CartTotals } from '~/src/wix/ecom';
 import { CartItem } from '../cart-item/cart-item';
 
 import styles from './cart-view.module.scss';
+import Icon from '../../icons/icon';
 
 export interface CartViewProps {
     cart?: Cart;
@@ -23,20 +23,23 @@ export interface CartViewProps {
     onItemRemove: (id: string) => void;
 }
 
-export const CartView = ({
-    cart,
-    cartTotals,
-    updatingCartItemIds = [],
-    error,
-    isLoading,
-    isUpdating = false,
-    isCheckoutInProgress,
-    onClose,
-    onCheckout,
-    onViewCart,
-    onItemQuantityChange,
-    onItemRemove,
-}: CartViewProps) => {
+export const CartView = forwardRef<HTMLDivElement, CartViewProps>(function CartView(
+    {
+        cart,
+        cartTotals,
+        updatingCartItemIds = [],
+        error,
+        isLoading,
+        //isUpdating = false,
+        //isCheckoutInProgress,
+        onClose,
+        //onCheckout,
+        onViewCart,
+        onItemQuantityChange,
+        onItemRemove,
+    }: CartViewProps,
+    ref,
+) {
     if (isLoading) {
         return (
             <CartFallback>
@@ -52,13 +55,11 @@ export const CartView = ({
     const itemCount = cart ? getCartItemCount(cart) : 0;
 
     return (
-        <div className={styles.cart}>
+        <div ref={ref} className={styles.cart}>
             <div className={styles.header}>
-                <span className="heading6">
-                    Cart ({itemCount} {itemCount === 1 ? 'item' : 'items'})
-                </span>
+                <span className="heading3 uppercase">Cart ({itemCount})</span>
                 <button className={classNames(styles.closeButton, 'iconButton')} onClick={onClose}>
-                    <CrossIcon />
+                    <Icon name={'close'} />
                 </button>
             </div>
 
@@ -89,12 +90,13 @@ export const CartView = ({
                                     <span>{cart.subtotal.formattedConvertedAmount}</span>
                                 </div>
                                 <div className={styles.subtotalNote}>
-                                    Taxes and shipping are calculated at checkout.
+                                    <Icon name={'local_shipping'} />
+                                    Estimated delivery 3-7 business days
                                 </div>
                             </>
                         )}
 
-                        <button
+                        {/*                        <button
                             className={classNames(
                                 'button',
                                 'mutedPrimaryButton',
@@ -104,24 +106,22 @@ export const CartView = ({
                             disabled={isCheckoutInProgress || isUpdating}
                         >
                             {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Checkout'}
-                        </button>
+                        </button>*/}
                         <button
-                            className={classNames('button', styles.viewCartButton)}
+                            className={classNames(
+                                'button button-secondary button-md',
+                                styles.viewCartButton,
+                            )}
                             onClick={onViewCart}
                         >
-                            View Cart
+                            Checkout
                         </button>
-
-                        <div className={styles.secureCheckout}>
-                            <LockIcon width={11} />
-                            <span>Secure Checkout</span>
-                        </div>
                     </div>
                 </>
             )}
         </div>
     );
-};
+});
 
 const CartFallback = ({ children }: { children: ReactNode }) => (
     <div className={styles.cartFallback}>{children}</div>

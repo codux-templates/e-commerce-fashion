@@ -1,0 +1,21 @@
+.saleBar {
+    height: 44px;
+    background: var(--surface-dark-color);
+    color: var(--content-invert-color);
+    pointer-events: none;
+    user-select: none;
+    display: flex;
+}
+
+.saleBarItem {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 48px;
+    padding-left: 48px;
+}
+
+.saleBarItem:not(:last-child) {
+    margin-right: 64px;
+}

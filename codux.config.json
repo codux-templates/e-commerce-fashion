@@ -52,5 +52,11 @@
   "previewConfiguration": {
     "environmentVariables": {},
     "envFile": ".env"
+  },
+  "externalProviders": {
+    "wix": {
+      "projectId": "ec6448f2-8070-493e-a189-841100036898",
+      "metaSiteId": "84c318bd-811f-4e17-a789-2781e7e40388"
+    }
   }
 }

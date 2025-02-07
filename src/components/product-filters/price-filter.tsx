@@ -12,6 +12,7 @@ export interface PriceFilterProps {
     maxSelectedPrice?: number;
     currency: string;
     onChange: (value: { minPrice: number; maxPrice: number }) => void;
+    onClearFilters: () => void;
 }
 
 export const PriceFilter: FC<PriceFilterProps> = ({
@@ -21,6 +22,7 @@ export const PriceFilter: FC<PriceFilterProps> = ({
     maxSelectedPrice,
     currency,
     onChange,
+    onClearFilters,
 }) => {
     const priceRange = maxAvailablePrice - minAvailablePrice;
     const sliderRange = alignRangeToNiceStep({
@@ -67,6 +69,13 @@ export const PriceFilter: FC<PriceFilterProps> = ({
                 <div>{formatPrice(value[0], currency)}</div>
                 <div>{formatPrice(value[1], currency)}</div>
             </div>
+            {(minAvailablePrice < minSelectedPrice || maxAvailablePrice > maxSelectedPrice) && (
+                <div className={styles.clearButtonWrapper}>
+                    <div className={'button button-sm'} onClick={onClearFilters}>
+                        Clear
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

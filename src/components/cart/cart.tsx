@@ -4,10 +4,13 @@ import { toast } from '~/src/components/toast/toast';
 import { useCart, useCartOpen, useCheckout } from '~/src/wix/cart';
 import { getErrorMessage } from '~/src/wix/utils';
 import { CartView } from './cart-view/cart-view';
+import styles from './cart.module.scss';
+import { useEffect, useRef } from 'react';
 
 export const Cart = () => {
     const { isOpen, setIsOpen } = useCartOpen();
     const navigate = useNavigate();
+    const ref = useRef<HTMLDivElement>(null);
     const {
         cart,
         cartTotals,
@@ -17,11 +20,17 @@ export const Cart = () => {
         updateItemQuantity,
     } = useCart();
 
-    const handleError = (error: unknown) =>
-        toast.error(getErrorMessage(error), {
+    useEffect(() => {
+        if (ref.current && isOpen) {
+            ref.current.focus();
+        }
+    }, [isOpen]);
+
+    const handleError = (error: unknown) => {
+        return toast.error(getErrorMessage(error), {
             position: 'bottom-right',
-            style: { width: 400 },
         });
+    };
 
     const { checkout, isCheckoutInProgress } = useCheckout({
         successUrl: '/thank-you',
@@ -35,8 +44,9 @@ export const Cart = () => {
     };
 
     return (
-        <Drawer onClose={() => setIsOpen(false)} open={isOpen}>
+        <Drawer onClose={() => setIsOpen(false)} open={isOpen} drawerClassName={styles.drawer}>
             <CartView
+                ref={ref}
                 cart={cart.data}
                 cartTotals={cartTotals}
                 error={cart.error ? getErrorMessage(cart.error) : undefined}

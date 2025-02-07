@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { cart } from '@wix/ecom';
 import classNames from 'classnames';
-import { DropdownIcon } from '~/src/components/icons';
 
 import styles from './cart-item-options.module.scss';
+import Icon from '../../icons/icon';
 
 interface CartItemOptionsProps {
     options: cart.DescriptionLine[];
@@ -38,7 +38,7 @@ export const CartItemOptions = ({
                     onClick={toggleIsExpanded}
                 >
                     {isExpanded ? 'Less Details' : 'More Details'}
-                    <DropdownIcon className={styles.moreOptionsIcon} />
+                    <Icon name={'expand_more'} />
                 </button>
             )}
         </div>

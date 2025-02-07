@@ -3,21 +3,25 @@ import { type MetaFunction, useLoaderData } from '@remix-run/react';
 import type { GetStaticRoutes } from '@wixc3/define-remix-app';
 import classNames from 'classnames';
 import { Accordion } from '~/src/components/accordion/accordion';
-import { BreadcrumbData, Breadcrumbs } from '~/src/components/breadcrumbs/breadcrumbs';
-import { RouteBreadcrumbs, useBreadcrumbs } from '~/src/components/breadcrumbs/use-breadcrumbs';
-import { MinusIcon, PlusIcon } from '~/src/components/icons';
 import { ProductImages } from '~/src/components/product-images/product-images';
 import { ProductOption } from '~/src/components/product-option/product-option';
 import { ProductPrice } from '~/src/components/product-price/product-price';
 import { QuantityInput } from '~/src/components/quantity-input/quantity-input';
-import { ShareProductLinks } from '~/src/components/share-product-links/share-product-links';
 import { toast } from '~/src/components/toast/toast';
-import { initializeEcomApiAnonymous } from '~/src/wix/ecom';
+import { initializeEcomApiAnonymous, Product } from '~/src/wix/ecom';
 import { initializeEcomApiForRequest } from '~/src/wix/ecom/session';
 import { useProductDetails } from '~/src/wix/products';
 import { getErrorMessage, removeQueryStringFromUrl } from '~/src/wix/utils';
-
+import { Section } from '~/src/components/section/section';
+import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
+import { Banner } from '~/src/components/banner/banner';
+import { ProductsSpotlight } from '~/src/components/products-spotlight/products-spotlight';
 import styles from './route.module.scss';
+import { useCheckout } from '~/src/wix/cart';
+import { Spinner } from '~/src/components/spinner/spinner';
+import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
+import { useEffect, useState } from 'react';
+import { type JsonifyObject } from 'type-fest/source/jsonify';
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     if (!params.productSlug) throw new Response('Bad Request', { status: 400 });
@@ -33,48 +37,27 @@ export const getStaticRoutes: GetStaticRoutes = async () => {
     return items.map((product) => `/product-details/${product.slug}`);
 };
 
-interface ProductDetailsLocationState {
-    fromCategory?: {
-        name: string;
-        slug: string;
-    };
+export default function ProductDetailsPage() {
+    const loaderData = useLoaderData<typeof loader>();
+    const [data, setData] = useState(loaderData);
+
+    useEffect(() => {
+        if (!data && loaderData) {
+            setData(loaderData);
+        }
+    }, [loaderData, data]);
+    if (!data) return <></>;
+    return (
+        <PageWrapper key={data.product._id}>
+            <ProductDetails product={data.product} />
+        </PageWrapper>
+    );
 }
 
-const breadcrumbs: RouteBreadcrumbs<typeof loader, ProductDetailsLocationState> = (
-    match,
-    location,
-) => {
-    const fromCategory = location.state?.fromCategory;
-
-    const breadcrumbs: BreadcrumbData[] = [
-        {
-            title: match.data.product.name!,
-            to: `/product-details/${match.data.product.slug}`,
-        },
-    ];
-
-    if (fromCategory) {
-        breadcrumbs.unshift({
-            title: fromCategory.name,
-            to: `/products/${fromCategory.slug}`,
-            clientOnly: true,
-        });
-    }
-
-    return breadcrumbs;
-};
-
-export const handle = {
-    breadcrumbs,
-};
-
-export default function ProductDetailsPage() {
-    const { product, canonicalUrl } = useLoaderData<typeof loader>();
-
+function ProductDetails({ product }: { product: JsonifyObject<Product> }) {
     const {
         outOfStock,
         priceData,
-        sku,
         media,
         productOptions,
         quantity,
@@ -86,20 +69,31 @@ export default function ProductDetailsPage() {
         handleQuantityChange,
     } = useProductDetails(product);
 
-    const breadcrumbs = useBreadcrumbs();
+    const handleError = (error: unknown) => {
+        return toast.error(getErrorMessage(error));
+    };
 
-    const handleError = (error: unknown) => toast.error(getErrorMessage(error));
+    const { checkout, isCheckoutInProgress } = useCheckout({
+        successUrl: '/thank-you',
+        cancelUrl: '/products/all-products',
+        onError: handleError,
+    });
+
+    const handleBuyItNow = async () => {
+        if (await handleAddToCart(false)) {
+            checkout().catch(handleError);
+        }
+    };
 
     return (
         <div className={styles.page}>
-            <Breadcrumbs breadcrumbs={breadcrumbs} />
-
             <div className={styles.content}>
-                <ProductImages media={media} />
+                <div className={styles.productImagesWrapper}>
+                    <ProductImages media={media} />
+                </div>
 
-                <div>
+                <div className={styles.productInfo}>
                     <h1 className={styles.productName}>{product.name}</h1>
-                    {sku && <p className={styles.sku}>SKU: {sku}</p>}
 
                     {priceData && (
                         <ProductPrice
@@ -148,25 +142,39 @@ export default function ProductDetailsPage() {
                     </div>
 
                     <button
-                        className={classNames('button', 'primaryButton', styles.addToCartButton)}
+                        className={classNames(
+                            'button',
+                            'primaryButton',
+                            'button-md',
+                            styles.addToCartButton,
+                        )}
                         onClick={() => handleAddToCart().catch(handleError)}
                         disabled={outOfStock || isAddingToCart}
                     >
                         {outOfStock ? 'Out of stock' : 'Add to Cart'}
                     </button>
 
+                    {!outOfStock && (
+                        <button
+                            className={classNames(
+                                'button',
+                                'button-secondary',
+                                'button-md',
+                                styles.buyItNowButton,
+                            )}
+                            onClick={handleBuyItNow}
+                            disabled={isCheckoutInProgress}
+                        >
+                            {isCheckoutInProgress ? <Spinner size="1lh" /> : 'Buy it now'}
+                        </button>
+                    )}
+
                     {product.additionalInfoSections &&
                         product.additionalInfoSections.length > 0 && (
                             <Accordion
                                 className={styles.additionalInfoSections}
-                                expandIcon={<PlusIcon width={22} />}
-                                collapseIcon={<MinusIcon width={22} />}
                                 items={product.additionalInfoSections.map((section) => ({
-                                    header: (
-                                        <div className={styles.additionalInfoSectionTitle}>
-                                            {section.title!}
-                                        </div>
-                                    ),
+                                    header: <div>{section.title!}</div>,
                                     content: section.description ? (
                                         <div
                                             dangerouslySetInnerHTML={{
@@ -178,19 +186,70 @@ export default function ProductDetailsPage() {
                                 initialOpenItemIndex={0}
                             />
                         )}
-
-                    <ShareProductLinks
-                        className={styles.socialLinks}
-                        productCanonicalUrl={canonicalUrl}
-                    />
                 </div>
             </div>
+            <FeaturedProductsSection
+                className={styles.featuredProductsSection}
+                categorySlug={'new-in'}
+                title={'You might also like'}
+                productCount={4}
+            />
+            <Section
+                className={styles.spotlightsSection}
+                title="Mix, match, and make it yours"
+                subheading="Complete the look"
+            >
+                <ProductsSpotlight
+                    spotlights={[
+                        {
+                            horizontalPercentage: 37,
+                            verticalPercentage: 50,
+                            productSlug: 't-shirt-dress',
+                        },
+                    ]}
+                    imagePosition={'top'}
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_11cce258e7cb45ab80637d887a5e8aea~mv2.png/v1/fit/w_640,h_640/0e228a0f121297eada19e8519cd7c75e.png.png"
+                />
+                <ProductsSpotlight
+                    spotlights={[
+                        {
+                            horizontalPercentage: 57,
+                            verticalPercentage: 20,
+                            productSlug: 'knit-beanie',
+                        },
+                        {
+                            horizontalPercentage: 40,
+                            verticalPercentage: 80,
+                            productSlug: 'unisex-oversized-t-shirt',
+                        },
+                    ]}
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
+                />
+                <ProductsSpotlight
+                    spotlights={[
+                        {
+                            horizontalPercentage: 40,
+                            verticalPercentage: 80,
+                            productSlug: 'men-s-crewneck-sweater',
+                        },
+                    ]}
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_aa2b1d021aec496d82343066eb108ed5~mv2.jpg/v1/fit/w_640,h_640/6e08f8548530cd72ddfcd50ecf665249.jpg.jpg"
+                />
+            </Section>
+            <Banner
+                className={styles.banner}
+                title="Our Comfy sweatshirts is now online!"
+                subheading="Product Spotlight"
+                buttonText="Shop now"
+                buttonUrl="/product-details/women-s-oversized-sweatshirt"
+                imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
+            />
         </div>
     );
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-    const title = `${data?.product.name ?? 'Product Details'} | ReClaim`;
+    const title = `${data?.product.name ?? 'Product Details'} | RND.Apparel`;
     const description = data?.product.description;
 
     return [

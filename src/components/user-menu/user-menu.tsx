@@ -1,24 +1,26 @@
-import { NavLink } from '@remix-run/react';
+import { Link } from '@remix-run/react';
 import { Avatar } from '~/src/components/avatar/avatar';
 import {
     DropdownMenu,
     DropdownMenuItem,
     DropdownMenuSeparator,
 } from '~/src/components/dropdown-menu/dropdown-menu';
-import { DropdownIcon } from '~/src/components/icons';
 import { useUserInfo } from '~/src/wix/users';
 
 import styles from './user-menu.module.scss';
+import Icon from '../icons/icon';
 
 export const UserMenu = () => {
     const { isLoggedIn, user } = useUserInfo();
 
     if (!isLoggedIn) {
         return (
-            <NavLink className={styles.root} to={'/login'}>
-                <Avatar imageSrc={undefined} />
-                Log In
-            </NavLink>
+            <Link className={styles.root} to={'/login'}>
+                <div className={styles.icon}>
+                    <Icon name={'person'} />
+                </div>
+                <div className={styles.label}>Sign in</div>
+            </Link>
         );
     }
 
@@ -27,7 +29,7 @@ export const UserMenu = () => {
             trigger={
                 <button className={styles.root}>
                     <Avatar imageSrc={user?.profile?.photo?.url} />
-                    <DropdownIcon width={10} height={10} />
+                    <Icon name={'expand_more'} />
                 </button>
             }
             contentProps={{
@@ -35,24 +37,24 @@ export const UserMenu = () => {
                 sideOffset: 6,
             }}
         >
-            <DropdownMenuItem asChild>
-                <NavLink className={styles.link} to={'/members-area/my-account'}>
+            <DropdownMenuItem className={styles.dropdownItem}>
+                <Link className={styles.link} to={'/members-area/my-account'}>
                     My Account
-                </NavLink>
+                </Link>
             </DropdownMenuItem>
 
-            <DropdownMenuItem asChild>
-                <NavLink className={styles.link} to={'/members-area/my-orders'}>
+            <DropdownMenuItem className={styles.dropdownItem}>
+                <Link className={styles.link} to={'/members-area/my-orders'}>
                     My Orders
-                </NavLink>
+                </Link>
             </DropdownMenuItem>
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem asChild>
-                <NavLink className={styles.link} to={'/logout'}>
+            <DropdownMenuItem className={styles.dropdownItem}>
+                <Link className={styles.link} to={'/logout'}>
                     Log out
-                </NavLink>
+                </Link>
             </DropdownMenuItem>
         </DropdownMenu>
     );

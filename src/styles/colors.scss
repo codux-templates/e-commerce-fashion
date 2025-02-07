@@ -1,19 +1,35 @@
 :root {
-    --page-background-color: #fef9ec;
-    --text-color: #17110d;
-    --error-color: #df3131;
-    /** Focus ring that appears when an element is focused via keyboard. */
-    --focus-ring-color: #414434;
+    --background-color: #ffffff;
 
-    --primary1: #fef9ec;
-    --primary2: #ffefc7;
-    --primary3: #dad3c1;
-    --primary4: #767165;
-    --primary5: #17110d;
+    --border-dark-color: #3b3b3b;
+    --border-light-color: #e5e5e5;
+    --border-error-color: #df3131;
 
-    --secondary1: #ced0c4;
-    --secondary2: #9fa295;
-    --secondary3: #707365;
-    --secondary4: #414434;
-    --secondary5: #22241b;
+    --button-primary-border: #3b3b3b;
+    --button-primary-content: #3b3b3b;
+    --button-primary-invert-border: #ffffff;
+    --button-primary-invert-content: #ffffff;
+    --button-primary-invert-surface: #ffffff33;
+    --button-primary-surface-hover: #f7f7f7;
+    --button-primary-surface-selected: #3b3b3b;
+    --button-primary-surface: #ffffff;
+    --button-secondary-surface-hover: #3b3b3b;
+    --button-secondary-surface: #000000;
+
+    --content-disabled-color: #b2b2b2;
+    --content-invert-color: #ffffff;
+    --content-primary-color: #000000;
+    --content-secondary-color: #666666;
+    --content-error-color: #df1919;
+
+    --focus-ring-color: #000000;
+
+    --overlay-color: #00000033;
+
+    --progress-bar-color: #ffffff;
+
+    --surface-announcement-color: #524840;
+    --surface-dark-color: #000000;
+    --surface-light-color: #ffffff;
+    --surface-mid-color: #f2f2f2;
 }

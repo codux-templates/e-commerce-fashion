@@ -1,0 +1,45 @@
+.infoSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.infoSectionCard {
+    aspect-ratio: 1/1;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    background-color: var(--surface-mid-color);
+}
+
+.infoSectionCardTextWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.infoCardHeading {
+    font: var(--subheading);
+    text-transform: uppercase;
+}
+
+.infoSectionCardSubheading {
+    font: var(--body2);
+}
+
+@media (max-width: 768px) {
+    .infoSection {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+}

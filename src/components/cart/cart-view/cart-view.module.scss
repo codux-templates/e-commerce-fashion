@@ -1,6 +1,6 @@
 .cart {
     height: 100%;
-    padding: 20px;
+    padding: 8px;
     display: flex;
     flex-direction: column;
 }
@@ -9,8 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--primary5);
+    padding-bottom: 40px;
 }
 
 .closeButton {
@@ -36,37 +35,32 @@
 
 .footer {
     margin-top: auto;
-    padding-top: 20px;
-    border-top: 1px solid rgba(23, 17, 13, 0.2);
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light-color);
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
 }
 
 .subtotal {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 20px;
+    font: var(--heading4);
+    text-transform: uppercase;
 }
 
 .subtotalNote {
-    margin: 12px 0;
-    font: var(--paragraph3);
-    color: var(--primary4);
-}
-
-.checkoutButton,
-.viewCartButton {
-    width: 100%;
-}
-
-.viewCartButton {
-    margin-top: 12px;
-}
-
-.secureCheckout {
-    margin-top: 12px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    font: var(--body2);
     gap: 8px;
-    font: var(--paragraph3);
+
+    span {
+        font-size: 20px;
+    }
+}
+
+.viewCartButton {
+    margin-top: 12px;
 }

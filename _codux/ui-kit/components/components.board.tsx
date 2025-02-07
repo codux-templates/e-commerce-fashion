@@ -3,11 +3,12 @@ import { Accordion } from '~/src/components/accordion/accordion';
 import { ProductCard } from '~/src/components/product-card/product-card';
 import { QuantityInput } from '~/src/components/quantity-input/quantity-input';
 import { Select, SelectItem } from '~/src/components/select/select';
-import classNames from 'classnames';
-import { CategoryLink } from '~/src/components/category-link/category-link';
 import { ColorSelect } from '~/src/components/color-select/color-select';
 import ComponentWrapper from '_codux/board-wrappers/component-wrapper';
 import { Kit } from '../ui-kit-utils/kit';
+import { Marquee } from '~/src/components/marquee/marquee';
+import { ProductsSpotlight } from '~/src/components/products-spotlight/products-spotlight';
+import { products } from '@wix/stores';
 
 import styles from './components.board.module.scss';
 
@@ -34,6 +35,21 @@ export default createBoard({
                             />
                         </Variant>
                         <Kit.Description>Input Placeholder</Kit.Description>
+                    </Kit.Item>
+
+                    <Kit.Item>
+                        <Variant name="Input Error">
+                            <div className="formGroup">
+                                <input
+                                    className="textInput error"
+                                    placeholder="Placeholder"
+                                    value=""
+                                    onChange={() => {}}
+                                />
+                                <span className="errorMessage">Error message</span>
+                            </div>
+                        </Variant>
+                        <Kit.Description>Input Error</Kit.Description>
                     </Kit.Item>
 
                     <Kit.Item>
@@ -111,48 +127,349 @@ export default createBoard({
                     </Kit.Item>
                 </Kit.Section>
 
-                <Kit.Section title="Labels">
-                    <Kit.Item>
-                        <Variant name="Ribbon">
-                            <span className="ribbon">Sale</span>
-                        </Variant>
-                        <Kit.Description>Ribbon</Kit.Description>
-                    </Kit.Item>
-                </Kit.Section>
-
                 <Kit.Section title="Cards">
                     <Kit.Item className={styles.demoWidth}>
                         <Variant name="Product Card">
-                            <ProductCard
-                                name="Bamboo Toothbrush"
-                                imageUrl="https://static.wixstatic.com/media/c837a6_18152edaef9940ca88f446ae94b48a47~mv2.jpg/v1/fill/w_824,h_1098,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_18152edaef9940ca88f446ae94b48a47~mv2.jpg"
-                                ribbon="NEW"
-                                price="$6"
-                                discountedPrice="$5.5"
-                            />
+                            <ProductCard product={product} />
                         </Variant>
                         <Kit.Description>Product Card</Kit.Description>
                     </Kit.Item>
-                    <Kit.Item className={classNames(styles.demoWidth, styles.linkCardWrapper)}>
-                        <Variant name="Link Card">
-                            <CategoryLink categorySlug="all-products" className="linkCard">
-                                <img
-                                    className="linkCardBackground"
-                                    src="https://static.wixstatic.com/media/c837a6_c05a03f48fbd49e7b5046d1b18c930eb~mv2.jpg/v1/fill/w_547,h_730,q_90/c837a6_c05a03f48fbd49e7b5046d1b18c930eb~mv2.jpg"
-                                    alt=""
-                                />
-                                <div className="linkCardTitle">All Products</div>
-                            </CategoryLink>
+                </Kit.Section>
+                <Kit.Section title="Marquee">
+                    <Kit.Item>
+                        <Variant name="Marquee">
+                            <Marquee elements={['Shop Sale', 'Up to 50% off']} />
                         </Variant>
-                        <Kit.Description>Link Card</Kit.Description>
+                        <Kit.Description>Marquee</Kit.Description>
+                    </Kit.Item>
+                </Kit.Section>
+                <Kit.Section title="Products Spotlight">
+                    <Kit.Item className={styles.demoWidth}>
+                        <Variant name="Products Spotlight">
+                            <ProductsSpotlight
+                                imageUrl="https://static.wixstatic.com/media/c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.jpg/v1/fill/w_640,h_640,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.webp"
+                                spotlights={[
+                                    {
+                                        horizontalPercentage: 40,
+                                        verticalPercentage: 33,
+                                        productSlug: 'knit-beanie',
+                                    },
+                                    {
+                                        horizontalPercentage: 60,
+                                        verticalPercentage: 66,
+                                        productSlug: 'knit-beanie',
+                                    },
+                                ]}
+                            />
+                        </Variant>
+                        <Kit.Description>Products Spotlight</Kit.Description>
                     </Kit.Item>
                 </Kit.Section>
             </Kit>
         </ComponentWrapper>
     ),
     environmentProps: {
-        windowWidth: 320,
+        windowWidth: 746,
         windowHeight: 800,
     },
     isSnippet: true,
 });
+
+const product: products.Product = {
+    name: 'Knit Beanie',
+    slug: 'knit-beanie',
+    visible: true,
+    productType: 'physical' as products.ProductType,
+    description:
+        "I'm a product description. I'm a great place to add more details about your product such as sizing, material, care instructions and cleaning instructions.",
+    sku: '36523641234523',
+    weight: 0,
+    weightRange: {
+        minValue: 0,
+        maxValue: 0,
+    },
+    stock: {
+        trackInventory: false,
+        inStock: true,
+        inventoryStatus: 'IN_STOCK' as products.InventoryStatus,
+    },
+    price: {
+        currency: 'USD',
+        price: 30,
+        discountedPrice: 15,
+        formatted: {
+            price: '30,00$',
+            discountedPrice: '15,00$',
+        },
+    },
+    priceData: {
+        currency: 'USD',
+        price: 30,
+        discountedPrice: 15,
+        formatted: {
+            price: '30,00$',
+            discountedPrice: '15,00$',
+        },
+    },
+    convertedPriceData: {
+        currency: 'USD',
+        price: 30,
+        discountedPrice: 15,
+        formatted: {
+            price: '30,00$',
+            discountedPrice: '15,00$',
+        },
+    },
+    priceRange: {
+        minValue: 30,
+        maxValue: 30,
+    },
+    costRange: {
+        minValue: 0,
+        maxValue: 0,
+    },
+    additionalInfoSections: [
+        {
+            title: 'Product Info',
+            description:
+                "I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.",
+        },
+        {
+            title: 'Return & Refund Policy',
+            description:
+                'I’m a Return and Refund policy. I’m a great place to let your customers know what to do in case they are dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build trust and reassure your customers that they can buy with confidence.',
+        },
+        {
+            title: 'Shipping Info',
+            description:
+                "I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and cost. Providing straightforward information about your shipping policy is a great way to build trust and reassure your customers that they can buy from you with confidence.",
+        },
+    ],
+    ribbons: [],
+    media: {
+        mainMedia: {
+            thumbnail: {
+                url: 'https://static.wixstatic.com/media/c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.jpg/v1/fit/w_50,h_50,q_90/file.jpg',
+                width: 50,
+                height: 50,
+            },
+            mediaType: 'image' as products.MediaItemType,
+            title: '',
+            image: {
+                url: 'https://static.wixstatic.com/media/c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.jpg/v1/fit/w_4849,h_6465,q_90/file.jpg',
+                width: 4849,
+                height: 6465,
+            },
+            _id: 'c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.jpg',
+        },
+        items: [
+            {
+                thumbnail: {
+                    url: 'https://static.wixstatic.com/media/c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.jpg/v1/fit/w_50,h_50,q_90/file.jpg',
+                    width: 50,
+                    height: 50,
+                },
+                mediaType: 'image' as products.MediaItemType,
+                title: '',
+                image: {
+                    url: 'https://static.wixstatic.com/media/c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.jpg/v1/fit/w_4849,h_6465,q_90/file.jpg',
+                    width: 4849,
+                    height: 6465,
+                },
+                _id: 'c837a6_38ddd1ca2a044f1ca066291bca023845~mv2.jpg',
+            },
+            {
+                thumbnail: {
+                    url: 'https://static.wixstatic.com/media/c837a6_d762db06ee28411596c1399082f66d62~mv2.jpg/v1/fit/w_50,h_50,q_90/file.jpg',
+                    width: 50,
+                    height: 50,
+                },
+                mediaType: 'image' as products.MediaItemType,
+                title: '',
+                image: {
+                    url: 'https://static.wixstatic.com/media/c837a6_d762db06ee28411596c1399082f66d62~mv2.jpg/v1/fit/w_2048,h_2048,q_90/file.jpg',
+                    width: 2048,
+                    height: 2048,
+                },
+                _id: 'c837a6_d762db06ee28411596c1399082f66d62~mv2.jpg',
+            },
+            {
+                thumbnail: {
+                    url: 'https://static.wixstatic.com/media/c837a6_b1faaa2a2f4a4a158e654f7b057357f7~mv2.jpg/v1/fit/w_50,h_50,q_90/file.jpg',
+                    width: 50,
+                    height: 50,
+                },
+                mediaType: 'image' as products.MediaItemType,
+                title: '',
+                image: {
+                    url: 'https://static.wixstatic.com/media/c837a6_b1faaa2a2f4a4a158e654f7b057357f7~mv2.jpg/v1/fit/w_2048,h_2048,q_90/file.jpg',
+                    width: 2048,
+                    height: 2048,
+                },
+                _id: 'c837a6_b1faaa2a2f4a4a158e654f7b057357f7~mv2.jpg',
+            },
+            {
+                thumbnail: {
+                    url: 'https://static.wixstatic.com/media/c837a6_21c42b74162843e7a305c87431ca5567~mv2.jpg/v1/fit/w_50,h_50,q_90/file.jpg',
+                    width: 50,
+                    height: 50,
+                },
+                mediaType: 'image' as products.MediaItemType,
+                title: '',
+                image: {
+                    url: 'https://static.wixstatic.com/media/c837a6_21c42b74162843e7a305c87431ca5567~mv2.jpg/v1/fit/w_2048,h_1761,q_90/file.jpg',
+                    width: 2048,
+                    height: 1761,
+                },
+                _id: 'c837a6_21c42b74162843e7a305c87431ca5567~mv2.jpg',
+            },
+            {
+                thumbnail: {
+                    url: 'https://static.wixstatic.com/media/c837a6_9d75d592c3ee47fea83c0f789d71cc60~mv2.jpg/v1/fit/w_50,h_50,q_90/file.jpg',
+                    width: 50,
+                    height: 50,
+                },
+                mediaType: 'image' as products.MediaItemType,
+                title: '',
+                image: {
+                    url: 'https://static.wixstatic.com/media/c837a6_9d75d592c3ee47fea83c0f789d71cc60~mv2.jpg/v1/fit/w_2048,h_2048,q_90/file.jpg',
+                    width: 2048,
+                    height: 2048,
+                },
+                _id: 'c837a6_9d75d592c3ee47fea83c0f789d71cc60~mv2.jpg',
+            },
+            {
+                thumbnail: {
+                    url: 'https://static.wixstatic.com/media/c837a6_26e58628afb64e2abd3060d5695f2e5d~mv2.jpg/v1/fit/w_50,h_50,q_90/file.jpg',
+                    width: 50,
+                    height: 50,
+                },
+                mediaType: 'image' as products.MediaItemType,
+                title: '',
+                image: {
+                    url: 'https://static.wixstatic.com/media/c837a6_26e58628afb64e2abd3060d5695f2e5d~mv2.jpg/v1/fit/w_4849,h_6465,q_90/file.jpg',
+                    width: 4849,
+                    height: 6465,
+                },
+                _id: 'c837a6_26e58628afb64e2abd3060d5695f2e5d~mv2.jpg',
+            },
+            {
+                thumbnail: {
+                    url: 'https://static.wixstatic.com/media/c837a6_ad665a5d6f7041fea8443e56eb663ac1~mv2.jpg/v1/fit/w_50,h_50,q_90/file.jpg',
+                    width: 50,
+                    height: 50,
+                },
+                mediaType: 'image' as products.MediaItemType,
+                title: '',
+                image: {
+                    url: 'https://static.wixstatic.com/media/c837a6_ad665a5d6f7041fea8443e56eb663ac1~mv2.jpg/v1/fit/w_4849,h_6465,q_90/file.jpg',
+                    width: 4849,
+                    height: 6465,
+                },
+                _id: 'c837a6_ad665a5d6f7041fea8443e56eb663ac1~mv2.jpg',
+            },
+            {
+                thumbnail: {
+                    url: 'https://static.wixstatic.com/media/c837a6_16d2062e3e794f579938115dafe2c766~mv2.jpg/v1/fit/w_50,h_50,q_90/file.jpg',
+                    width: 50,
+                    height: 50,
+                },
+                mediaType: 'image' as products.MediaItemType,
+                title: '',
+                image: {
+                    url: 'https://static.wixstatic.com/media/c837a6_16d2062e3e794f579938115dafe2c766~mv2.jpg/v1/fit/w_4849,h_6465,q_90/file.jpg',
+                    width: 4849,
+                    height: 6465,
+                },
+                _id: 'c837a6_16d2062e3e794f579938115dafe2c766~mv2.jpg',
+            },
+        ],
+    },
+    customTextFields: [],
+    manageVariants: false,
+    productOptions: [
+        {
+            optionType: 'color' as products.OptionType,
+            name: 'Color',
+            choices: [
+                {
+                    value: '#FF6600',
+                    description: 'Burnt Orange',
+                    inStock: true,
+                    visible: true,
+                },
+                {
+                    value: '#2145b2',
+                    description: 'Royal Blue',
+                    inStock: true,
+                    visible: true,
+                },
+                {
+                    value: '#3c5639',
+                    description: 'Forest Green',
+                    inStock: true,
+                    visible: true,
+                },
+                {
+                    value: '#DDDD36',
+                    description: 'Yellow',
+                    inStock: true,
+                    visible: true,
+                },
+            ],
+        },
+    ],
+    productPageUrl: {
+        base: 'https://davidpolynar.wixstudio.com/test',
+        path: '/product-page/knit-beanie',
+    },
+    numericId: '1736336747532017',
+    inventoryItemId: '9f270997-522f-b82b-5b7b-3a9e79455f55',
+    discount: {
+        type: 'PERCENT' as products.DiscountType,
+        value: 50,
+    },
+    collectionIds: [
+        '6dc62abd-e8ce-fd9c-d552-653efc49bafd',
+        '5adfcc71-407b-1b6e-4a0a-07918bd221a4',
+        'cd5487fc-1a06-4050-aa79-fb35dbff5830',
+        '00000000-000000-000000-000000000001',
+    ],
+    variants: [
+        {
+            choices: {},
+            variant: {
+                priceData: {
+                    currency: 'USD',
+                    price: 30,
+                    discountedPrice: 15,
+                    formatted: {
+                        price: '30,00$',
+                        discountedPrice: '15,00$',
+                    },
+                },
+                convertedPriceData: {
+                    currency: 'USD',
+                    price: 30,
+                    discountedPrice: 15,
+                    formatted: {
+                        price: '30,00$',
+                        discountedPrice: '15,00$',
+                    },
+                },
+                weight: 0,
+                sku: '36523641234523',
+                visible: true,
+            },
+            stock: {
+                trackQuantity: false,
+                inStock: true,
+            },
+            _id: '00000000-0000-0000-0000-000000000000',
+        },
+    ],
+    lastUpdated: new Date('2025-01-08T15:54:06.569Z'),
+    ribbon: '',
+    _id: '60d8f668-add0-47d4-a484-c56186baa0aa',
+    _createdDate: new Date('2025-01-08T11:45:47.532Z'),
+};

@@ -1,17 +1,41 @@
 .root {
-    padding: 0;
-    border: 0;
+    padding: 0 8px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    font: var(--paragraph3);
+    gap: 4px;
     cursor: pointer;
-    background-color: transparent;
+    border: none;
+    background: transparent;
 }
 
 .link {
-    display: block;
-    font: var(--paragraph3);
-    line-height: 26px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    color: var(--content-primary-color);
+    font: var(--navlink);
+}
+
+.dropdownItem {
+    border-color: transparent;
+    height: auto;
+}
+
+.dropdownItem:hover {
+    border-color: transparent;
+    height: auto;
+}
+
+.icon {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .label {
+        display: none;
+    }
+
+    .icon {
+        display: flex;
+        align-items: center;
+    }
 }

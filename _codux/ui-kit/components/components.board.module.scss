@@ -1,9 +1,5 @@
 .demoWidth {
-    width: 250px;
-}
-
-.linkCardWrapper :global(.linkCard) {
-    aspect-ratio: 0.75;
+    width: 300px;
 }
 
 @media (max-width: 480px) {

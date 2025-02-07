@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import { UserIcon } from '../icons';
 
 import styles from './avatar.module.scss';
+import Icon from '../icons/icon';
 
 export interface AvatarProps {
     className?: string;
@@ -12,7 +12,11 @@ export interface AvatarProps {
 export const Avatar = ({ className, imageSrc }: AvatarProps) => {
     return (
         <div className={classNames(styles.root, className)}>
-            {imageSrc ? <img crossOrigin="anonymous" src={imageSrc} alt="" /> : <UserIcon />}
+            {imageSrc ? (
+                <img crossOrigin="anonymous" src={imageSrc} alt="" />
+            ) : (
+                <Icon name="person" />
+            )}
         </div>
     );
 };

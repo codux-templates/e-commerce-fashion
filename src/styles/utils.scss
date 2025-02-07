@@ -6,90 +6,187 @@
 
 .heading1 {
     font: var(--heading1);
+    letter-spacing: var(--letter-spacing-heading);
 }
 
 .heading2 {
     font: var(--heading2);
+    letter-spacing: var(--letter-spacing-heading);
 }
 
 .heading3 {
     font: var(--heading3);
+    letter-spacing: var(--letter-spacing-heading);
 }
 
 .heading4 {
     font: var(--heading4);
 }
 
-.heading5 {
-    font: var(--heading5);
+.subheading {
+    font: var(--subheading);
+    text-transform: uppercase;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
-.heading6 {
-    font: var(--heading6);
+.display {
+    font: var(--display);
+    text-transform: none;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
 /* Paragraphs *****************************************************************/
 
-.paragraph1 {
-    font: var(--paragraph1);
+.body1 {
+    font: var(--body1);
+    text-transform: none;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
-.paragraph2 {
-    font: var(--paragraph2);
+.body1-caps {
+    font: var(--body1-caps);
+    text-transform: uppercase;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
-.paragraph3 {
-    font: var(--paragraph3);
+.body2 {
+    font: var(--body2);
+    text-transform: none;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.body2-caps {
+    font: var(--body2-caps);
+    text-transform: uppercase;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.body3 {
+    font: var(--body3);
+    text-transform: none;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+/* Action ********************************************************************/
+
+.action {
+    color: var(--content-secondary-color);
+    font: var(--action);
+    text-transform: uppercase;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+
+    &:active {
+        color: var(--content-primary-color);
+    }
+}
+
+.navlink {
+    font: var(--navlink);
+    text-transform: none;
+    text-decoration: none;
+    color: var(--content-secondary-color);
+}
+
+.navlink:hover {
+    color: var(--content-primary-color);
+}
+
+/* Text utils ********************************************************************/
+
+.uppercase {
+    text-transform: uppercase;
 }
 
 /* Buttons ********************************************************************/
+
+button {
+    color: var(--button-primary-content);
+}
 
 .button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 16px;
-    border: 1px solid var(--primary5);
-    font: var(--paragraph1);
-    background: transparent;
-    color: var(--primary5);
+    padding: 8px 7px;
+    border: 1px solid var(--button-primary-border);
+    font: var(--action);
+    background-color: transparent;
+    color: var(--button-primary-content);
     cursor: pointer;
     white-space: nowrap;
-    transition: all 200ms ease;
     transition-property: background-color, color;
+    text-transform: uppercase;
+    line-height: 10px;
+    border-radius: 2px;
+    user-select: none;
+}
+
+.button:not(:disabled):not(.animated):hover {
+    //  background: var(--button-primary-surface-hover);
+}
+
+.button:not(:disabled).active {
+    background: var(--button-primary-surface-selected);
+    color: var(--button-primary-invert-content);
+}
+
+.button.invert {
+    border: 1px solid var(--button-primary-invert-border);
+    color: var(--button-primary-invert-content);
+}
+
+.button.button-lg {
+    padding: 27px 40px;
+}
+
+.button.button-md {
+    padding: 19px 40px;
 }
 
 .button:disabled {
-    border-color: transparent;
-    background: var(--primary3);
-    color: var(--primary1);
+    color: var(--content-disabled-color);
     cursor: default;
+    border: 1px solid var(--border-light-color);
 }
 
-.button:not(:disabled):hover {
-    background: var(--primary5);
-    color: var(--primary1);
+.button:not(:disabled):not(.animated).invert:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
-.primaryButton {
-    background: var(--primary5);
-    color: var(--primary1);
-}
-
-.primaryButton:not(:disabled):hover {
-    background: transparent;
-    color: var(--primary5);
-}
-
-.mutedPrimaryButton {
+.button.muted {
     border-color: transparent;
-    background: var(--secondary3);
-    color: var(--primary1);
+    color: var(--content-secondary-color);
 }
 
-.mutedPrimaryButton:not(:disabled):hover {
-    background: rgba(112, 115, 101, 0.7);
-    color: var(--primary1);
+.button.muted:not(:disabled):not(.animated):hover {
+    background: var(--button-primary-surface-hover);
+}
+
+.button.muted:not(:disabled):active {
+    background: unset;
+}
+
+.button.button-secondary {
+    background: var(--button-secondary-surface);
+    color: var(--button-primary-invert-content);
+}
+
+.button.button-secondary:not(:disabled):not(.animated):hover {
+    background: var(--button-secondary-surface-hover);
+}
+
+.button.button-secondary:disabled {
+    background: var(--surface-mid-color);
+    border-color: var(--border-light-color);
+    color: var(--content-disabled-color);
 }
 
 .linkButton {
@@ -112,6 +209,52 @@
     padding: 5px 16px;
 }
 
+.button {
+    background-size: 100% 200%;
+    background-position: 0 -100%;
+    background-image: linear-gradient(
+        to bottom,
+        var(--button-secondary-surface) 50%,
+        transparent 50%
+    );
+    -webkit-transition: background-position 350ms;
+    -moz-transition: background-position 350ms;
+    transition:
+        background-position 350ms,
+        all 200ms ease;
+}
+
+.button.invert {
+    background-image: linear-gradient(
+        to bottom,
+        var(--button-primary-surface) 50%,
+        transparent 50%
+    );
+}
+
+.button:hover {
+    color: var(--button-primary-surface);
+    background-position: 0 0;
+}
+
+.button.invert:hover {
+    color: var(--button-secondary-surface);
+}
+
+/* Badge ********************************************************************/
+
+.badge {
+    padding: 8px 10px;
+    font: var(--body2);
+    user-select: none;
+    background-color: var(--surface-light-color);
+}
+
+.badge.black {
+    background-color: var(--surface-dark-color);
+    color: var(--content-invert-color);
+}
+
 /* Inputs ********************************************************************/
 
 .transparentInput {
@@ -121,34 +264,44 @@
 }
 
 .textInput {
-    border: none;
-    background: transparent;
-    color: var(--primary5);
-    font: var(--paragraph1);
-    padding: 8px 0;
-    border-bottom: solid 1px rgba(23, 17, 13, 0.4);
+    box-sizing: border-box;
+    background: var(--surface-mid-color);
+    color: var(--content-primary-color);
+    font: var(--body2);
+    padding: 14px 12px;
+    border-radius: 2px;
+    border: 1px solid var(--border-dark-color);
     box-shadow: none;
 
     &:disabled {
-        color: var(--primary4);
-        opacity: 0.5;
+        color: var(--content-disabled-color);
+        border-color: var(--border-light-color);
     }
 
     &:focus,
     &:hover:not(:disabled) {
-        border-bottom-color: var(--primary5);
+        outline: var(--focus-ring-color) solid 1px;
     }
 
     &::placeholder {
-        color: var(--primary4);
+        color: var(--content-secondary-color);
+    }
+
+    &.error {
+        border-color: var(--border-error-color);
     }
 }
 
-/* Icons **********************************************************************/
+.formGroup {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
-.smallIcon {
-    width: 20px;
-    height: 20px;
+.formGroup .errorMessage {
+    font: var(--body3);
+    color: var(--content-error-color);
 }
 
 /* Text Page ******************************************************************/
@@ -157,7 +310,6 @@
     max-width: 60em;
     margin: 48px auto;
     text-align: center;
-    font: var(--paragraph2);
 }
 
 .textPage a {
@@ -165,12 +317,11 @@
 }
 
 .textPage h1 {
-    font: var(--heading2);
+    font: var(--heading1);
 }
 
 .textPage h2 {
-    font-size: 24px;
-    font-weight: 400;
+    font: var(--subheading);
     text-transform: uppercase;
     margin: 36px 0 24px 0;
 }
@@ -179,47 +330,44 @@
     margin-top: 24px;
 }
 
-@media (max-width: 768px) {
-    .textPage {
-        margin-top: 24px;
-        text-align: left;
-    }
-
+@media (max-width: 767px) {
     .textPage h1 {
-        font: var(--heading3);
+        font: var(--heading2);
     }
 
     .textPage h2 {
-        font-size: 20px;
+        font: var(--subheading);
     }
 }
 
 /* Hero Banner ****************************************************************/
 
 .heroBanner {
-    margin-bottom: var(--pagePaddingHoriz);
-    height: 100vh;
+    height: 720px;
     position: relative;
-    color: var(--primary1);
+    color: var(--content-invert-color);
     background: #000;
 }
 
 .heroBannerOverlay {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     overflow: hidden;
     position: absolute;
     inset: 0;
-    padding: 40px;
+    max-width: 640px;
+    margin-right: auto;
+    margin-left: auto;
+    gap: 28px;
 }
 
 .heroBannerImage {
     opacity: 0.8;
     object-fit: cover;
-    object-position: 50% 50%;
+    object-position: 50% 30%;
     height: 100%;
     width: 100%;
 }
@@ -234,6 +382,12 @@
     font: var(--heading1);
     font-size: 6vw;
     text-transform: uppercase;
+}
+
+@media screen and (max-width: 767px) {
+    .heroBanner {
+        height: 560px;
+    }
 }
 
 /* Text Banner ****************************************************************/
@@ -251,13 +405,11 @@
     flex-direction: column;
     place-items: center;
     text-align: center;
-    font-family: var(--text-font);
     line-height: 1;
 }
 
 .textBannerTitle {
     margin-bottom: 10px;
-    font-family: var(--heading-font);
     font-size: max(30px, 4.3vw);
     line-height: 1.1;
 }
@@ -296,28 +448,13 @@
     }
 }
 
-.linkCardTitle {
-    z-index: 2;
-    padding: 30px;
-    text-transform: uppercase;
-    color: var(--primary1);
-    font: var(--heading4);
-    text-align: center;
-}
-
-@container (max-width: 300px) {
-    .linkCardTitle {
-        font-size: 30px;
-    }
-}
-
 /* Floating Card **************************************************************/
 
 .floatingCard {
     width: 32%;
     aspect-ratio: 0.8;
-    padding: 22px;
-    background: var(--primary2);
+    padding: 8px;
+    background: var(--surface-light-color);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -383,13 +520,6 @@
     }
 }
 
-@media (max-width: 480px) {
-    .floatingCardHeader,
-    .floatingCardDescription {
-        font: var(--paragraph3);
-    }
-}
-
 /* Cards Section **************************************************************/
 
 .cardsSection {
@@ -418,67 +548,16 @@
 
 .tabs {
     display: flex;
-    border-bottom: 1px solid var(--secondary1);
     overflow: auto;
+    gap: 12px;
 }
 
 .tab {
-    padding: 14px 30px;
-    border-bottom: 4px solid transparent;
+    color: var(--content-secondary-color);
+    padding: 3px 2px;
     flex-shrink: 0;
 }
 
-.tab:hover {
-    border-bottom-color: var(--secondary2);
-}
-
 .tab.active {
-    border-bottom-color: var(--secondary3);
-}
-
-@media (max-width: 768px) {
-    .tab {
-        padding: 14px 20px;
-    }
-
-    .tab.active {
-        color: var(--primary4);
-    }
-
-    .tab.active,
-    .tab:hover {
-        border-bottom-color: transparent;
-    }
-}
-
-/* Miscellaneous **************************************************************/
-
-.alternateBackground {
-    background: var(--primary3);
-}
-
-.ribbon {
-    display: inline-block;
-    vertical-align: middle;
-    padding: 2px 12px;
-    border-radius: 100px;
-    background: var(--primary2);
-    font: var(--paragraph3);
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
-.slider {
-    --track-color: var(--secondary2);
-    --range-color: var(--primary5);
-    --thumb-color: var(--primary5);
-    --focus-ring-color: inherit;
-}
-
-.colorSelect {
-    --option-size: 20px;
-    --border-color: var(--primary3);
-    --border-color-hover: var(--primary5);
-    --border-color-selected: var(--primary4);
-    --border-color-error: var(--error-color);
+    color: var(--content-primary-color);
 }

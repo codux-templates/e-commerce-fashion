@@ -1,5 +1,5 @@
-.item:not(:last-child) {
-    border-bottom: 1px solid rgba(118, 113, 101, 0.3);
+.item {
+    border-bottom: 1px solid var(--border-light-color);
 }
 
 .header {
@@ -8,24 +8,27 @@
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    padding: 16px 0;
 }
 
 .headerContent {
     flex-grow: 1;
+    font: var(--subheading);
+    text-transform: uppercase;
 }
 
 .toggleIconContainer {
+    height: 20px;
+    width: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-right: 4px;
 }
 
-.collapseIcon {
-    transform: rotate(180deg);
-}
-
 .content {
+    overflow: hidden;
+
     --transitionDuration: 0.4s;
     display: grid;
     grid-template-rows: 0fr;
@@ -37,18 +40,21 @@
 }
 
 .contentExpander {
-    overflow: auto;
-    transition: overflow 0s allow-discrete;
+    overflow: hidden;
+    height: 0;
+    transition: overflow 0s;
+    transition-behavior: allow-discrete;
 }
 
 .expanded .contentExpander {
-    // Prevent clipping outline and box-shadow after transition.
     overflow: visible;
     transition-delay: var(--transitionDuration);
+    height: auto;
 }
 
 .contentInner {
     padding-bottom: 25px;
+    font: var(--body2);
 }
 
 .small .contentInner {

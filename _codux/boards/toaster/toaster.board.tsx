@@ -29,7 +29,7 @@ export default createBoard({
         );
     },
     environmentProps: {
-        windowHeight: 300,
+        windowHeight: 372,
         windowWidth: 1100,
     },
 });

@@ -2,7 +2,7 @@ import type { SerializeFrom } from '@remix-run/node';
 import { products } from '@wix/stores';
 import { useCallback, useState } from 'react';
 import { useCart, useCartOpen } from '../cart';
-import { AddToCartOptions } from '../ecom';
+import { AddToCartOptions, Product } from '../ecom';
 import {
     getMedia,
     getPriceData,
@@ -13,7 +13,7 @@ import {
     selectedChoicesToVariantChoices,
 } from './product-details';
 
-export function useProductDetails(product: SerializeFrom<products.Product>) {
+export function useProductDetails(product: Product | SerializeFrom<products.Product>) {
     const cartOpener = useCartOpen();
     const { addToCart, isAddingToCart } = useCart();
 
@@ -38,21 +38,25 @@ export function useProductDetails(product: SerializeFrom<products.Product>) {
     const media = getMedia(product, selectedChoices);
     const productOptions = getProductOptions(product, selectedChoices);
 
-    const handleAddToCart = useCallback(async () => {
-        setAddToCartAttempted(true);
+    const handleAddToCart = useCallback(
+        async (openCart = true) => {
+            setAddToCartAttempted(true);
 
-        if (Object.values(selectedChoices).includes(undefined)) return;
+            if (Object.values(selectedChoices).includes(undefined)) return false;
 
-        const selectedVariant = getSelectedVariant(product, selectedChoices);
+            const selectedVariant = getSelectedVariant(product, selectedChoices);
 
-        const options: AddToCartOptions =
-            product.manageVariants && selectedVariant?._id
-                ? { variantId: selectedVariant._id }
-                : { options: selectedChoicesToVariantChoices(product, selectedChoices) };
+            const options: AddToCartOptions =
+                product.manageVariants && selectedVariant?._id
+                    ? { variantId: selectedVariant._id }
+                    : { options: selectedChoicesToVariantChoices(product, selectedChoices) };
 
-        await addToCart(product._id!, quantity, options);
-        cartOpener.setIsOpen(true);
-    }, [addToCart, cartOpener, product, quantity, selectedChoices]);
+            await addToCart(product._id!, quantity, options);
+            if (openCart) cartOpener.setIsOpen(true);
+            return true;
+        },
+        [addToCart, cartOpener, product, quantity, selectedChoices],
+    );
 
     const handleOptionChange = useCallback((optionName: string, newChoice: products.Choice) => {
         setQuantity(1);
@@ -61,6 +65,10 @@ export function useProductDetails(product: SerializeFrom<products.Product>) {
             [optionName]: newChoice,
         }));
     }, []);
+
+    const isAllOptionsSelected = (): boolean => {
+        return !Object.values(selectedChoices).includes(undefined);
+    };
 
     return {
         outOfStock,
@@ -75,5 +83,6 @@ export function useProductDetails(product: SerializeFrom<products.Product>) {
         handleAddToCart,
         handleOptionChange,
         handleQuantityChange: setQuantity,
+        isAllOptionsSelected,
     };
 }

@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { cart } from '@wix/ecom';
 import { media } from '@wix/sdk';
 import { QuantityInput } from '~/src/components/quantity-input/quantity-input';
-import { TrashIcon, ImagePlaceholderIcon, ErrorIcon } from '~/src/components/icons';
 import { Spinner } from '~/src/components/spinner/spinner';
 import { ProductPrice } from '~/src/components/product-price/product-price';
 import classNames from 'classnames';
@@ -10,6 +9,7 @@ import debounce from 'lodash.debounce';
 import { CartItemOptions } from '../cart-item-options/cart-item-options';
 
 import styles from './cart-item.module.scss';
+import Icon from '../../icons/icon';
 
 export interface CartItemProps {
     item: cart.LineItem;
@@ -61,29 +61,31 @@ export const CartItem = ({
                     </div>
                 ) : (
                     <div className={styles.imagePlaceholder}>
-                        <ImagePlaceholderIcon className={styles.imagePlaceholderIcon} />
+                        <Icon name="image" />
                     </div>
                 )}
 
                 <div className={styles.productInfo}>
-                    <div className={styles.productNameAndPrice}>
+                    <div className={styles.productNameWrapper}>
                         <div className={styles.productName}>{productName}</div>
+                    </div>
 
-                        {item.fullPrice?.formattedConvertedAmount && (
-                            <ProductPrice
-                                price={item.fullPrice?.formattedConvertedAmount}
-                                discountedPrice={item.price?.formattedConvertedAmount}
-                            />
-                        )}
-
+                    <div className={styles.productOptionsWrapper}>
                         {item.descriptionLines && item.descriptionLines.length > 0 && (
                             <CartItemOptions
                                 className={styles.options}
                                 options={item.descriptionLines}
-                                visibleOptionsCount={1}
+                                visibleOptionsCount={2}
                             />
                         )}
                     </div>
+
+                    {item.fullPrice?.formattedConvertedAmount && (
+                        <ProductPrice
+                            className={styles.price}
+                            price={priceBreakdown?.lineItemPrice?.formattedConvertedAmount}
+                        />
+                    )}
 
                     <div className={styles.quantity}>
                         <QuantityInput
@@ -99,17 +101,17 @@ export const CartItem = ({
                         {priceBreakdown?.lineItemPrice?.formattedConvertedAmount}
                     </div>
                     <button
-                        className={classNames(styles.removeButton, 'iconButton')}
+                        className={classNames('action uppercase', styles.removeButton)}
                         onClick={onRemove}
                     >
-                        <TrashIcon />
+                        Remove
                     </button>
                 </div>
             </div>
 
             {isUnavailable && (
                 <div className={styles.unavailableIndication}>
-                    <ErrorIcon className={styles.unavailableIcon} />
+                    <Icon name={'error'} />
                     <span>Sorry, this item is no longer available.</span>
                 </div>
             )}

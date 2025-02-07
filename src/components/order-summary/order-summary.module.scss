@@ -1,14 +1,17 @@
 .root {
+    display: flex;
+    gap: 128px;
     width: 100%;
 }
 
-.divider {
-    border-bottom: 1px solid var(--secondary1);
-    margin: 20px 0;
+.orderItemsSection {
+    width: 100%;
 }
 
-.divider.dashed {
-    border-bottom-style: dashed;
+.infoBox {
+    font: var(--body1);
+    padding: 12px;
+    background-color: var(--surface-mid-color);
 }
 
 .orderItems {
@@ -17,26 +20,24 @@
     gap: 24px;
 }
 
-.summary {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-}
-
-.note {
-    font: var(--paragraph3);
-    color: var(--secondary3);
+.orderDetailsRow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 0 16px;
+    border-top: 1px solid var(--border-dark-color);
 }
 
 .priceSummary {
-    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
 }
 
 .priceDetails {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    font: var(--paragraph3);
 }
 
 .priceRow {
@@ -44,30 +45,42 @@
     justify-content: space-between;
 }
 
-.totalPrice {
-    font-size: 20px;
-}
-
 .addressSection {
-    margin-top: 32px;
+    flex-direction: column;
+    max-width: 350px;
     display: flex;
-    gap: 64px;
+    width: 100%;
 }
 
 .addressData {
-    font: var(--paragraph3);
-    margin-top: 16px;
+    text-align: right;
+    font: var(--body1);
 }
 
 .deliveryTime {
     margin-top: 8px;
 }
 
-@media (max-width: 480px) {
-    .summary {
-        grid-template-columns: 1fr;
+@media (max-width: 1023px) {
+    .root {
+        gap: 93px;
     }
+    .addressSection {
+        max-width: 330px;
+    }
+}
 
+@media (max-width: 768px) {
+    .root {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .addressSection {
+        max-width: unset;
+    }
+}
+
+@media (max-width: 480px) {
     .priceSummary {
         grid-column: auto;
     }
@@ -76,4 +89,10 @@
         flex-direction: column;
         gap: 24px;
     }
+}
+
+.noteSection {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }

@@ -1,4 +1,4 @@
-import { currentCart, orders } from '@wix/ecom';
+import { currentCart, orders, orderTransactions } from '@wix/ecom';
 import { members } from '@wix/members';
 import { redirects } from '@wix/redirects';
 import { createClient, OAuthStrategy, Tokens } from '@wix/sdk';
@@ -21,7 +21,7 @@ const WIX_STORES_APP_ID = '1380b703-ce81-ff05-f115-39571d94dfcd';
  * ignored.
  * - https://help.codux.com/kb/en/article/connecting-your-app-to-wix-headless-services
  */
-const DEMO_WIX_CLIENT_ID = '35a15d20-4732-4bb8-a8ef-194fd1166827';
+const DEMO_WIX_CLIENT_ID = '4265e6e9-0abc-4431-a39e-ca25a5730a68';
 
 /**
  * OAuth app client ID for your Wix website to access Wix APIs. It is used on
@@ -52,6 +52,7 @@ export function createWixClient(tokens?: Tokens): WixApiClient {
             collections,
             orders,
             members,
+            orderTransactions,
         },
         auth: OAuthStrategy({
             clientId: getWixClientId(),
@@ -191,6 +192,16 @@ const createEcomApi = (wixClient: WixApiClient): EcomApi =>
                 items: searchOrdersResponse.orders,
                 totalCount: searchOrdersResponse.metadata?.count ?? 0,
             };
+        },
+
+        async getOrderTransactions(orderId: string) {
+            try {
+                const response =
+                    await wixClient.orderTransactions.listTransactionsForSingleOrder(orderId);
+                return response.orderTransactions;
+            } catch (error) {
+                if (!isNotFoundWixClientError(error)) throw error;
+            }
         },
 
         async getProductPriceBoundsInCategory(categoryId: string) {

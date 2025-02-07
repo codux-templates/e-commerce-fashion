@@ -27,7 +27,11 @@ export default createBoard({
     name: 'CartItem',
     Board: () => {
         return (
-            <div style={{ padding: '0 20px' }}>
+            <div
+                style={{
+                    padding: '20px',
+                }}
+            >
                 <CartItem
                     item={mockCartItem}
                     priceBreakdown={{
@@ -40,7 +44,7 @@ export default createBoard({
         );
     },
     environmentProps: {
-        windowHeight: 200,
-        windowWidth: 360,
+        windowHeight: 340,
+        windowWidth: 550,
     },
 });

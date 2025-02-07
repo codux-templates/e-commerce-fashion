@@ -1,7 +1,7 @@
 .backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(27, 17, 13, 0.8);
+    background: var(--overlay-color);
 }
 
 .drawer {
@@ -9,7 +9,7 @@
     top: 0;
     right: 0;
     width: 100%;
-    max-width: 420px;
+    max-width: 440px;
     height: 100%;
-    background: var(--primary1);
+    background: var(--surface-light-color);
 }

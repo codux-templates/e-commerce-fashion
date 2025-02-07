@@ -1,0 +1,54 @@
+.root {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.reverse {
+    flex-direction: row-reverse;
+}
+
+.imageContainer {
+    width: 100%;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    background-color: var(--surface-mid-color);
+}
+
+.content {
+    width: calc(100% - 16px);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: start;
+    padding: 16px 8px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 560px;
+}
+
+.subheading {
+    font: var(--subheading);
+    text-transform: uppercase;
+    color: var(--content-secondary-color);
+}
+
+.title {
+    font: var(--display);
+}
+
+@media (max-width: 767px) {
+    .root {
+        flex-direction: column;
+        gap: 32px;
+    }
+}

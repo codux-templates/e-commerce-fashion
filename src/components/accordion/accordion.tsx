@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 import { getClickableElementAttributes } from '~/src/wix/utils';
-import { DropdownIcon } from '../icons';
 
 import styles from './accordion.module.scss';
+import Icon from '../icons/icon';
 
 interface AccordionItem {
     header: React.ReactNode;
@@ -14,6 +14,7 @@ interface AccordionProps {
     items: AccordionItem[];
     initialOpenItemIndex?: number;
     className?: string;
+    itemClassName?: string;
     small?: boolean;
     expandIcon?: React.ReactNode;
     collapseIcon?: React.ReactNode;
@@ -26,6 +27,7 @@ export const Accordion = ({
     small = false,
     expandIcon,
     collapseIcon,
+    itemClassName,
 }: AccordionProps) => {
     const [openItemIndex, setOpenItemIndex] = useState<number | null>(initialOpenItemIndex ?? null);
 
@@ -35,7 +37,7 @@ export const Accordion = ({
                 const isOpen = openItemIndex === index;
 
                 return (
-                    <div key={index} className={styles.item}>
+                    <div key={index} className={classNames(styles.item, itemClassName)}>
                         <div
                             className={styles.header}
                             {...getClickableElementAttributes(() =>
@@ -47,12 +49,12 @@ export const Accordion = ({
                             <div className={styles.toggleIconContainer}>
                                 {isOpen
                                     ? collapseIcon || (
-                                          <DropdownIcon
-                                              width={12}
-                                              className={styles.collapseIcon}
+                                          <Icon
+                                              name={'expand_more'}
+                                              style={{ transform: 'rotate(180deg)' }}
                                           />
                                       )
-                                    : expandIcon || <DropdownIcon width={12} />}
+                                    : expandIcon || <Icon name={'expand_more'} />}
                             </div>
                         </div>
 

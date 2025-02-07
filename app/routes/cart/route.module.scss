@@ -1,8 +1,16 @@
 .page {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0 4%;
-    padding-bottom: 60px;
+    flex-direction: column;
+}
+
+.cartSection {
+    padding: 40px 92px 60px;
+    display: flex;
+    gap: 120px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1200px;
+    width: 100%;
 }
 
 .cart {
@@ -10,20 +18,34 @@
 }
 
 .summary {
-    width: 280px;
+    width: 100%;
+    max-width: 330px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex-shrink: 1;
 }
 
-.cartHeader,
-.summaryHeader {
-    font: var(--heading5);
-    line-height: 18px;
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(23, 17, 13, 0.2);
+.summaryMobile {
+    display: none;
+}
+
+.cartHeader {
+    padding: 12px;
+    background-color: var(--surface-mid-color);
+    position: relative;
+
+    span {
+        cursor: pointer;
+        font-size: 20px;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+    }
 }
 
 .summaryContent {
     position: relative;
-    padding: 14px 0;
 }
 
 .summaryContent.loading {
@@ -42,27 +64,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 0;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-dark-color);
 }
 
 .summaryTotal {
-    font-size: 20px;
-    padding: 16px 0 2px;
-    margin-top: 14px;
-    border-top: 1px solid rgba(23, 17, 13, 0.2);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-dark-color);
 }
 
 .checkoutButton {
     width: 100%;
     margin-bottom: 14px;
-}
-
-.secureCheckout {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font: var(--paragraph3);
 }
 
 /* Fallback for loading, error, and empty cart states */
@@ -82,16 +95,37 @@
     text-decoration: underline;
 }
 
-@media (max-width: 1024px) {
-    .summary {
-        width: 100%;
+@media (max-width: 1023px) {
+    .cartSection {
+        padding: 40px 8px 60px;
+        gap: 94px;
+    }
+}
+
+@media (max-width: 767px) {
+    .cartSection {
+        flex-direction: column-reverse;
+        gap: 24px;
     }
 
-    .summaryHeader {
+    .summary {
         display: none;
     }
+    .summaryMobile {
+        display: block;
+    }
 
-    .summaryContent {
-        margin-top: 30px;
+    .summaryAccordion {
+        border-bottom: none !important;
+    }
+
+    .summaryMobileContent {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        width: 100%;
+    }
+    .checkoutButton {
+        margin-bottom: 0;
     }
 }

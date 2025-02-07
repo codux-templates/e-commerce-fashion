@@ -1,108 +1,131 @@
-import type { MetaFunction } from '@remix-run/react';
+import '../../../src/styles/utils.scss';
 import { CategoryLink } from '~/src/components/category-link/category-link';
 import { FeaturedProductsSection } from '~/src/components/featured-products-section/featured-products-section';
-import { LabelWithArrow } from '~/src/components/label-with-arrow/label-with-arrow';
-import { BackgroundParallax, FadeIn, FloatIn } from '~/src/components/visual-effects';
+import { Marquee } from '~/src/components/marquee/marquee';
+import { CategoriesSection } from '~/src/components/categories-section/categories-section';
+import { Section } from '~/src/components/section/section';
+import { SplitSection } from '~/src/components/spit-section/split-section';
+import { MetaFunction } from '@remix-run/react';
+import { Banner } from '~/src/components/banner/banner';
+import { ProductsSpotlight } from '~/src/components/products-spotlight/products-spotlight';
+import { InfoSection } from '~/src/components/info-section/info-section';
+import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
+import { useEffect, useState } from 'react';
 
 export default function HomePage() {
+    const [viewportDimension, setViewportDimension] = useState(1024);
+    useEffect(() => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        setViewportDimension(Math.max(width, height));
+    }, []);
+
     return (
-        <div>
+        <PageWrapper>
             <div className="heroBanner">
                 <img
-                    src="https://static.wixstatic.com/media/32aab9_2c3c65e142434906992aedb17db53566~mv2.jpg"
+                    src={`https://static.wixstatic.com/media/a2cc95_30c2b0d877354d389a2bce2e169440c9~mv2.png/v1/fit/w_${viewportDimension},h_${viewportDimension}/4737ca55766dd3c7e65a3f69a8937bc5.png`}
                     className="heroBannerImage"
                     alt=""
                 />
                 <div className="heroBannerOverlay">
-                    <div className="heroBannerSubtitle">ReClaim</div>
-                    <h1 className="heroBannerTitle">Reuse. Repurpose. Relove.</h1>
+                    <div className="subheading">Start the freshest season</div>
+                    <h1 className="uppercase">New Spring Collection is Now Online</h1>
                     <CategoryLink categorySlug="all-products">
-                        <LabelWithArrow>Shop Collections</LabelWithArrow>
+                        <button className="button invert animated button-md">
+                            Shop Collections
+                        </button>
                     </CategoryLink>
                 </div>
             </div>
+            <Marquee elements={['Shop Sale', 'Up to 50% off']} />
+            <div className={'pageWrapper'}>
+                <FeaturedProductsSection categorySlug="new-in" title="New In" productCount={8} />
 
-            <div className="textBannerSection">
-                <FadeIn className="textBanner" duration={1.8}>
-                    <div className="textBannerSubtitle">Products of the highest standards</div>
-                    <div className="textBannerTitle">
-                        Essential home collections for sustainable living
-                    </div>
-                    <CategoryLink categorySlug="all-products">
-                        <LabelWithArrow>Shop Collections</LabelWithArrow>
-                    </CategoryLink>
-                </FadeIn>
+                <CategoriesSection categorySlugs={['women', 'men', 'accessories']} />
+
+                <Section title="Sale is on" subheading="Don’t miss our last catches">
+                    <ProductsSpotlight
+                        spotlights={[
+                            {
+                                horizontalPercentage: 37,
+                                verticalPercentage: 50,
+                                productSlug: 't-shirt-dress',
+                            },
+                        ]}
+                        imagePosition={'top'}
+                        imageUrl="https://static.wixstatic.com/media/a2cc95_11cce258e7cb45ab80637d887a5e8aea~mv2.png/v1/fit/w_640,h_640/0e228a0f121297eada19e8519cd7c75e.png.png"
+                    />
+                    <ProductsSpotlight
+                        spotlights={[
+                            {
+                                horizontalPercentage: 55,
+                                verticalPercentage: 20,
+                                productSlug: 'knit-beanie',
+                            },
+                            {
+                                horizontalPercentage: 40,
+                                verticalPercentage: 80,
+                                productSlug: 'unisex-oversized-t-shirt',
+                            },
+                        ]}
+                        imageUrl="https://static.wixstatic.com/media/a2cc95_547fc6927ad4401e92ada183ffcfffcf~mv2.png/v1/fit/w_640,h_640/9a9999cd3f47e2952e55fc45ae9f75b5.png.png"
+                    />
+                </Section>
+                <SplitSection
+                    subheading={'About'}
+                    buttonText={'Shop All'}
+                    buttonUrl={'/products/all-products'}
+                    title={
+                        "Fashion is more than just what you wear it's how you express yourself. That’s why we’re committed to offering pieces that blend quality, comfort, and style, so you can look and feel your best every day."
+                    }
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_d312443aeecb499bb9f6986404b94193~mv2.png/v1/fit/w_1920,h_1920/25846e5769d5dff3f39611ee1589857b.png"
+                />
+                <FeaturedProductsSection
+                    categorySlug="best-seller"
+                    title="Best Sellers"
+                    productCount={4}
+                />
+
+                <Banner
+                    title="Our Comfy sweatshirts is now online!"
+                    subheading="Product Spotlight"
+                    buttonText="Shop now"
+                    buttonUrl="/product-details/women-s-oversized-sweatshirt"
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
+                />
+
+                <InfoSection
+                    items={[
+                        {
+                            icon: 'local_shipping',
+                            heading: 'Free Shipping',
+                            subheading: 'On orders over 120$',
+                        },
+                        {
+                            icon: 'refresh',
+                            heading: 'Easy Returns',
+                            subheading: 'Enjoy 30 days to change your mind.',
+                        },
+                        {
+                            icon: 'loyalty',
+                            heading: 'Weekly Deals',
+                            subheading: 'Save big on new offers every weekend.',
+                        },
+                        {
+                            icon: 'lock',
+                            heading: 'Secure Checkout',
+                            subheading: 'Shop confidently with encrypted payments.',
+                        },
+                    ]}
+                />
             </div>
-
-            <div className="cardsSection">
-                <CategoryLink categorySlug="kitchen-essentials" className="linkCard">
-                    <img
-                        className="linkCardBackground"
-                        src="https://static.wixstatic.com/media/c837a6_c05a03f48fbd49e7b5046d1b18c930eb~mv2.jpg/v1/fill/w_547,h_730,q_90/c837a6_c05a03f48fbd49e7b5046d1b18c930eb~mv2.jpg"
-                        alt=""
-                    />
-                    <div className="linkCardTitle">Kitchen</div>
-                </CategoryLink>
-                <CategoryLink categorySlug="bath" className="linkCard">
-                    <img
-                        className="linkCardBackground"
-                        src="https://static.wixstatic.com/media/c837a6_269f35d6ccff4321b7ed1e65c2835c61~mv2.jpg/v1/fill/w_548,h_730,q_90/c837a6_269f35d6ccff4321b7ed1e65c2835c61~mv2.jpg"
-                        alt=""
-                    />
-                    <div className="linkCardTitle">Bath</div>
-                </CategoryLink>
-                <CategoryLink categorySlug="on-the-go" className="linkCard">
-                    <img
-                        className="linkCardBackground"
-                        src="https://static.wixstatic.com/media/c837a6_d38d8d08196d477ba49efff880d5b918~mv2.jpg/v1/fill/w_547,h_730,q_90/c837a6_d38d8d08196d477ba49efff880d5b918~mv2.jpg"
-                        alt=""
-                    />
-                    <div className="linkCardTitle">On the Go</div>
-                </CategoryLink>
-            </div>
-
-            <FeaturedProductsSection
-                className="alternateBackground"
-                categorySlug="new-in"
-                title="New In"
-                description="Embrace a sustainable lifestyle with our newest drop-ins."
-                productCount={4}
-            />
-
-            <BackgroundParallax
-                className="floatingCardBackground"
-                backgroundImageUrl="https://static.wixstatic.com/media/c837a6_cae4dbe5a7ee4637b7d55d9bd5bd755d~mv2.png/v1/fill/w_1178,h_974,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/c837a6_cae4dbe5a7ee4637b7d55d9bd5bd755d~mv2.png"
-                parallaxStrength={0.75}
-            >
-                <FloatIn direction="up" duration={1.2} distance={120}>
-                    <div className="floatingCard">
-                        <div className="floatingCardHeader">Happy Holidays</div>
-                        <div className="floatingCardContent">
-                            <h2 className="floatingCardTitle">The holidays best sellers</h2>
-                            <div className="floatingCardDescription">
-                                Home essentials for
-                                <br /> sustainable living
-                            </div>
-                        </div>
-                        <CategoryLink categorySlug="all-products">
-                            <LabelWithArrow>Buy a gift</LabelWithArrow>
-                        </CategoryLink>
-                    </div>
-                </FloatIn>
-            </BackgroundParallax>
-
-            <FeaturedProductsSection
-                categorySlug="best-sellers"
-                title="Best Sellers"
-                description="When quality is eco-friendly. Explore our top picks."
-                productCount={4}
-            />
-        </div>
+        </PageWrapper>
     );
 }
 
 export const meta: MetaFunction = () => {
-    const title = 'ReClaim: Home Goods Store';
+    const title = 'RND.Apparel';
     const description = 'Essential home products for sustainable living';
 
     return [

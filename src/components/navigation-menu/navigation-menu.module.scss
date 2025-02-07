@@ -5,19 +5,36 @@
     padding: 0;
     justify-content: center;
     flex-wrap: wrap;
+    height: 100%;
+    gap: 8px;
+    position: relative;
+}
+
+.menuList li {
+    height: 100%;
+}
+
+.menuList li button {
+    background: unset;
+    border: unset;
+    overflow: hidden;
+    display: inline-flex;
+    height: 100%;
+    align-items: center;
+}
+
+.menuItem {
+    padding: 0 12px;
+    white-space: nowrap;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.menuItem.active {
+    color: var(--content-primary-color);
 }
 
 .menuList.vertical {
     flex-direction: column;
-}
-
-.menuItem {
-    display: block;
-    padding: 14px 18px;
-    white-space: nowrap;
-}
-
-.menuItem:hover,
-.menuItem.active {
-    text-decoration: underline;
 }

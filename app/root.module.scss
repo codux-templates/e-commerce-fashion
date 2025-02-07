@@ -1,20 +1,16 @@
 .root {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
 
     /* Prevent elements with a z-index in .root from piercing through overlays
-       that appear later in the DOM. */
+   that appear later in the DOM. */
     isolation: isolate;
 }
 
 .main {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    padding: 0 var(--pagePaddingHoriz);
+    margin-top: calc(var(--header-height) + var(--announcement-bar-height));
 }
 
 .navigationProgressBar {
-    --color: #7d6283;
+    color: var(--surface-dark-color);
 }

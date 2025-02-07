@@ -1,17 +1,16 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
+import styles from './route.module.scss';
+import { LoaderFunctionArgs } from '@remix-run/node';
 import { type MetaFunction, useLoaderData } from '@remix-run/react';
 import type { GetStaticRoutes } from '@wixc3/define-remix-app';
-import classNames from 'classnames';
-import { useEffect } from 'react';
-import { AppliedProductFilters } from '~/src/components/applied-product-filters/applied-product-filters';
-import { Breadcrumbs } from '~/src/components/breadcrumbs/breadcrumbs';
-import { RouteBreadcrumbs, useBreadcrumbs } from '~/src/components/breadcrumbs/use-breadcrumbs';
-import { CategoryLink } from '~/src/components/category-link/category-link';
-import { ProductFilters } from '~/src/components/product-filters/product-filters';
-import { ProductGrid } from '~/src/components/product-grid/product-grid';
-import { ProductSortingSelect } from '~/src/components/product-sorting-select/product-sorting-select';
+import { useEffect, useMemo, useState } from 'react';
 import { toast } from '~/src/components/toast/toast';
-import { initializeEcomApiAnonymous } from '~/src/wix/ecom';
+import {
+    Collection,
+    CollectionDetails,
+    initializeEcomApiAnonymous,
+    Product,
+    ProductFilter,
+} from '~/src/wix/ecom';
 import { initializeEcomApiForRequest } from '~/src/wix/ecom/session';
 import {
     productFiltersFromSearchParams,
@@ -21,8 +20,17 @@ import {
     useProductsPageResults,
 } from '~/src/wix/products';
 import { getErrorMessage } from '~/src/wix/utils';
+import { ProductGrid } from '~/src/components/product-grid/product-grid';
+import { ProductFilters } from '~/src/components/product-filters/product-filters';
+import { ProductSortingSelect } from '~/src/components/product-sorting-select/product-sorting-select';
+import { CategoryLink } from '~/src/components/category-link/category-link';
+import classNames from 'classnames';
+import { Banner } from '~/src/components/banner/banner';
+import { PageWrapper } from '~/src/components/page-wrapper/page-wrapper';
+import { type JsonifyObject } from 'type-fest/source/jsonify';
 
-import styles from './route.module.scss';
+const INITIAL_PRODUCTS_LIMIT = 8;
+const LOAD_MORE_PRODUCTS_LIMIT = 8;
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     const url = new URL(request.url);
@@ -41,21 +49,19 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
         throw new Response('Category Not Found', { status: 404 });
     }
 
-    const [categoryProducts, allCategories, productPriceBounds] = await Promise.all([
-        api.getProducts({ categoryId: category._id!, filters, sortBy }),
+    const [categoryProducts, categories, productPriceBounds] = await Promise.all([
+        api.getProducts({
+            categoryId: category._id!,
+            filters,
+            sortBy,
+            limit: INITIAL_PRODUCTS_LIMIT,
+        }),
         api.getAllCategories(),
         api.getProductPriceBoundsInCategory(category._id!),
     ]);
 
-    return { category, categoryProducts, allCategories, productPriceBounds };
+    return { category, categoryProducts, categories, productPriceBounds };
 };
-
-const breadcrumbs: RouteBreadcrumbs<typeof loader> = (match) => [
-    {
-        title: match.data.category.name!,
-        to: `/products/${match.data.category.slug}`,
-    },
-];
 
 export const getStaticRoutes: GetStaticRoutes = async () => {
     const api = initializeEcomApiAnonymous();
@@ -63,17 +69,62 @@ export const getStaticRoutes: GetStaticRoutes = async () => {
     return categories.map((category) => `/products/${category.slug}`);
 };
 
-export const handle = {
-    breadcrumbs,
-};
-
 export default function ProductsPage() {
-    const {
-        category,
-        categoryProducts: resultsFromLoader,
-        allCategories,
-        productPriceBounds,
-    } = useLoaderData<typeof loader>();
+    const loaderData = useLoaderData<typeof loader>();
+    const [data, setData] = useState(loaderData);
+
+    useEffect(() => {
+        if (!data && loaderData) {
+            setData(loaderData);
+        }
+    }, [loaderData, data]);
+    if (!data) return <></>;
+    return (
+        <PageWrapper key={data.category?._id}>
+            <ProductsPageComponent
+                key={data.category?._id + '_'}
+                category={data.category}
+                categoryProducts={data.categoryProducts}
+                categories={data.categories}
+                productPriceBounds={data.productPriceBounds}
+            />
+        </PageWrapper>
+    );
+}
+
+function ProductsPageComponent({
+    category,
+    categoryProducts,
+    categories,
+    productPriceBounds,
+}: {
+    category: CollectionDetails;
+    categoryProducts: JsonifyObject<{ items: Product[]; totalCount: number }>;
+    categories: Collection[];
+    productPriceBounds: { lowest: number; highest: number };
+}) {
+    const [skippedCategories] = useState<string[]>([]);
+    const [preferredOrder] = useState<string[]>([
+        'all-products',
+        'women',
+        'men',
+        'accessories',
+        'outlet',
+    ]);
+
+    const orderedCategories = useMemo(() => {
+        if (!categories) return [];
+        const filteredCategories = categories.filter(
+            (category) => !skippedCategories.includes(category.slug!),
+        );
+        const sortedCategories = preferredOrder.map((slug) =>
+            filteredCategories.find((category) => category.slug === slug),
+        );
+        const remainingCategories = filteredCategories.filter(
+            (category) => !preferredOrder.includes(category.slug!),
+        );
+        return [...sortedCategories, ...remainingCategories];
+    }, [categories, preferredOrder, skippedCategories]);
 
     const { appliedFilters, someFiltersApplied, clearFilters, clearAllFilters } =
         useAppliedProductFilters();
@@ -85,116 +136,113 @@ export default function ProductsPage() {
             categoryId: category._id!,
             filters: appliedFilters,
             sorting,
-            resultsFromLoader,
+            resultsFromLoader: categoryProducts,
+            limit: LOAD_MORE_PRODUCTS_LIMIT,
         });
 
     const currency = products[0]?.priceData?.currency ?? 'USD';
-
-    const breadcrumbs = useBreadcrumbs();
 
     useEffect(() => {
         if (error) toast.error(getErrorMessage(error));
     }, [error]);
 
+    const handleClearFilters = () => {
+        clearFilters([ProductFilter.minPrice, ProductFilter.maxPrice]);
+    };
     return (
-        <div className={styles.page}>
-            <Breadcrumbs breadcrumbs={breadcrumbs} />
+        <PageWrapper>
+            <div className={styles.page}>
+                <div className={styles.content}>
+                    <div className={styles.main}>
+                        <div className={styles.categoryHeader}>
+                            <h1 className={styles.categoryName}>
+                                {appliedFilters.search
+                                    ? `"${appliedFilters.search}"`
+                                    : category.name}
+                            </h1>
+                            {category.description && !appliedFilters.search && (
+                                <p className={styles.categoryDescription}>{category.description}</p>
+                            )}
+                        </div>
 
-            <div className={styles.content}>
-                <div className={styles.sidebar}>
-                    <nav>
-                        <h2 className={styles.sidebarTitle}>Browse by</h2>
-                        <ul className={styles.categoryList}>
-                            {allCategories.map((category) => (
-                                <li key={category._id} className={styles.categoryListItem}>
-                                    <CategoryLink
-                                        categorySlug={category.slug!}
-                                        className={({ isActive }) =>
-                                            classNames(styles.categoryLink, {
-                                                [styles.categoryLinkActive]: isActive,
-                                            })
-                                        }
-                                    >
-                                        {category.name}
-                                    </CategoryLink>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className={styles.categoryList}>
+                            {orderedCategories &&
+                                orderedCategories.map(
+                                    (category) =>
+                                        category && (
+                                            <div
+                                                key={category._id}
+                                                className={styles.categoryListItem}
+                                            >
+                                                <CategoryLink
+                                                    categorySlug={category.slug ?? ''}
+                                                    className={({ isActive }) =>
+                                                        classNames(
+                                                            'button button-sm',
+                                                            styles.categoryLink,
+                                                            {
+                                                                ['active']: isActive,
+                                                            },
+                                                        )
+                                                    }
+                                                >
+                                                    {category?.name}
+                                                </CategoryLink>
+                                            </div>
+                                        ),
+                                )}
+                        </div>
 
-                        {category.numberOfProducts !== 0 && (
-                            <div className={styles.filters}>
-                                <h2
-                                    className={classNames(styles.sidebarTitle, styles.filtersTitle)}
-                                >
-                                    Filters
-                                </h2>
+                        <div className={styles.countAndSorting}>
+                            <p className={styles.productsCount}>
+                                {totalProducts} {totalProducts === 1 ? 'item' : 'items'}
+                            </p>
+                            <div className={styles.filtersAndSorting}>
                                 <ProductFilters
                                     minAvailablePrice={productPriceBounds.lowest}
                                     maxAvailablePrice={productPriceBounds.highest}
                                     currency={currency}
+                                    onClearFilters={handleClearFilters}
                                 />
+                                <ProductSortingSelect />
+                            </div>
+                        </div>
+
+                        <ProductGrid
+                            products={products}
+                            category={category}
+                            filtersApplied={someFiltersApplied}
+                            onClickClearFilters={clearAllFilters}
+                        />
+
+                        {products.length < totalProducts && (
+                            <div className={styles.loadMoreWrapper}>
+                                <button
+                                    className="button button-sm"
+                                    onClick={loadMoreProducts}
+                                    disabled={isLoadingMoreProducts}
+                                >
+                                    {isLoadingMoreProducts ? 'Loading...' : 'Load More'}
+                                </button>
                             </div>
                         )}
-                    </nav>
-                </div>
-
-                <div className={styles.main}>
-                    <div className={styles.categoryHeader}>
-                        <h1 className={styles.categoryName}>
-                            {appliedFilters.search ? `"${appliedFilters.search}"` : category.name}
-                        </h1>
-                        {category.description && !appliedFilters.search && (
-                            <p className={styles.categoryDescription}>{category.description}</p>
-                        )}
                     </div>
-
-                    {someFiltersApplied && (
-                        <AppliedProductFilters
-                            className={styles.appliedFilters}
-                            appliedFilters={appliedFilters}
-                            onClearFilters={clearFilters}
-                            onClearAllFilters={clearAllFilters}
-                            currency={currency}
-                            minPriceInCategory={productPriceBounds.lowest}
-                            maxPriceInCategory={productPriceBounds.highest}
-                        />
-                    )}
-
-                    <div className={styles.countAndSorting}>
-                        <p className={styles.productsCount}>
-                            {totalProducts} {totalProducts === 1 ? 'product' : 'products'}
-                        </p>
-
-                        <ProductSortingSelect />
-                    </div>
-
-                    <ProductGrid
-                        products={products}
-                        category={category}
-                        filtersApplied={someFiltersApplied}
-                        onClickClearFilters={clearAllFilters}
-                    />
-
-                    {products.length < totalProducts && (
-                        <div className={styles.loadMoreWrapper}>
-                            <button
-                                className="button secondaryButton"
-                                onClick={loadMoreProducts}
-                                disabled={isLoadingMoreProducts}
-                            >
-                                {isLoadingMoreProducts ? 'Loading...' : 'Load More'}
-                            </button>
-                        </div>
-                    )}
                 </div>
+                <Banner
+                    title="Our Comfy sweatshirts is now online!"
+                    subheading={'Product Spotlight'}
+                    imageUrl="https://static.wixstatic.com/media/a2cc95_c3f3157d16424344a167c12f4e59af0d~mv2.png/v1/fit/w_1920,h_1920/a9bfabda082c6167b007f5eda6ea0bf8.png"
+                    buttonText={'Shop Now'}
+                    buttonUrl={'/product-details/women-s-oversized-sweatshirt'}
+                />
             </div>
-        </div>
+        </PageWrapper>
     );
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [
-        { title: `${data?.category.name ?? 'ReClaim: Products'} | ReClaim` },
+        { title: `${data?.category.name ?? 'RND.Apparel: Products'} | RND.Apparel` },
         {
             name: 'description',
             content: data?.category.description,
